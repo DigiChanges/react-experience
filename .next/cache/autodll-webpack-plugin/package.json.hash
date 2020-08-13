@@ -1,1 +1,0 @@
-{"name":"active-class-name","version":"1.0.0","scripts":{"dev":"next","build":"next build","start":"next start"},"author":{"name":"Remy Sharp","email":"remy@leftlogic.com"},"dependencies":{"next":"latest","react":"^16.7.0","react-dom":"^16.7.0"},"license":"ISC","readme":"ERROR: No README data found!","_id":"active-class-name@1.0.0"}
