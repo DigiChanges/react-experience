@@ -1,10 +1,10 @@
-import Nav from '../components/Nav'
+import * as React from "react";
+import LoginView from '../components/LoginView';
 
 const IndexPage = () => (
-  <>
-    <Nav />
-    <p>Hello, I'm the index page</p>
-  </>
-)
+    <div>
+        <LoginView/>
+    </div>
+);
 
-export default IndexPage
+export default IndexPage;
