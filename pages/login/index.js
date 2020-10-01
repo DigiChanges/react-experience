@@ -1,5 +1,5 @@
 import * as React from "react";
-import Login from '../Templates/Login';
+import Login from '../../Templates/Login';
 
 const IndexPage = () => (
     <React.Fragment>

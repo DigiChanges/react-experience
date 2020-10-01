@@ -1,27 +1,38 @@
 {
-  "name": "active-class-name",
-  "version": "1.0.0",
+  "name": "learn-starter",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "next",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "build:css": "tailwind build assets/tailwind.css -c tailwind.config.js -o assets/main.css",
+    "analyze:tailwind-css-class-order": "rustywind --dry-run .",
+    "analyze": "yarn analyze:tailwind-css-class-order",
+    "fix:tailwind-css-class-order": "rustywind --write .",
+    "fix": "yarn fix:tailwind-css-class-order",
+    "export": "yarn build && next export",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Digichanges <nathan@digichanges.com>",
   "dependencies": {
+    "@date-io/date-fns": "^1.3.13",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "dotenv": "^8.2.0",
-    "next": "latest",
-    "react": "^16.7.0",
-    "react-alert": "^7.0.2",
-    "react-alert-template-oldschool-dark": "^1.0.1",
-    "react-dom": "^16.7.0",
-    "react-hook-form": "^6.3.3",
-    "redux-saga": "^1.1.3"
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@material-ui/pickers": "^3.2.10",
+    "date-fns": "^2.16.1",
+    "formik": "^2.1.5",
+    "formik-material-ui": "^3.0.0-alpha.0",
+    "formik-material-ui-lab": "0.0.5",
+    "formik-material-ui-pickers": "0.0.11",
+    "next": "9.3.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "yup": "^0.29.3"
   },
-  "license": "ISC",
   "devDependencies": {
-    "clsx": "^1.1.1",
-    "prop-types": "^15.7.2"
+    "autoprefixer": "^10.0.0",
+    "prop-types": "^15.7.2",
+    "tailwindcss": "^1.8.10"
   }
 }

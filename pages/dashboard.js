@@ -1,9 +1,9 @@
 import * as React from "react";
-import Login from '../Templates/Login';
+import Content from "../Templates/Content";
 
 const IndexPage = () => (
     <React.Fragment>
-        <Login/>
+        <Content/>
     </React.Fragment>
 );
 
