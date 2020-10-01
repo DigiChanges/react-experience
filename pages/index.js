@@ -1,10 +1,10 @@
 import * as React from "react";
-import LoginView from '../components/LoginView';
+import Login from '../Templates/Login';
 
 const IndexPage = () => (
-    <div>
-        <LoginView/>
-    </div>
+    <React.Fragment>
+        <Login/>
+    </React.Fragment>
 );
 
 export default IndexPage;

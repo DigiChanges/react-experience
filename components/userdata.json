@@ -1,4 +1,4 @@
-    {
+{
         "code": 201,
         "statusCode": "HTTP_CREATED",
         "status": "success",
@@ -26,4 +26,4 @@
         "expires": 1599249281,
         "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaWdpY2hhbmdlcyIsImF1ZCI6ImRpZ2ljaGFuZ2VzLmNvbSIsInN1YiI6InVzZXJAbm9kZS5jb20iLCJpYXQiOjE1OTkyNDkyODEsImV4cCI6MTU5OTI0OTI4MSwidXNlcklkIjoiODkyMzQ1NjUtMmQxZS00MWQyLTg2YWYtMTZjYTY2YWQwNDY4IiwiZW1haWwiOiJ1c2VyQG5vZGUuY29tIn0.chvDz_a1wN5jv3cPptphtpI1LcdgqYGEsh_LYrbbe59MSntMHCLj8D3jKU_8X27-srJUWNcE1ms9RSVk7FN4fg"
         }
-    }
+}

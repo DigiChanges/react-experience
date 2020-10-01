@@ -1,5 +1,4 @@
-
-    {
-        "email": "user@node.com",
-        "password": "12345678"
-    }
+{
+    "email": "user@node.com",
+    "password": "12345678"
+}
