@@ -3,7 +3,6 @@ import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Router from "next/router";
 import loginData from "../../data/logindata.json";
-import Logo from "../../atoms/Logo";
 
 const Login = () => (
   <React.Fragment>
@@ -13,27 +12,22 @@ const Login = () => (
           <Formik
             initialValues={{
               email: "",
-              password: "",
             }}
             validationSchema={SignUpSchema}
             onSubmit={async (values) => {
               // same shape as initial values
               console.log(values);
-
-              if (
-                loginData.email === values.email &&
-                loginData.password === values.password
-              ) {
-                await Router.push("/dashboard");
+              if (loginData.email === values.email) {
+                await Router.push("/");
               }
             }}
           >
             {({ errors, touched }) => (
               <Form>
-                <Logo image={"/logo.png"} />
-
                 <div className="bg-gray-800 p-6 rounded-lg border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
-                  <h1 className="font-hairline mb-4 text-center">Login</h1>
+                  <h1 className="font-hairline mb-4 text-center">
+                    Forgot Password
+                  </h1>
                   <div className="mb-4">
                     <label className="font-bold text-grey-darker block mb-2">
                       Email
@@ -49,34 +43,19 @@ const Login = () => (
                     ) : null}
                   </div>
 
-                  <div className="mb-1">
-                    <label className="font-bold text-grey-darker block mb-2">
-                      Password
-                    </label>
-                    <Field
-                      name="password"
-                      type="password"
-                      className="w-full bg-gray-800 rounded border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey px-2 py-2 rounded shadow"
-                      placeholder="Your Password"
-                    />
-                    {errors.password && touched.password ? (
-                      <div className="text-red-500 p-2">{errors.password}</div>
-                    ) : null}
-                  </div>
-
                   <div className="flex items-center justify-between">
-                    <a
-                      className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-dark "
-                      href="/forgotPassword"
-                    >
-                      Forgot Password?
-                    </a>
-                  </div>
-                  <div className="mt-4">
                     <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                      Login
+                      Send
                     </button>
                   </div>
+                </div>
+                <div className="text-center">
+                  <p className="text-grey-dark text-sm">
+                    <a href="/" className="no-underline text-blue font-bold">
+                      Back to login
+                    </a>
+                    .
+                  </p>
                 </div>
               </Form>
             )}
