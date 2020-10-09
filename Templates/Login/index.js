@@ -31,7 +31,6 @@ const Login = () => (
             {({ errors, touched }) => (
               <Form>
                 <Logo image={"/logo.png"} />
-
                 <div className="bg-gray-800 p-6 rounded-lg border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
                   <h1 className="font-hairline mb-4 text-center">Login</h1>
                   <div className="mb-4">
