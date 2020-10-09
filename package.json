@@ -27,7 +27,9 @@
     "formik-material-ui-pickers": "0.0.11",
     "next": "9.3.5",
     "react": "16.13.1",
+    "react-data-table-component": "^6.11.5",
     "react-dom": "16.13.1",
+    "styled-components": "^5.2.0",
     "yup": "^0.29.3"
   },
   "devDependencies": {
