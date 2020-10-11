@@ -1,6 +1,4 @@
 import * as React from "react";
-import { Formik, Form, Field } from "formik";
-import { TrendingUpTwoTone } from "@material-ui/icons";
 
 const MultiSelect = ({ options, value }) => {
   const [currentSelection, setCurrentSelection] = React.useState([]);
@@ -31,7 +29,6 @@ const MultiSelect = ({ options, value }) => {
     return setOpenMulti(true);
   };
 
-  console.log(currentSelection);
   return (
     <div className="w-full flex flex-col items-center h-auto mx-auto">
       <div className="w-full">
@@ -50,21 +47,21 @@ const MultiSelect = ({ options, value }) => {
                             <div>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width="100%"
-                                height="100%"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                className="feather feather-x cursor-pointer hover:text-gray-400 rounded-full w-4 h-4 ml-2"
+                                className="feather feather-x cursor-pointer
+                                hover:text-gray-400 rounded-full w-4 h-4 ml-2"
                                 onClick={() => {
                                   deleteSelected(opt.value);
                                 }}
                               >
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M6 18L18 6M6 6l12 12"
+                                />
                               </svg>
                             </div>
                           </div>
@@ -88,24 +85,23 @@ const MultiSelect = ({ options, value }) => {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="100%"
-                    height="100%"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    className="feather feather-chevron-up w-4 h-auto"
                   >
-                    <polyline points="18 15 12 9 6 15"></polyline>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
               </div>
             </div>
           </div>
 
-          <div className="absolute shadow  bg-blue-600 w-full left-0 rounded">
+          <div className="absolute shadow top-100 bg-blue-600 w-full left-0 rounded">
             {openMulti ? (
               <select
                 name="optionSelect"

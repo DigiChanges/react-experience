@@ -1,15 +1,15 @@
 import * as React from "react";
 import ModalAddUser from "../../Modal/AddUser";
-import DataTable from "react-data-table-component";
-import ActionsIcons from "../../ActionsIcons/ActionsIcons";
+import DataTable, { createTheme } from "react-data-table-component";
 import UpdateUser from "../../Modal/UpdateUser";
+import IconsTableAccion from "../../../atoms/IconsTableAccion";
+import IconEnableTable from "../../../atoms/IconEnableTable";
+import IconDisabledTable from "../../../atoms/IconsDisabledTable";
 
-const UsersTable = () => {
+const UsersTable = (props) => {
   const [openModal, setOpenModal] = React.useState(false);
   const [booleanUpdate, setBooleanUpdate] = React.useState(false);
-
-  const customData = require("../../../data/userdata.json");
-
+  console.log(props);
   const createData = (id, firstName, lastName, email, roles, enable) => {
     let rolesData = "";
     let rolesId = [];
@@ -28,7 +28,7 @@ const UsersTable = () => {
     setBooleanUpdate(!booleanUpdate);
   };
 
-  const rows = customData.map((user) => {
+  const rows = props.data.map((user, index) => {
     return createData(
       user.data.user.id,
       user.data.user.firstName,
@@ -38,11 +38,23 @@ const UsersTable = () => {
       user.data.user.enable
     );
   });
-  console.log("plo", rows);
+
   const stateModalChange = () => {
     setOpenModal(!openModal);
   };
 
+  const customStyles = {
+    headCells: {
+      style: {
+        fontSize: "0.9rem",
+      },
+    },
+    cells: {
+      style: {
+        fontSize: "0.8rem",
+      },
+    },
+  };
   const columns = [
     {
       name: "First Name",
@@ -65,27 +77,30 @@ const UsersTable = () => {
       sortable: true,
     },
     {
+      name: "State",
+      selector: "",
+      sortable: true,
+      cell: (row, rowIndex) => {
+        return (
+          <React.Fragment>
+            {row.enable ? <IconEnableTable /> : <IconDisabledTable />}
+          </React.Fragment>
+        );
+      },
+    },
+    {
       name: "Actions",
       selector: "",
       sortable: true,
-      cell: (row) => (
-        <div className="w-full">
-          <div className="flex justify-around">
-            <ActionsIcons enable={rows.enable} openUpdate={openUpdate} />
-          </div>
-        </div>
-      ),
-    },
-  ];
-  const customStyles = {
-    rows: {
-      style: {
-        background: "#718096",
-        "border-top": "1px solid #4a5568",
-        "border-bottom": "1px solid #4a5568",
+      cell: (row, rowIndex) => {
+        return (
+          <React.Fragment>
+            <IconsTableAccion close={openUpdate} user={row} />
+          </React.Fragment>
+        );
       },
     },
-  };
+  ];
 
   return (
     <React.Fragment>
@@ -95,11 +110,11 @@ const UsersTable = () => {
           <DataTable
             columns={columns}
             data={rows}
-            keyField={rows.id}
             title={false}
             striped={true}
             noHeader
-            // customStyles={customStyles}
+            theme="digiChangesThemeTable"
+            customStyles={customStyles}
           />
         </div>
         <div className="flex justify-center">

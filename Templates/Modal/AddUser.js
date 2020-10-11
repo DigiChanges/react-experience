@@ -9,27 +9,27 @@ const ModalAddUser = ({ close }) => {
   let rolesPrueba = [
     {
       key: "chua",
-      value: "1",
+      value: "10",
     },
     {
       key: "chubacgffga 2",
-      value: "2",
+      value: "20",
     },
     {
       key: "aca 3",
-      value: "3",
+      value: "30",
     },
     {
       key: "chubaca 4",
-      value: "4",
+      value: "40",
     },
     {
       key: "chubaca 5",
-      value: "5",
+      value: "50",
     },
     {
       key: "chubaca 6",
-      value: "6",
+      value: "60",
     },
   ];
 
@@ -53,7 +53,6 @@ const ModalAddUser = ({ close }) => {
               validationSchema={SignUpSchema}
               onSubmit={(values) => {
                 // same shape as initial values
-                console.log(values);
               }}
             >
               {({ errors, touched }) => (
@@ -67,11 +66,11 @@ const ModalAddUser = ({ close }) => {
                       </div>
                     ) : null}
 
-                    <h1 className="font-hairline text-5xl  mb-4 text-center">
+                    <h1 className="font-hairline text-5xl text-gray-400 mb-4 text-center">
                       Add user
                     </h1>
                     <div className="mb-4">
-                      <label className="font-bold  text-grey-darker block mb-2 ">
+                      <label className="font-bold  text-gray-400 block mb-2 ">
                         First Name
                       </label>
                       <Field
@@ -87,13 +86,13 @@ const ModalAddUser = ({ close }) => {
                       ) : null}
                     </div>
                     <div className="mb-4">
-                      <label className="font-bold text-grey-darker block mb-2">
+                      <label className="font-bold text-gray-400 block mb-2">
                         Last Name
                       </label>
                       <Field
                         name="lastName"
                         type="text"
-                        className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-2 rounded shadow"
+                        className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-gray px-2 py-2 rounded shadow"
                         placeholder="Enter Last Name"
                       />
                       {errors.lastName && touched.lastName ? (
@@ -103,13 +102,13 @@ const ModalAddUser = ({ close }) => {
                       ) : null}
                     </div>
                     <div className="mb-4">
-                      <label className="font-bold text-grey-darker block mb-2">
+                      <label className="font-bold text-gray-400 block mb-2">
                         Email
                       </label>
                       <Field
                         name="email"
                         type="text"
-                        className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
+                        className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                         placeholder="Enter Email"
                       />
                       {errors.email && touched.email ? (
@@ -117,13 +116,13 @@ const ModalAddUser = ({ close }) => {
                       ) : null}
                     </div>
                     <div className="mb-1">
-                      <label className="font-bold text-grey-darker block mb-2">
+                      <label className="font-bold text-gray-400 block mb-2">
                         Password
                       </label>
                       <Field
                         name="password"
                         type="password"
-                        className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
+                        className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                         placeholder="Enter Password"
                       />
                       {errors.password && touched.password ? (
@@ -133,13 +132,13 @@ const ModalAddUser = ({ close }) => {
                       ) : null}
                     </div>
                     <div className="mb-1">
-                      <label className="font-bold text-grey-darker block mb-2">
+                      <label className="font-bold text-gray-400 block mb-2">
                         Confirm Password
                       </label>
                       <Field
                         name="passwordConfirmation"
                         type="password"
-                        className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
+                        className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                         placeholder="Repeat Password"
                       />
                       {errors.passwordConfirmation &&
@@ -150,7 +149,7 @@ const ModalAddUser = ({ close }) => {
                       ) : null}
                     </div>
                     <div className="mb-4">
-                      <label className="font-bold text-grey-darker block mb-2">
+                      <label className="font-bold text-gray-400 block mb-2">
                         Roles
                       </label>
 

@@ -64,34 +64,5 @@
         "expires": 1599249281,
         "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaWdpY2hhbmdlcyIsImF1ZCI6ImRpZ2ljaGFuZ2VzLmNvbSIsInN1YiI6InVzZXJAbm9kZS5jb20iLCJpYXQiOjE1OTkyNDkyODEsImV4cCI6MTU5OTI0OTI4MSwidXNlcklkIjoiODkyMzQ1NjUtMmQxZS00MWQyLTg2YWYtMTZjYTY2YWQwNDY4IiwiZW1haWwiOiJ1c2VyQG5vZGUuY29tIn0.chvDz_a1wN5jv3cPptphtpI1LcdgqYGEsh_LYrbbe59MSntMHCLj8D3jKU_8X27-srJUWNcE1ms9RSVk7FN4fg"
         }
-},
-{
-        "code": 201,
-        "statusCode": "HTTP_CREATED",
-        "status": "success",
-        "data": {
-        "user": {
-        "id": "89234565-2d1e-41d2-86af-16ca66ad04654",
-        "firstName": "Bruno",
-        "lastName": "Wayne",
-        "email": "soyBatman@node.com",
-        "enable": false,
-        "permissions": [],
-        "roles": [
-        {
-        "id": "4127c4ec-6102-4e9b-8e28-d6875340da76",
-        "name": "Admin",
-        "slug": "admin",
-        "enable": false,
-        "createdAt": 1598714326,
-        "updatedAt": 1598714326
-        }
-        ],
-        "createdAt": 1598714326,
-        "updatedAt": 1598990180
-        },
-        "expires": 1599249281,
-        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaWdpY2hhbmdlcyIsImF1ZCI6ImRpZ2ljaGFuZ2VzLmNvbSIsInN1YiI6InVzZXJAbm9kZS5jb20iLCJpYXQiOjE1OTkyNDkyODEsImV4cCI6MTU5OTI0OTI4MSwidXNlcklkIjoiODkyMzQ1NjUtMmQxZS00MWQyLTg2YWYtMTZjYTY2YWQwNDY4IiwiZW1haWwiOiJ1c2VyQG5vZGUuY29tIn0.chvDz_a1wN5jv3cPptphtpI1LcdgqYGEsh_LYrbbe59MSntMHCLj8D3jKU_8X27-srJUWNcE1ms9RSVk7FN4fg"
-        }
 }
 ]

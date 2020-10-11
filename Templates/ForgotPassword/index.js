@@ -17,7 +17,7 @@ const Login = () => (
             validationSchema={SignUpSchema}
             onSubmit={async (values) => {
               // same shape as initial values
-              console.log(values);
+
               if (loginData.email === values.email) {
                 await Router.push("/");
               }
