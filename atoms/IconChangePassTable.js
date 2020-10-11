@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const IconChangePassTable = () => {
+const IconChangePassTable = ({ open }) => {
   return (
     <React.Fragment>
       <div className="w-6  hover:text-gray-700 mr-1">
@@ -9,6 +9,7 @@ const IconChangePassTable = () => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          onClick={open}
         >
           <path
             strokeLinecap="round"

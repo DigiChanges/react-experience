@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const IconUpdateUserTable = ({ close }) => {
+const IconUpdateUserTable = ({ open }) => {
   return (
     <React.Fragment>
       <div className="w-6  hover:text-gray-700 mr-1">
@@ -9,7 +9,7 @@ const IconUpdateUserTable = ({ close }) => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          onClick={close}
+          onClick={open}
         >
           <path
             strokeLinecap="round"
