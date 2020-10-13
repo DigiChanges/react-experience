@@ -2,9 +2,7 @@ import * as React from "react";
 import ModalAddUser from "../../Modal/AddUser";
 import DataTable, { createTheme } from "react-data-table-component";
 import UpdateUser from "../../Modal/UpdateUser";
-import IconsTableAccion from "../../../atoms/IconsTableAccion";
-import IconEnableTable from "../../../atoms/IconEnableTable";
-import IconDisabledTable from "../../../atoms/IconsDisabledTable";
+import ListUsersTemplatePage from "../UsersTable/ListUsersTemplatePage";
 import ChangePassword from "../../Modal/ChangePassword";
 import ConfirmDeleteUser from "../../Modal/ConfirmDeleteUser";
 const UsersTable = (props) => {
@@ -75,57 +73,62 @@ const UsersTable = (props) => {
       },
     },
   };
-  const columns = [
-    {
-      name: "First Name",
-      selector: "firstName",
-      sortable: true,
-    },
-    {
-      name: "Last Name",
-      selector: "lastName",
-      sortable: true,
-    },
-    {
-      name: "Email",
-      selector: "email",
-      sortable: true,
-    },
-    {
-      name: "Roles",
-      selector: "rolesData",
-      sortable: true,
-    },
-    {
-      name: "State",
-      selector: "",
-      sortable: true,
-      cell: (row, rowIndex) => {
-        return (
-          <React.Fragment>
-            {row.enable ? <IconEnableTable /> : <IconDisabledTable />}
-          </React.Fragment>
-        );
-      },
-    },
-    {
-      name: "Actions",
-      selector: "",
-      sortable: true,
-      cell: (row, rowIndex) => {
-        return (
-          <React.Fragment>
-            <IconsTableAccion
-              openUpdate={openUpdate}
-              openChangePass={openChangePass}
-              openConfirmDelete={openConfirmDelete}
-              user={row}
-            />
-          </React.Fragment>
-        );
-      },
-    },
-  ];
+  const columns = ListUsersTemplatePage(
+    openUpdate,
+    openChangePass,
+    openConfirmDelete
+  );
+  // const columns = [
+  //   {
+  //     name: "First Name",
+  //     selector: "firstName",
+  //     sortable: true,
+  //   },
+  //   {
+  //     name: "Last Name",
+  //     selector: "lastName",
+  //     sortable: true,
+  //   },
+  //   {
+  //     name: "Email",
+  //     selector: "email",
+  //     sortable: true,
+  //   },
+  //   {
+  //     name: "Roles",
+  //     selector: "rolesData",
+  //     sortable: true,
+  //   },
+  //   {
+  //     name: "State",
+  //     selector: "",
+  //     sortable: true,
+  //     cell: (row, rowIndex) => {
+  //       return (
+  //         <React.Fragment>
+  //           {row.enable ? <IconEnableTable /> : <IconDisabledTable />}
+  //         </React.Fragment>
+  //       );
+  //     },
+  //   },
+  //   {
+  //     name: "Actions",
+  //     selector: "",
+  //     sortable: true,
+  //     cell: (row, rowIndex) => {
+  //       return (
+  //         <React.Fragment>
+  //           <IconsTableAccion
+  //             openUpdate={openUpdate}
+  //             openChangePass={openChangePass}
+  //             openConfirmDelete={openConfirmDelete}
+  //             user={row}
+  //           />
+  //         </React.Fragment>
+  //       );
+  //     },
+  //   },
+  // ];
   const CustomLoader = () => (
     <div className=" justify-center text-gray-700">
       <svg
