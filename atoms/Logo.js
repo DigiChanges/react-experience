@@ -1,11 +1,7 @@
-import {Fragment}  from "react";
+import React  from "react";
 
-const Logo = (props) => {
-  return (
-    <Fragment>
+const Logo = (props) => (
       <img src={props.image} alt="Logo image" className=" mx-auto" />
-    </Fragment>
-  );
-};
+);
 
 export default Logo;

@@ -1,33 +1,40 @@
-import {Fragment, useState} from "react";
+import React, {useState} from "react";
 import UsersTable from "../../Templates/Tables/UsersTable";
 import ModalAddUser from "../../Templates/Modal/AddUser";
 import UpdateUser from "../../Templates/Modal/UpdateUser";
 import ChangePassword from "../../Templates/Modal/ChangePassword";
 import ConfirmDeleteUser from "../../Templates/Modal/ConfirmDeleteUser";
+const customData = require("../../data/userdata.json");
 
-
-
-const Users = () => {
-  const customData = require("../../data/userdata.json");
+const Users = () =>
+{
   const [booleanAddUser, setBooleanAddUser] = useState(false);
   const [booleanUpdate, setBooleanUpdate] = useState(false);
   const [booleanChangePass, setBooleanChangePass] = useState(false);
   const [booleanConfirmDelete, setBooleanConfirmDelete] = useState(false);
 
-  const openAddUser = () => {
+  const openAddUser = () =>
+  {
     setBooleanAddUser(!booleanAddUser);
   };
-  const openUpdate = () => {
+
+  const openUpdate = () =>
+  {
     setBooleanUpdate(!booleanUpdate);
   };
-  const openChangePass = () => {
+
+  const openChangePass = () =>
+  {
     setBooleanChangePass(!booleanChangePass);
   };
-  const openConfirmDelete = () => {
+
+  const openConfirmDelete = () =>
+  {
     setBooleanConfirmDelete(!booleanConfirmDelete);
   };
+
   return (
-    <Fragment>
+    <>
       <UsersTable 
         data={customData} 
         openUpdate={openUpdate} 
@@ -35,13 +42,13 @@ const Users = () => {
         openConfirmDelete={openConfirmDelete} 
         openAddUser={openAddUser}
       />
-      {booleanAddUser ? <ModalAddUser close={openAddUser} /> : null}
+      <ModalAddUser open={booleanAddUser} action={openAddUser} />
       {booleanUpdate ? <UpdateUser close={openUpdate} /> : null}
       {booleanChangePass ? <ChangePassword close={openChangePass} /> : null}
       {booleanConfirmDelete ? (
         <ConfirmDeleteUser close={openConfirmDelete} />
       ) : null}
-    </Fragment>
+    </>
   );
 };
 

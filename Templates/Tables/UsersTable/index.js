@@ -38,9 +38,6 @@ const UsersTable = (props) => {
       user.data.user.enable
     );
   });
-
-
-
  
   const columns = ListUsersTemplateColumns(props.openUpdate, props.openChangePass, props.openConfirmDelete);
   

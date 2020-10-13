@@ -1,4 +1,4 @@
-import {Fragment}  from "react";
+import React from "react";
 import Head from "next/head";
 import { createTheme } from "react-data-table-component";
 import "../assets/css/index.css";
@@ -34,7 +34,7 @@ createTheme("digiChangesThemeTable", {
 });
 
 const MyApp = ({ Component, pageProps }) => (
-  <Fragment>
+  <>
     <Head>
       <meta
         name="viewport"
@@ -47,7 +47,7 @@ const MyApp = ({ Component, pageProps }) => (
       <title>React Experience</title>
     </Head>
     <Component {...pageProps} />
-  </Fragment>
+  </>
 );
 
 export default MyApp;

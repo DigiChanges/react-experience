@@ -1,13 +1,12 @@
-import {Fragment}  from "react";
+import React  from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Router from "next/router";
 import Logo from "../../atoms/Logo";
 
-const Login = (props) => {  
-  
+const Login = ({loginData}) =>
+{
   return(
-  <Fragment>
     <section className="text-gray-500 body-font bg-gray-900 h-screen">
       <div className="container mx-auto h-full flex justify-center items-center">
         <div className="w-1/3">
@@ -19,8 +18,8 @@ const Login = (props) => {
             validationSchema={SignUpSchema}
             onSubmit={async (values) => {
               if (
-                props.loginData.email === values.email &&
-                props.loginData.password === values.password
+                loginData.email === values.email &&
+                loginData.password === values.password
               ) {
                 await Router.push("/dashboard");
               }
@@ -64,7 +63,7 @@ const Login = (props) => {
                   <div className="flex items-center justify-between">
                     <a
                       className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-dark "
-                      href="/forgotPassword"
+                      href={"/forgotPassword"}
                     >
                       Forgot Password?
                     </a>
@@ -81,7 +80,6 @@ const Login = (props) => {
         </div>
       </div>
     </section>
-  </Fragment>
 )};
 
 export default Login;

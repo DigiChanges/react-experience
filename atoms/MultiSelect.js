@@ -1,31 +1,40 @@
-import {useState} from "react";
+import React, {useState} from "react";
 
-const MultiSelect = ({ options, value }) => {
+const MultiSelect = ({ options, value }) =>
+{
   const [currentSelection, setCurrentSelection] = useState([]);
 
   const [openMulti, setOpenMulti] = useState(false);
 
-  const getAllUnselected = () => {
+  const getAllUnselected = () =>
+  {
     return options.filter(
       (item) => currentSelection.indexOf(item.value) === -1
     );
   };
-  const getAllSelected = () => {
+  const getAllSelected = () =>
+  {
     return options.filter(
       (item) => currentSelection.indexOf(item.value) !== -1
     );
   };
-  const deleteSelected = (value) => {
+  const deleteSelected = (value) =>
+  {
     setCurrentSelection(currentSelection.filter((pos) => pos !== value));
   };
 
-  const selectOnChange = (value) => {
+  const selectOnChange = (value) =>
+  {
     setCurrentSelection([...currentSelection, value]);
   };
-  const switchMulti = () => {
-    if (openMulti) {
+
+  const switchMulti = () =>
+  {
+    if (openMulti)
+    {
       return setOpenMulti(false);
     }
+
     return setOpenMulti(true);
   };
 

@@ -1,11 +1,13 @@
-import {Fragment}  from "react";
+import React, {Fragment}  from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import MultiSelect from "../../atoms/MultiSelect";
 
-const ModalAddUser = ({ close }) => {
-  //agrega o quita la x para cerrar modal en la posicion superior
+const ModalAddUser = ({ open, action }) =>
+{
+  // Agrega o quita la x para cerrar modal en la posicion superior
   let booleanXquit = false;
+
   let rolesPrueba = [
     {
       key: "chua",
@@ -34,8 +36,8 @@ const ModalAddUser = ({ close }) => {
   ];
 
   return (
-    <Fragment>
-      <div
+    <>
+      {open && <div
         className="fixed top-0 left-0 h-screen w-full flex items-center justify-center"
         style={{ background: "rgba(0,0,0,0.8)" }}
       >
@@ -58,13 +60,6 @@ const ModalAddUser = ({ close }) => {
               {({ errors, touched }) => (
                 <Form>
                   <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
-                    {booleanXquit ? (
-                      <div className="text-right ">
-                        <button onClick={close} className="text-lg">
-                          x
-                        </button>
-                      </div>
-                    ) : null}
 
                     <h1 className="font-hairline text-5xl text-gray-400 mb-4 text-center">
                       Add user
@@ -158,7 +153,7 @@ const ModalAddUser = ({ close }) => {
                     <div className="mt-10 flex justify-around ">
                       <button
                         className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                        onClick={close}
+                        onClick={action}
                       >
                         <span className="mr-2">Close</span>
                       </button>
@@ -176,8 +171,8 @@ const ModalAddUser = ({ close }) => {
             </Formik>
           </div>
         </div>
-      </div>
-    </Fragment>
+      </div>}
+    </>
   );
 };
 

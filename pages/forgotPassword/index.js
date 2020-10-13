@@ -1,10 +1,9 @@
-import {Fragment}  from "react";
+import React  from "react";
 import ForgotPassword from "../../Templates/ForgotPassword";
 
-const IndexPage = () => (
-  <Fragment>
+const IndexPage = () =>
+(
     <ForgotPassword />
-  </Fragment>
 );
 
 export default IndexPage;

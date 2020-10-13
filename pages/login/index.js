@@ -1,13 +1,10 @@
-import {Fragment}  from "react";
+import React  from "react";
 import Login from '../../Templates/Login';
+const loginData = require("../../data/logindata.json");
 
-
-const IndexPage = () => {
-    const loginData = require("../../data/logindata.json");
-    return (
-    <Fragment>
-        <Login loginData={loginData}/>
-    </Fragment>
-)};
+const IndexPage = () =>
+(
+    <Login loginData={loginData}/>
+);
 
 export default IndexPage;

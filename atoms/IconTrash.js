@@ -1,6 +1,6 @@
 import {Fragment}  from "react";
 
-const IconTrash = ({ open }) => {
+const IconTrash = () => {
   return (
     <Fragment>
       <div className="w-6  hover:text-gray-700 mr-1">
@@ -9,7 +9,6 @@ const IconTrash = ({ open }) => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          onClick={open}
         >
           <path
             strokeLinecap="round"
