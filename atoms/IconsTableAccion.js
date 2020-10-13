@@ -1,21 +1,18 @@
-import * as React from "react";
-import IconDeleteTable from "../atoms/IconDeleteTable";
-import IconChangePassTable from "../atoms/IconChangePassTable";
-import IconUpdateUserTable from "../atoms/IconUpdateUserTable";
-import IconViewUserTable from "../atoms/IconViewUserTable";
-const IconsTableAccion = ({
-  openUpdate,
-  openChangePass,
-  openConfirmDelete,
-}) => {
+import {Fragment}  from "react";
+import IconTrash from "./IconTrash";
+import IconPencilAlt from "./IconPencilAlt";
+import IconCog from "./IconCog";
+import IconEye from "./IconEye";
+
+const IconsTableAction = ({openUpdate, openChangePass, openConfirmDelete}) => {
   return (
-    <React.Fragment>
-      <IconViewUserTable />
-      <IconChangePassTable open={openChangePass} />
-      <IconUpdateUserTable open={openUpdate} />
-      <IconDeleteTable open={openConfirmDelete} />
-    </React.Fragment>
+    <Fragment>
+      <IconEye />
+      <IconPencilAlt open={openChangePass} />
+      <IconCog open={openUpdate} />
+      <IconTrash open={openConfirmDelete} />
+    </Fragment>
   );
 };
 
-export default IconsTableAccion;
+export default IconsTableAction;

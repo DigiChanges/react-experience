@@ -1,8 +1,8 @@
-import * as React from "react";
+import {Fragment}  from "react";
 
-const IconEnableTable = () => {
+const IconLockOpen = () => {
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="w-6 text-green-600 hover:text-green-800 mr-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -18,8 +18,8 @@ const IconEnableTable = () => {
           />
         </svg>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
-export default IconEnableTable;
+export default IconLockOpen;

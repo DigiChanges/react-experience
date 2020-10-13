@@ -1,12 +1,13 @@
-import React from "react";
+import {Fragment}  from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Router from "next/router";
-import loginData from "../../data/logindata.json";
 import Logo from "../../atoms/Logo";
 
-const Login = () => (
-  <React.Fragment>
+const Login = (props) => {  
+  
+  return(
+  <Fragment>
     <section className="text-gray-500 body-font bg-gray-900 h-screen">
       <div className="container mx-auto h-full flex justify-center items-center">
         <div className="w-1/3">
@@ -17,11 +18,9 @@ const Login = () => (
             }}
             validationSchema={SignUpSchema}
             onSubmit={async (values) => {
-              // same shape as initial values
-
               if (
-                loginData.email === values.email &&
-                loginData.password === values.password
+                props.loginData.email === values.email &&
+                props.loginData.password === values.password
               ) {
                 await Router.push("/dashboard");
               }
@@ -71,7 +70,7 @@ const Login = () => (
                     </a>
                   </div>
                   <div className="mt-4">
-                    <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                    <button type="submit" className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                       Login
                     </button>
                   </div>
@@ -82,7 +81,7 @@ const Login = () => (
         </div>
       </div>
     </section>
-  </React.Fragment>
-);
+  </Fragment>
+)};
 
 export default Login;

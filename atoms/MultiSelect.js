@@ -1,9 +1,9 @@
-import * as React from "react";
+import {useState} from "react";
 
 const MultiSelect = ({ options, value }) => {
-  const [currentSelection, setCurrentSelection] = React.useState([]);
+  const [currentSelection, setCurrentSelection] = useState([]);
 
-  const [openMulti, setOpenMulti] = React.useState(false);
+  const [openMulti, setOpenMulti] = useState(false);
 
   const getAllUnselected = () => {
     return options.filter(

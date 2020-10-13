@@ -1,10 +1,10 @@
-import * as React from "react";
+import {Fragment}  from "react";
 
 const Logo = (props) => {
   return (
-    <React.Fragment>
+    <Fragment>
       <img src={props.image} alt="Logo image" className=" mx-auto" />
-    </React.Fragment>
+    </Fragment>
   );
 };
 

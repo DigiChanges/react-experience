@@ -1,10 +1,10 @@
-import * as React from "react";
+import {Fragment}  from "react";
 import Content from "../Templates/Content";
 
 const IndexPage = () => (
-    <React.Fragment>
+    <Fragment>
         <Content/>
-    </React.Fragment>
+    </Fragment>
 );
 
 export default IndexPage;

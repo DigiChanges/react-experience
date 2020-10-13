@@ -1,4 +1,4 @@
-import React from "react";
+import {Fragment}  from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Router from "next/router";
@@ -6,7 +6,7 @@ import loginData from "../../data/logindata.json";
 import Logo from "../../atoms/Logo";
 
 const ForgotPassword = () => (
-  <React.Fragment>
+  <Fragment>
     <section className="text-gray-500 body-font bg-gray-900 h-screen">
       <div className="container mx-auto h-full flex justify-center items-center">
         <div className="w-1/3">
@@ -65,7 +65,7 @@ const ForgotPassword = () => (
         </div>
       </div>
     </section>
-  </React.Fragment>
+  </Fragment>
 );
 
 export default ForgotPassword;

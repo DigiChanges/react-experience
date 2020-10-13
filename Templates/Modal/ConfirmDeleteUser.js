@@ -1,12 +1,9 @@
-import * as React from "react";
-import { Field, Form, Formik } from "formik";
-import SignUpSchema from "../../SchemaValidations/SignUpSchema";
-import MultiSelect from "../../atoms/MultiSelect";
+import {Fragment}  from "react";
 
 const ConfirmDelete = ({ close }) => {
   let booleanXquit = true;
   return (
-    <React.Fragment>
+    <Fragment>
       <div
         className="fixed top-0 left-0 h-screen w-full flex items-center justify-center"
         style={{ background: "rgba(0,0,0,0.5)" }}
@@ -61,7 +58,7 @@ const ConfirmDelete = ({ close }) => {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

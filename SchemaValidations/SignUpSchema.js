@@ -9,7 +9,9 @@ const SignUpSchema = Yup.object().shape({
     .required("Required")
     .min(2, "Too Short!")
     .max(50, "Too Long!"),
-  email: Yup.string().email("Invalid email").required("Required"), //prettier (a configurar)
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Required"),
   roles: Yup.string()
     .required("Required")
     .min(2, "Too Short!")

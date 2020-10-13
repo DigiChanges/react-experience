@@ -1,8 +1,8 @@
-import * as React from "react";
+import {Fragment}  from "react";
 
-const IconViewUserTable = () => {
+const IconEye = () => {
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="w-6 hover:text-gray-700 mr-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -24,8 +24,8 @@ const IconViewUserTable = () => {
           />
         </svg>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
-export default IconViewUserTable;
+export default IconEye;
