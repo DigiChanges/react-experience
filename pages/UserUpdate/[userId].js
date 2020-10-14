@@ -1,12 +1,13 @@
 import {Fragment}  from "react";
-import Login from '../../Templates/Login';
-
+import UserUpdate from '../../Templates/Tables/UsersTable/UserUpdate';
+import {useRouter} from "next/router";
 
 const IndexPage = () => {
+    const router = useRouter()
     const loginData = require("../../data/logindata.json");
     return (
         <Fragment>
-            <Login loginData={loginData}/>
+            <UserUpdate userId={router.query.userId}/>
         </Fragment>
     )};
 

@@ -4,6 +4,7 @@ import ListUsersTemplateColumns from "./ListUsersTemplateColumns";
 import CustomLoader from "../../../atoms/CustomLoader"
 import TableUsersStyle from "../../../assets/customStyles/TableUsersStyle"
 
+
 const UsersTable = (props) => {
   const [pending, setPending] = useState(true);
 

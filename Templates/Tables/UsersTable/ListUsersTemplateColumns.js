@@ -2,6 +2,7 @@ import UserStateColumn from "./UserStateColumn"
 import UserActionsColumn from "./UserActionsColumn"
 
 const ListUsersTemplateColumns = (openUpdate, openChangePass, openConfirmDelete) => {
+
   const columns = [
     {
       name: "First Name",
@@ -33,7 +34,7 @@ const ListUsersTemplateColumns = (openUpdate, openChangePass, openConfirmDelete)
       name: "Actions",
       selector: "",
       sortable: true,
-      cell: () => UserActionsColumn(openUpdate, openChangePass, openConfirmDelete)
+      cell: (row) => UserActionsColumn(row, openChangePass, openConfirmDelete)
     },
   ];
   return columns;

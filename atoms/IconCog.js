@@ -1,6 +1,8 @@
 import {Fragment}  from "react";
 
-const IconCog = ({ open }) => {
+
+const IconCog = ({userId}) => {
+
   return (
     <Fragment>
       <div className="w-6  hover:text-gray-700 mr-1">
@@ -9,7 +11,7 @@ const IconCog = ({ open }) => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          onClick={open}
+          // onClick={() => (Router.push("/userupdate"))}
         >
           <path
             strokeLinecap="round"

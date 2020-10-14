@@ -4,15 +4,16 @@ import IconPencilAlt from "./IconPencilAlt";
 import IconCog from "./IconCog";
 import IconEye from "./IconEye";
 
-const IconsTableAction = ({openUpdate, openChangePass, openConfirmDelete}) => {
-  return (
-    <Fragment>
-      <IconEye />
-      <IconPencilAlt open={openChangePass} />
-      <IconCog open={openUpdate} />
-      <IconTrash open={openConfirmDelete} />
-    </Fragment>
-  );
+const IconsTableAction = ({userId, openChangePass, openConfirmDelete}) => {
+    console.log('row', userId)
+    return (
+        <Fragment>
+            <IconEye />
+            <IconPencilAlt userId={userId}/>
+            <IconCog />
+            <IconTrash open={openConfirmDelete} />
+        </Fragment>
+    );
 };
 
 export default IconsTableAction;

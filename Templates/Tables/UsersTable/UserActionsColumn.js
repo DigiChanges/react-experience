@@ -1,14 +1,13 @@
 import {Fragment}  from "react";
 import IconsTableAction from "../../../atoms/IconsTableAccion";
 
-const UserActionsColumn = (openUpdate, openChangePass, openConfirmDelete,row) => {
+const UserActionsColumn = (row, openChangePass, openConfirmDelete) => {
   return (
     <Fragment>
       <IconsTableAction
-        openUpdate={openUpdate}
         openChangePass={openChangePass}
         openConfirmDelete={openConfirmDelete}
-        user={row}
+        userId={row.id}
       />
     </Fragment>
   );

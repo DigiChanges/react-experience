@@ -1,6 +1,6 @@
-import {Fragment}  from "react";
+import {Fragment, useState} from "react";
 
-const IconPencilAlt = ({ open }) => {
+const IconPencilAlt = () => {
   return (
     <Fragment>
       <div className="w-6  hover:text-gray-700 mr-1">
@@ -9,7 +9,6 @@ const IconPencilAlt = ({ open }) => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          onClick={open}
         >
           <path
             strokeLinecap="round"
