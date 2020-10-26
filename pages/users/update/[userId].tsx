@@ -6,7 +6,7 @@ const IndexPage = (props): any =>
 {
     const router = useRouter()
     const { userId } = router.query
-
+console.log({userId})
     return (
         <UserUpdate />
     )

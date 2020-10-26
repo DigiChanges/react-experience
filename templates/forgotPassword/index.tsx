@@ -3,7 +3,7 @@ import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Router from "next/router";
 import loginData from "../../data/logindata.json";
-import Logo from "../../atoms/Logo";
+import Image from "../../atoms/Image";
 
 const ForgotPassword = (): any => (
   <Fragment>
@@ -25,7 +25,7 @@ const ForgotPassword = (): any => (
           >
             {({ errors, touched }) => (
               <Form>
-                <Logo image={"/logo.png"} />
+                <Image image={"/logo.png"} />
                 <div className="bg-gray-800 p-6 rounded-lg border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
                   <h1 className="font-hairline mb-4 text-center">
                     Forgot Password

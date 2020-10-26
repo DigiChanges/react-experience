@@ -38,7 +38,7 @@ const UpdateUser = (): any => {
                     <div className='text-gray-400 text-4xl'>
                         <h1>Update User</h1>
                     </div>
-                    <div className="bg-gray-800 p-6 rounded-lg border-teal p-1 border-t-12 bg-white mb-6 rounded-lg shadow-lg ">
+                    <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg ">
                         <Formik
                             initialValues={{
                                 firstName: '',
@@ -49,8 +49,8 @@ const UpdateUser = (): any => {
                          onSubmit={(): void => console.log("Hello")}>
                             {({ errors, touched }) => (
                                 <Form>
-                                    <div className='flex justify-around  bg-gray-800 rounded-lg border-teal border-t-12 bg-white rounded-lg shadow-lg'>
-                                        <div className="bg-gray-800 p-6 p-8 mb-6 w-1/2 flex flex-col justify-between">
+                                    <div className='flex justify-around bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg'>
+                                        <div className="bg-gray-800 p-6 mb-6 w-1/2 flex flex-col justify-between">
                                             <div className="mb-4">
                                                 <label className="font-bold text-gray-400 block mb-2">
                                                     First Name
@@ -58,7 +58,7 @@ const UpdateUser = (): any => {
                                                 <Field
                                                     name="firstName"
                                                     type="text"
-                                                    className="w-full bg-gray-800 rounded border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey px-2 py-2 rounded shadow"
+                                                    className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey px-2 py-2 rounded shadow"
                                                     placeholder="poner name del user"
                                                 />
                                             </div>
@@ -69,12 +69,12 @@ const UpdateUser = (): any => {
                                                 <Field
                                                     name="email"
                                                     type="text"
-                                                    className="w-full bg-gray-800 rounded border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey px-2 py-2 rounded shadow"
+                                                    className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey px-2 py-2 rounded shadow"
                                                     placeholder="lastName"
                                                 />
                                             </div>
                                         </div>
-                                        <div className="bg-gray-800 p-6 p-8 mb-6 w-1/2 flex flex-col justify-between">
+                                        <div className="bg-gray-800 p-6 mb-6 w-1/2 flex flex-col justify-between">
                                             <div className="mb-4">
                                                 <label className="font-bold text-gray-400 block mb-2">
                                                     Last Name

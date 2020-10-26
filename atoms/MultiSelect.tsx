@@ -49,7 +49,7 @@ const MultiSelect = ({ options }: any): any =>
                 {currentSelection
                   ? getAllSelected().map((opt): any => {
                       return (
-                        <div className="w-auto flex items-center bg-gray-700 rounded-full mr-1 mb-1 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey  shadow">
+                        <div className="w-auto flex items-center bg-gray-700 rounded-full mr-1 mb-1 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey shadow">
                           <div className="text-xs font-normal leading-none max-w-full flex-initial">
                             {opt.key}
                           </div>

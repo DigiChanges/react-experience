@@ -1,6 +1,6 @@
 import React  from "react";
 import {useRouter} from "next/router";
-import UserUpdate from "../../../templates/users/UserUpdate";
+import UserView from "../../../templates/users/UserView";
 
 const IndexPage = (): any =>
 {
@@ -8,7 +8,7 @@ const IndexPage = (): any =>
     const { userId } = router.query
 
     return (
-        <UserUpdate />
+        <UserView />
     )
 };
 

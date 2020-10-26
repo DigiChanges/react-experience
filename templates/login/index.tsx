@@ -2,7 +2,7 @@ import React  from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Router from "next/router";
-import Logo from "../../atoms/Logo";
+import Image from "../../atoms/Image";
 
 const Login = ({loginData}: any): any =>
 {
@@ -27,8 +27,8 @@ const Login = ({loginData}: any): any =>
           >
             {({ errors, touched }) => (
               <Form>
-                <Logo image={"/logo.png"} />
-                <div className="bg-gray-800 p-6 rounded-lg border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
+                <Image image={"/logo.png"} />
+                <div className="bg-gray-800  rounded-lg border-teal p-8 border-t-12  mb-6 shadow-lg">
                   <h1 className="font-hairline mb-4 text-center">Login</h1>
                   <div className="mb-4">
                     <label className="font-bold text-grey-darker block mb-2">
@@ -37,7 +37,7 @@ const Login = ({loginData}: any): any =>
                     <Field
                       name="email"
                       type="text"
-                      className="w-full bg-gray-800 rounded border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey px-2 py-2 rounded shadow"
+                      className="w-full bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey  rounded shadow"
                       placeholder="Your Email"
                     />
                     {errors.email && touched.email ? (
@@ -52,7 +52,7 @@ const Login = ({loginData}: any): any =>
                     <Field
                       name="password"
                       type="password"
-                      className="w-full bg-gray-800 rounded border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey px-2 py-2 rounded shadow"
+                      className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey  rounded shadow"
                       placeholder="Your Password"
                     />
                     {errors.password && touched.password ? (
