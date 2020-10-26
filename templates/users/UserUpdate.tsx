@@ -59,7 +59,7 @@ const UpdateUser = (): any => {
                                                     name="firstName"
                                                     type="text"
                                                     className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey px-2 py-2 rounded shadow"
-                                                    placeholder="poner name del user"
+                                                    placeholder="FirstName"
                                                 />
                                             </div>
                                             <div className="mb-1">
@@ -70,7 +70,7 @@ const UpdateUser = (): any => {
                                                     name="email"
                                                     type="text"
                                                     className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey px-2 py-2 rounded shadow"
-                                                    placeholder="lastName"
+                                                    placeholder="email"
                                                 />
                                             </div>
                                         </div>
