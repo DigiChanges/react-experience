@@ -1,10 +1,10 @@
 import React  from "react";
-import UserCreate from "../../../templates/users/UserCreate";
+import UserChangePassword from "../../../templates/users/UserChangePass";
 
 const IndexPage = (): any =>
 {
     return (
-        <UserCreate />
+        <UserChangePassword />
     )
 };
 

@@ -4,10 +4,9 @@ import ListUsersTemplateColumns from "./ListUsersTemplateColumns";
 import CustomLoader from "../../../atoms/CustomLoader"
 import TableUsersStyle from "../../../assets/customStyles/TableUsersStyle"
 
-const UsersTable = (props): any =>
+const UsersTable = (props: any): any =>
 {
   const [pending, setPending] = useState(true);
-
   useEffect(() =>
   {
     const timeout = setTimeout(() => {
@@ -19,7 +18,7 @@ const UsersTable = (props): any =>
   const createData = (id, firstName, lastName, email, roles, enable) =>
   {
     let rolesData = "";
-    let rolesId = [];
+    const rolesId = [];
 
     roles.map((index) => {
       if (rolesData.length === 0) {
@@ -32,7 +31,7 @@ const UsersTable = (props): any =>
     return { id, firstName, lastName, email, rolesData, rolesId, enable };
   };
 
-  const rows = props.data.map((user, index) => {
+  const rows = props.data.map((user) => {
     return createData(
       user.data.user.id,
       user.data.user.firstName,

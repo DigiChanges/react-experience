@@ -2,7 +2,7 @@ import React  from "react";
 import IconLockOpen from "../../../atoms/IconLockOpen";
 import IconLockClosed from "../../../atoms/IconLockClosed";
 
-const UserStateCell = (row): any => {
+const UserStateCell = (row: any): any => {
 
   return (
     <>
@@ -11,7 +11,7 @@ const UserStateCell = (row): any => {
               <IconLockOpen />
             </div>
               :
-            <div className="w-6 text-red-500 mr-1 hover:text-red-800 mr-1">
+            <div className="w-6 text-red-500 mr-1 hover:text-red-800">
               <IconLockClosed />
             </div>
         }

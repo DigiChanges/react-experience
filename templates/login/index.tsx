@@ -31,7 +31,7 @@ const Login = ({loginData}: any): any =>
                 <div className="bg-gray-800  rounded-lg border-teal p-8 border-t-12  mb-6 shadow-lg">
                   <h1 className="font-hairline mb-4 text-center">Login</h1>
                   <div className="mb-4">
-                    <label className="font-bold text-grey-darker block mb-2">
+                    <label htmlFor='email' className="font-bold text-grey-darker block mb-2">
                       Email
                     </label>
                     <Field
@@ -46,7 +46,7 @@ const Login = ({loginData}: any): any =>
                   </div>
 
                   <div className="mb-1">
-                    <label className="font-bold text-grey-darker block mb-2">
+                    <label htmlFor='password' className="font-bold text-grey-darker block mb-2">
                       Password
                     </label>
                     <Field

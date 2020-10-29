@@ -1,13 +1,11 @@
-import React, {useEffect, useState} from "react";
-import { Field, Form, Formik } from "formik";
+import React from "react";
+import { Field, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import MultiSelect from "../../atoms/MultiSelect";
-import Modal from "../../molecules/Modal";
+import Router from "next/router";
 
-const AddUserModal = ({open}: any): any =>
+const UserCreate = (): any =>
 {
-  const [openModal, setOpenModal] = useState(false);
-
   const rolesPrueba = [
     {
       key: "chua",
@@ -35,20 +33,13 @@ const AddUserModal = ({open}: any): any =>
     },
   ];
 
-  const closeModal = () =>
-  {
-      setOpenModal(!openModal);
-  }
-
-  useEffect(() => {
-    setOpenModal(open)
-  }, [open]);
-
-  
   return (
-    <Modal open={openModal}>
-      <div className="container mx-auto h-full flex justify-center items-center">
-        <div className="w-1/3">
+    <section className="text-gray-500 body-font bg-gray-900 h-screen w-1/4 flex justify-center items-center">
+      <div className='w-10/12 max-h-3/4'>
+          <div className='text-4xl mb-2'>
+              <h1>Add User</h1>
+          </div>
+          <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
           <Formik
             initialValues={{
               firstName: "",
@@ -64,13 +55,12 @@ const AddUserModal = ({open}: any): any =>
             }}
           >
             {({ errors, touched }) => (
-              <Form>
+              <div>
                 <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
-                  <h1 className="font-hairline text-5xl text-gray-400 mb-4 text-center">
-                    Add user
-                  </h1>
+
+                  
                   <div className="mb-4">
-                    <label htmlFor='firstName' className="font-bold text-gray-400 block mb-2">
+                    <label htmlFor='firstName' className="font-bold  text-gray-400 block mb-2 ">
                       First Name
                     </label>
                     <Field
@@ -158,7 +148,7 @@ const AddUserModal = ({open}: any): any =>
                   <div className="mt-10 flex justify-around ">
                     <button
                       className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                      onClick={closeModal}
+                      onClick={() => (Router.push("/users"))}
                     >
                       <span className="mr-2">Close</span>
                     </button>
@@ -171,13 +161,13 @@ const AddUserModal = ({open}: any): any =>
                     </button>
                   </div>
                 </div>
-              </Form>
+              </div>
             )}
           </Formik>
         </div>
-      </div>
-    </Modal>
+    </div>
+    </section>
   );
 };
 
-export default AddUserModal;
+export default UserCreate;

@@ -766,7 +766,7 @@ module.exports = {
     },
   },
   variants: {
-    accessibility: ["responsive", "focus"],
+    accessibility: ["responsive", "focus", "hover"],
     alignContent: ["responsive"],
     alignItems: ["responsive"],
     alignSelf: ["responsive"],
@@ -789,7 +789,7 @@ module.exports = {
     boxShadow: ["responsive", "hover", "focus"],
     boxSizing: ["responsive"],
     container: ["responsive"],
-    cursor: ["responsive"],
+    cursor: ["responsive", "hover"],
     display: ["responsive"],
     divideColor: ["responsive"],
     divideOpacity: ["responsive"],

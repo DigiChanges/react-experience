@@ -65,6 +65,7 @@
                 "specialLink": ["hrefLeft", "hrefRight"],
                 "aspects": ["invalidHref", "preferButton"]
             }
-        ]
+        ],
+        "@typescript-eslint/no-var-requires": "off"
     }
 }

@@ -26,18 +26,18 @@ const ForgotPassword = (): any => (
             {({ errors, touched }) => (
               <Form>
                 <Image image={"/logo.png"} />
-                <div className="bg-gray-800 p-6 rounded-lg border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
+                <div className="bg-gray-800 rounded-lg border-teal p-8 border-t-12 mb-6 shadow-lg">
                   <h1 className="font-hairline mb-4 text-center">
                     Forgot Password
                   </h1>
                   <div className="mb-4">
-                    <label className="font-bold text-grey-darker block mb-2">
+                    <label htmlFor='email' className="font-bold text-grey-darker block mb-2">
                       Email
                     </label>
                     <Field
                       name="email"
                       type="text"
-                      className="w-full bg-gray-800 rounded border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey px-2 py-2 rounded shadow"
+                      className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-2 rounded shadow"
                       placeholder="Your Email"
                     />
                     {errors.email && touched.email ? (

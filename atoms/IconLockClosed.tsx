@@ -1,11 +1,12 @@
 import React from "react";
 
-const IconLockClosed = (): any => (
+const IconLockClosed = (props: any): any => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
+      className={props.className}
     >
     <path
       strokeLinecap="round"

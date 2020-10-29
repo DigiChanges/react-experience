@@ -1,7 +1,7 @@
 import React  from "react";
-import ForgotPassword from "../../templates/ForgotPassword";
+import ForgotPassword from "../../templates/forgotPassword/";
 
-const IndexPage = () =>
+const IndexPage = (): any =>
 (
     <ForgotPassword />
 );
