@@ -67,5 +67,6 @@
             }
         ],
         "@typescript-eslint/no-var-requires": "off"
+
     }
 }
