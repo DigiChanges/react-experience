@@ -109,6 +109,17 @@ const UpdateUser = (): any => {
                       component={Select}
                       items={rolesPrueba}
                       isMulti
+                      primary25="#4a5568"
+                      primary="#667eea"
+                      neutral0="#2d3748"
+                      neutral20="#4a5568"
+                      neutral50="#a0aec0"
+                      neutral80="#fff"
+                      neutral10="#4a5568"
+                      neutral30="#667eea"
+                      primary50="#718096"
+                      danger="#a0aec0"
+                      dangerLight="#1a202c"
                     />
                   </div>
                 </div>

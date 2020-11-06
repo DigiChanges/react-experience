@@ -1,22 +1,23 @@
 import { Fragment } from "react";
 import { Field, Form, Formik } from "formik";
-import SignUpSchema from "../../SchemaValidations/SignUpSchema";
+import UserSchema from "../../SchemaValidations/UserSchema";
 import Router from "next/router";
 
 const UserChangePassword = (): any => {
   return (
     <Fragment>
-      <section className="text-gray-500 body-font bg-gray-900 h-screen w-1/4 flex justify-center items-center">
-        <div className="w-10/12 max-h-3/4">
+      <section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
+        <div className="w-full">
           <div className="text-4xl mb-2">
             <h1>Change Password</h1>
           </div>
           <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg ">
             <Formik
               initialValues={{
-                email: "",
+                password: "",
+                confirmationPassword: "",
               }}
-              validationSchema={SignUpSchema}
+              validationSchema={UserSchema}
               onSubmit={() => {
                 return null;
               }}
@@ -28,36 +29,40 @@ const UserChangePassword = (): any => {
                   <div className="flex flex-col  bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
                     <div className="mb-4">
                       <label
-                        htmlFor="email"
+                        htmlFor="password"
                         className="font-bold text-grey-darker block mb-2"
                       >
                         New Password
                       </label>
                       <Field
-                        name="email"
+                        name="password"
                         type="text"
                         className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
                         placeholder="New password"
                       />
-                      {errors.email && touched.email ? (
-                        <div className="text-red-500 p-2">{errors.email}</div>
+                      {errors.password && touched.password ? (
+                        <div className="text-red-500 p-2">
+                          {errors.password}
+                        </div>
                       ) : null}
                     </div>
                     <div className="mb-4">
                       <label
-                        htmlFor="email"
+                        htmlFor="confirmationPassword"
                         className="font-bold text-grey-darker block mb-2"
                       >
                         Confirm New Password
                       </label>
                       <Field
-                        name="email"
+                        name="confirmationPassword"
                         type="text"
                         className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
                         placeholder="Confirm new password"
                       />
-                      {errors.email && touched.email ? (
-                        <div className="text-red-500 p-2">{errors.email}</div>
+                      {errors.password && touched.password ? (
+                        <div className="text-red-500 p-2">
+                          {errors.password}
+                        </div>
                       ) : null}
                     </div>
                   </div>

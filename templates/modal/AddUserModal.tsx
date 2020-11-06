@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
-import MultiSelect from "../../atoms/MultiSelect";
+import Select from "../../atoms/Select";
 import Modal from "../../molecules/Modal";
 
-const AddUserModal = ({open}: any): any =>
-{
+const AddUserModal = ({ open }: any): any => {
   const [openModal, setOpenModal] = useState(false);
 
   const rolesPrueba = [
@@ -35,16 +34,14 @@ const AddUserModal = ({open}: any): any =>
     },
   ];
 
-  const closeModal = () =>
-  {
-      setOpenModal(!openModal);
-  }
+  const closeModal = () => {
+    setOpenModal(!openModal);
+  };
 
   useEffect(() => {
-    setOpenModal(open)
+    setOpenModal(open);
   }, [open]);
 
-  
   return (
     <Modal open={openModal}>
       <div className="container mx-auto h-full flex justify-center items-center">
@@ -70,7 +67,10 @@ const AddUserModal = ({open}: any): any =>
                     Add user
                   </h1>
                   <div className="mb-4">
-                    <label htmlFor='firstName' className="font-bold text-gray-400 block mb-2">
+                    <label
+                      htmlFor="firstName"
+                      className="font-bold text-gray-400 block mb-2"
+                    >
                       First Name
                     </label>
                     <Field
@@ -80,13 +80,14 @@ const AddUserModal = ({open}: any): any =>
                       placeholder="Enter First Name"
                     />
                     {errors.firstName && touched.firstName ? (
-                      <div className="text-red-500 p-2">
-                        {errors.firstName}
-                      </div>
+                      <div className="text-red-500 p-2">{errors.firstName}</div>
                     ) : null}
                   </div>
                   <div className="mb-4">
-                    <label htmlFor='lastName' className="font-bold text-gray-400 block mb-2">
+                    <label
+                      htmlFor="lastName"
+                      className="font-bold text-gray-400 block mb-2"
+                    >
                       Last Name
                     </label>
                     <Field
@@ -96,13 +97,14 @@ const AddUserModal = ({open}: any): any =>
                       placeholder="Enter Last Name"
                     />
                     {errors.lastName && touched.lastName ? (
-                      <div className="text-red-500 p-2">
-                        {errors.lastName}
-                      </div>
+                      <div className="text-red-500 p-2">{errors.lastName}</div>
                     ) : null}
                   </div>
                   <div className="mb-4">
-                    <label htmlFor='email' className="font-bold text-gray-400 block mb-2">
+                    <label
+                      htmlFor="email"
+                      className="font-bold text-gray-400 block mb-2"
+                    >
                       Email
                     </label>
                     <Field
@@ -116,7 +118,10 @@ const AddUserModal = ({open}: any): any =>
                     ) : null}
                   </div>
                   <div className="mb-1">
-                    <label htmlFor='password' className="font-bold text-gray-400 block mb-2">
+                    <label
+                      htmlFor="password"
+                      className="font-bold text-gray-400 block mb-2"
+                    >
                       Password
                     </label>
                     <Field
@@ -126,13 +131,14 @@ const AddUserModal = ({open}: any): any =>
                       placeholder="Enter Password"
                     />
                     {errors.password && touched.password ? (
-                      <div className="text-red-500 p-2">
-                        {errors.password}
-                      </div>
+                      <div className="text-red-500 p-2">{errors.password}</div>
                     ) : null}
                   </div>
                   <div className="mb-1">
-                    <label htmlFor='passwordConfirmation' className="font-bold text-gray-400 block mb-2">
+                    <label
+                      htmlFor="passwordConfirmation"
+                      className="font-bold text-gray-400 block mb-2"
+                    >
                       Confirm Password
                     </label>
                     <Field
@@ -149,11 +155,12 @@ const AddUserModal = ({open}: any): any =>
                     ) : null}
                   </div>
                   <div className="mb-4">
-                    <label htmlFor='roles' className="font-bold text-gray-400 block mb-2">
+                    <label
+                      htmlFor="roles"
+                      className="font-bold text-gray-400 block mb-2"
+                    >
                       Roles
                     </label>
-
-                    <MultiSelect options={rolesPrueba} />
                   </div>
                   <div className="mt-10 flex justify-around ">
                     <button

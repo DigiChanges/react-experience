@@ -5,19 +5,40 @@ import { FieldProps } from "formik";
 interface OwnProps {
   items: any;
   isMulti: boolean;
+  primary25: any;
+  primary: any;
+  neutral0: any;
+  neutral20: any;
+  neutral50: any;
+  neutral80: any;
+  neutral10: any;
+  neutral30: any;
+  primary50: any;
+  danger: any;
+  dangerLight: any;
+  neutral70: any;
 }
 
-const MultiSelectTwo: React.FC<OwnProps & FieldProps> = ({
+const MultiSelect: React.FC<OwnProps & FieldProps> = ({
   items,
   isMulti,
+  primary25,
+  primary,
+  neutral0,
+  neutral20,
+  neutral50,
+  neutral80,
+  neutral10,
+  neutral30,
+  primary50,
+  danger,
+  dangerLight,
   ...selectProps
 }) => {
-  console.log(selectProps);
   //Para que el componente sea multiSelect declarar en props isMulti
   const onChange = (value) => {
     selectProps.form.setFieldValue(selectProps.field.name, value);
   };
-
   return (
     <Select
       {...selectProps.field}
@@ -29,28 +50,26 @@ const MultiSelectTwo: React.FC<OwnProps & FieldProps> = ({
       theme={(theme) => ({
         ...theme,
         borderWidth: 6,
-
         multiValue: {
           borderRadius: 30,
         },
         colors: {
           ...theme.colors,
-          primary25: "#4a5568",
-          primary: "#667eea",
-          neutral0: "#2d3748",
-          neutral20: "#4a5568",
-          neutral50: "#a0aec0",
-          neutral70: "orange ",
-          neutral80: "#fff",
-          neutral10: "#4a5568",
-          neutral30: "#667eea",
-          primary50: "#718096",
-          danger: "#a0aec0",
-          dangerLight: "#1a202c",
+          primary25: primary25,
+          primary: primary,
+          neutral0: neutral0,
+          neutral20: neutral20,
+          neutral50: neutral50,
+          neutral80: neutral80,
+          neutral10: neutral10,
+          neutral30: neutral30,
+          primary50: primary50,
+          danger: danger,
+          dangerLight: dangerLight,
         },
       })}
     />
   );
 };
 
-export default MultiSelectTwo;
+export default MultiSelect;

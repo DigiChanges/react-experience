@@ -34,9 +34,9 @@ const UserCreate = (): any => {
 
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-128">
-      <div className="w-full ">
-        <div className="text-4xl mb-2">
-          <h1>Add User</h1>
+      <div className="w-full px-5">
+        <div className="text-4xl mb-2 ">
+          <h1 className="text-left">Add User</h1>
         </div>
         <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
           <Formik
@@ -156,6 +156,17 @@ const UserCreate = (): any => {
                       component={Select}
                       items={rolesPrueba}
                       isMulti
+                      primary25="#4a5568"
+                      primary="#667eea"
+                      neutral0="#2d3748"
+                      neutral20="#4a5568"
+                      neutral50="#a0aec0"
+                      neutral80="#fff"
+                      neutral10="#4a5568"
+                      neutral30="#667eea"
+                      primary50="#718096"
+                      danger="#a0aec0"
+                      dangerLight="#1a202c"
                     />
                   </div>
                   <div className="mt-10 flex justify-around ">
