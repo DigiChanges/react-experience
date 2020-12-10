@@ -1,6 +1,5 @@
 import {
   LOGIN_USER,
-  LOGIN_LOADING,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILED,
   LOGOUT_USER,
@@ -33,8 +32,8 @@ const Auth = (state: State = INIT_STATE, action: AuthAction) =>
     //Not necessary
     // case LOGIN_USER:
     //   return { ...state };
-    case LOGIN_LOADING:
-      return { ...state, loading: true }
+    // case LOGIN_LOADING:
+    //   return { ...state, loading: true }
     case LOGIN_USER_SUCCESS:
       return { ...state, user: action.payload, loading: false, error: null};
     case LOGIN_USER_FAILED:

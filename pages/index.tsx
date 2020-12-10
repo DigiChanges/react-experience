@@ -12,7 +12,6 @@ const LoginPage = (): any => {
 )};
 
 const mapStateToProps = state => {
-    console.log(state)
     const { user, loading, error } = state.Auth;
     return { user, loading, error };
 };

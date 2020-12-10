@@ -11,7 +11,6 @@ import { LOGIN_USER, LOGOUT_USER, FORGET_PASSWORD, CHANGE_FORGOT_PASSWORD } from
 
 import {
     loginUserSuccess,
-    loginLoading,
     loginUserFailed,
     forgetPasswordSuccess,
     forgetPasswordFailed,
@@ -19,6 +18,11 @@ import {
     changeForgotPasswordSuccess,
     changeForgotPasswordFieldsFailed
 } from './actions';
+
+import {
+  startLoading,
+  stopLoading
+} from '../loading/actions'
 
 
 
@@ -63,7 +67,7 @@ function* login({ payload: { email, password } }) {
     //     headers: { 'Content-Type': 'application/json'},
     // };
 
-    yield put( loginLoading() )
+    yield put( startLoading() )
 
     try {
 
@@ -77,13 +81,12 @@ function* login({ payload: { email, password } }) {
         token: '123456789'
       }
       
-      if (res && res.data && res.data.token) {
+     if (res?.data?.token) {
+       
         yield put( loginUserSuccess(res.data) )
       } else {
         throw new Error(res.message || 'Internal Server Error')
       }
-
-
 
         // const response = yield call(fetchJSON, currentApiRoute.apiEnv + '/auth/login', options);
         // if (response.status === "error")
@@ -98,6 +101,8 @@ function* login({ payload: { email, password } }) {
       yield put( loginUserFailed(error.message) )
         // yield put(loginUserFailed(error.message));
         // setSession(null);
+    } finally {
+      yield put( stopLoading() )
     }
 }
 

@@ -78,13 +78,9 @@ const Login = ({loginData}: any): any =>
                     </a>
                   </div>
                   <div className="mt-4">
-                    {loading ? (
-                      <CustomLoader height='48px'/>
-                    ) : (
-                      <button type="submit" className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                        Login
-                      </button>
-                    )}
+                    <button type="submit" className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                      Login
+                    </button>
                   </div>
                 </div>
               </Form>
