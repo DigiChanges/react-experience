@@ -5,6 +5,8 @@ import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 // import { fetchJSON } from '../../helpers/api';
 // import { getTenantIdFromToken } from "../../helpers/authUtils";
 
+import { signin } from '../../services/userService'
+
 import { LOGIN_USER, LOGOUT_USER, FORGET_PASSWORD, CHANGE_FORGOT_PASSWORD } from './constants';
 
 import {
@@ -55,16 +57,31 @@ import {
  */
 
 function* login({ payload: { email, password } }) {
-    const options = {
-        body: JSON.stringify({ email, password }),
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-    };
+    // const options = {
+    //     body: JSON.stringify({ email, password }),
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json'},
+    // };
+
+    yield put( loginLoading() )
 
     try {
 
-      yield put( loginLoading() )
-
+      //fake api consume
+      //todo: jwt decode get data
+      let res = yield call( signin, email, password )
+      res.data = {
+        name: 'Agustin',
+        surname: 'Perez',
+        email: 'agustin.perez@gmail.com',
+        token: '123456789'
+      }
+      
+      if (res && res.data && res.data.token) {
+        yield put( loginUserSuccess(res.data) )
+      } else {
+        throw new Error(res.message || 'Internal Server Error')
+      }
 
 
 
@@ -78,6 +95,7 @@ function* login({ payload: { email, password } }) {
         // setSession(response.data);
         // yield put(loginUserSuccess(response.data));
     } catch (error) {
+      yield put( loginUserFailed(error.message) )
         // yield put(loginUserFailed(error.message));
         // setSession(null);
     }
