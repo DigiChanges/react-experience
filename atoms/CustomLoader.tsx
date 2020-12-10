@@ -1,13 +1,14 @@
 import React from "react";
 
-const CustomLoader = ({cssClassName}: any): any => (
-  <div className={cssClassName}>
+const CustomLoader = ({cssClassName, height}: any): any => (
+  <div className={ cssClassName }>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
       className="animate-spin w-1/2 ml-1/4"
+      height={ height }
     >
     <path
       strokeLinecap="round"

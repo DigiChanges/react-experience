@@ -9,6 +9,7 @@ import { LOGIN_USER, LOGOUT_USER, FORGET_PASSWORD, CHANGE_FORGOT_PASSWORD } from
 
 import {
     loginUserSuccess,
+    loginLoading,
     loginUserFailed,
     forgetPasswordSuccess,
     forgetPasswordFailed,
@@ -61,6 +62,12 @@ function* login({ payload: { email, password } }) {
     };
 
     try {
+
+      yield put( loginLoading() )
+
+
+
+
         // const response = yield call(fetchJSON, currentApiRoute.apiEnv + '/auth/login', options);
         // if (response.status === "error")
         // {

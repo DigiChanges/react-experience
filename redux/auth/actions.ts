@@ -1,5 +1,6 @@
 import {
     LOGIN_USER,
+    LOGIN_LOADING,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
     LOGOUT_USER,
@@ -25,6 +26,11 @@ export const loginUser = (email: string, password: string): AuthAction => ({
     type: LOGIN_USER,
     payload: { email, password },
 });
+
+export const loginLoading = (): AuthAction => ({
+  type: LOGIN_LOADING,
+  payload: null
+}) 
 
 export const loginUserSuccess = (user: string): AuthAction => ({
     type: LOGIN_USER_SUCCESS,
