@@ -1,15 +1,13 @@
 
-//TODO: Create .env consts
-//https://pokeapi.co/api/v2/pokemon
-const AUTH_PROTOCOL =  ''
-const AUTH_HOSTNAME = ''
-const AUTH_PORT = ''
+const AUTH_PROTOCOL =  'http'
+const AUTH_HOSTNAME = 'localhost'
+const AUTH_PORT = '8089'
 
-const API_PROTOCOL =  ''
-const API_HOSTNAME = ''
-const API_PORT = ''
+const API_PROTOCOL =  'http'
+const API_HOSTNAME = 'localhost'
+const API_PORT = '8089'
 
-const BACKEND_BASE_AUTH = ''
+const BACKEND_BASE_PATH = 'api/auth'
 
 export const config = {
   restApiAuth: {
@@ -19,8 +17,9 @@ export const config = {
       port: AUTH_PORT 
     },
     routes: {
-      signin: '/signin',
-      signout: '/signout'
+      login: `${BACKEND_BASE_PATH}/login`,
+      //TODO
+      // signout: '/signout'
     }
   },
   apiGateway: {
@@ -30,8 +29,10 @@ export const config = {
       port: API_PORT 
     },
     routes: {
-      //for example, projects getAll url endpoint
-      getAll: `${BACKEND_BASE_AUTH}/projects`
+      //TODO
+      // products: {
+      //   getAll: `${BACKEND_BASE_PATH}/products`
+      // }
     }
   }
 }

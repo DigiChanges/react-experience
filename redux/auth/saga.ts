@@ -1,110 +1,48 @@
 // @flow
-// import { Cookies } from 'react-cookie';
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-
-// import { fetchJSON } from '../../helpers/api';
-// import { getTenantIdFromToken } from "../../helpers/authUtils";
-
 import { signin } from '../../services/userService'
-
 import { LOGIN_USER, LOGOUT_USER, FORGET_PASSWORD, CHANGE_FORGOT_PASSWORD } from './constants';
-
+import { setSession, getSession, removeSession } from '../../helpers/authSession'
+import { startLoading, stopLoading } from '../loading/actions'
 import {
-    loginUserSuccess,
-    loginUserFailed,
-    forgetPasswordSuccess,
-    forgetPasswordFailed,
-    changeForgotPasswordFailed,
-    changeForgotPasswordSuccess,
-    changeForgotPasswordFieldsFailed
+  loginUserSuccess,
+  loginUserFailed,
+  forgetPasswordSuccess,
+  forgetPasswordFailed,
+  changeForgotPasswordFailed,
+  changeForgotPasswordSuccess,
+  changeForgotPasswordFieldsFailed
 } from './actions';
 
-import {
-  startLoading,
-  stopLoading
-} from '../loading/actions'
-
-
-
-// import {currentApiRoute} from "../../routes/api";
-
-/**
- * Sets the session
- * @param {*} data
- */
-// const setSession = (data) => {
-//     let cookies = new Cookies();
-//
-//     if (data) {
-//         const { expires, token, user } = data;
-//
-//         cookies.set('user', JSON.stringify(user), { path: '/' });
-//         cookies.set('expires', JSON.stringify(expires), { path: '/' });
-//         cookies.set('token', JSON.stringify(token), { path: '/' });
-//         cookies.set('tenantId', getTenantIdFromToken(token), { path: '/' });
-//         cookies.set('socket', JSON.stringify({status: false}), { path: '/' });
-//         cookies.set('firstLogin', JSON.stringify({ firstLogin: true }) , { path: '/' });
-//     }
-//     else {
-//         cookies.remove('user', { path: '/' });
-//         cookies.remove('expires', { path: '/' });
-//         cookies.remove('token', { path: '/' });
-//         cookies.remove('tenantId', { path: '/' });
-//         cookies.remove('socket', { path: '/' });
-//         cookies.remove('firstLogin', { path: '/' });
-//
-//     }
-// };
-/**
- * Login the user
- * @param authParams
- */
-
 function* login({ payload: { email, password } }) {
-    // const options = {
-    //     body: JSON.stringify({ email, password }),
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json'},
-    // };
-
-    yield put( startLoading() )
-
-    try {
-
-      //fake api consume
-      //todo: jwt decode get data
-      let res = yield call( signin, email, password )
-      res.data = {
-        name: 'Agustin',
-        surname: 'Perez',
-        email: 'agustin.perez@gmail.com',
-        token: '123456789'
-      }
-      
-     if (res?.data?.token) {
-       
-        yield put( loginUserSuccess(res.data) )
+  yield put( startLoading() )
+  try {
+    let res = yield call( signin, email, password )      
+    const { result, data, error } = res
+    if (result === 'success') {
+      if (data.expires && data.user && data.token) {
+        setSession( data )
+        yield put( loginUserSuccess(data) )
+        //TODO routing and navigate to another screen
       } else {
-        throw new Error(res.message || 'Internal Server Error')
+        yield put( loginUserFailed('Internal Server Error') )
       }
-
-        // const response = yield call(fetchJSON, currentApiRoute.apiEnv + '/auth/login', options);
-        // if (response.status === "error")
-        // {
-        //     yield put(loginUserFailed(response.message));
-        //     return;
-        // }
-
-        // setSession(response.data);
-        // yield put(loginUserSuccess(response.data));
-    } catch (error) {
-      yield put( loginUserFailed(error.message) )
-        // yield put(loginUserFailed(error.message));
-        // setSession(null);
-    } finally {
-      yield put( stopLoading() )
+    } else {
+      yield put( loginUserFailed(error) )
     }
+  } catch (e) {
+    removeSession()
+    yield put( loginUserFailed(e.message) )
+  } finally {
+    yield put( stopLoading() )
+  }
 }
+
+
+
+
+
+//TODO - PENDING REVIEW
 
 /**
  * Logout the user
@@ -180,6 +118,10 @@ function* changeForgotPassword({ payload: { confirmationToken, password, passwor
         // yield put(changeForgotPasswordFailed(error.message));
     }
 }
+
+
+
+
 
 export function* watchLoginUser(): any {
     // @ts-ignore

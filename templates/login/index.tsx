@@ -1,16 +1,13 @@
-import React, { useState }  from "react";
+import React  from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
-import Router from "next/router";
 import Image from "../../atoms/Image";
 import { loginUser } from '../../redux/auth/actions'
-import { useDispatch, useSelector } from 'react-redux';
-import CustomLoader from "../../atoms/CustomLoader";
+import { useDispatch } from 'react-redux';
 
-const Login = ({loginData}: any): any =>
+const Login = () =>
 {
   const dispatch = useDispatch()
-  const loading = useSelector( state => state.Auth.loading )
 
   return(
     <section className="text-gray-500 body-font bg-gray-900 h-screen">
@@ -25,13 +22,6 @@ const Login = ({loginData}: any): any =>
             onSubmit={async (values) => {
               const { email, password } = values
               dispatch( loginUser(email, password) )
-              //showLoading(true)
-              // if (
-              //   loginData.email === values.email &&
-              //   loginData.password === values.password
-              // ) {
-              //   await Router.push("/dashboard");
-              // }
             }}
           >
             {({ errors, touched }) => (
