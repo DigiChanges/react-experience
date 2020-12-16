@@ -3,7 +3,7 @@ import GeneralLoader from "../../atoms/GeneralLoader";
 import { useSelector } from 'react-redux';
 
 const ContentLayout = (props: any): any => {
-  const { isLoading } = useSelector( state => state.Loading )
+  const { isLoading } = useSelector( state => state.General )
   return (
     <div className="text-gray-700 body-font bg-gray-900 h-screen flex justify-center items-center">
       {isLoading && (

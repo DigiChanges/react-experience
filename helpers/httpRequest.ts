@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { apiResult } from '../api/apiResult'
 /*
 2xx Success
 200 OK
@@ -16,9 +17,6 @@ import axios from 'axios'
 const HTTP_SUCCESS_STATUS = [200, 201, 204]
 const HTTP_ERROR_STATUS = [400, 401, 403, 404, 412, 500, 501]
 const SUCCESS = 'success'
-const ERROR = 'error'
-
-const setResult = (result:string, data:any, error:string) => ({result, data, error})
 
 class HttpRequest {
   static async request({
@@ -42,18 +40,18 @@ class HttpRequest {
       const res = await axios(requestOptions)
       const { data } = res
       if (HTTP_SUCCESS_STATUS.includes(res.status)) {
-        return setResult(SUCCESS, data.data, null)
+        return apiResult( data.data )
       } else if (HTTP_ERROR_STATUS.includes(res.status)) {
-        return setResult(ERROR, null, data.message || 'Internal Server Error')
+        const error = data.message || 'Internal Server Error'
+        throw new Error(error)
       } else {
-        return setResult(ERROR, null, 'Network response was not ok')
+        throw new Error('Network response was not ok')
       }
     } catch (e) {
-      return setResult(ERROR, null, e.message)
+      const { message } = e.response.data
+      throw new Error(message)
     }
   }
 }
-
-
 
 export { HttpRequest }

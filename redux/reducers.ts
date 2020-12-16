@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import Auth from './auth/reducers';
-import Loading from './loading/reducers';
+import General from './general/reducers';
 
 const appReducer = combineReducers({
     Auth,
-    Loading
+    General
 });
 
 export default appReducer;

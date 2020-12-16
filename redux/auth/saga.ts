@@ -3,7 +3,13 @@ import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 import { signin } from '../../services/userService'
 import { LOGIN_USER, LOGOUT_USER, FORGET_PASSWORD, CHANGE_FORGOT_PASSWORD } from './constants';
 import { setSession, getSession, removeSession } from '../../helpers/authSession'
-import { startLoading, stopLoading } from '../loading/actions'
+import { messageTypes, generalMessage } from '../../entities/generalMessage';
+import { 
+  startGeneralLoading, 
+  stopGeneralLoading, 
+  showGeneralMessage, 
+  dismissGeneralMessage 
+} from '../general/actions'
 import {
   loginUserSuccess,
   loginUserFailed,
@@ -14,29 +20,47 @@ import {
   changeForgotPasswordFieldsFailed
 } from './actions';
 
+//TODO
+//IMPLEMENTAR SISTEMA DE TOASTS
+
 function* login({ payload: { email, password } }) {
-  yield put( startLoading() )
+  yield put( startGeneralLoading() )
   try {
     let res = yield call( signin, email, password )      
-    const { result, data, error } = res
-    if (result === 'success') {
-      if (data.expires && data.user && data.token) {
-        setSession( data )
-        yield put( loginUserSuccess(data) )
-        //TODO routing and navigate to another screen
-      } else {
-        yield put( loginUserFailed('Internal Server Error') )
-      }
+    const { data } = res
+    if (data.expires && data.user && data.token) {
+      setSession( data )
+      yield put( loginUserSuccess(data) )
+      //TODO routing and navigate to another screen
     } else {
-      yield put( loginUserFailed(error) )
+      yield put( 
+        showGeneralMessage(
+          generalMessage(
+            messageTypes.ERROR, 
+            'Error', 
+            'Internal Server Error')
+        ) 
+      )
     }
   } catch (e) {
     removeSession()
-    yield put( loginUserFailed(e.message) )
+    yield put( 
+      showGeneralMessage(
+        generalMessage(
+          messageTypes.ERROR, 
+          'Error', 
+          e.message)
+      ) 
+    )
   } finally {
-    yield put( stopLoading() )
+    yield put( stopGeneralLoading() )
   }
 }
+
+
+
+
+
 
 
 
