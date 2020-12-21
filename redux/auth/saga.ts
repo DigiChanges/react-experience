@@ -3,12 +3,11 @@ import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 import { signin } from '../../services/userService'
 import { LOGIN_USER, LOGOUT_USER, FORGET_PASSWORD, CHANGE_FORGOT_PASSWORD } from './constants';
 import { setSession, getSession, removeSession } from '../../helpers/authSession'
-import { messageTypes, generalMessage } from '../../entities/generalMessage';
+import { notificationTypes, notification } from '../../entities/notification';
 import { 
   startGeneralLoading, 
   stopGeneralLoading, 
-  showGeneralMessage, 
-  dismissGeneralMessage 
+  showGeneralNotification 
 } from '../general/actions'
 import {
   loginUserSuccess,
@@ -19,9 +18,6 @@ import {
   changeForgotPasswordSuccess,
   changeForgotPasswordFieldsFailed
 } from './actions';
-
-//TODO
-//IMPLEMENTAR SISTEMA DE TOASTS
 
 function* login({ payload: { email, password } }) {
   yield put( startGeneralLoading() )
@@ -34,10 +30,9 @@ function* login({ payload: { email, password } }) {
       //TODO routing and navigate to another screen
     } else {
       yield put( 
-        showGeneralMessage(
-          generalMessage(
-            messageTypes.ERROR, 
-            'Error', 
+        showGeneralNotification(
+          notification(
+            notificationTypes.ERROR, 
             'Internal Server Error')
         ) 
       )
@@ -45,10 +40,9 @@ function* login({ payload: { email, password } }) {
   } catch (e) {
     removeSession()
     yield put( 
-      showGeneralMessage(
-        generalMessage(
-          messageTypes.ERROR, 
-          'Error', 
+      showGeneralNotification(
+        notification(
+          notificationTypes.ERROR,
           e.message)
       ) 
     )

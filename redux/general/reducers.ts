@@ -1,20 +1,19 @@
 import {
   START_GENERAL_LOADING,
   STOP_GENERAL_LOADING,
-  SHOW_GENERAL_MESSAGE,
-  DISMISS_GENERAL_MESSAGE
+  SHOW_GENERAL_NOTIFICATION
 } from './constants';
 
 const INIT_STATE = {
   isLoading: false,
-  message: undefined
+  notification: undefined
 }
 
 const General = (state= INIT_STATE, action ) => {
   switch (action.type) {
     case START_GENERAL_LOADING:
       return { 
-        message: undefined,
+        notification: undefined,
         isLoading: true 
       }
     case STOP_GENERAL_LOADING:
@@ -22,15 +21,10 @@ const General = (state= INIT_STATE, action ) => {
         ...state, 
         isLoading: false 
       }
-    case SHOW_GENERAL_MESSAGE: 
+    case SHOW_GENERAL_NOTIFICATION: 
       return { 
         isLoading: false,
-        message: {...action.payload}
-      }
-    case DISMISS_GENERAL_MESSAGE: 
-      return { 
-        ...state,
-        message: undefined
+        notification: {...action.payload}
       }
     default: return { ...state }
   }

@@ -5,6 +5,8 @@ import "../assets/css/index.css";
 import { Provider } from 'react-redux'
 import {configureStore} from "../redux/store";
 import ContentLayout from "../templates/layout/ContentLayout";
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 createTheme("DGDarkTheme", {
   text: {
@@ -35,6 +37,8 @@ createTheme("DGDarkTheme", {
     text: "#E1E8E8",
   },
 });
+
+toast.configure()
 
 const MyApp = ({ Component, pageProps }: any): any => (
   <>
