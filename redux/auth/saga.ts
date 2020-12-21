@@ -18,6 +18,8 @@ import {
   changeForgotPasswordSuccess,
   changeForgotPasswordFieldsFailed
 } from './actions';
+import Router from 'next/router'
+
 
 function* login({ payload: { email, password } }) {
   yield put( startGeneralLoading() )
@@ -27,7 +29,7 @@ function* login({ payload: { email, password } }) {
     if (data.expires && data.user && data.token) {
       setSession( data )
       yield put( loginUserSuccess(data) )
-      //TODO routing and navigate to another screen
+      Router.replace('/users')
     } else {
       yield put( 
         showGeneralNotification(

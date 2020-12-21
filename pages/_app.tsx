@@ -7,6 +7,8 @@ import {configureStore} from "../redux/store";
 import ContentLayout from "../templates/layout/ContentLayout";
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { CookiesProvider } from 'react-cookie'
+import AuthProvider from '../auth/AuthProvider'
 
 createTheme("DGDarkTheme", {
   text: {
@@ -55,9 +57,13 @@ const MyApp = ({ Component, pageProps }: any): any => (
     </Head>
 
     <Provider store={configureStore({})}>
-      <ContentLayout>
-        <Component {...pageProps} />
-      </ContentLayout>
+      <CookiesProvider>
+        <ContentLayout>
+          <AuthProvider>
+            <Component {...pageProps} />  
+          </AuthProvider>
+        </ContentLayout>
+      </CookiesProvider>
     </Provider>
   </>
 );
