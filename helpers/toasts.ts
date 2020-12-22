@@ -8,13 +8,13 @@ const tBody = (type:string) => ({
 	style: ToastStyle(type)
 })
 
-const getToast = (type:string, msg:string) => ({
-	[notificationTypes.SUCCESS]: toast.success(msg, tBody(type)),
-	[notificationTypes.INFO]: toast.info(msg, tBody(type)),
-	[notificationTypes.WARNING]: toast.warning(msg, tBody(type)),
-	[notificationTypes.ERROR]: toast.error(msg, tBody(type))
-})
+const getToast = {
+  [notificationTypes.SUCCESS]: toast.success,
+  [notificationTypes.INFO]: toast.info,
+  [notificationTypes.WARNING]: toast.warning,
+  [notificationTypes.ERROR]: toast.error
+}
 
 export const showToast = (type: string, msg: string) => {
-	return getToast(type, msg)[type]
+	return getToast[type](msg, tBody(type))
 }
