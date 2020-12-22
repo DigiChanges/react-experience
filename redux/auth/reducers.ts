@@ -16,8 +16,6 @@ import {
 } from './constants';
 import {AuthAction} from "./actions";
 
-// import {getLoggedInUser} from '../../helpers/authUtils';
-
 const INIT_STATE = {
     user: null,
     loading: false,
@@ -29,11 +27,6 @@ type State = { user: {} | null, loading: boolean, error: null }
 const Auth = (state: State = INIT_STATE, action: AuthAction) =>
 {
   switch (action.type) {
-    //Not necessary
-    // case LOGIN_USER:
-    //   return { ...state };
-    // case LOGIN_LOADING:
-    //   return { ...state, loading: true }
     case LOGIN_USER_SUCCESS:
       return { ...state, user: action.payload, loading: false, error: null};
     case LOGIN_USER_FAILED:

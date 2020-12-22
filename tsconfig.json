@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx", "api/config.js"
-  ],
+, "redux/store.ts"  ],
   "exclude": [
     "node_modules"
   ]

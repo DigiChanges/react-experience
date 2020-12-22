@@ -28,8 +28,8 @@ function* login({ payload: { email, password } }) {
     const { data } = res
     if (data.expires && data.user && data.token) {
       setSession( data )
-      yield put( loginUserSuccess(data) )
-      Router.replace('/users')
+      yield put( loginUserSuccess(data.user) )
+      Router.replace('/')
     } else {
       yield put( 
         showGeneralNotification(

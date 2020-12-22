@@ -26,7 +26,7 @@ export const loginUser = (email: string, password: string): AuthAction => ({
     payload: { email, password },
 });
 
-export const loginUserSuccess = (user: string): AuthAction => ({
+export const loginUserSuccess = (user: object): AuthAction => ({
     type: LOGIN_USER_SUCCESS,
     payload: user,
 });

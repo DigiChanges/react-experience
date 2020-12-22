@@ -12,7 +12,8 @@ const INIT_STATE = {
 const General = (state= INIT_STATE, action ) => {
   switch (action.type) {
     case START_GENERAL_LOADING:
-      return { 
+      return {
+        ...state,
         notification: undefined,
         isLoading: true 
       }
@@ -23,6 +24,7 @@ const General = (state= INIT_STATE, action ) => {
       }
     case SHOW_GENERAL_NOTIFICATION: 
       return { 
+        ...state,
         isLoading: false,
         notification: {...action.payload}
       }

@@ -56,7 +56,7 @@ const MyApp = ({ Component, pageProps }: any): any => (
       <title>React Experience</title>
     </Head>
 
-    <Provider store={configureStore({})}>
+    <Provider store={configureStore}>
       <CookiesProvider>
         <ContentLayout>
           <AuthProvider>

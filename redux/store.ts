@@ -6,13 +6,11 @@ import sagas from './sagas';
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
 
-export function configureStore(initialState)
-{
-    // @ts-ignore
-    const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-    const store = createStore(reducers, initialState, composeEnhancers(applyMiddleware(...middlewares)));
-    // @ts-ignore
-    sagaMiddleware.run(sagas);
-    return store;
-}
+export const configureStore = createStore(
+  reducers,
+  composeEnhancers(applyMiddleware(...middlewares))
+)
+
+sagaMiddleware.run(sagas);
