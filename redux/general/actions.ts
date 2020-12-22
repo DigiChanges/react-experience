@@ -9,3 +9,4 @@ export const stopGeneralLoading = () => ({ type: STOP_GENERAL_LOADING })
 
 export const showGeneralNotification = notification => 
   ({ type: SHOW_GENERAL_NOTIFICATION, payload: notification })
+  
