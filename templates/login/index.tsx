@@ -51,6 +51,7 @@ const Login = () =>
                     <Field
                       name="password"
                       type="password"
+                      autoComplete="off"
                       className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey  rounded shadow"
                       placeholder="Your Password"
                     />

@@ -1,38 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
-import Select from "../../atoms/Select";
 import Modal from "../../molecules/Modal";
 
 const AddUserModal = ({ open }: any): any => {
   const [openModal, setOpenModal] = useState(false);
-
-  const rolesPrueba = [
-    {
-      key: "chua",
-      value: "10",
-    },
-    {
-      key: "chubacgffga 2",
-      value: "20",
-    },
-    {
-      key: "aca 3",
-      value: "30",
-    },
-    {
-      key: "chubaca 4",
-      value: "40",
-    },
-    {
-      key: "chubaca 5",
-      value: "50",
-    },
-    {
-      key: "chubaca 6",
-      value: "60",
-    },
-  ];
 
   const closeModal = () => {
     setOpenModal(!openModal);
