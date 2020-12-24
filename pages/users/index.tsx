@@ -7,6 +7,7 @@ import Link from "next/link";
 import customData from "../../data/userdata.json";
 
 const UsersPage = (): any => {
+    
   const [booleanConfirmDelete, setBooleanConfirmDelete] = useState(false);
 
   const openConfirmDelete = (): any => {
@@ -15,7 +16,7 @@ const UsersPage = (): any => {
 
   return (
     <>
-      <div className="w-full h-full flex flex-col justify-between">
+      <div className="w-full h-full flex flex-col justify-between">        
         <UsersTable data={customData} />
         <AddUserModal />
         {booleanConfirmDelete ? (

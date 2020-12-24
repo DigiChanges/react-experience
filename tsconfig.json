@@ -21,8 +21,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "api/config.js"
-, "redux/store.ts"  ],
+    "**/*.tsx"  
+  ],
   "exclude": [
     "node_modules"
   ]

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import GeneralToast from '../../atoms/GeneralToast'
 
 const ContentLayout = (props: any): any => {
-  const { isLoading, notification } = useSelector( state => state.General )
+  const { isLoading, notification } = useSelector( state => state.General )  
   return (
     <div className="text-gray-700 body-font bg-gray-900 h-screen flex justify-center items-center">
       {isLoading && (

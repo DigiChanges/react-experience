@@ -3,13 +3,16 @@ import {
   STOP_GENERAL_LOADING,
   SHOW_GENERAL_NOTIFICATION
 } from './constants';
+import { GeneralActions } from './actions';
 
 const INIT_STATE = {
   isLoading: false,
-  notification: undefined
+  notification: null
 }
 
-const General = (state= INIT_STATE, action ) => {
+type State = { isLoading: boolean, notification: {} | null }
+
+const General = (state: State = INIT_STATE, action: GeneralActions) => {
   switch (action.type) {
     case START_GENERAL_LOADING:
       return {
