@@ -41,7 +41,7 @@ const UsersTable = (props: any): any => {
 
   return (
     <>
-      <div className="w-screen px-56 pt-20">
+      <div className="px-16 pt-20">
         <h1 className="text-5xl text-gray-500">Users</h1>
         <DataTable
           columns={ListUsersTemplateColumns}

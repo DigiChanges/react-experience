@@ -1,12 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
 import GeneralLoader from "../../atoms/GeneralLoader";
 import { useSelector } from 'react-redux';
 import GeneralToast from '../../atoms/GeneralToast'
 
-const ContentLayout = (props: any): any => {
+const GeneralLayout = (props: any): any => {
   const { isLoading, notification } = useSelector( state => state.General )  
   return (
-    <div className="text-gray-700 body-font bg-gray-900 h-screen flex justify-center items-center">
+    <Fragment>
       {isLoading && (
         <GeneralLoader 
           cssScreenContainer='fixed w-screen h-screen bg-black bg-opacity-75 top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center'
@@ -19,8 +19,8 @@ const ContentLayout = (props: any): any => {
           msg={ notification.message }/>
       )}      
       {props.children}
-    </div>
+    </Fragment>
   );
 };
 
-export default ContentLayout;
+export default GeneralLayout;

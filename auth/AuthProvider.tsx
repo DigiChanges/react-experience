@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import IndexPage from '../pages/login'
 import HomePage from '../pages/index';
 import { useRouter } from 'next/router'
 import { withCookies } from 'react-cookie'
 import { useDispatch } from 'react-redux'
 import { setStartPathname } from '../redux/paths/actions'
+import  PrivateLayout from '../templates/layout/PrivateLayout'
 
 const AuthProvider = ({ children, ...props }) => {
 
@@ -24,7 +25,11 @@ const AuthProvider = ({ children, ...props }) => {
   const renderChildren = () => {
     if (isAuth) {
       if (router.pathname !== '/login') {
-        return children
+        return (
+          <PrivateLayout 
+            children={ children }
+          />
+        )
       } else {
         return <HomePage />
       }
@@ -33,11 +38,7 @@ const AuthProvider = ({ children, ...props }) => {
     }
   }
 
-  return (
-    <Fragment>
-      { renderChildren() }
-    </Fragment>  
-  )
+  return ( renderChildren() )
 }
 
 export default withCookies(AuthProvider)
