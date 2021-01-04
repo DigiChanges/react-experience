@@ -22,19 +22,7 @@ const Login = () =>
             validationSchema={SignUpSchema}
             onSubmit={async (values) => {
 							const { email, password } = values
-							
-							//to test
-							// dispatch( loginUser(email, password) )
-							setSession({
-								expires: '1234124234',
-								user: {
-									id: 1234, 
-									enable: true,
-									name: 'test'
-								},
-								token: '1231241314323' 
-							})
-							//to test
+              dispatch( loginUser(email, password) )
             }}
           >
             {({ errors, touched }) => (

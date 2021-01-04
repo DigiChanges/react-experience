@@ -25,11 +25,7 @@ const AuthProvider = ({ children, ...props }) => {
   const renderChildren = () => {
     if (isAuth) {
       if (router.pathname !== '/login') {
-        return (
-          <PrivateLayout 
-            children={ children }
-          />
-        )
+        return <PrivateLayout children={ children }/>
       } else {
         return <HomePage />
       }
@@ -38,7 +34,7 @@ const AuthProvider = ({ children, ...props }) => {
     }
   }
 
-  return ( renderChildren() )
+  return renderChildren()
 }
 
 export default withCookies(AuthProvider)
