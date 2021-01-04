@@ -24,11 +24,9 @@ const AuthProvider = ({ children, ...props }) => {
 
   const renderChildren = () => {
     if (isAuth) {
-      if (router.pathname !== '/login') {
-        return <PrivateLayout children={ children }/>
-      } else {
-        return <HomePage />
-      }
+      return router.pathname !== '/login'
+        ? <PrivateLayout children={ children }/>
+        : <HomePage />
     } else {
       return <IndexPage />
     }
