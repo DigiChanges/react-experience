@@ -13,7 +13,7 @@ const HomePage = (): any => {
         startPathname !== '/login') {
       router.replace( startPathname )
     } else {
-      router.replace('/Test')
+      router.replace('/users')
     }
   }, [])
 
