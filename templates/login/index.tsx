@@ -4,6 +4,7 @@ import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Image from "../../atoms/Image";
 import { loginUser } from '../../redux/auth/actions'
 import { useDispatch } from 'react-redux';
+import { setSession } from '../../helpers/authSession'
 
 const Login = () =>
 {
@@ -20,8 +21,20 @@ const Login = () =>
             }}
             validationSchema={SignUpSchema}
             onSubmit={async (values) => {
-              const { email, password } = values
-              dispatch( loginUser(email, password) )
+							const { email, password } = values
+							
+							//to test
+							// dispatch( loginUser(email, password) )
+							setSession({
+								expires: '1234124234',
+								user: {
+									id: 1234, 
+									enable: true,
+									name: 'test'
+								},
+								token: '1231241314323' 
+							})
+							//to test
             }}
           >
             {({ errors, touched }) => (

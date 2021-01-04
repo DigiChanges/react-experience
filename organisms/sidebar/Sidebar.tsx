@@ -1,13 +1,39 @@
+import IconHome from '../../atoms/IconHome'
+import IconDashboard from '../../atoms/IconDashboard'
+import IconUsers from '../../atoms/IconUsers'
+import IconLogout from '../../atoms/IconLogout'
+
+const size = 6
+const color = 'gray-500'
+
 const DASH_ROUTES = [
-  { path: '/', name: 'Home', icon: null },
-  { path: '/dashboard', name: 'Dashboard', icon: null },
+	{ 
+		path: '/', 
+		name: 'Home', 
+		icon: <IconHome size={size} color={color}/>
+	},
+	{ 
+		path: '/dashboard', 
+		name: 'Dashboard', 
+		icon: <IconDashboard size={size} color={color}/> 
+	},
+	{ 
+		path: '/users', 
+		name: 'Users', 
+		icon: <IconUsers size={size} color={color}/> 
+	},
   { 
-    path: '/users', name: 'Users', icon: null, childs: [
-      { path: '/user1', name: 'User1', icon: null },
-      { path: '/user2', name: 'User2', icon: null }
+    path: '/reports', name: 'Reports', icon: null, childs: [
+      { path: '/report1', name: 'report1', icon: null },
+			{ path: '/report2', name: 'report2', icon: null },
+			{ path: '/report3', name: 'report3', icon: null }
     ] 
   },
-  { path: '/about', name: 'About', icon: null }
+  { 
+		path: '/logout', 
+		name: 'Logout', 
+		icon: <IconLogout size={size} color={color}/>  
+	}
 ]
 
 export default function Sidebar() {
@@ -15,25 +41,18 @@ export default function Sidebar() {
   const menu = []
   DASH_ROUTES.forEach((prop, key) => {
     if (prop.childs) {
-      //TODO with dropdown
+			//TODO with dropdown
     } else {
       menu.push(
-        <li>
+        <li key={ key }>
           <a href="#" className="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800">
-            <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"><i className="bx bx-home"></i></span>
+            <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400">
+							{ prop.icon }
+						</span>
             <span className="text-sm font-medium">{ prop.name }</span>
           </a>
         </li>
       )
-      // <li key={ key }>
-      //   <a 
-      //     href={ prop.path } 
-      //     classNameName='nav-link' 
-      //   >
-      //     <i classNameName={prop.icon}></i>
-      //     <p>{prop.name}</p>
-      //   </a>
-      // </li>
     }
   })  
 
