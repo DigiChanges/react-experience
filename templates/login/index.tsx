@@ -1,11 +1,14 @@
 import React  from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
-import Router from "next/router";
 import Image from "../../atoms/Image";
+import { loginUser } from '../../redux/auth/actions'
+import { useDispatch } from 'react-redux';
 
-const Login = ({loginData}: any): any =>
+const Login = () =>
 {
+  const dispatch = useDispatch()
+
   return(
     <section className="text-gray-500 body-font bg-gray-900 h-screen">
       <div className="container mx-auto h-full flex justify-center items-center">
@@ -17,12 +20,8 @@ const Login = ({loginData}: any): any =>
             }}
             validationSchema={SignUpSchema}
             onSubmit={async (values) => {
-              if (
-                loginData.email === values.email &&
-                loginData.password === values.password
-              ) {
-                await Router.push("/dashboard");
-              }
+              const { email, password } = values
+              dispatch( loginUser(email, password) )
             }}
           >
             {({ errors, touched }) => (
@@ -52,6 +51,7 @@ const Login = ({loginData}: any): any =>
                     <Field
                       name="password"
                       type="password"
+                      autoComplete="off"
                       className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey  rounded shadow"
                       placeholder="Your Password"
                     />

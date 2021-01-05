@@ -1,11 +1,11 @@
 import React  from "react";
 import Login from '../../templates/login/index';
 
-const loginData = require("../../data/logindata.json");
+const IndexPage = () => {
 
-const IndexPage = () =>
-(
-    <Login loginData={loginData}/>
-);
+  return (
+    <Login />
+  )
+}
 
 export default IndexPage;

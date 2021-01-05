@@ -1,80 +1,68 @@
 // @flow
-// import { Cookies } from 'react-cookie';
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-
-// import { fetchJSON } from '../../helpers/api';
-// import { getTenantIdFromToken } from "../../helpers/authUtils";
-
+import { signin } from '../../services/userService'
 import { LOGIN_USER, LOGOUT_USER, FORGET_PASSWORD, CHANGE_FORGOT_PASSWORD } from './constants';
-
+import { setSession, getSession, removeSession } from '../../helpers/authSession'
+import { notificationTypes, notification } from '../../entities/notification';
+import { 
+  startGeneralLoading, 
+  stopGeneralLoading, 
+  showGeneralNotification 
+} from '../general/actions'
 import {
-    loginUserSuccess,
-    loginUserFailed,
-    forgetPasswordSuccess,
-    forgetPasswordFailed,
-    changeForgotPasswordFailed,
-    changeForgotPasswordSuccess,
-    changeForgotPasswordFieldsFailed
+  loginUserSuccess,
+  loginUserFailed,
+  forgetPasswordSuccess,
+  forgetPasswordFailed,
+  changeForgotPasswordFailed,
+  changeForgotPasswordSuccess,
+  changeForgotPasswordFieldsFailed
 } from './actions';
+import Router from 'next/router'
 
-
-
-// import {currentApiRoute} from "../../routes/api";
-
-/**
- * Sets the session
- * @param {*} data
- */
-// const setSession = (data) => {
-//     let cookies = new Cookies();
-//
-//     if (data) {
-//         const { expires, token, user } = data;
-//
-//         cookies.set('user', JSON.stringify(user), { path: '/' });
-//         cookies.set('expires', JSON.stringify(expires), { path: '/' });
-//         cookies.set('token', JSON.stringify(token), { path: '/' });
-//         cookies.set('tenantId', getTenantIdFromToken(token), { path: '/' });
-//         cookies.set('socket', JSON.stringify({status: false}), { path: '/' });
-//         cookies.set('firstLogin', JSON.stringify({ firstLogin: true }) , { path: '/' });
-//     }
-//     else {
-//         cookies.remove('user', { path: '/' });
-//         cookies.remove('expires', { path: '/' });
-//         cookies.remove('token', { path: '/' });
-//         cookies.remove('tenantId', { path: '/' });
-//         cookies.remove('socket', { path: '/' });
-//         cookies.remove('firstLogin', { path: '/' });
-//
-//     }
-// };
-/**
- * Login the user
- * @param authParams
- */
 
 function* login({ payload: { email, password } }) {
-    const options = {
-        body: JSON.stringify({ email, password }),
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-    };
-
-    try {
-        // const response = yield call(fetchJSON, currentApiRoute.apiEnv + '/auth/login', options);
-        // if (response.status === "error")
-        // {
-        //     yield put(loginUserFailed(response.message));
-        //     return;
-        // }
-
-        // setSession(response.data);
-        // yield put(loginUserSuccess(response.data));
-    } catch (error) {
-        // yield put(loginUserFailed(error.message));
-        // setSession(null);
+  yield put( startGeneralLoading() )
+  try {
+    let res = yield call( signin, email, password )      
+    const { data } = res
+    if (data.expires && data.user && data.token) {
+      setSession( data )
+      yield put( loginUserSuccess(data.user) )
+      Router.replace('/')
+    } else {
+      yield put( 
+        showGeneralNotification(
+          notification(
+            notificationTypes.ERROR, 
+            'Internal Server Error')
+        ) 
+      )
     }
+  } catch (e) {
+    removeSession()
+    yield put( 
+      showGeneralNotification(
+        notification(
+          notificationTypes.ERROR,
+          e.message)
+      ) 
+    )
+  } finally {
+    yield put( stopGeneralLoading() )
+  }
 }
+
+
+
+
+
+
+
+
+
+
+//TODO - PENDING REVIEW
 
 /**
  * Logout the user
@@ -150,6 +138,10 @@ function* changeForgotPassword({ payload: { confirmationToken, password, passwor
         // yield put(changeForgotPasswordFailed(error.message));
     }
 }
+
+
+
+
 
 export function* watchLoginUser(): any {
     // @ts-ignore

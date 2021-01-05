@@ -1,22 +1,25 @@
-import React  from "react";
-import Login from '../templates/login';
-import {loginUser} from "../redux/auth/actions";
-import {connect} from "react-redux";
+import { useEffect }  from "react";
+import { useSelector } from  'react-redux'
+import { useRouter } from "next/router";
 
-const LoginPage = (): any => {
-    const loginData = require("../data/logindata.json");
-    return (
-    <>
-        <Login loginData={loginData}/>
-    </>
-)};
+const HomePage = (): any => {
 
-const mapStateToProps = state => {
-    const { user, loading, error } = state.Auth;
-    return { user, loading, error };
-};
+  const router = useRouter()
+  const { startPathname } = useSelector(state => state.Paths)
 
-export default connect(
-    mapStateToProps,
-    { loginUser }
-)(LoginPage);
+  useEffect(() => {
+    if (startPathname && 
+        startPathname !== '/' &&
+        startPathname !== '/login') {
+      router.replace( startPathname )
+    } else {
+      router.replace('/users')
+    }
+  }, [])
+
+  return (
+    'Redirecting...'
+  )
+}
+
+export default HomePage

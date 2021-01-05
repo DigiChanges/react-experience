@@ -5,6 +5,9 @@ import "../assets/css/index.css";
 import { Provider } from 'react-redux'
 import {configureStore} from "../redux/store";
 import ContentLayout from "../templates/layout/ContentLayout";
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import AuthProvider from '../auth/AuthProvider'
 
 createTheme("DGDarkTheme", {
   text: {
@@ -36,6 +39,8 @@ createTheme("DGDarkTheme", {
   },
 });
 
+toast.configure()
+
 const MyApp = ({ Component, pageProps }: any): any => (
   <>
     <Head>
@@ -50,9 +55,11 @@ const MyApp = ({ Component, pageProps }: any): any => (
       <title>React Experience</title>
     </Head>
 
-    <Provider store={configureStore({})}>
+    <Provider store={configureStore}>
       <ContentLayout>
-        <Component {...pageProps} />
+        <AuthProvider>
+          <Component {...pageProps} />  
+        </AuthProvider>
       </ContentLayout>
     </Provider>
   </>

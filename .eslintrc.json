@@ -40,31 +40,22 @@
         "react-hooks"
     ],
     "rules": {
-        "double": {
-            "allowTemplateLiterals": 0
-        },
+        "double": 0,
         "import/no-unresolved": "off",
         "react/prop-types": "off", // We turn off prop-types rule, as we will use TypeScript's types instead.
         "react/react-in-jsx-scope": "off",
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/explicit-module-boundary-types": [
-            1,
-            {
-                "allowTypedFunctionExpressions": true,
-                "allowDirectConstAssertionInArrowFunctions": true,
-                "allowArgumentsExplicitlyTypedAsAny": true
-            }
-        ],
+        "@typescript-eslint/explicit-module-boundary-types": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx",".ts", ".tsx"] }],
         "jsx-a11y/anchor-is-valid": [
-            "error",
-            {
-                "components": ["Link"],
-                "specialLink": ["hrefLeft", "hrefRight"],
-                "aspects": ["invalidHref", "preferButton"]
-            }
+          "error",
+          {
+            "components": ["Link"],
+            "specialLink": ["hrefLeft", "hrefRight"],
+            "aspects": ["invalidHref", "preferButton"]
+          }
         ],
         "@typescript-eslint/no-var-requires": "off"
 
