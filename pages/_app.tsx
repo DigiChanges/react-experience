@@ -4,17 +4,10 @@ import { createTheme } from "react-data-table-component";
 import "../assets/css/index.css";
 import { Provider } from 'react-redux'
 import {configureStore} from "../redux/store";
-<<<<<<< HEAD
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import AuthProvider from '../auth/AuthProvider'
 import GeneralLayout from '../templates/layout/GeneralLayout';
-=======
-import ContentLayout from "../templates/layout/ContentLayout";
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import AuthProvider from '../auth/AuthProvider'
->>>>>>> 728e76561be458bde767da5f06b3f725515d3393
 
 createTheme("DGDarkTheme", {
   text: {
