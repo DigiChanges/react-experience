@@ -3,8 +3,7 @@ import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Image from "../../atoms/Image";
 import { loginUser } from '../../redux/auth/actions'
-import { useDispatch } from 'react-redux';
-import { setSession } from '../../helpers/authSession'
+import { useDispatch } from 'react-redux'
 
 const Login = () =>
 {

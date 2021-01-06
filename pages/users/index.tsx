@@ -16,7 +16,7 @@ const UsersPage = (): any => {
 
   return (
     <>
-      <div className="w-full h-full flex flex-col justify-between">
+      <div className="w-full h-full flex flex-col justify-between">        
         <UsersTable data={customData} />
         <AddUserModal />
         {booleanConfirmDelete ? (
