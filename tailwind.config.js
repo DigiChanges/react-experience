@@ -8,6 +8,7 @@ module.exports = {
   prefix: "",
   important: false,
   separator: ":",
+ darkMode: "media",
   theme: {
     screens: {
       sm: "640px",

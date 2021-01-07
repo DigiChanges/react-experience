@@ -1,5 +1,5 @@
-import React  from "react";
-import Content from "../templates/content";
+import React  from 'react';
+import Content from '../templates/content';
 
 const IndexPage = (): any => (
     <>

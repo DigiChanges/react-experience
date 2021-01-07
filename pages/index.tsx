@@ -1,4 +1,4 @@
-import { useEffect }  from "react";
+import { useEffect }  from 'react';
 import { useSelector } from  'react-redux'
 import { useRouter } from "next/router";
 
@@ -15,7 +15,7 @@ const HomePage = (): any => {
     } else {
       router.replace('/users')
     }
-  }, [])
+  })
 
   return (
     'Redirecting...'

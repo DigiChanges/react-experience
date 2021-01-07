@@ -4,7 +4,6 @@ import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Image from "../../atoms/Image";
 import { loginUser } from '../../redux/auth/actions'
 import { useDispatch } from 'react-redux';
-import { setSession } from '../../helpers/authSession'
 
 const Login = () =>
 {
