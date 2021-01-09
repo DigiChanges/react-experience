@@ -12,12 +12,6 @@ import ConfirmDelete from "../../modal/ConfirmDeleteUser"
 
 const UserActionsCell = (user: any): any => {
 
-  console.log('lala', user)
-
-
-
-
-
   const dispatch = useDispatch()
 
   const [boolean, setBoolean] = useState(false);

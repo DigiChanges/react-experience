@@ -31,7 +31,8 @@ export const config = {
     },
     routes: {
       users: {
-        getAll: `${BACKEND_BASE_PATH}/users`
+        getAll: `${BACKEND_BASE_PATH}/users`,
+        create: `${BACKEND_BASE_PATH}/users`
       }
       //TODO
       // products: {

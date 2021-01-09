@@ -1,7 +1,7 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-import { getAllUsers } from '../../services/usersService'
+import { getAllUsers, createUser } from '../../services/usersService'
 
-import { GET_USERS, GET_USERS_SUCCESS } from './constants'
+import { GET_USERS, GET_USERS_SUCCESS, CREATE_USER } from './constants';
 import { notification, notificationTypes } from '../../entities/notification';
 import { 
   startGeneralLoading, 
@@ -10,8 +10,10 @@ import {
 } from '../general/actions'
 import { 
   getUsers, 
-  getUserSuccess 
+  getUserSuccess,
+  createUserSuccess
 } from './actions'
+import Router from 'next/router';
 
 function* getUsersList() {
   yield put( startGeneralLoading() )
@@ -46,13 +48,67 @@ function* getUsersList() {
   }
 }
 
+function* createNewUser(
+  {payload: {
+    firstName, 
+    lastName,
+    email,
+    password,
+    passwordConfirmation,
+    permissions,
+    roles
+  }}) {
+  yield put( startGeneralLoading() )
+  try {
+    const newUser = { firstName, lastName, email, password, passwordConfirmation, permissions, roles }
+    console.log('createNewUser', newUser)
+    let res = yield call( createUser, newUser )
+    const { data } = res
+    if (!data) {
+      return yield put( 
+        showGeneralNotification(
+          notification(
+            notificationTypes.ERROR, 
+            'Internal Server Error'
+          )
+        )
+      )
+    }
+
+    yield put( createUserSuccess(data) )
+    Router.push('/users')
+
+  } catch (e) {
+    yield put(
+      showGeneralNotification(
+        notification(
+          notificationTypes.ERROR, 
+          e.message
+        )
+      )
+    )
+  } finally {
+    yield put( stopGeneralLoading() )
+  }
+}
+
+
+
+
+
+
 export function* watchGetUsersList(): any {
   // @ts-ignore
   yield takeEvery(GET_USERS, getUsersList);
 }
 
+export function* watchCreateUser(): any {
+  // @ts-ignore
+  yield takeEvery(CREATE_USER, createNewUser);
+}
+
 function* usersSaga(): any {
-  yield all( [fork(watchGetUsersList)] )
+  yield all( [fork(watchGetUsersList), fork(watchCreateUser)] )
 }
 
 export default usersSaga

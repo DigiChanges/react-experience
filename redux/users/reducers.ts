@@ -18,13 +18,13 @@ type State = {
   selected: {} | undefined
 }
 
-// const getUsers = (users, user) => {
-//   if (!users) {
-//     users = []
-//   }
-//   users.push(user)
-//   return users
-// }
+const getUsers = (newUser, users) => {
+  if (!users) {
+    users = []
+  }
+  users.push(newUser)
+  return users
+}
 
 const getSelectedUser = (id, users) => {
   if (users && users.length > 0) {
@@ -42,12 +42,8 @@ const Users = (state: State = INIT_STATE, action: UserActions) => {
     case SELECTED_USER:
       return { ...state, selected: getSelectedUser(action.payload, state.list) }
  
-
-
-
-    // case CREATE_USER:
-    //   return { ...state, users: getUsers(state.users, action.payload) }
-    
+    case CREATE_USER_SUCCESS:
+      return { ...state, users: getUsers(action.payload, state.list) }
     
     default: return { ...state }
   }

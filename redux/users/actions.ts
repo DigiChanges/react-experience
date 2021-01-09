@@ -26,21 +26,17 @@ export const selectedUser = id => ({
   payload: id
 })
 
-
-
-
-
-
-
 export const createUser = (
   firstName: string, 
   lastName: string,
   email: string,
   password: string,
-  roles: {} 
+  passwordConfirmation: string,
+  permissions: {},
+  roles: {}
   ): UserActions => ({
     type: CREATE_USER,
-    payload: { firstName, lastName, email, password, roles }
+    payload: { firstName, lastName, email, password, passwordConfirmation, permissions, roles }
   })
 
 export const createUserSuccess = (user:{}): UserActions => ({
