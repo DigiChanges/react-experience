@@ -46,9 +46,9 @@ const updateUser = (user, users) => {
   return INIT_STATE.list
 }
 
-const deleteUser = (id, users) => {
+const deleteUser = (user, users) => {
   if (users && users.length > 0) {
-    return users.filter(u => u.id !== id)
+    return users.filter(u => u.id !== user.id)
   }
   return INIT_STATE.list
 }
@@ -82,7 +82,7 @@ const Users = (state: State = INIT_STATE, action: UserActions) => {
       return { ...state, selectedToRemove: getSelectedUser(action.payload, state.list) }
 
     case REMOVE_USER_SUCCESS:
-      return { ...state, users: deleteUser(action.payload, state.list) }
+      return { ...state, list: deleteUser(action.payload, state.list) }
     
     default: return { ...state }
   }

@@ -136,10 +136,10 @@ function* updateUser({ payload: {
   }
 }
 
-function* removeUser({ payload: {id} }) {
+function* removeUser({ payload: id }) {
   yield put( startGeneralLoading() )
   try {
-    let res = yield call( deleteUser, { id } )
+    let res = yield call( deleteUser, id )
     const { data } = res
     if (!data) {
       return yield put( 
@@ -152,7 +152,7 @@ function* removeUser({ payload: {id} }) {
       )
     }
 
-    yield put( removeUserSuccess() )
+    yield put( removeUserSuccess(data) )
     Router.push('/users')
 
   } catch (e) {

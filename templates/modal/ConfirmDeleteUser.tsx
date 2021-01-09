@@ -23,6 +23,7 @@ const ConfirmDelete = ({ open, close }: any): any => {
 
   const onHandleDeleteUser = () => {
     dispatch( removeUser(selectedToRemove.id) )
+    closeModal()
   } 
 
   return (

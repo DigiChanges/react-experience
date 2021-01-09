@@ -44,7 +44,6 @@ const UserCreate = (): any => {
             validationSchema={SignUpSchema}
             onSubmit={async (values) => {
               const { firstName, lastName, email, password, passwordConfirmation, permissions, roles } = values
-              console.log('values', values)
               dispatch( 
                 createUser(
                   firstName, 

@@ -34,11 +34,10 @@ export const putUser = (id, body) => {
   return HttpRequest.request(requestOptions)
 }
 
-export const deleteUser = body => {
+export const deleteUser = id => {
   const requestOptions = {
-    url: `${ protocol }://${ hostname }:${ port }/${ remove }`,
+    url: `${ protocol }://${ hostname }:${ port }/${ remove.replace(':id', id) }`,
     method: 'DELETE',
-    body,
     headers: getHeader()
   }
   return HttpRequest.request(requestOptions)

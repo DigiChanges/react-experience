@@ -91,8 +91,8 @@ export const removeUser = (id: string): UserActions => ({
   payload: id
 })
 
-export const removeUserSuccess = (): UserActions => ({
+export const removeUserSuccess = (user: {}): UserActions => ({
   type: REMOVE_USER_SUCCESS,
-  payload: null
+  payload: user
 })
 
