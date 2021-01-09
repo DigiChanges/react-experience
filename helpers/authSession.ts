@@ -25,6 +25,16 @@ export const getSession = () => {
   return cookies.getAll()
 }
 
+export const getSessionToken = () => {
+  const cookies = getCookies()
+  return cookies.get(TOKEN)
+}
+
+export const updateSessionToken = (token: string) => {
+  const cookies = getCookies()
+  cookies.set(TOKEN, token, { path: '/' })
+}
+
 export const removeSession = () => {
   let cookies = getCookies()
   cookies.remove(USER, { path: '/' });

@@ -23,12 +23,12 @@ const ListUsersTemplateColumns =
     selector: "rolesData",
     sortable: true,
   },
-  {
-    name: "State",
-    selector: "",
-    sortable: true,
-    cell: UserStateCell,
-  },
+  // {
+  //   name: "State",
+  //   selector: "",
+  //   sortable: true,
+  //   cell: UserStateCell,
+  // },
   {
     name: "Actions",
     selector: "",

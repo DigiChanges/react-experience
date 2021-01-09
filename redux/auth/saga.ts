@@ -1,6 +1,6 @@
 // @flow
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-import { signin } from '../../services/userService'
+import { signin } from '../../services/authService'
 import { LOGIN_USER, LOGOUT_USER, FORGET_PASSWORD, CHANGE_FORGOT_PASSWORD } from './constants';
 import { setSession, getSession, removeSession } from '../../helpers/authSession'
 import { notificationTypes, notification } from '../../entities/notification';

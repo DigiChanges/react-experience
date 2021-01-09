@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { apiResult } from '../api/apiResult'
+import { updateSessionToken } from '../helpers/authSession'
 /*
 2xx Success
 200 OK
@@ -16,7 +17,6 @@ import { apiResult } from '../api/apiResult'
 */
 const HTTP_SUCCESS_STATUS = [200, 201, 204]
 const HTTP_ERROR_STATUS = [400, 401, 403, 404, 412, 500, 501]
-const SUCCESS = 'success'
 
 class HttpRequest {
   static async request({
@@ -40,6 +40,11 @@ class HttpRequest {
       const res = await axios(requestOptions)
       const { data } = res
       if (HTTP_SUCCESS_STATUS.includes(res.status)) {
+        //update refresh token
+        const { metadata } = data
+        if (metadata && metadata.refreshToken) {
+          updateSessionToken(metadata.refreshToken)
+        }
         return apiResult( data.data )
       } else if (HTTP_ERROR_STATUS.includes(res.status)) {
         const error = data.message || 'Internal Server Error'
