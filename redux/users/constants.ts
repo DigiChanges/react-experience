@@ -1,6 +1,8 @@
 export const GET_USERS = 'GET_USERS';
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 
+export const SELECTED_USER = 'SELECTED_USER';
+
 export const CREATE_USER = 'CREATE_USER';
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
 

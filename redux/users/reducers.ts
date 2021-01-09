@@ -1,18 +1,21 @@
 import {
   GET_USERS,
   GET_USERS_SUCCESS,
+  SELECTED_USER,
   CREATE_USER,
   CREATE_USER_SUCCESS,
 } from './constants'
 
-import { UserActions } from './actions';
+import { UserActions, selectedUser } from './actions';
 
 const INIT_STATE = {
-  list: []
+  list: [],
+  selected: undefined
 }
 
 type State = { 
-  list: {}
+  list: {},
+  selected: {} | undefined
 }
 
 // const getUsers = (users, user) => {
@@ -23,11 +26,21 @@ type State = {
 //   return users
 // }
 
+const getSelectedUser = (id, users) => {
+  if (users && users.length > 0) {
+    return users.find(user => user.id === id)
+  }
+  return undefined
+}
+
 const Users = (state: State = INIT_STATE, action: UserActions) => {
   switch (action.type) {
     
     case GET_USERS_SUCCESS:
       return { ...state, list: action.payload }
+
+    case SELECTED_USER:
+      return { ...state, selected: getSelectedUser(action.payload, state.list) }
  
 
 

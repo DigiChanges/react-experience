@@ -1,6 +1,7 @@
 import {
   GET_USERS,
   GET_USERS_SUCCESS,
+  SELECTED_USER,
   CREATE_USER,
   CREATE_USER_SUCCESS,
 } from './constants'
@@ -18,6 +19,11 @@ export const getUsers = () => ({
 export const getUserSuccess = users => ({
   type: GET_USERS_SUCCESS,
   payload: users
+})
+
+export const selectedUser = id => ({
+  type: SELECTED_USER,
+  payload: id
 })
 
 
