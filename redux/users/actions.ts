@@ -4,6 +4,11 @@ import {
   SELECTED_USER,
   CREATE_USER,
   CREATE_USER_SUCCESS,
+
+  SELECTED_USER_TO_UPDATE,
+  UPDATE_USER,
+  UPDATE_USER_SUCCESS,
+
   SELECTED_USER_TO_REMOVE,
   REMOVE_USER,
   REMOVE_USER_SUCCESS
@@ -46,6 +51,35 @@ export const createUserSuccess = (user:{}): UserActions => ({
   type: CREATE_USER_SUCCESS,
   payload: user
 })
+
+
+
+
+export const selectedUserToUpdate = (id: string): UserActions => ({
+  type: SELECTED_USER_TO_UPDATE,
+  payload: id
+})
+
+export const updateUser = (
+  id: string,
+  firstName: string, 
+  lastName: string,
+  email: string,
+  enable: boolean
+): UserActions => ({
+  type: UPDATE_USER,
+  payload: { id, firstName, lastName, email, enable }
+})
+
+export const updateUserSuccess = (user: {}): UserActions => ({
+  type: UPDATE_USER_SUCCESS,
+  payload: user
+})
+
+
+
+
+
 
 export const selectedUserToRemove = (id: string): UserActions => ({
   type: SELECTED_USER_TO_REMOVE,

@@ -4,23 +4,27 @@ import {
   SELECTED_USER,
   CREATE_USER,
   CREATE_USER_SUCCESS,
+  SELECTED_USER_TO_UPDATE,
+  UPDATE_USER_SUCCESS,
   SELECTED_USER_TO_REMOVE,
   REMOVE_USER,
   REMOVE_USER_SUCCESS
 } from './constants'
 
-import { UserActions, selectedUser } from './actions';
+import { UserActions } from './actions';
 
 const INIT_STATE = {
   list: [],
   selected: undefined,
-  selectedToRemove: undefined
+  selectedToRemove: undefined,
+  selectedToUpdate: undefined
 }
 
 type State = { 
   list: {},
   selected: {} | undefined,
-  selectedToRemove: {} | undefined
+  selectedToRemove: {} | undefined,
+  selectedToUpdate: {} | undefined
 }
 
 const addUser = (newUser, users) => {
@@ -29,6 +33,17 @@ const addUser = (newUser, users) => {
   }
   users.push(newUser)
   return users
+}
+
+const updateUser = (user, users) => {
+  if (users && users.length > 0) {
+    const userIndex = users.findIndex(u => u.id === user.id)
+    if( userIndex > -1 ) {
+      users[userIndex] = user
+    }
+    return users
+  }
+  return INIT_STATE.list
 }
 
 const deleteUser = (id, users) => {
@@ -56,6 +71,12 @@ const Users = (state: State = INIT_STATE, action: UserActions) => {
  
     case CREATE_USER_SUCCESS:
       return { ...state, users: addUser(action.payload, state.list) }
+
+    case SELECTED_USER_TO_UPDATE:
+      return { ...state, selectedToUpdate: getSelectedUser(action.payload, state.list) }
+
+    case SELECTED_USER_TO_UPDATE:
+      return { ...state, list: updateUser(action.payload, state.list) }
 
     case SELECTED_USER_TO_REMOVE:
       return { ...state, selectedToRemove: getSelectedUser(action.payload, state.list) }

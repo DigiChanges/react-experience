@@ -2,7 +2,11 @@ import { Fragment, useState }  from "react";
 import { useDispatch } from 'react-redux';
 import Router from 'next/router';
 import Link from "next/link";
-import { selectedUser, selectedUserToRemove } from '../../../redux/users/actions';
+import { 
+  selectedUser, 
+  selectedUserToRemove, 
+  selectedUserToUpdate 
+} from '../../../redux/users/actions';
 import IconEye from "../../../atoms/IconEye";
 import IconPencilAlt from "../../../atoms/IconPencilAlt";
 import IconCog from "../../../atoms/IconCog";
@@ -21,12 +25,19 @@ const UserActionsCell = (user: any): any => {
 
   const setSelectedUser = () => {
     dispatch( selectedUser(user.id) )
+    //TODO REMOVE user.id from path
     Router.push(`/users/view/${user.id}`)
   }
 
   const setSelectedUserToRemove = () => {
     dispatch( selectedUserToRemove(user.id) )
     openModal()
+  }
+
+  const setSelectedUserToUpdate = () => {
+    dispatch( selectedUserToUpdate(user.id) )
+    //TODO REMOVE user.id from path
+    Router.push(`/users/update/${user.id}`)
   }
 
   return (
@@ -45,17 +56,20 @@ const UserActionsCell = (user: any): any => {
           <IconPencilAlt />
         </a>
       </Link>
-      <Link href={`/users/update/${user.id}`}>
-        <a className="w-6 hover:text-gray-700 mr-1">
-          <IconCog />
-        </a>
-      </Link>
-        <button 
-          className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
-          onClick={ setSelectedUserToRemove } 
-          type='button'>
-            <IconTrash />
-        </button>
+
+      <button 
+        className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
+        onClick={ setSelectedUserToUpdate }
+        type='button'>
+        <IconCog />
+      </button>
+
+      <button 
+        className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
+        onClick={ setSelectedUserToRemove } 
+        type='button'>
+          <IconTrash />
+      </button>
     </Fragment>
   );
 }

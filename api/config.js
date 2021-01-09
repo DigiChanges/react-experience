@@ -33,7 +33,8 @@ export const config = {
       users: {
         getAll: `${BACKEND_BASE_PATH}/users`,
         create: `${BACKEND_BASE_PATH}/users`,
-        remove: `${BACKEND_BASE_PATH}/users`
+        update: `${BACKEND_BASE_PATH}/users/:id`,
+        remove: `${BACKEND_BASE_PATH}/users/:id`
       }
     }
   }
