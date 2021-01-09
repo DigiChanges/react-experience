@@ -1,7 +1,10 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-import { getAllUsers, createUser } from '../../services/usersService'
+import { getAllUsers, createUser, deleteUser } from '../../services/usersService'
 
-import { GET_USERS, GET_USERS_SUCCESS, CREATE_USER } from './constants';
+import { 
+  GET_USERS, 
+  CREATE_USER,
+  REMOVE_USER } from './constants';
 import { notification, notificationTypes } from '../../entities/notification';
 import { 
   startGeneralLoading, 
@@ -9,9 +12,9 @@ import {
   showGeneralNotification 
 } from '../general/actions'
 import { 
-  getUsers, 
   getUserSuccess,
-  createUserSuccess
+  createUserSuccess,
+  removeUserSuccess
 } from './actions'
 import Router from 'next/router';
 
@@ -61,7 +64,6 @@ function* createNewUser(
   yield put( startGeneralLoading() )
   try {
     const newUser = { firstName, lastName, email, password, passwordConfirmation, permissions, roles }
-    console.log('createNewUser', newUser)
     let res = yield call( createUser, newUser )
     const { data } = res
     if (!data) {
@@ -76,6 +78,39 @@ function* createNewUser(
     }
 
     yield put( createUserSuccess(data) )
+    Router.push('/users')
+
+  } catch (e) {
+    yield put(
+      showGeneralNotification(
+        notification(
+          notificationTypes.ERROR, 
+          e.message
+        )
+      )
+    )
+  } finally {
+    yield put( stopGeneralLoading() )
+  }
+}
+
+function* removeUser({ payload: {id} }) {
+  yield put( startGeneralLoading() )
+  try {
+    let res = yield call( deleteUser, { id } )
+    const { data } = res
+    if (!data) {
+      return yield put( 
+        showGeneralNotification(
+          notification(
+            notificationTypes.ERROR, 
+            'Internal Server Error'
+          )
+        )
+      )
+    }
+
+    yield put( removeUserSuccess() )
     Router.push('/users')
 
   } catch (e) {
@@ -107,8 +142,13 @@ export function* watchCreateUser(): any {
   yield takeEvery(CREATE_USER, createNewUser);
 }
 
+export function* watchRemoveUser(): any {
+  // @ts-ignore
+  yield takeEvery(REMOVE_USER, removeUser)
+}
+
 function* usersSaga(): any {
-  yield all( [fork(watchGetUsersList), fork(watchCreateUser)] )
+  yield all( [fork(watchGetUsersList), fork(watchCreateUser), fork(watchRemoveUser)] )
 }
 
 export default usersSaga

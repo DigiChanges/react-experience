@@ -4,6 +4,9 @@ import {
   SELECTED_USER,
   CREATE_USER,
   CREATE_USER_SUCCESS,
+  SELECTED_USER_TO_REMOVE,
+  REMOVE_USER,
+  REMOVE_USER_SUCCESS
 } from './constants'
 
 export interface UserActions {
@@ -11,7 +14,7 @@ export interface UserActions {
   payload: {} | null
 }
 
-export const getUsers = () => ({
+export const getUsers = (): UserActions => ({
   type: GET_USERS,
   payload: null
 })
@@ -21,7 +24,7 @@ export const getUserSuccess = users => ({
   payload: users
 })
 
-export const selectedUser = id => ({
+export const selectedUser = (id: string):UserActions => ({
   type: SELECTED_USER,
   payload: id
 })
@@ -42,5 +45,20 @@ export const createUser = (
 export const createUserSuccess = (user:{}): UserActions => ({
   type: CREATE_USER_SUCCESS,
   payload: user
+})
+
+export const selectedUserToRemove = (id: string): UserActions => ({
+  type: SELECTED_USER_TO_REMOVE,
+  payload: id
+})
+
+export const removeUser = (id: string): UserActions => ({
+  type: REMOVE_USER,
+  payload: id
+})
+
+export const removeUserSuccess = (): UserActions => ({
+  type: REMOVE_USER_SUCCESS,
+  payload: null
 })
 

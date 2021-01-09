@@ -32,12 +32,9 @@ export const config = {
     routes: {
       users: {
         getAll: `${BACKEND_BASE_PATH}/users`,
-        create: `${BACKEND_BASE_PATH}/users`
+        create: `${BACKEND_BASE_PATH}/users`,
+        remove: `${BACKEND_BASE_PATH}/users`
       }
-      //TODO
-      // products: {
-      //   getAll: `${BACKEND_BASE_PATH}/products`
-      // }
     }
   }
 }
