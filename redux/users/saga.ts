@@ -1,12 +1,20 @@
-import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-import { getAllUsers, postUser, putUser, deleteUser } from '../../services/usersService'
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
+import { notification, notificationTypes } from '../../entities/notification'
+import Router from 'next/router'
+import { 
+  getAllUsers, 
+  postUser, 
+  putUser, 
+  changeUserPassword, 
+  deleteUser 
+} from '../../services/usersService'
 
 import { 
   GET_USERS, 
   CREATE_USER,
   UPDATE_USER,
-  REMOVE_USER } from './constants';
-import { notification, notificationTypes } from '../../entities/notification';
+  CHANGE_PASSWORD,
+  REMOVE_USER } from './constants'
 import { 
   startGeneralLoading, 
   stopGeneralLoading, 
@@ -16,9 +24,9 @@ import {
   getUserSuccess,
   createUserSuccess,
   updateUserSuccess,
+  changePasswordSuccess,
   removeUserSuccess
 } from './actions'
-import Router from 'next/router';
 
 function* getUsersList() {
   yield put( startGeneralLoading() )
@@ -136,6 +144,45 @@ function* updateUser({ payload: {
   }
 }
 
+function* changePassword({ payload: { 
+  id, 
+  password,
+  passwordConfirmation
+}}) {
+  yield put( startGeneralLoading() )
+  try {
+    let res = yield call( changeUserPassword, id, { 
+          newPassword: password, 
+          newPasswordConfirmation: passwordConfirmation 
+        }
+      )
+    const { data } = res
+    if (!data) {
+      return yield put( 
+        showGeneralNotification(
+          notification(
+            notificationTypes.ERROR, 
+            'Internal Server Error'
+          )
+        )
+      )
+    }
+    yield put( changePasswordSuccess() )
+    Router.push('/users')
+  } catch (e) {
+    yield put(
+      showGeneralNotification(
+        notification(
+          notificationTypes.ERROR, 
+          e.message
+        )
+      )
+    )
+  } finally {
+    yield put( stopGeneralLoading() )
+  }
+}
+
 function* removeUser({ payload: id }) {
   yield put( startGeneralLoading() )
   try {
@@ -189,6 +236,11 @@ export function* watchUpdateUser(): any {
   yield takeEvery(UPDATE_USER, updateUser);
 }
 
+export function* watchChangeUserPassword(): any {
+  // @ts-ignore
+  yield takeEvery(CHANGE_PASSWORD, changePassword)
+}
+
 export function* watchRemoveUser(): any {
   // @ts-ignore
   yield takeEvery(REMOVE_USER, removeUser)
@@ -199,6 +251,7 @@ function* usersSaga(): any {
     fork(watchGetUsersList), 
     fork(watchCreateUser),
     fork(watchUpdateUser), 
+    fork(watchChangeUserPassword),
     fork(watchRemoveUser)
   ])
 }

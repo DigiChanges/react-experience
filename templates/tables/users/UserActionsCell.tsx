@@ -4,8 +4,9 @@ import Router from 'next/router';
 import Link from "next/link";
 import { 
   selectedUser, 
-  selectedUserToRemove, 
-  selectedUserToUpdate 
+  selectedUserToChangePassword,
+  selectedUserToUpdate,
+  selectedUserToRemove 
 } from '../../../redux/users/actions';
 import IconEye from "../../../atoms/IconEye";
 import IconPencilAlt from "../../../atoms/IconPencilAlt";
@@ -29,15 +30,21 @@ const UserActionsCell = (user: any): any => {
     Router.push(`/users/view/${user.id}`)
   }
 
-  const setSelectedUserToRemove = () => {
-    dispatch( selectedUserToRemove(user.id) )
-    openModal()
+  const setSelectedUserToChangePassword = () => {
+    dispatch( selectedUserToChangePassword(user.id) )
+    //TODO REMOVE user.id from path
+    Router.push(`/users/changePassword/${user.id}`)
   }
 
   const setSelectedUserToUpdate = () => {
     dispatch( selectedUserToUpdate(user.id) )
     //TODO REMOVE user.id from path
     Router.push(`/users/update/${user.id}`)
+  }
+
+  const setSelectedUserToRemove = () => {
+    dispatch( selectedUserToRemove(user.id) )
+    openModal()
   }
 
   return (
@@ -51,19 +58,18 @@ const UserActionsCell = (user: any): any => {
         type='button'>
         <IconEye />
       </button>
-      <Link href={`/users/changePassword/${user.id}`}>
-        <a className="w-6 hover:text-gray-700 mr-1">
-          <IconPencilAlt />
-        </a>
-      </Link>
-
+      <button 
+        className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
+        onClick={ setSelectedUserToChangePassword }
+        type='button'>
+        <IconPencilAlt />
+      </button>
       <button 
         className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
         onClick={ setSelectedUserToUpdate }
         type='button'>
         <IconCog />
       </button>
-
       <button 
         className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
         onClick={ setSelectedUserToRemove } 

@@ -3,7 +3,7 @@ import { config } from '../api/config'
 import { getHeader } from '../api/auth'
 
 const { protocol, hostname, port } = config.apiGateway.server
-const { getAll, create, update, remove } = config.apiGateway.routes.users
+const { getAll, create, update, editPassword, remove } = config.apiGateway.routes.users
 
 export const getAllUsers = () => {
   const requestOptions = {
@@ -27,6 +27,16 @@ export const postUser = body => {
 export const putUser = (id, body) => {
   const requestOptions = {
     url: `${ protocol }://${ hostname }:${ port }/${ update.replace(':id', id) }`,
+    method: 'PUT',
+    body,
+    headers: getHeader()
+  }
+  return HttpRequest.request(requestOptions)
+}
+
+export const changeUserPassword = (id, body) => {
+  const requestOptions = {
+    url: `${ protocol }://${ hostname }:${ port }/${ editPassword.replace(':id', id) }`,
     method: 'PUT',
     body,
     headers: getHeader()

@@ -1,9 +1,15 @@
 import { Fragment } from "react";
 import { Field, Form, Formik } from "formik";
-import UserSchema from "../../SchemaValidations/UserSchema";
+import ChangePasswordSchema from "../../SchemaValidations/ChangePasswordSchema";
 import Router from "next/router";
+import { useSelector, useDispatch } from 'react-redux'
+import { changePassword } from '../../redux/users/actions'
 
 const UserChangePassword = (): any => {
+
+  const { selectedToChangePassword } = useSelector( state => state.Users )
+  const dispatch = useDispatch()
+
   return (
     <Fragment>
       <section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
@@ -15,15 +21,24 @@ const UserChangePassword = (): any => {
             <Formik
               initialValues={{
                 password: "",
-                confirmationPassword: "",
+                passwordConfirmation: "",
               }}
-              validationSchema={UserSchema}
-              onSubmit={() => {
-                return null;
+              validationSchema={ ChangePasswordSchema }
+              onSubmit={async (values) => {
+                if (selectedToChangePassword && selectedToChangePassword.id) {
+                  const { password, passwordConfirmation } = values
+                  dispatch( 
+                    changePassword(
+                      selectedToChangePassword.id, 
+                      password, 
+                      passwordConfirmation
+                    ) 
+                  )
+                }
               }}
             >
               {(
-                { errors, touched } //CAMBIAR CALIDACIONES
+                { errors, touched }
               ) => (
                 <Form>
                   <div className="flex flex-col  bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
@@ -48,13 +63,13 @@ const UserChangePassword = (): any => {
                     </div>
                     <div className="mb-4">
                       <label
-                        htmlFor="confirmationPassword"
+                        htmlFor="passwordConfirmation"
                         className="font-bold text-grey-darker block mb-2"
                       >
                         Confirm New Password
                       </label>
                       <Field
-                        name="confirmationPassword"
+                        name="passwordConfirmation"
                         type="text"
                         className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
                         placeholder="Confirm new password"
@@ -76,7 +91,7 @@ const UserChangePassword = (): any => {
                     </button>
                     <button
                       className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                      type="button"
+                      type="submit"
                     >
                       Save
                     </button>

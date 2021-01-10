@@ -6,6 +6,9 @@ import {
   CREATE_USER_SUCCESS,
   SELECTED_USER_TO_UPDATE,
   UPDATE_USER_SUCCESS,
+  SELECTED_USER_TO_CHANGE_PASSWORD,
+  CHANGE_PASSWORD,
+  CHANGE_PASSWORD_SUCCESS,
   SELECTED_USER_TO_REMOVE,
   REMOVE_USER,
   REMOVE_USER_SUCCESS
@@ -17,14 +20,16 @@ const INIT_STATE = {
   list: [],
   selected: undefined,
   selectedToRemove: undefined,
-  selectedToUpdate: undefined
+  selectedToUpdate: undefined,
+  selectedToChangePassword: undefined
 }
 
 type State = { 
   list: {},
   selected: {} | undefined,
   selectedToRemove: {} | undefined,
-  selectedToUpdate: {} | undefined
+  selectedToUpdate: {} | undefined,
+  selectedToChangePassword: {} | undefined
 }
 
 const addUser = (newUser, users) => {
@@ -75,8 +80,11 @@ const Users = (state: State = INIT_STATE, action: UserActions) => {
     case SELECTED_USER_TO_UPDATE:
       return { ...state, selectedToUpdate: getSelectedUser(action.payload, state.list) }
 
-    case SELECTED_USER_TO_UPDATE:
+    case UPDATE_USER_SUCCESS:
       return { ...state, list: updateUser(action.payload, state.list) }
+
+    case SELECTED_USER_TO_CHANGE_PASSWORD:
+      return { ...state, selectedToChangePassword: getSelectedUser(action.payload, state.list) }
 
     case SELECTED_USER_TO_REMOVE:
       return { ...state, selectedToRemove: getSelectedUser(action.payload, state.list) }

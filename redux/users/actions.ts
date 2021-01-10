@@ -2,12 +2,17 @@ import {
   GET_USERS,
   GET_USERS_SUCCESS,
   SELECTED_USER,
+
   CREATE_USER,
   CREATE_USER_SUCCESS,
 
   SELECTED_USER_TO_UPDATE,
   UPDATE_USER,
   UPDATE_USER_SUCCESS,
+
+  SELECTED_USER_TO_CHANGE_PASSWORD,
+  CHANGE_PASSWORD,
+  CHANGE_PASSWORD_SUCCESS,
 
   SELECTED_USER_TO_REMOVE,
   REMOVE_USER,
@@ -76,6 +81,28 @@ export const updateUserSuccess = (user: {}): UserActions => ({
   payload: user
 })
 
+
+
+export const selectedUserToChangePassword = (id: string): UserActions => ({
+  type: SELECTED_USER_TO_CHANGE_PASSWORD,
+  payload: id
+})
+
+export const changePassword = (
+  id: string, 
+  password: string, 
+  passwordConfirmation: string
+): UserActions => {
+  return {
+    type: CHANGE_PASSWORD,
+    payload: { id, password, passwordConfirmation } 
+  }
+}
+
+export const changePasswordSuccess = () => ({
+  type: CHANGE_PASSWORD_SUCCESS,
+  payload: null
+})
 
 
 

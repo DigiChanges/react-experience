@@ -34,7 +34,8 @@ export const config = {
         getAll: `${BACKEND_BASE_PATH}/users`,
         create: `${BACKEND_BASE_PATH}/users`,
         update: `${BACKEND_BASE_PATH}/users/:id`,
-        remove: `${BACKEND_BASE_PATH}/users/:id`
+        remove: `${BACKEND_BASE_PATH}/users/:id`,
+        editPassword: `${BACKEND_BASE_PATH}/users/changeUserPassword/:id`
       }
     }
   }
