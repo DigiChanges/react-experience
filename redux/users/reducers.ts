@@ -2,6 +2,7 @@ import {
   GET_USERS,
   GET_USERS_SUCCESS,
   SELECTED_USER,
+  UNSELECTED_USER,
   CREATE_USER,
   CREATE_USER_SUCCESS,
   SELECTED_USER_TO_UPDATE,
@@ -73,6 +74,9 @@ const Users = (state: State = INIT_STATE, action: UserActions) => {
 
     case SELECTED_USER:
       return { ...state, selected: getSelectedUser(action.payload, state.list) }
+    
+    case UNSELECTED_USER:
+      return { ...state, selected: INIT_STATE.selected }
  
     case CREATE_USER_SUCCESS:
       return { ...state, users: addUser(action.payload, state.list) }

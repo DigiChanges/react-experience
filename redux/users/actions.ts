@@ -2,6 +2,7 @@ import {
   GET_USERS,
   GET_USERS_SUCCESS,
   SELECTED_USER,
+  UNSELECTED_USER,
   CREATE_USER,
   CREATE_USER_SUCCESS,
   SELECTED_USER_TO_UPDATE,
@@ -33,6 +34,11 @@ export const getUserSuccess = (users: {}): UserActions => ({
 export const selectedUser = (id: string): UserActions => ({
   type: SELECTED_USER,
   payload: id
+})
+
+export const unselectedUser = (): UserActions => ({
+  type: UNSELECTED_USER,
+  payload: null
 })
 
 export const createUser = (

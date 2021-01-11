@@ -1,16 +1,27 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import AvatarImage from "../../atoms/AvatarImage";
 import Router from "next/router";
 import IconLockClosed from "../../atoms/IconLockClosed";
 import IconLockOpen from "../../atoms/IconLockOpen";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { unselectedUser } from '../../redux/users/actions'
+
 
 const UserView = () => {
 
+  const dispatch = useDispatch()
   const { selected } = useSelector( state => state.Users )
 
   // const roles = ["admin", "tortuga ninja", "user", "power ranger"];
   // const enable = true;
+
+  useEffect(() => {
+    //unmount component
+    return () => {
+      console.log('asdf')
+      dispatch( unselectedUser() )
+    }
+  }, [])
 
   const getRolesView = () => (
     selected.roles && selected.roles.length > 0 ? (
