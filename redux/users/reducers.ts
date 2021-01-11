@@ -9,12 +9,12 @@ import {
 import { UserActions } from './actions';
 
 const INIT_STATE = {
-  list: [],
+  list: undefined,
   selected: undefined
 }
 
 type State = { 
-  list: {},
+  list: [] | undefined,
   selected: {} | undefined
 }
 

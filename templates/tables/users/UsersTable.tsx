@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import DataTable from "react-data-table-component";
 import ListUsersTemplateColumns from "./ListUsersTemplateColumns";
 import TableUsersStyle from "../../../assets/customStyles/TableUsersStyle";
@@ -11,9 +11,15 @@ const UsersTable = () => {
   const { list } = useSelector( state => state.Users )
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch( getUsers() )
-    }, 2000);
+    /**
+     * Prevent get user list 
+     * every time component mount
+     */
+    if (!list) {
+      setTimeout(() => {
+        dispatch( getUsers() )
+      }, 2000);
+    }
   }, []);
 
   const getRoles = roles => {
@@ -35,28 +41,30 @@ const UsersTable = () => {
     rolesData: getRoles(roles)
   })
 
-  const rows = list.map(u => getUserRow(u.id, u.firstName, u.lastName, u.email, u.roles))
+  const getRows = () => list.map(u => getUserRow(u.id, u.firstName, u.lastName, u.email, u.roles))
 
   return (
     <>
       <div className="px-16 pt-20">
         <h1 className="text-5xl text-gray-500">Users</h1>
-        {list && list.length > 0 ? (
-          <DataTable
-            columns={ListUsersTemplateColumns}
-            data={rows}
-            title={false}
-            striped={true}
-            noHeader
-            theme="DGDarkTheme"
-            customStyles={TableUsersStyle}
-            // progressPending={pending}
-            // progressComponent={
-            //   <CustomLoader cssClassName={"justify-center text-gray-700"} />
-            // }
-          />
-        ) : (
-          <p>No Users</p>
+        {list && (
+          list.length > 0 ? (
+            <DataTable
+              columns={ListUsersTemplateColumns}
+              data={getRows()}
+              title={false}
+              striped={true}
+              noHeader
+              theme="DGDarkTheme"
+              customStyles={TableUsersStyle}
+              // progressPending={pending}
+              // progressComponent={
+              //   <CustomLoader cssClassName={"justify-center text-gray-700"} />
+              // }
+            />
+          ) : (
+            <p>No Users</p>
+          )
         )}
       </div>
     </>
