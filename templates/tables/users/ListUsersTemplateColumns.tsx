@@ -1,4 +1,4 @@
-import UserStateCell from "./UserStateCell"
+// import UserStateCell from "./UserStateCell"
 import UserActionsCell from "./UserActionsCell"
 
 const ListUsersTemplateColumns =

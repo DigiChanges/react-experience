@@ -24,15 +24,15 @@ const UpdateUser = (): any => {
     }
   ];
 
-  const permissionsTest = [
-    {
-      label: "authKeepAlive",
-      value: "100",
-    }
-  ];
+  // const permissionsTest = [
+  //   {
+  //     label: "authKeepAlive",
+  //     value: "100",
+  //   }
+  // ];
 
   const getRoles = () => {
-    let roles = []
+    const roles = []
     selected.roles.map(role => {
       roles.push({ label: role.name })
     })

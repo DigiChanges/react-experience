@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from "react";
 import AvatarImage from "../../atoms/AvatarImage";
 import Router from "next/router";
-import IconLockClosed from "../../atoms/IconLockClosed";
-import IconLockOpen from "../../atoms/IconLockOpen";
+// import IconLockClosed from "../../atoms/IconLockClosed";
+// import IconLockOpen from "../../atoms/IconLockOpen";
 import { useSelector, useDispatch } from 'react-redux'
 import { unselectedUser } from '../../redux/users/actions'
 
@@ -18,7 +18,6 @@ const UserView = () => {
   useEffect(() => {
     //unmount component
     return () => {
-      console.log('asdf')
       dispatch( unselectedUser() )
     }
   }, [])
@@ -38,8 +37,8 @@ const UserView = () => {
   return (
     <div className="w-128 flex flex-col justify-center items-center">
       {selected ? (
-        <Fragment>
-          <div className="z-10">
+        <div>
+          <div className="z-10 flex justify-center">
             <AvatarImage
               avatar={"/userAvatar.jpg"}
               // image={props.image}
@@ -104,7 +103,7 @@ const UserView = () => {
               </button>
             </div>
           </div>
-        </Fragment>
+        </div>
       ) : (
         <p>No user selected</p>
       )}
