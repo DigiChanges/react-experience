@@ -81,16 +81,19 @@ const Users = (state: State = INIT_STATE, action: UserActions) => {
       return { ...state, selectedToUpdate: getSelectedUser(action.payload, state.list) }
 
     case UPDATE_USER_SUCCESS:
-      return { ...state, list: updateUser(action.payload, state.list) }
+      return { ...state, list: updateUser(action.payload, state.list), selectedToUpdate: INIT_STATE.selected }
 
     case SELECTED_USER_TO_CHANGE_PASSWORD:
       return { ...state, selectedToChangePassword: getSelectedUser(action.payload, state.list) }
+
+    case CHANGE_PASSWORD_SUCCESS:
+      return { ...state, selectedToChangePassword: INIT_STATE.selectedToChangePassword }
 
     case SELECTED_USER_TO_REMOVE:
       return { ...state, selectedToRemove: getSelectedUser(action.payload, state.list) }
 
     case REMOVE_USER_SUCCESS:
-      return { ...state, list: deleteUser(action.payload, state.list) }
+      return { ...state, list: deleteUser(action.payload, state.list), selectedToRemove: INIT_STATE.selectedToRemove }
     
     default: return { ...state }
   }
