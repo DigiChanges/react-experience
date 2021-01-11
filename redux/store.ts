@@ -6,6 +6,7 @@ import sagas from './sagas';
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
 
+//@ts-ignore
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 export const configureStore = createStore(
@@ -13,4 +14,5 @@ export const configureStore = createStore(
   composeEnhancers(applyMiddleware(...middlewares))
 )
 
+//@ts-ignore
 sagaMiddleware.run(sagas);

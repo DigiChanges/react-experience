@@ -1,9 +1,9 @@
 import React from 'react';
-import Nav from '../components/Nav'
+// import Nav from '../components/Nav'
 
 const AboutPage = (): any => (
   <>
-    <Nav />
+    {/* <Nav /> */}
     <p>Hello, I'm the about page</p>
   </>
 )
