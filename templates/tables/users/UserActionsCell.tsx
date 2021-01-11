@@ -1,13 +1,7 @@
 import { Fragment, useState }  from "react";
 import { useDispatch } from 'react-redux';
 import Router from 'next/router';
-import Link from "next/link";
-import { 
-  selectedUser, 
-  selectedUserToChangePassword,
-  selectedUserToUpdate,
-  selectedUserToRemove 
-} from '../../../redux/users/actions';
+import { selectedUser } from '../../../redux/users/actions';
 import IconEye from "../../../atoms/IconEye";
 import IconPencilAlt from "../../../atoms/IconPencilAlt";
 import IconCog from "../../../atoms/IconCog";
@@ -24,26 +18,13 @@ const UserActionsCell = (user: any): any => {
       return setBoolean(!boolean)
   }
 
-  const setSelectedUser = () => {
+  const navigateToPath = (path: string) => {
     dispatch( selectedUser(user.id) )
-    //TODO REMOVE user.id from path
-    Router.push(`/users/view/${user.id}`)
-  }
-
-  const setSelectedUserToChangePassword = () => {
-    dispatch( selectedUserToChangePassword(user.id) )
-    //TODO REMOVE user.id from path
-    Router.push(`/users/changePassword/${user.id}`)
-  }
-
-  const setSelectedUserToUpdate = () => {
-    dispatch( selectedUserToUpdate(user.id) )
-    //TODO REMOVE user.id from path
-    Router.push(`/users/update/${user.id}`)
+    Router.push( path )
   }
 
   const setSelectedUserToRemove = () => {
-    dispatch( selectedUserToRemove(user.id) )
+    dispatch( selectedUser(user.id) )
     openModal()
   }
 
@@ -54,19 +35,19 @@ const UserActionsCell = (user: any): any => {
         close={openModal}/>
       <button 
         className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
-        onClick={ setSelectedUser }
+        onClick={ () => navigateToPath(`/users/view/${user.id}`) }
         type='button'>
         <IconEye />
       </button>
       <button 
         className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
-        onClick={ setSelectedUserToChangePassword }
+        onClick={ () => navigateToPath(`/users/changePassword/${user.id}`) }
         type='button'>
         <IconPencilAlt />
       </button>
       <button 
         className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
-        onClick={ setSelectedUserToUpdate }
+        onClick={ () => navigateToPath(`/users/update/${user.id}`) }
         type='button'>
         <IconCog />
       </button>

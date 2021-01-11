@@ -24,15 +24,13 @@ import {
   getUserSuccess,
   createUserSuccess,
   updateUserSuccess,
-  changePasswordSuccess,
   removeUserSuccess
 } from './actions'
 
 function* getUsersList() {
   yield put( startGeneralLoading() )
   try {
-    
-    let res = yield call( getAllUsers )
+    const res = yield call( getAllUsers )
     const { data } = res
     if (!data) {
       return yield put( 
@@ -44,9 +42,7 @@ function* getUsersList() {
         )
       )
     }
-
     yield put( getUserSuccess(data) )
-
   } catch (e) {
     yield put(
       showGeneralNotification(
@@ -74,7 +70,7 @@ function* createNewUser(
   yield put( startGeneralLoading() )
   try {
     const newUser = { firstName, lastName, email, password, passwordConfirmation, permissions, roles }
-    let res = yield call( postUser, newUser )
+    const res = yield call( postUser, newUser )
     const { data } = res
     if (!data) {
       return yield put( 
@@ -86,10 +82,8 @@ function* createNewUser(
         )
       )
     }
-
     yield put( createUserSuccess(data) )
     Router.push('/users')
-
   } catch (e) {
     yield put(
       showGeneralNotification(
@@ -112,9 +106,8 @@ function* updateUser({ payload: {
   enable
 }}) {
   yield put( startGeneralLoading() )
-
   try {
-    let res = yield call( putUser, id, {firstName, lastName, email, enable} )
+    const res = yield call( putUser, id, {firstName, lastName, email, enable} )
     const { data } = res
     if (!data) {
       return yield put( 
@@ -126,10 +119,8 @@ function* updateUser({ payload: {
         )
       )
     }
-
-    yield put( updateUserSuccess(data.data) )
+    yield put( updateUserSuccess(data) )
     Router.push('/users')
-
   } catch (e) {
     yield put(
       showGeneralNotification(
@@ -151,7 +142,7 @@ function* changePassword({ payload: {
 }}) {
   yield put( startGeneralLoading() )
   try {
-    let res = yield call( changeUserPassword, id, { 
+    const res = yield call( changeUserPassword, id, { 
           newPassword: password, 
           newPasswordConfirmation: passwordConfirmation 
         }
@@ -167,7 +158,6 @@ function* changePassword({ payload: {
         )
       )
     }
-    yield put( changePasswordSuccess() )
     Router.push('/users')
   } catch (e) {
     yield put(
@@ -186,7 +176,7 @@ function* changePassword({ payload: {
 function* removeUser({ payload: id }) {
   yield put( startGeneralLoading() )
   try {
-    let res = yield call( deleteUser, id )
+    const res = yield call( deleteUser, id )
     const { data } = res
     if (!data) {
       return yield put( 
@@ -198,10 +188,8 @@ function* removeUser({ payload: id }) {
         )
       )
     }
-
     yield put( removeUserSuccess(data) )
     Router.push('/users')
-
   } catch (e) {
     yield put(
       showGeneralNotification(
@@ -215,11 +203,6 @@ function* removeUser({ payload: id }) {
     yield put( stopGeneralLoading() )
   }
 }
-
-
-
-
-
 
 export function* watchGetUsersList(): any {
   // @ts-ignore
@@ -257,4 +240,3 @@ function* usersSaga(): any {
 }
 
 export default usersSaga
-

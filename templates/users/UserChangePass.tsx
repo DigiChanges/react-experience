@@ -1,14 +1,21 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Field, Form, Formik } from "formik";
 import ChangePasswordSchema from "../../SchemaValidations/ChangePasswordSchema";
 import Router from "next/router";
 import { useSelector, useDispatch } from 'react-redux'
-import { changePassword } from '../../redux/users/actions'
+import { changePassword, unselectedUser } from '../../redux/users/actions'
 
 const UserChangePassword = (): any => {
 
-  const { selectedToChangePassword } = useSelector( state => state.Users )
+  const { selected } = useSelector( state => state.Users )
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    //unmount component
+    return () => {
+      dispatch( unselectedUser() )
+    }
+  }, [])
 
   return (
     <Fragment>
@@ -25,11 +32,11 @@ const UserChangePassword = (): any => {
               }}
               validationSchema={ ChangePasswordSchema }
               onSubmit={async (values) => {
-                if (selectedToChangePassword && selectedToChangePassword.id) {
+                if (selected && selected.id) {
                   const { password, passwordConfirmation } = values
                   dispatch( 
                     changePassword(
-                      selectedToChangePassword.id, 
+                      selected.id, 
                       password, 
                       passwordConfirmation
                     ) 

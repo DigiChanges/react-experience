@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from "../../molecules/Modal";
-import { removeUser } from '../../redux/users/actions'
+import { removeUser, unselectedUser } from '../../redux/users/actions'
 
 const ConfirmDelete = ({ open, close }: any): any => {
 
   const dispatch = useDispatch()
   const booleanXquit = true;
 
-  const { selectedToRemove } = useSelector( state => state.Users )
+  const { selected } = useSelector( state => state.Users )
 
   useEffect(() => {
     setOpenModal(open);
@@ -18,11 +18,12 @@ const ConfirmDelete = ({ open, close }: any): any => {
 
   const closeModal = () => {
     close();
+    dispatch( unselectedUser() )
     setOpenModal(!openModal);
   };
 
   const onHandleDeleteUser = () => {
-    dispatch( removeUser(selectedToRemove.id) )
+    dispatch( removeUser(selected.id) )
     closeModal()
   } 
 
@@ -57,12 +58,12 @@ const ConfirmDelete = ({ open, close }: any): any => {
                   />
                 </svg>
               </div>
-              {selectedToRemove ? (
+              {selected ? (
                 <p className="font-hairline text-5xl text-gray-400 mb-4 text-center">
                   Are you sure delete user: 
                   <br/>
                   <span className='text-2xl'>
-                    { `${ selectedToRemove.id } - ${selectedToRemove.lastName} ${selectedToRemove.firstName}` }
+                    { `${ selected.id } - ${selected.lastName} ${selected.firstName}` }
                   </span>
                 </p>
               ) : <p>No user selected</p>}

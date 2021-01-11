@@ -5,13 +5,9 @@ import {
   UNSELECTED_USER,
   CREATE_USER,
   CREATE_USER_SUCCESS,
-  SELECTED_USER_TO_UPDATE,
   UPDATE_USER,
   UPDATE_USER_SUCCESS,
-  SELECTED_USER_TO_CHANGE_PASSWORD,
   CHANGE_PASSWORD,
-  CHANGE_PASSWORD_SUCCESS,
-  SELECTED_USER_TO_REMOVE,
   REMOVE_USER,
   REMOVE_USER_SUCCESS
 } from './constants'
@@ -59,11 +55,6 @@ export const createUserSuccess = (user: {}): UserActions => ({
   payload: user
 })
 
-export const selectedUserToUpdate = (id: string): UserActions => ({
-  type: SELECTED_USER_TO_UPDATE,
-  payload: id
-})
-
 export const updateUser = (
   id: string,
   firstName: string, 
@@ -80,11 +71,6 @@ export const updateUserSuccess = (user: {}): UserActions => ({
   payload: user
 })
 
-export const selectedUserToChangePassword = (id: string): UserActions => ({
-  type: SELECTED_USER_TO_CHANGE_PASSWORD,
-  payload: id
-})
-
 export const changePassword = (
   id: string, 
   password: string, 
@@ -95,16 +81,6 @@ export const changePassword = (
     payload: { id, password, passwordConfirmation } 
   }
 }
-
-export const changePasswordSuccess = (): UserActions => ({
-  type: CHANGE_PASSWORD_SUCCESS,
-  payload: null
-})
-
-export const selectedUserToRemove = (id: string): UserActions => ({
-  type: SELECTED_USER_TO_REMOVE,
-  payload: id
-})
 
 export const removeUser = (id: string): UserActions => ({
   type: REMOVE_USER,

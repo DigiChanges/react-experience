@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Field, Formik, Form } from "formik";
 import Select from "../../atoms/Select";
 import Router from "next/router";
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUser } from '../../redux/users/actions';
+import { updateUser, unselectedUser } from '../../redux/users/actions';
 
 const UpdateUser = (): any => {
 
   const dispatch = useDispatch()
+  const { selected } = useSelector( state => state.Users )
 
-  const { selectedToUpdate } = useSelector( state => state.Users )
+  useEffect(() => {
+    //unmount component
+    return () => {
+      dispatch( unselectedUser() )
+    }
+  }, [])
 
   const rolesPrueba = [
     {
@@ -27,7 +33,7 @@ const UpdateUser = (): any => {
 
   const getRoles = () => {
     let roles = []
-    selectedToUpdate.roles.map(role => {
+    selected.roles.map(role => {
       roles.push({ label: role.name })
     })
     return roles
@@ -40,12 +46,12 @@ const UpdateUser = (): any => {
           <h1>Update User</h1>
         </div>
         <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
-          {selectedToUpdate ? (
+          {selected ? (
             <Formik
               initialValues={{
-                firstName: selectedToUpdate.firstName,
-                lastName: selectedToUpdate.lastName,
-                email: selectedToUpdate.email,
+                firstName: selected.firstName,
+                lastName: selected.lastName,
+                email: selected.email,
                 roles: getRoles(),
               }}
               onSubmit={async (values) => {
@@ -54,7 +60,7 @@ const UpdateUser = (): any => {
                 const { firstName, lastName, email } = values
                 dispatch( 
                   updateUser(
-                    selectedToUpdate.id,
+                    selected.id,
                     firstName,
                     lastName,
                     email,
