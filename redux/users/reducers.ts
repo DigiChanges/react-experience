@@ -9,13 +9,13 @@ import {
 import { UserActions } from './actions';
 
 const INIT_STATE = {
-  list: undefined,
-  selected: undefined
+  usersList: undefined,
+  userSelected: undefined
 }
 
 type State = { 
-  list: [] | undefined,
-  selected: {} | undefined
+  usersList: [] | undefined,
+  userSelected: {} | undefined
 }
 
 const addUser = (newUser, users) => {
@@ -34,13 +34,13 @@ const updateUser = (user, users) => {
     }
     return users
   }
-  return INIT_STATE.list
+  return INIT_STATE.usersList
 }
 
 const deleteUser = (user, users) => (
   users && users.length > 0 
     ? users.filter(u => u.id !== user.id)
-    : INIT_STATE.list
+    : INIT_STATE.usersList
 )
 
 const getSelectedUser = (id, users) => (
@@ -53,22 +53,22 @@ const Users = (state: State = INIT_STATE, action: UserActions) => {
   switch (action.type) {
     
     case GET_USERS_SUCCESS:
-      return { ...state, list: action.payload }
+      return { ...state, usersList: action.payload }
 
     case SELECTED_USER:
-      return { ...state, selected: getSelectedUser(action.payload, state.list) }
+      return { ...state, userSelected: getSelectedUser(action.payload, state.usersList) }
     
     case UNSELECTED_USER:
-      return { ...state, selected: INIT_STATE.selected }
+      return { ...state, userSelected: INIT_STATE.userSelected }
  
     case CREATE_USER_SUCCESS:
-      return { ...state, list: addUser(action.payload, state.list) }
+      return { ...state, usersList: addUser(action.payload, state.usersList) }
 
     case UPDATE_USER_SUCCESS:
-      return { ...state, list: updateUser(action.payload, state.list) }
+      return { ...state, usersList: updateUser(action.payload, state.usersList) }
 
     case REMOVE_USER_SUCCESS:
-      return { ...state, list: deleteUser(action.payload, state.list) }
+      return { ...state, usersList: deleteUser(action.payload, state.usersList) }
     
     default: return { ...state }
   }

@@ -3,26 +3,52 @@ import DataTable from "react-data-table-component";
 import ListUsersTemplateColumns from "./ListUsersTemplateColumns";
 import TableUsersStyle from "../../../assets/customStyles/TableUsersStyle";
 import { getUsers } from '../../../redux/users/actions';
+import { getPermissions } from '../../../redux/auth/actions';
+import { getRoles } from '../../../redux/roles/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const UsersTable = () => {
 
   const dispatch = useDispatch()
-  const { list } = useSelector( state => state.Users )
+  const { usersList } = useSelector( state => state.Users )
+  const { permissions } = useSelector( state => state.Auth )
+  const { rolesList } = useSelector( state => state.Roles )
 
   useEffect(() => {
-    /**
-     * Prevent get user list 
-     * every time component mount
-     */
-    if (!list) {
-      setTimeout(() => {
-        dispatch( getUsers() )
-      }, 2000);
+    const getData = async () => {
+      if (!usersList) await getUsersData()
+      if (!permissions) await getPermissionsData()
+      if (!rolesList) await getRolesData()
     }
+    getData()
   }, []);
 
-  const getRoles = roles => {
+  //TODO CHANGE TIMEOUT TO HTTP_REQUEST
+  //wait some seconds before consuming the api
+  const getUsersData = async () => {
+    console.log('Waiting to get users data')
+    setTimeout(() => {
+      console.log('Dispatching users data')
+      dispatch( getUsers() )
+    }, 2000);
+  }
+  const getPermissionsData = async () => {
+    console.log('Waiting to get permissions data')
+    setTimeout(() => {
+      console.log('Dispatching permissions data')
+      dispatch( getPermissions() )
+    }, 4000)
+  }
+  const getRolesData = async () => {
+    console.log('Waiting to get roles data')
+    setTimeout(() => {
+      console.log('Dispatching roles data')
+      dispatch( getRoles() )
+    }, 10000)
+  }
+  //TODO CHANGE TIMEOUT TO HTTP_REQUEST
+
+  const mapRoles = roles => {
     if (roles && roles.length > 0) {
       let rolesData = ''
       roles.map(role => {
@@ -38,17 +64,17 @@ const UsersTable = () => {
     firstName,
     lastName,
     email,
-    rolesData: getRoles(roles)
+    rolesData: mapRoles(roles)
   })
 
-  const getRows = () => list.map(u => getUserRow(u.id, u.firstName, u.lastName, u.email, u.roles))
+  const getRows = () => usersList.map(u => getUserRow(u.id, u.firstName, u.lastName, u.email, u.roles))
 
   return (
     <>
       <div className="px-16 pt-20">
         <h1 className="text-5xl text-gray-500">Users</h1>
-        {list && (
-          list.length > 0 ? (
+        {usersList && (
+          usersList.length > 0 ? (
             <DataTable
               columns={ListUsersTemplateColumns}
               data={getRows()}

@@ -2,6 +2,8 @@ import {
   LOGIN_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILED,
+  GET_PERMISSIONS,
+  GET_PERMISSIONS_SUCCESS,
   LOGOUT_USER,
   REGISTER_USER,
   REGISTER_USER_SUCCESS,
@@ -18,11 +20,17 @@ import {AuthAction} from "./actions";
 
 const INIT_STATE = {
     user: null,
-    loading: false,
-    error: null
+    loading: false, //TODO REMOVE
+    error: null, //TODO REMOVE
+    permissions: undefined
 };
 
-type State = { user: {} | null, loading: boolean, error: null }
+type State = { 
+  user: {} | null, 
+  loading: boolean, 
+  error: null, 
+  permissions: [] | undefined 
+}
 
 const Auth = (state: State = INIT_STATE, action: AuthAction) =>
 {
@@ -31,6 +39,10 @@ const Auth = (state: State = INIT_STATE, action: AuthAction) =>
       return { ...state, user: action.payload, loading: false, error: null};
     case LOGIN_USER_FAILED:
       return { ...state, error: action.payload, loading: false };
+
+    case GET_PERMISSIONS_SUCCESS:
+      return { ...state, permissions: action.payload }
+
     case REGISTER_USER:
       return { ...state, loading: true };
     case REGISTER_USER_SUCCESS:
