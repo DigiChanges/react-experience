@@ -1,28 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Select from "../../atoms/Select";
 import Router from "next/router";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createUser } from '../../redux/users/actions'
 
 const UserCreate = (): any => {
 
   const dispatch = useDispatch()
+  const { permissions } = useSelector( store => store.Auth )
+  const { rolesList } = useSelector( store => store.Roles )
 
-  const rolesPrueba = [
-    {
-      label: "Admin",
-      value: "10",
-    }
-  ];
+  const getRolesList = () => (
+    rolesList && rolesList.length > 0
+      ? rolesList.map((item, value) => ({ label: item.name, value }))
+      : []
+  )
 
-  const permissionsTest = [
-    {
-      label: "authKeepAlive",
-      value: "100",
-    }
-  ];
+  const getPermissionsList = () => (
+    permissions && permissions.length > 0
+      ? permissions.map((label, value) => ({ label, value }))
+      : []
+  )
 
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-128">
@@ -159,7 +159,7 @@ const UserCreate = (): any => {
                     <Field
                       name="permissions"
                       component={Select}
-                      items={permissionsTest}
+                      items={ getPermissionsList() }
                       isMulti
                       primary25="#4a5568"
                       primary="#667eea"
@@ -185,7 +185,7 @@ const UserCreate = (): any => {
                     <Field
                       name="roles"
                       component={Select}
-                      items={rolesPrueba}
+                      items={ getRolesList() }
                       isMulti
                       primary25="#4a5568"
                       primary="#667eea"
