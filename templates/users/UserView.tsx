@@ -10,7 +10,7 @@ import { unselectedUser } from '../../redux/users/actions'
 const UserView = () => {
 
   const dispatch = useDispatch()
-  const { selected } = useSelector( state => state.Users )
+  const { userSelected } = useSelector( state => state.Users )
 
   // const roles = ["admin", "tortuga ninja", "user", "power ranger"];
   // const enable = true;
@@ -23,8 +23,8 @@ const UserView = () => {
   }, [])
 
   const getRolesView = () => (
-    selected.roles && selected.roles.length > 0 ? (
-      selected.roles.map(role => (
+    userSelected.roles && userSelected.roles.length > 0 ? (
+      userSelected.roles.map(role => (
         <span
           key={ role.id }
           className='w-auto flex items-center bg-gray-700 rounded-lg mr-1 mb-1 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey shadow"'
@@ -36,7 +36,7 @@ const UserView = () => {
 
   return (
     <div className="w-128 flex flex-col justify-center items-center">
-      {selected ? (
+      {userSelected ? (
         <div>
           <div className="z-10 flex justify-center">
             <AvatarImage
@@ -50,7 +50,7 @@ const UserView = () => {
             <div className="p-4 md:p-12 text-center lg:text-left bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
               <div className="flex justify-center items-center relative">
                 <h1 className="text-3xl font-bold text-white text-center pt-1">
-                  { selected.firstName }
+                  { userSelected.firstName }
                 </h1>
                 {/* <div className="absolute right-0 pt-1">
                   {enable ? (
@@ -65,7 +65,7 @@ const UserView = () => {
                 Email
               </p>
               <p className="text-white text-lg text-center pt-2">
-                { selected.email }
+                { userSelected.email }
               </p>
               <p className="pt-4 pb-4 text-lg text-gray-400 font-bold flex items-center justify-center text-center">
                 Roles

@@ -8,7 +8,7 @@ import { updateUser, unselectedUser } from '../../redux/users/actions';
 const UpdateUser = (): any => {
 
   const dispatch = useDispatch()
-  const { selected } = useSelector( state => state.Users )
+  const { userSelected } = useSelector( state => state.Users )
 
   useEffect(() => {
     //unmount component
@@ -17,23 +17,16 @@ const UpdateUser = (): any => {
     }
   }, [])
 
-  const rolesPrueba = [
-    {
-      label: "Admin",
-      value: "10",
-    }
-  ];
+  const STATES = [
+    { label: 'Enabled', value: 1 },
+    { label: 'Disabled', value: 0 },
+  ]
 
-  // const permissionsTest = [
-  //   {
-  //     label: "authKeepAlive",
-  //     value: "100",
-  //   }
-  // ];
+  const getUserInitialState = () => ( userSelected.enable ? STATES[0] : STATES[1] )
 
-  const getRoles = () => {
+  const getUserInitialRoles = () => {
     const roles = []
-    selected.roles.map(role => {
+    userSelected.roles.map(role => {
       roles.push({ label: role.name })
     })
     return roles
@@ -46,25 +39,25 @@ const UpdateUser = (): any => {
           <h1>Update User</h1>
         </div>
         <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
-          {selected ? (
+          {userSelected ? (
             <Formik
               initialValues={{
-                firstName: selected.firstName,
-                lastName: selected.lastName,
-                email: selected.email,
-                roles: getRoles(),
+                firstName: userSelected.firstName,
+                lastName: userSelected.lastName,
+                email: userSelected.email,
+                enable: getUserInitialState(),
+                roles: getUserInitialRoles(),
               }}
               onSubmit={async (values) => {
                 //TODO enable
-                const enable = true
-                const { firstName, lastName, email } = values
+                const { firstName, lastName, email, enable } = values
                 dispatch( 
                   updateUser(
-                    selected.id,
+                    userSelected.id,
                     firstName,
                     lastName,
                     email,
-                    enable
+                    !!enable.value
                   ) 
                 )
               }}
@@ -114,7 +107,33 @@ const UpdateUser = (): any => {
                         placeholder="email"
                       />
                     </div>
+
                     <div className="mb-4 ">
+                      <label
+                        htmlFor="enable"
+                        className="font-bold text-gray-400 block mb-2 "
+                      >
+                        State
+                      </label>
+                      <Field
+                        name="enable"
+                        component={ Select }
+                        items={ STATES }
+                        primary25="#4a5568"
+                        primary="#667eea"
+                        neutral0="#2d3748"
+                        neutral20="#4a5568"
+                        neutral50="#a0aec0"
+                        neutral80="#fff"
+                        neutral10="#4a5568"
+                        neutral30="#667eea"
+                        primary50="#718096"
+                        danger="#a0aec0"
+                        dangerLight="#1a202c"
+                      />
+                    </div>
+                    
+                    {/* <div className="mb-4 ">
                       <label
                         htmlFor="roles"
                         className="font-bold text-gray-400 block mb-2 "
@@ -138,7 +157,7 @@ const UpdateUser = (): any => {
                         danger="#a0aec0"
                         dangerLight="#1a202c"
                       />
-                    </div>
+                    </div> */}
                   </div>
                   <div className="flex justify-evenly mt-8">
                     <button

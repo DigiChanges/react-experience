@@ -7,7 +7,7 @@ import { changePassword, unselectedUser } from '../../redux/users/actions'
 
 const UserChangePassword = (): any => {
 
-  const { selected } = useSelector( state => state.Users )
+  const { userSelected } = useSelector( state => state.Users )
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -32,11 +32,11 @@ const UserChangePassword = (): any => {
               }}
               validationSchema={ ChangePasswordSchema }
               onSubmit={async (values) => {
-                if (selected && selected.id) {
+                if (userSelected && userSelected.id) {
                   const { password, passwordConfirmation } = values
                   dispatch( 
                     changePassword(
-                      selected.id, 
+                      userSelected.id, 
                       password, 
                       passwordConfirmation
                     ) 
