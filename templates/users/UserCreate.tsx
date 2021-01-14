@@ -12,12 +12,14 @@ const UserCreate = (): any => {
   const { permissions } = useSelector( store => store.Auth )
   const { rolesList } = useSelector( store => store.Roles )
 
+  //TODO child key issue
   const getRolesList = () => (
     rolesList && rolesList.length > 0
-      ? rolesList.map((item, value) => ({ label: item.name, value }))
+      ? rolesList.map(item => ({ label: item.name, id: item.id }))
       : []
   )
 
+  //TODO child key issue
   const getPermissionsList = () => (
     permissions && permissions.length > 0
       ? permissions.map((label, value) => ({ label, value }))
@@ -52,7 +54,7 @@ const UserCreate = (): any => {
                   password, 
                   passwordConfirmation,
                   permissions.map(permission => permission.label),
-                  roles.map(role => role.label)
+                  roles.map(role => role.id)
                 ) 
               )
             }}

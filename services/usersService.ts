@@ -3,7 +3,14 @@ import { config } from '../api/config'
 import { getHeader } from '../api/auth'
 
 const { protocol, hostname, port } = config.apiGateway.server
-const { getAll, create, update, editPassword, remove } = config.apiGateway.routes.users
+const { 
+  getAll, 
+  create, 
+  update, 
+  editPassword, 
+  remove, 
+  assignRole 
+} = config.apiGateway.routes.users
 
 export const getAllUsers = () => {
   const requestOptions = {
@@ -14,7 +21,7 @@ export const getAllUsers = () => {
   return HttpRequest.request(requestOptions)
 }
 
-export const postUser = body => {
+export const postUser = (body: {}) => {
   const requestOptions = {
     url: `${ protocol }://${ hostname }:${ port }/${ create }`,
     method: 'POST',
@@ -24,7 +31,7 @@ export const postUser = body => {
   return HttpRequest.request(requestOptions)
 }
 
-export const putUser = (id, body) => {
+export const putUser = (id: string, body: {}) => {
   const requestOptions = {
     url: `${ protocol }://${ hostname }:${ port }/${ update.replace(':id', id) }`,
     method: 'PUT',
@@ -34,7 +41,7 @@ export const putUser = (id, body) => {
   return HttpRequest.request(requestOptions)
 }
 
-export const changeUserPassword = (id, body) => {
+export const changeUserPassword = (id: string, body: {}) => {
   const requestOptions = {
     url: `${ protocol }://${ hostname }:${ port }/${ editPassword.replace(':id', id) }`,
     method: 'PUT',
@@ -44,10 +51,20 @@ export const changeUserPassword = (id, body) => {
   return HttpRequest.request(requestOptions)
 }
 
-export const deleteUser = id => {
+export const deleteUser = (id: string) => {
   const requestOptions = {
     url: `${ protocol }://${ hostname }:${ port }/${ remove.replace(':id', id) }`,
     method: 'DELETE',
+    headers: getHeader()
+  }
+  return HttpRequest.request(requestOptions)
+}
+
+export const assignUserRole = (id: string, body: {}) => {
+  const requestOptions = {
+    url: `${ protocol }://${ hostname }:${ port }/${ assignRole.replace(':id', id) }`,
+    method: 'PUT',
+    body,
     headers: getHeader()
   }
   return HttpRequest.request(requestOptions)

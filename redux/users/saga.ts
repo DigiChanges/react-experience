@@ -6,7 +6,8 @@ import {
   postUser, 
   putUser, 
   changeUserPassword, 
-  deleteUser 
+  deleteUser,
+  assignUserRole
 } from '../../services/usersService'
 
 import { 
@@ -57,6 +58,10 @@ function* getUsersList() {
   }
 }
 
+/**
+ * Create new user
+ * Assign Role
+ */
 function* createNewUser(
   {payload: {
     firstName, 
@@ -69,7 +74,8 @@ function* createNewUser(
   }}) {
   yield put( startGeneralLoading() )
   try {
-    const newUser = { firstName, lastName, email, password, passwordConfirmation, permissions, roles }
+    const newUser = { firstName, lastName, email, password, passwordConfirmation, permissions }
+    //create user
     const res = yield call( postUser, newUser )
     const { data } = res
     if (!data) {
@@ -82,6 +88,23 @@ function* createNewUser(
         )
       )
     }
+    
+    //assign roles
+    if (roles && roles.length > 0) {
+      const { id } = data
+      const rolesRes = yield call( assignUserRole, id, { rolesId: roles } )
+      if (!rolesRes) {
+        return yield put( 
+          showGeneralNotification(
+            notification(
+              notificationTypes.ERROR, 
+              'Internal Server Error'
+            )
+          )
+        )
+      }
+    }
+
     yield put( createUserSuccess(data) )
     Router.push('/users')
   } catch (e) {
