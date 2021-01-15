@@ -11,42 +11,39 @@ const UsersTable = () => {
 
   const dispatch = useDispatch()
   const { usersList } = useSelector( state => state.Users )
-  const { permissions } = useSelector( state => state.Auth )
-  const { rolesList } = useSelector( state => state.Roles )
+  // const { permissions } = useSelector( state => state.Auth )
+  // const { rolesList } = useSelector( state => state.Roles )
 
   useEffect(() => {
-    const getData = async () => {
-      if (!usersList) await getUsersData()
-      if (!permissions) await getPermissionsData()
-      if (!rolesList) await getRolesData()
-    }
-    getData()
+    dispatch( getUsers() )
+    dispatch( getRoles() )
+    dispatch( getPermissions() )
   }, []);
 
-  //TODO CHANGE TIMEOUT TO HTTP_REQUEST
+  //TODO REMOVE COMMENTED CODE
+
   //wait some seconds before consuming the api
-  const getUsersData = async () => {
-    console.log('Waiting to get users data')
-    setTimeout(() => {
-      console.log('Dispatching users data')
-      dispatch( getUsers() )
-    }, 2000);
-  }
-  const getPermissionsData = async () => {
-    console.log('Waiting to get permissions data')
-    setTimeout(() => {
-      console.log('Dispatching permissions data')
-      dispatch( getPermissions() )
-    }, 4000)
-  }
-  const getRolesData = async () => {
-    console.log('Waiting to get roles data')
-    setTimeout(() => {
-      console.log('Dispatching roles data')
-      dispatch( getRoles() )
-    }, 10000)
-  }
-  //TODO CHANGE TIMEOUT TO HTTP_REQUEST
+  // const getUsersData = async () => {
+  //   console.log('Waiting to get users data')
+  //   setTimeout(() => {
+  //     console.log('Dispatching users data')
+  //     dispatch( getUsers() )
+  //   }, 2000);
+  // }
+  // const getPermissionsData = async () => {
+  //   console.log('Waiting to get permissions data')
+  //   setTimeout(() => {
+  //     console.log('Dispatching permissions data')
+  //     dispatch( getPermissions() )
+  //   }, 4000)
+  // }
+  // const getRolesData = async () => {
+  //   console.log('Waiting to get roles data')
+  //   setTimeout(() => {
+  //     console.log('Dispatching roles data')
+  //     dispatch( getRoles() )
+  //   }, 10000)
+  // }
 
   const mapRoles = roles => {
     if (roles && roles.length > 0) {
@@ -83,6 +80,9 @@ const UsersTable = () => {
               noHeader
               theme="DGDarkTheme"
               customStyles={TableUsersStyle}
+
+              //TODO: REMOVE COMMENTED CODE
+
               // progressPending={pending}
               // progressComponent={
               //   <CustomLoader cssClassName={"justify-center text-gray-700"} />

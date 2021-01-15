@@ -88,6 +88,12 @@ function* createNewUser(
         )
       )
     }
+
+    /**
+     * TODO:
+     * CHECK SECOND API CONSUME
+     * WAITING NATHAN SERVER CHANGES
+     */
     
     //assign roles
     if (roles && roles.length > 0) {

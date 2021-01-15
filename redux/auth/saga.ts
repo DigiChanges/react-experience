@@ -18,7 +18,6 @@ import {
 } from '../general/actions'
 import {
   loginUserSuccess,
-  getPermissions,
   getPermissionsSuccess
 } from './actions';
 
