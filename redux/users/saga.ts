@@ -33,26 +33,10 @@ function* getUsersList() {
   try {
     const res = yield call( getAllUsers )
     const { data } = res
-    if (!data) {
-      return yield put( 
-        showGeneralNotification(
-          notification(
-            notificationTypes.ERROR, 
-            'Internal Server Error'
-          )
-        )
-      )
-    }
+    if (!data) return yield put( showErrorNotification('Internal Server Error') )
     yield put( getUserSuccess(data) )
   } catch (e) {
-    yield put(
-      showGeneralNotification(
-        notification(
-          notificationTypes.ERROR, 
-          e.message
-        )
-      )
-    )
+    yield put( showErrorNotification(e.message) )
   } finally {
     yield put( stopGeneralLoading() )
   }
@@ -78,16 +62,7 @@ function* createNewUser(
     //create user
     const res = yield call( postUser, newUser )
     const { data } = res
-    if (!data) {
-      return yield put( 
-        showGeneralNotification(
-          notification(
-            notificationTypes.ERROR, 
-            'Internal Server Error'
-          )
-        )
-      )
-    }
+    if (!data) return yield put( showErrorNotification('Internal Server Error') )
 
     /**
      * TODO:
@@ -99,29 +74,13 @@ function* createNewUser(
     if (roles && roles.length > 0) {
       const { id } = data
       const rolesRes = yield call( assignUserRole, id, { rolesId: roles } )
-      if (!rolesRes) {
-        return yield put( 
-          showGeneralNotification(
-            notification(
-              notificationTypes.ERROR, 
-              'Internal Server Error'
-            )
-          )
-        )
-      }
+      if (!rolesRes) return yield put( showErrorNotification('Internal Server Error') )
     }
-
+    yield put( showSuccessNotification('User Created!') )
     yield put( createUserSuccess(data) )
     Router.push('/users')
   } catch (e) {
-    yield put(
-      showGeneralNotification(
-        notification(
-          notificationTypes.ERROR, 
-          e.message
-        )
-      )
-    )
+    yield put( showErrorNotification(e.message) )
   } finally {
     yield put( stopGeneralLoading() )
   }
@@ -138,27 +97,12 @@ function* updateUser({ payload: {
   try {
     const res = yield call( putUser, id, {firstName, lastName, email, enable} )
     const { data } = res
-    if (!data) {
-      return yield put( 
-        showGeneralNotification(
-          notification(
-            notificationTypes.ERROR, 
-            'Internal Server Error'
-          )
-        )
-      )
-    }
+    if (!data) return yield put( showErrorNotification('Internal Server Error') )
+    yield put( showSuccessNotification('User Updated!') )
     yield put( updateUserSuccess(data) )
     Router.push('/users')
   } catch (e) {
-    yield put(
-      showGeneralNotification(
-        notification(
-          notificationTypes.ERROR, 
-          e.message
-        )
-      )
-    )
+    yield put( showErrorNotification(e.message) )
   } finally {
     yield put( stopGeneralLoading() )
   }
@@ -177,26 +121,11 @@ function* changePassword({ payload: {
         }
       )
     const { data } = res
-    if (!data) {
-      return yield put( 
-        showGeneralNotification(
-          notification(
-            notificationTypes.ERROR, 
-            'Internal Server Error'
-          )
-        )
-      )
-    }
+    if (!data) return yield put( showErrorNotification('Internal Server Error') )
+    yield put( showSuccessNotification('Password Changed!') )
     Router.push('/users')
   } catch (e) {
-    yield put(
-      showGeneralNotification(
-        notification(
-          notificationTypes.ERROR, 
-          e.message
-        )
-      )
-    )
+    yield put( showErrorNotification(e.message) )
   } finally {
     yield put( stopGeneralLoading() )
   }
@@ -207,31 +136,34 @@ function* removeUser({ payload: id }) {
   try {
     const res = yield call( deleteUser, id )
     const { data } = res
-    if (!data) {
-      return yield put( 
-        showGeneralNotification(
-          notification(
-            notificationTypes.ERROR, 
-            'Internal Server Error'
-          )
-        )
-      )
-    }
+    if (!data) return yield put( showErrorNotification('Internal Server Error') )
+    yield put( showSuccessNotification('User Removed!') )
     yield put( removeUserSuccess(data) )
     Router.push('/users')
   } catch (e) {
-    yield put(
-      showGeneralNotification(
-        notification(
-          notificationTypes.ERROR, 
-          e.message
-        )
-      )
-    )
+    yield put( showErrorNotification(e.message) )
   } finally {
     yield put( stopGeneralLoading() )
   }
 }
+
+const showSuccessNotification = (msg: string) => (
+  showGeneralNotification(
+    notification(
+      notificationTypes.SUCCESS,
+      msg
+    )
+  )
+)
+
+const showErrorNotification = (msg: string) => (
+  showGeneralNotification(
+    notification(
+      notificationTypes.ERROR, 
+      msg
+    )
+  )
+)
 
 export function* watchGetUsersList(): any {
   // @ts-ignore
