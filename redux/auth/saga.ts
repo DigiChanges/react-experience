@@ -58,7 +58,6 @@ function* getPermissionsList() {
   // yield put( startGeneralLoading() )
   try {
     const res = yield call( getAllPermissions )
-    console.log('getPermissionsList sagas', res)
     const { data } = res
     if (!data) {
       return yield put( 

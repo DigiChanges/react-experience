@@ -8,7 +8,7 @@ const ConfirmDelete = ({ open, close }: any): any => {
   const dispatch = useDispatch()
   const booleanXquit = true;
 
-  const { selected } = useSelector( state => state.Users )
+  const { userSelected } = useSelector( state => state.Users )
 
   useEffect(() => {
     setOpenModal(open);
@@ -23,7 +23,7 @@ const ConfirmDelete = ({ open, close }: any): any => {
   };
 
   const onHandleDeleteUser = () => {
-    dispatch( removeUser(selected.id) )
+    dispatch( removeUser(userSelected.id) )
     closeModal()
   } 
 
@@ -58,12 +58,12 @@ const ConfirmDelete = ({ open, close }: any): any => {
                   />
                 </svg>
               </div>
-              {selected ? (
+              {userSelected ? (
                 <p className="font-hairline text-5xl text-gray-400 mb-4 text-center">
                   Are you sure delete user: 
                   <br/>
                   <span className='text-2xl'>
-                    { `${ selected.id } - ${selected.lastName} ${selected.firstName}` }
+                    { `${ userSelected.id } - ${userSelected.lastName} ${userSelected.firstName}` }
                   </span>
                 </p>
               ) : <p>No user selected</p>}

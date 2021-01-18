@@ -9,7 +9,6 @@ function* getRolesList() {
   // yield put( startGeneralLoading() )
   try {
     const res = yield call( getAllRoles )
-    console.log('getRoles sagas', res)
     const { data } = res
     if (!data) {
       return yield put( 
