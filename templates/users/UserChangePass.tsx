@@ -58,7 +58,7 @@ const UserChangePassword = (): any => {
                       </label>
                       <Field
                         name="password"
-                        type="text"
+                        type="password"
                         className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
                         placeholder="New password"
                       />
@@ -77,7 +77,7 @@ const UserChangePassword = (): any => {
                       </label>
                       <Field
                         name="passwordConfirmation"
-                        type="text"
+                        type="password"
                         className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
                         placeholder="Confirm new password"
                       />
