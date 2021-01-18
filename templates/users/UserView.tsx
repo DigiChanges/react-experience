@@ -4,7 +4,7 @@ import Router from "next/router";
 // import IconLockClosed from "../../atoms/IconLockClosed";
 // import IconLockOpen from "../../atoms/IconLockOpen";
 import { useSelector, useDispatch } from 'react-redux'
-import { unselectedUser } from '../../redux/users/actions'
+import { unselectedUser, selectedUser } from '../../redux/users/actions';
 
 
 const UserView = () => {
@@ -15,10 +15,18 @@ const UserView = () => {
   // const roles = ["admin", "tortuga ninja", "user", "power ranger"];
   // const enable = true;
 
+  let unselectUser = true
+
+  const navigateToUpdateUser = () => {
+    if (!userSelected) return
+    unselectUser = false
+    Router.push(`/users/update/${userSelected.id}`)
+  }
+
   useEffect(() => {
     //unmount component
     return () => {
-      dispatch( unselectedUser() )
+      if (unselectUser) dispatch( unselectedUser() )
     }
   }, [])
 
@@ -129,7 +137,7 @@ const UserView = () => {
               </button>
               <button
                 className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                onClick={() => Router.push("/users/update/")} //add useid in router
+                onClick={ navigateToUpdateUser }
               >
                 Edit
               </button>
