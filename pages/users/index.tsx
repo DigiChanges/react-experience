@@ -15,7 +15,7 @@ const UsersPage = (): any => {
 
   return (
     <>
-      <div className="w-full h-full flex flex-col justify-between">
+      <div className="container mx-auto w-full h-full flex flex-col justify-between">
         <UsersTable />
         <AddUserModal />
         {booleanConfirmDelete ? (
@@ -27,7 +27,7 @@ const UsersPage = (): any => {
               <IconPlus />
             </button>
           </Link>
-        </div>
+        </div> 
       </div>
     </>
   );

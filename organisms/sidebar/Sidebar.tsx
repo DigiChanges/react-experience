@@ -22,7 +22,7 @@ export default function Sidebar() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="flex flex-col w-56 bg-blue rounded-r-3xl overflow-hidden">
+      <div className="flex flex-col w-40 bg-blue rounded-r-3xl overflow-hidden">
         <div className="flex items-center justify-center h-20 shadow-md">
           <h1 className="text-3xl uppercase text-indigo-500">Logo</h1>
         </div>
