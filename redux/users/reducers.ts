@@ -9,13 +9,13 @@ import {
 import { UserActions } from './actions';
 
 const INIT_STATE = {
-  usersList: undefined,
-  userSelected: undefined
+  usersList: null,
+  userSelected: null
 }
 
 type State = { 
-  usersList: [] | undefined,
-  userSelected: {} | undefined
+  usersList: [] | null,
+  userSelected: {} | null
 }
 
 const addUser = (newUser, users) => {

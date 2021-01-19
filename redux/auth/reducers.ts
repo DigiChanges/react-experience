@@ -1,8 +1,6 @@
 import {
-  LOGIN_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILED,
-  GET_PERMISSIONS,
   GET_PERMISSIONS_SUCCESS,
   LOGOUT_USER,
   REGISTER_USER,
@@ -22,14 +20,14 @@ const INIT_STATE = {
     user: null,
     loading: false, //TODO REMOVE
     error: null, //TODO REMOVE
-    permissions: undefined
+    permissions: null
 };
 
 type State = { 
   user: {} | null, 
   loading: boolean, 
   error: null, 
-  permissions: [] | undefined 
+  permissions: [] | null 
 }
 
 const Auth = (state: State = INIT_STATE, action: AuthAction) =>
