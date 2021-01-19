@@ -1,11 +1,12 @@
-import { getSession } from '../helpers/authSession'
+import { getSession, isSessionTokenAlive } from '../helpers/authSession'
 
 export const getHeader = () => {
-  const session = getSession()
-  return session && session.user && session.token 
+  const { user, token } = getSession()
+  const isAuth = user && token && isSessionTokenAlive() 
+  return isAuth
     ? { 
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${ session.token }`
+        Authorization: `Bearer ${ token }`
       }
-    : {}
+    : null
 }

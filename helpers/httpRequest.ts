@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { apiResult } from '../api/apiResult'
-import { updateSessionToken } from '../helpers/authSession'
 /*
 2xx Success
 200 OK
@@ -22,10 +21,11 @@ class HttpRequest {
   static async request({
     url = '',
     method = 'POST',
-    headers = {},
+    headers,
     path = '',
     body = {}
   }) {
+    if (headers === null) throw new Error('Token Expired')
     const requestOptions: {[key: string]: any} = {
       method,
       url: `${url}${path}`,
@@ -40,11 +40,6 @@ class HttpRequest {
       const res = await axios(requestOptions)
       const { data } = res
       if (HTTP_SUCCESS_STATUS.includes(res.status)) {
-        //update refresh token
-        const { metadata } = data
-        if (metadata && metadata.refreshToken) {
-          updateSessionToken(metadata.refreshToken)
-        }
         return apiResult( data.data )
       } else if (HTTP_ERROR_STATUS.includes(res.status)) {
         const error = data.message || 'Internal Server Error'
