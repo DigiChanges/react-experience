@@ -4,6 +4,10 @@ import ChangePasswordSchema from "../../SchemaValidations/ChangePasswordSchema";
 import Router from "next/router";
 import { useSelector, useDispatch } from 'react-redux'
 import { changePassword, unselectedUser } from '../../redux/users/actions'
+import TitleH1 from "../../atoms/TitleH1"
+import AdvButton from "../../atoms/AdvButton"
+import TypeButton from  "../../atoms/TypeButton"
+import ErrorForm from "../../atoms/ErrorForm"
 
 const UserChangePassword = (): any => {
 
@@ -22,7 +26,7 @@ const UserChangePassword = (): any => {
       <section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
         <div className="w-full">
           <div className="text-4xl mb-2">
-            <h1>Change Password</h1>
+            <TitleH1 titleName="Change Password" titleClass="noClass" />
           </div>
           <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg ">
             <Formik
@@ -63,9 +67,7 @@ const UserChangePassword = (): any => {
                         placeholder="New password"
                       />
                       {errors.password && touched.password ? (
-                        <div className="text-red-500 p-2">
-                          {errors.password}
-                        </div>
+                        <ErrorForm errorMessage={errors.password} containerClass="text-red-500 p-2" />
                       ) : null}
                     </div>
                     <div className="mb-4">
@@ -82,26 +84,22 @@ const UserChangePassword = (): any => {
                         placeholder="Confirm new password"
                       />
                       {errors.password && touched.password ? (
-                        <div className="text-red-500 p-2">
-                          {errors.password}
-                        </div>
+                        <ErrorForm errorMessage={errors.password} containerClass="text-red-500 p-2" />
                       ) : null}
                     </div>
                   </div>
                   <div className="flex justify-evenly mt-8">
-                    <button
-                      className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                      type="button"
-                      onClick={() => Router.push("/users")}
-                    >
-                      <span className="mr-2">Back</span>
-                    </button>
-                    <button
-                      className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                      type="submit"
-                    >
-                      Save
-                    </button>
+                    <AdvButton
+                      buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                      buttonType="button"
+                      buttonClick={() => Router.push("/users")}
+                      buttonText="Back"
+                    />
+                    <TypeButton
+                      buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                      buttonType="submit"
+                      buttonText
+                    />
                   </div>
                 </Form>
               )}

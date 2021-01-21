@@ -5,6 +5,9 @@ import Select from "../../atoms/Select";
 import Router from "next/router";
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser } from '../../redux/users/actions'
+import ErrorForm from "../../atoms/ErrorForm"
+import ClickButton from "../../atoms/ClickButton";
+import TypeButton from "../../atoms/TypeButton";
 
 const UserCreate = (): any => {
 
@@ -76,7 +79,7 @@ const UserCreate = (): any => {
                       placeholder="Enter First Name"
                     />
                     {errors.firstName && touched.firstName ? (
-                      <div className="text-red-500 p-2">{errors.firstName}</div>
+                      <ErrorForm errorMessage={errors.firstName} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
                   <div className="mb-4">
@@ -93,7 +96,7 @@ const UserCreate = (): any => {
                       placeholder="Enter Last Name"
                     />
                     {errors.lastName && touched.lastName ? (
-                      <div className="text-red-500 p-2">{errors.lastName}</div>
+                      <ErrorForm errorMessage={errors.lastName} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
                   <div className="mb-4">
@@ -110,7 +113,7 @@ const UserCreate = (): any => {
                       placeholder="Enter Email"
                     />
                     {errors.email && touched.email ? (
-                      <div className="text-red-500 p-2">{errors.email}</div>
+                      <ErrorForm errorMessage={errors.email} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
                   <div className="mb-1">
@@ -127,7 +130,7 @@ const UserCreate = (): any => {
                       placeholder="Enter Password"
                     />
                     {errors.password && touched.password ? (
-                      <div className="text-red-500 p-2">{errors.password}</div>
+                      <ErrorForm errorMessage={errors.password} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
                   <div className="mb-1">
@@ -145,9 +148,7 @@ const UserCreate = (): any => {
                     />
                     {errors.passwordConfirmation &&
                     touched.passwordConfirmation ? (
-                      <div className="text-red-500 p-2">
-                        {errors.passwordConfirmation}
-                      </div>
+                      <ErrorForm errorMessage={errors.passwordConfirmation} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
 
@@ -202,20 +203,18 @@ const UserCreate = (): any => {
                       dangerLight="#1a202c"
                     />
                   </div>
-                  <div className="mt-10 flex justify-around ">
-                    <button
-                      className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                      onClick={() => Router.push("/users")}
-                    >
-                      <span className="mr-2">Close</span>
-                    </button>
+                  <div className="mt-10 flex justify-around">
+                    <ClickButton
+                      buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                      buttonClick={() => Router.push("/users")}
+                      buttonText="Close"
+                    />                    
 
-                    <button
-                      className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                      type="submit"
-                    >
-                      Save
-                    </button>
+                    <TypeButton
+                      buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                      buttonType="submit"
+                      buttonText="Save"
+                    />
                   </div>
                 </div>
               </Form>

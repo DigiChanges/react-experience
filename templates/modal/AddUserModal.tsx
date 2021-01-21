@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Modal from "../../molecules/Modal";
+import TitleH1 from "../../atoms/TitleH1";
+import ClickButton from "../../atoms/ClickButton";
+import TypeButton from "../../atoms/TypeButton"
+import ErrorForm from "../../atoms/ErrorForm"
 
 const AddUserModal = ({ open }: any): any => {
   const [openModal, setOpenModal] = useState(false);
@@ -35,9 +39,7 @@ const AddUserModal = ({ open }: any): any => {
             {({ errors, touched }) => (
               <Form>
                 <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
-                  <h1 className="font-hairline text-5xl text-gray-400 mb-4 text-center">
-                    Add user
-                  </h1>
+                  <TitleH1 titleName="Add user" titleClass="font-hairline text-5xl text-gray-400 mb-4 text-center" />
                   <div className="mb-4">
                     <label
                       htmlFor="firstName"
@@ -52,7 +54,7 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter First Name"
                     />
                     {errors.firstName && touched.firstName ? (
-                      <div className="text-red-500 p-2">{errors.firstName}</div>
+                      <ErrorForm errorMessage={errors.firstName} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
                   <div className="mb-4">
@@ -69,7 +71,7 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter Last Name"
                     />
                     {errors.lastName && touched.lastName ? (
-                      <div className="text-red-500 p-2">{errors.lastName}</div>
+                      <ErrorForm errorMessage={errors.lastName} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
                   <div className="mb-4">
@@ -86,7 +88,7 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter Email"
                     />
                     {errors.email && touched.email ? (
-                      <div className="text-red-500 p-2">{errors.email}</div>
+                      <ErrorForm errorMessage={errors.email} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
                   <div className="mb-1">
@@ -103,7 +105,7 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter Password"
                     />
                     {errors.password && touched.password ? (
-                      <div className="text-red-500 p-2">{errors.password}</div>
+                      <ErrorForm errorMessage={errors.password} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
                   <div className="mb-1">
@@ -120,10 +122,8 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Repeat Password"
                     />
                     {errors.passwordConfirmation &&
-                    touched.passwordConfirmation ? (
-                      <div className="text-red-500 p-2">
-                        {errors.passwordConfirmation}
-                      </div>
+                    touched.passwordConfirmation ? (                      
+                      <ErrorForm errorMessage={errors.passwordConfirmation} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
                   <div className="mb-4">
@@ -134,20 +134,17 @@ const AddUserModal = ({ open }: any): any => {
                       Roles
                     </label>
                   </div>
-                  <div className="mt-10 flex justify-around ">
-                    <button
-                      className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                      onClick={closeModal}
-                    >
-                      <span className="mr-2">Close</span>
-                    </button>
-
-                    <button
-                      className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                      type="submit"
-                    >
-                      Save
-                    </button>
+                  <div className="mt-10 flex justify-around">
+                    <ClickButton
+                      buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                      buttonText="Close"
+                      buttonClick={closeModal}
+                    />
+                    <TypeButton
+                      buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                      buttonType="submit"
+                      buttonText="Save"
+                    />
                   </div>
                 </div>
               </Form>

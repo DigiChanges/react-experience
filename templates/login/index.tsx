@@ -4,6 +4,9 @@ import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Image from "../../atoms/Image";
 import { loginUser } from '../../redux/auth/actions'
 import { useDispatch } from 'react-redux';
+import TitleH1 from "../../atoms/TitleH1"
+import ErrorForm from "../../atoms/ErrorForm"
+import TypeButton from "../../atoms/TypeButton";
 
 const Login = () =>
 {
@@ -28,7 +31,10 @@ const Login = () =>
               <Form>
                 <Image image={"/logo.png"} />
                 <div className="bg-gray-800  rounded-lg border-teal p-8 border-t-12  mb-6 shadow-lg">
-                  <h1 className="font-hairline mb-4 text-center">Login</h1>
+                  <TitleH1 
+                  titleName="Login"
+                  titleClass="font-hairline mb-4 text-center"
+                  />
                   <div className="mb-4">
                     <label htmlFor='email' className="font-bold text-grey-darker block mb-2">
                       Email
@@ -40,7 +46,7 @@ const Login = () =>
                       placeholder="Your Email"
                     />
                     {errors.email && touched.email ? (
-                      <div className="text-red-500 p-2">{errors.email}</div>
+                      <ErrorForm errorMessage={errors.email} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
 
@@ -56,7 +62,7 @@ const Login = () =>
                       placeholder="Your Password"
                     />
                     {errors.password && touched.password ? (
-                      <div className="text-red-500 p-2">{errors.password}</div>
+                      <ErrorForm errorMessage={errors.password} containerClass="text-red-500 p-2" />
                     ) : null}
                   </div>
 
@@ -69,9 +75,11 @@ const Login = () =>
                     </a>
                   </div>
                   <div className="mt-4">
-                    <button type="submit" className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                      Login
-                    </button>
+                    <TypeButton
+                    buttonText="Login" 
+                    buttonType="submit" 
+                    buttonClass="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                    />
                   </div>
                 </div>
               </Form>

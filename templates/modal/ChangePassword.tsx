@@ -1,6 +1,7 @@
 import {Fragment}  from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
+import TitleH1 from "../../atoms/TitleH1";
 
 const ChangePassword = ({ close }: any): any =>
 {
@@ -37,9 +38,7 @@ const ChangePassword = ({ close }: any): any =>
                       </div>
                     ) : null}
 
-                    <h1 className="font-hairline text-5xl text-gray-400 mb-4 text-center">
-                      Change Password
-                    </h1>
+                    <TitleH1 titleName="Change Password" titleClass="font-hairline text-5xl text-gray-400 mb-4 text-center" />
                     <div className="mb-1">
                       <label className="font-bold text-gray-400 block mb-2">
                         Old Password

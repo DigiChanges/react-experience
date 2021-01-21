@@ -4,6 +4,8 @@ import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Router from "next/router";
 import loginData from "../../data/logindata.json";
 import Image from "../../atoms/Image";
+import TitleH1 from "../../atoms/TitleH1"
+import BasicButton from "../../atoms/BasicButton";
 
 const ForgotPassword = (): any => (
   <Fragment>
@@ -27,9 +29,11 @@ const ForgotPassword = (): any => (
               <Form>
                 <Image image={"/logo.png"} />
                 <div className="bg-gray-800 rounded-lg border-teal p-8 border-t-12 mb-6 shadow-lg">
-                  <h1 className="font-hairline mb-4 text-center">
-                    Forgot Password
-                  </h1>
+                  <TitleH1 
+                  titleName="Forgot Password"
+                  titleClass="font-hairline mb-4 text-center"
+                  />
+                    
                   <div className="mb-4">
                     <label htmlFor='email' className="font-bold text-grey-darker block mb-2">
                       Email
@@ -46,9 +50,11 @@ const ForgotPassword = (): any => (
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                      Send
-                    </button>
+                    <BasicButton 
+                    buttonText="Send"
+                    buttonClass="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                    />
+                      
                   </div>
                 </div>
                 <div className="text-center">
