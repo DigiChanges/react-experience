@@ -1,42 +1,63 @@
-import {useState}  from "react";
-import Link from "next/link";
+import { Fragment, useState }  from "react";
+import { useDispatch } from 'react-redux';
+import Router from 'next/router';
+import { selectedUser } from '../../../redux/users/actions';
 import IconEye from "../../../atoms/IconEye";
 import IconPencilAlt from "../../../atoms/IconPencilAlt";
 import IconCog from "../../../atoms/IconCog";
 import IconTrash from "../../../atoms/IconTrash";
 import ConfirmDelete from "../../modal/ConfirmDeleteUser"
 
-const UserActionsCell = (row: any): any =>
-{
+
+const UserActionsCell = (user: any): any => {
+
+  const dispatch = useDispatch()
+
   const [boolean, setBoolean] = useState(false);
   const openModal = () => {
       return setBoolean(!boolean)
   }
 
+  const navigateToPath = (path: string) => {
+    dispatch( selectedUser(user.id) )
+    Router.push( path )
+  }
+
+  const setSelectedUserToRemove = () => {
+    dispatch( selectedUser(user.id) )
+    openModal()
+  }
+
   return (
-    <>
-      <ConfirmDelete open={boolean} info={row} close={openModal}/>
-      <Link href={`/users/view/${row.id}`}>
-        <a className="w-6 hover:text-gray-700 mr-1">
-          <IconEye />
-        </a>
-      </Link>
-
-      <Link href={`/users/changePassword/${row.id}`}>
-        <a className="w-6 hover:text-gray-700 mr-1">
-          <IconPencilAlt />
-        </a>
-      </Link>
-
-      <Link href={`/users/update/${row.id}`}>
-        <a className="w-6 hover:text-gray-700 mr-1">
-          <IconCog />
-        </a>
-      </Link>
-        <button className="w-6 hover:text-gray-700 mr-1 hover:cursor-pointer" onClick={openModal} type='button'>
+    <Fragment>
+      <ConfirmDelete 
+        open={boolean} 
+        close={openModal}/>
+      <button 
+        className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
+        onClick={ () => navigateToPath(`/users/view/${user.id}`) }
+        type='button'>
+        <IconEye />
+      </button>
+      <button 
+        className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
+        onClick={ () => navigateToPath(`/users/changePassword/${user.id}`) }
+        type='button'>
+        <IconPencilAlt />
+      </button>
+      <button 
+        className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
+        onClick={ () => navigateToPath(`/users/update/${user.id}`) }
+        type='button'>
+        <IconCog />
+      </button>
+      <button 
+        className="w-6 hover:text-gray-700 mr-1 focus:outline-none" 
+        onClick={ setSelectedUserToRemove } 
+        type='button'>
           <IconTrash />
-        </button>
-    </>
+      </button>
+    </Fragment>
   );
 }
 

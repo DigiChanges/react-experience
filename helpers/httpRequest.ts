@@ -16,16 +16,16 @@ import { apiResult } from '../api/apiResult'
 */
 const HTTP_SUCCESS_STATUS = [200, 201, 204]
 const HTTP_ERROR_STATUS = [400, 401, 403, 404, 412, 500, 501]
-const SUCCESS = 'success'
 
 class HttpRequest {
   static async request({
     url = '',
     method = 'POST',
-    headers = {},
+    headers,
     path = '',
     body = {}
   }) {
+    if (headers === null) throw new Error('Token Expired')
     const requestOptions: {[key: string]: any} = {
       method,
       url: `${url}${path}`,

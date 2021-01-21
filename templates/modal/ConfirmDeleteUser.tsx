@@ -1,19 +1,31 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import Modal from "../../molecules/Modal";
+import { removeUser, unselectedUser } from '../../redux/users/actions'
 
-const ConfirmDelete = ({ open, info, close }: any): any => {
-  const [openModal, setOpenModal] = useState(false);
+const ConfirmDelete = ({ open, close }: any): any => {
+
+  const dispatch = useDispatch()
+  const booleanXquit = true;
+
+  const { userSelected } = useSelector( state => state.Users )
 
   useEffect(() => {
     setOpenModal(open);
   }, [open]);
 
+  const [openModal, setOpenModal] = useState(false);
+
   const closeModal = () => {
     close();
+    dispatch( unselectedUser() )
     setOpenModal(!openModal);
   };
 
-  const booleanXquit = true;
+  const onHandleDeleteUser = () => {
+    dispatch( removeUser(userSelected.id) )
+    closeModal()
+  } 
 
   return (
     <Modal open={openModal}>
@@ -46,9 +58,15 @@ const ConfirmDelete = ({ open, info, close }: any): any => {
                   />
                 </svg>
               </div>
-              <p className="font-hairline text-5xl text-gray-400 mb-4 text-center">
-                Are you sure delete user: {info.id}
-              </p>
+              {userSelected ? (
+                <p className="font-hairline text-5xl text-gray-400 mb-4 text-center">
+                  Are you sure delete user: 
+                  <br/>
+                  <span className='text-2xl'>
+                    { `${ userSelected.id } - ${userSelected.lastName} ${userSelected.firstName}` }
+                  </span>
+                </p>
+              ) : <p>No user selected</p>}
 
               <div className="mt-10 flex justify-around ">
                 <button
@@ -61,10 +79,9 @@ const ConfirmDelete = ({ open, info, close }: any): any => {
 
                 <button
                   className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                  type="submit"
-                  onClick={() => console.log("props.user")}
-                >
-                  Delete
+                  type="button"
+                  onClick={ onHandleDeleteUser }
+                > Delete
                 </button>
               </div>
             </div>

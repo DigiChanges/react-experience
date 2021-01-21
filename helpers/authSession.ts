@@ -1,4 +1,6 @@
 import { Cookies } from 'react-cookie'
+import jwt_decode from 'jwt-decode'
+import Router from 'next/router'
 
 const USER = 'user'
 const EXPIRES = 'expires'
@@ -24,6 +26,22 @@ export const getSession = () => {
   let cookies = getCookies()
   return cookies.getAll()
 }
+
+export const isSessionTokenAlive = () => {
+  const cookies = getCookies()
+  if (cookies && cookies.get(TOKEN) ) {
+    //@ts-ignore
+    const isAlive = isTokenAlive( jwt_decode( cookies.get(TOKEN) ).exp )
+    if (!isAlive) {
+      removeSession()
+      Router.replace('/login')
+    }
+    return isAlive
+  }
+  return false
+}
+
+const isTokenAlive = (exp: number) => exp > (Date.now() / 1000)
 
 export const removeSession = () => {
   let cookies = getCookies()

@@ -1,9 +1,16 @@
 // @flow
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-import { signin } from '../../services/userService'
-import { LOGIN_USER, LOGOUT_USER, FORGET_PASSWORD, CHANGE_FORGOT_PASSWORD } from './constants';
-import { setSession, getSession, removeSession } from '../../helpers/authSession'
+import { signin, getAllPermissions } from '../../services/authService'
+import { setSession, removeSession } from '../../helpers/authSession'
 import { notificationTypes, notification } from '../../entities/notification';
+import Router from 'next/router'
+import { 
+  LOGIN_USER, 
+  GET_PERMISSIONS,
+  LOGOUT_USER, 
+  FORGET_PASSWORD, 
+  CHANGE_FORGOT_PASSWORD 
+} from './constants';
 import { 
   startGeneralLoading, 
   stopGeneralLoading, 
@@ -11,14 +18,8 @@ import {
 } from '../general/actions'
 import {
   loginUserSuccess,
-  loginUserFailed,
-  forgetPasswordSuccess,
-  forgetPasswordFailed,
-  changeForgotPasswordFailed,
-  changeForgotPasswordSuccess,
-  changeForgotPasswordFieldsFailed
+  getPermissionsSuccess
 } from './actions';
-import Router from 'next/router'
 
 
 function* login({ payload: { email, password } }) {
@@ -51,6 +52,37 @@ function* login({ payload: { email, password } }) {
   } finally {
     yield put( stopGeneralLoading() )
   }
+}
+
+function* getPermissionsList() {
+  // yield put( startGeneralLoading() )
+  try {
+    const res = yield call( getAllPermissions )
+    const { data } = res
+    if (!data) {
+      return yield put( 
+        showGeneralNotification(
+          notification(
+            notificationTypes.ERROR, 
+            'Internal Server Error'
+          )
+        )
+      )
+    }
+    yield put( getPermissionsSuccess(data) )
+  } catch (e) {
+    yield put(
+      showGeneralNotification(
+        notification(
+          notificationTypes.ERROR, 
+          e.message
+        )
+      )
+    )
+  } 
+  // finally {
+  //   yield put( stopGeneralLoading() )
+  // }
 }
 
 
@@ -144,27 +176,38 @@ function* changeForgotPassword({ payload: { confirmationToken, password, passwor
 
 
 export function* watchLoginUser(): any {
-    // @ts-ignore
-    yield takeEvery(LOGIN_USER, login);
+  // @ts-ignore
+  yield takeEvery(LOGIN_USER, login);
+}
+
+export function* watchGetPermissions(): any {
+  // @ts-ignore
+  yield takeEvery(GET_PERMISSIONS, getPermissionsList);
 }
 
 export function* watchLogoutUser(): any {
-    // @ts-ignore
-    yield takeEvery(LOGOUT_USER, logout);
+  // @ts-ignore
+  yield takeEvery(LOGOUT_USER, logout);
 }
 
 export function* watchForgetPassword(): any {
-    // @ts-ignore
-    yield takeEvery(FORGET_PASSWORD, forgetPassword);
+  // @ts-ignore
+  yield takeEvery(FORGET_PASSWORD, forgetPassword);
 }
 
 export function* watchChangeForgotPassword(): any {
-    // @ts-ignore
-    yield takeEvery(CHANGE_FORGOT_PASSWORD, changeForgotPassword);
+  // @ts-ignore
+  yield takeEvery(CHANGE_FORGOT_PASSWORD, changeForgotPassword);
 }
 
 function* authSaga(): any {
-    yield all([fork(watchLoginUser), fork(watchLogoutUser), fork(watchForgetPassword), fork(watchChangeForgotPassword)]);
+  yield all([
+    fork(watchLoginUser),
+    fork(watchGetPermissions), 
+    fork(watchLogoutUser), 
+    fork(watchForgetPassword), 
+    fork(watchChangeForgotPassword)
+  ])
 }
 
 export default authSaga;

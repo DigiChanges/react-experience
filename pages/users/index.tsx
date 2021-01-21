@@ -4,7 +4,6 @@ import ConfirmDeleteUser from "../../templates/modal/ConfirmDeleteUser";
 import AddUserModal from "../../templates/modal/AddUserModal";
 import IconPlus from "../../atoms/IconPlus";
 import Link from "next/link";
-import customData from "../../data/userdata.json";
 
 const UsersPage = (): any => {
     
@@ -16,8 +15,8 @@ const UsersPage = (): any => {
 
   return (
     <>
-      <div className="w-full h-full flex flex-col justify-between">
-        <UsersTable data={customData} />
+      <div className="container mx-auto w-full h-full flex flex-col justify-between">
+        <UsersTable />
         <AddUserModal />
         {booleanConfirmDelete ? (
           <ConfirmDeleteUser close={openConfirmDelete} />
@@ -28,7 +27,7 @@ const UsersPage = (): any => {
               <IconPlus />
             </button>
           </Link>
-        </div>
+        </div> 
       </div>
     </>
   );

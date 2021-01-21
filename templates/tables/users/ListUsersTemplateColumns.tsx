@@ -1,4 +1,4 @@
-import UserStateCell from "./UserStateCell"
+// import UserStateCell from "./UserStateCell"
 import UserActionsCell from "./UserActionsCell"
 
 const ListUsersTemplateColumns =
@@ -23,12 +23,12 @@ const ListUsersTemplateColumns =
     selector: "rolesData",
     sortable: true,
   },
-  {
-    name: "State",
-    selector: "",
-    sortable: true,
-    cell: UserStateCell,
-  },
+  // {
+  //   name: "State",
+  //   selector: "",
+  //   sortable: true,
+  //   cell: UserStateCell,
+  // },
   {
     name: "Actions",
     selector: "",

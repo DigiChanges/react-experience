@@ -1,36 +1,30 @@
-import React from "react";
-import { Field, Formik } from "formik";
+import React, { useEffect } from "react";
+import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Select from "../../atoms/Select";
 import Router from "next/router";
+import { useDispatch, useSelector } from 'react-redux'
+import { createUser } from '../../redux/users/actions'
 
 const UserCreate = (): any => {
-  const rolesPrueba = [
-    {
-      label: "chua",
-      value: "10",
-    },
-    {
-      label: "chubacgffga 2",
-      value: "20",
-    },
-    {
-      label: "aca 3",
-      value: "30",
-    },
-    {
-      label: "chubaca 4",
-      value: "40",
-    },
-    {
-      label: "chubaca 5",
-      value: "50",
-    },
-    {
-      label: "chubaca 6",
-      value: "60",
-    },
-  ];
+
+  const dispatch = useDispatch()
+  const { permissions } = useSelector( store => store.Auth )
+  const { rolesList } = useSelector( store => store.Roles )
+
+  //TODO child key issue
+  const getRolesList = () => (
+    rolesList && rolesList.length > 0
+      ? rolesList.map(item => ({ label: item.name, id: item.id }))
+      : []
+  )
+
+  //TODO child key issue
+  const getPermissionsList = () => (
+    permissions && permissions.length > 0
+      ? permissions.map((label, value) => ({ label, value }))
+      : []
+  )
 
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-128">
@@ -46,15 +40,27 @@ const UserCreate = (): any => {
               email: "",
               password: "",
               passwordConfirmation: "",
+              permissions: [],
               roles: [],
             }}
             validationSchema={SignUpSchema}
-            onSubmit={() => {
-              // same shape as initial values
+            onSubmit={async (values) => {
+              const { firstName, lastName, email, password, passwordConfirmation, permissions, roles } = values
+              dispatch( 
+                createUser(
+                  firstName, 
+                  lastName, 
+                  email, 
+                  password, 
+                  passwordConfirmation,
+                  permissions.map(permission => permission.label),
+                  roles.map(role => role.id)
+                ) 
+              )
             }}
           >
             {({ errors, touched }) => (
-              <div>
+              <Form>
                 <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
                   <div className="mb-4">
                     <label
@@ -144,6 +150,33 @@ const UserCreate = (): any => {
                       </div>
                     ) : null}
                   </div>
+
+                  <div className="mb-4">
+                    <label
+                      htmlFor="permissions"
+                      className="font-bold text-gray-400 block mb-2"
+                    >
+                      Permissions
+                    </label>
+                    <Field
+                      name="permissions"
+                      component={Select}
+                      items={ getPermissionsList() }
+                      isMulti
+                      primary25="#4a5568"
+                      primary="#667eea"
+                      neutral0="#2d3748"
+                      neutral20="#4a5568"
+                      neutral50="#a0aec0"
+                      neutral80="#fff"
+                      neutral10="#4a5568"
+                      neutral30="#667eea"
+                      primary50="#718096"
+                      danger="#a0aec0"
+                      dangerLight="#1a202c"
+                    />
+                  </div>
+
                   <div className="mb-4">
                     <label
                       htmlFor="roles"
@@ -154,7 +187,7 @@ const UserCreate = (): any => {
                     <Field
                       name="roles"
                       component={Select}
-                      items={rolesPrueba}
+                      items={ getRolesList() }
                       isMulti
                       primary25="#4a5568"
                       primary="#667eea"
@@ -185,7 +218,7 @@ const UserCreate = (): any => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </Form>
             )}
           </Formik>
         </div>

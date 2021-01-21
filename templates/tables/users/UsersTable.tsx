@@ -1,61 +1,97 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import DataTable from "react-data-table-component";
 import ListUsersTemplateColumns from "./ListUsersTemplateColumns";
-import CustomLoader from "../../../atoms/CustomLoader";
 import TableUsersStyle from "../../../assets/customStyles/TableUsersStyle";
+import { getUsers } from '../../../redux/users/actions';
+import { getPermissions } from '../../../redux/auth/actions';
+import { getRoles } from '../../../redux/roles/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
-const UsersTable = (props: any): any => {
-  const [pending, setPending] = useState(true);
+const UsersTable = () => {
+
+  const dispatch = useDispatch()
+  const { usersList } = useSelector( state => state.Users )
+  // const { permissions } = useSelector( state => state.Auth )
+  // const { rolesList } = useSelector( state => state.Roles )
+
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setPending(false);
-    }, 1000);
-    return () => clearTimeout(timeout);
+    dispatch( getUsers() )
+    dispatch( getRoles() )
+    dispatch( getPermissions() )
   }, []);
 
-  const createData = (id, firstName, lastName, email, roles, enable) => {
-    let rolesData = "";
-    const rolesId = [];
+  //TODO REMOVE COMMENTED CODE
 
-    roles.map((index) => {
-      if (rolesData.length === 0) {
-        rolesData = `${rolesData} ${index.name}`;
-      } else {
-        rolesData = `${rolesData}, ${index.name}`;
-      }
-      rolesId.push(index.id);
-    });
-    return { id, firstName, lastName, email, rolesData, rolesId, enable };
-  };
+  //wait some seconds before consuming the api
+  // const getUsersData = async () => {
+  //   console.log('Waiting to get users data')
+  //   setTimeout(() => {
+  //     console.log('Dispatching users data')
+  //     dispatch( getUsers() )
+  //   }, 2000);
+  // }
+  // const getPermissionsData = async () => {
+  //   console.log('Waiting to get permissions data')
+  //   setTimeout(() => {
+  //     console.log('Dispatching permissions data')
+  //     dispatch( getPermissions() )
+  //   }, 4000)
+  // }
+  // const getRolesData = async () => {
+  //   console.log('Waiting to get roles data')
+  //   setTimeout(() => {
+  //     console.log('Dispatching roles data')
+  //     dispatch( getRoles() )
+  //   }, 10000)
+  // }
 
-  const rows = props.data.map((user) => {
-    return createData(
-      user.data.user.id,
-      user.data.user.firstName,
-      user.data.user.lastName,
-      user.data.user.email,
-      user.data.user.roles,
-      user.data.user.enable
-    );
-  });
+  const mapRoles = roles => {
+    if (roles && roles.length > 0) {
+      let rolesData = ''
+      roles.map(role => {
+        rolesData = rolesData.concat(`${ role.name } `)
+      })
+      return rolesData
+    } 
+    return ''
+  }
+
+  const getUserRow = (id, firstName, lastName, email, roles) => ({
+    id,
+    firstName,
+    lastName,
+    email,
+    rolesData: mapRoles(roles)
+  })
+
+  const getRows = () => usersList.map(u => getUserRow(u.id, u.firstName, u.lastName, u.email, u.roles))
 
   return (
     <>
       <div className="px-16 pt-20">
         <h1 className="text-5xl text-gray-500">Users</h1>
-        <DataTable
-          columns={ListUsersTemplateColumns}
-          data={rows}
-          title={false}
-          striped={true}
-          noHeader
-          theme="DGDarkTheme"
-          customStyles={TableUsersStyle}
-          progressPending={pending}
-          progressComponent={
-            <CustomLoader cssClassName={"justify-center text-gray-700"} />
-          }
-        />
+        {usersList && (
+          usersList.length > 0 ? (
+            <DataTable
+              columns={ListUsersTemplateColumns}
+              data={getRows()}
+              title={false}
+              striped={true}
+              noHeader
+              theme="DGDarkTheme"
+              customStyles={TableUsersStyle}
+
+              //TODO: REMOVE COMMENTED CODE
+
+              // progressPending={pending}
+              // progressComponent={
+              //   <CustomLoader cssClassName={"justify-center text-gray-700"} />
+              // }
+            />
+          ) : (
+            <p>No Users</p>
+          )
+        )}
       </div>
     </>
   );
