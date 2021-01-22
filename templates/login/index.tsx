@@ -16,7 +16,7 @@ const Login = () =>
   return(
     <section className="text-gray-500 body-font bg-gray-900 h-screen">
       <div className="container mx-auto h-full flex justify-center items-center">
-        <div className="w-1/3">
+        <div className="w-1/2 md:w-1/3">
           <Formik
             initialValues={{
               email: "",
