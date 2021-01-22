@@ -4,9 +4,9 @@ import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Image from "../../atoms/Image";
 import { loginUser } from '../../redux/auth/actions'
 import { useDispatch } from 'react-redux';
-import TitleH1 from "../../atoms/TitleH1"
+import Title from "../../atoms/Title"
 import ErrorForm from "../../atoms/ErrorForm"
-import TypeButton from "../../atoms/TypeButton";
+import Button from "../../atoms/Button"
 
 const Login = () =>
 {
@@ -31,10 +31,12 @@ const Login = () =>
               <Form>
                 <Image image={"/logo.png"} />
                 <div className="bg-gray-800  rounded-lg border-teal p-8 border-t-12  mb-6 shadow-lg">
-                  <TitleH1 
-                  titleName="Login"
+                  <Title 
+                  titleType="h1"
                   titleClass="font-hairline mb-4 text-center"
-                  />
+                  >
+                    Login
+                  </Title>
                   <div className="mb-4">
                     <label htmlFor='email' className="font-bold text-grey-darker block mb-2">
                       Email
@@ -46,7 +48,7 @@ const Login = () =>
                       placeholder="Your Email"
                     />
                     {errors.email && touched.email ? (
-                      <ErrorForm errorMessage={errors.email} containerClass="text-red-500 p-2" />
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.email}</ErrorForm>
                     ) : null}
                   </div>
 
@@ -62,7 +64,7 @@ const Login = () =>
                       placeholder="Your Password"
                     />
                     {errors.password && touched.password ? (
-                      <ErrorForm errorMessage={errors.password} containerClass="text-red-500 p-2" />
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.password}</ErrorForm>
                     ) : null}
                   </div>
 
@@ -75,11 +77,13 @@ const Login = () =>
                     </a>
                   </div>
                   <div className="mt-4">
-                    <TypeButton
-                    buttonText="Login" 
+                    <Button
+                    buttonClick="none"
                     buttonType="submit" 
                     buttonClass="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-                    />
+                    >
+                      Login
+                    </Button>
                   </div>
                 </div>
               </Form>

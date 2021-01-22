@@ -1,12 +1,9 @@
 import React from 'react'
 
-export default function ErrorForm({
-    errorMessage,
-    containerClass
-}) {
-    return (
-    <div className={containerClass}>
-        {errorMessage}
+const ErrorForm = ({children, ...props}) => (
+    <div className={props.containerClass}>
+        {children}
     </div>
-    )
-}
+)
+
+export default ErrorForm

@@ -1,7 +1,9 @@
 import {Fragment}  from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
-import TitleH1 from "../../atoms/TitleH1";
+import Title from "../../atoms/Title";
+import Button from "../../atoms/Button";
+import ErrorForm from "../../atoms/ErrorForm"
 
 const ChangePassword = ({ close }: any): any =>
 {
@@ -32,13 +34,15 @@ const ChangePassword = ({ close }: any): any =>
                   <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
                     {booleanXquit ? (
                       <div className="text-right ">
-                        <button onClick={close} className="text-lg">
+                        <Button buttonClick={close} buttonClass="text-lg">
                           x
-                        </button>
+                        </Button>
                       </div>
                     ) : null}
 
-                    <TitleH1 titleName="Change Password" titleClass="font-hairline text-5xl text-gray-400 mb-4 text-center" />
+                    <Title titleClass="font-hairline text-5xl text-gray-400 mb-4 text-center" titleType="h1" >
+                    Change Password
+                    </Title>
                     <div className="mb-1">
                       <label className="font-bold text-gray-400 block mb-2">
                         Old Password
@@ -50,9 +54,7 @@ const ChangePassword = ({ close }: any): any =>
                         placeholder="Enter Old Password"
                       />
                       {errors.password && touched.password ? (
-                        <div className="text-red-500 p-2">
-                          {errors.password}
-                        </div>
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.password}</ErrorForm>
                       ) : null}
                     </div>
                     <div className="mb-1">
@@ -66,9 +68,7 @@ const ChangePassword = ({ close }: any): any =>
                         placeholder="Enter New Password"
                       />
                       {errors.password && touched.password ? (
-                        <div className="text-red-500 p-2">
-                          {errors.password}
-                        </div>
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.password}</ErrorForm>
                       ) : null}
                     </div>
                     <div className="mb-1">
@@ -83,27 +83,25 @@ const ChangePassword = ({ close }: any): any =>
                       />
                       {errors.passwordConfirmation &&
                       touched.passwordConfirmation ? (
-                        <div className="text-red-500 p-2">
-                          {errors.passwordConfirmation}
-                        </div>
+                        <ErrorForm containerClass="text-red-500 p-2" >{errors.passwordConfirmation}</ErrorForm>
                       ) : null}
                     </div>
                     <div className="mt-10 flex justify-around ">
-                      <button
-                        className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                        onClick={close}
-                        type="button"
+                      <Button
+                        buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                        buttonClick={close}
+                        buttonType="button"
                       >
                         <span className="mr-2">Close</span>
-                      </button>
+                      </Button>
 
-                      <button
-                        className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                        type="submit"
-                        onClick={() => console.log("props.user")}
+                      <Button
+                        buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                        buttonType="submit"
+                        buttonClick={() => console.log("props.user")}
                       >
                         Save
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </Form>

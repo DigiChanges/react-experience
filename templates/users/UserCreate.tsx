@@ -5,9 +5,9 @@ import Select from "../../atoms/Select";
 import Router from "next/router";
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser } from '../../redux/users/actions'
+import Title from "../../atoms/Title"
 import ErrorForm from "../../atoms/ErrorForm"
-import ClickButton from "../../atoms/ClickButton";
-import TypeButton from "../../atoms/TypeButton";
+import Button from "../../atoms/Button";
 
 const UserCreate = (): any => {
 
@@ -33,7 +33,7 @@ const UserCreate = (): any => {
     <section className="text-gray-500 body-font bg-gray-900 w-128">
       <div className="w-full px-5">
         <div className="text-4xl mb-2 ">
-          <h1 className="text-left">Add User</h1>
+          <Title titleClass="text-left" titleType="h1">Add User</Title>
         </div>
         <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
           <Formik
@@ -79,7 +79,7 @@ const UserCreate = (): any => {
                       placeholder="Enter First Name"
                     />
                     {errors.firstName && touched.firstName ? (
-                      <ErrorForm errorMessage={errors.firstName} containerClass="text-red-500 p-2" />
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.firstName}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
@@ -96,7 +96,7 @@ const UserCreate = (): any => {
                       placeholder="Enter Last Name"
                     />
                     {errors.lastName && touched.lastName ? (
-                      <ErrorForm errorMessage={errors.lastName} containerClass="text-red-500 p-2" />
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.lastName}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
@@ -113,7 +113,7 @@ const UserCreate = (): any => {
                       placeholder="Enter Email"
                     />
                     {errors.email && touched.email ? (
-                      <ErrorForm errorMessage={errors.email} containerClass="text-red-500 p-2" />
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.email}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-1">
@@ -130,7 +130,7 @@ const UserCreate = (): any => {
                       placeholder="Enter Password"
                     />
                     {errors.password && touched.password ? (
-                      <ErrorForm errorMessage={errors.password} containerClass="text-red-500 p-2" />
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.password}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-1">
@@ -148,7 +148,7 @@ const UserCreate = (): any => {
                     />
                     {errors.passwordConfirmation &&
                     touched.passwordConfirmation ? (
-                      <ErrorForm errorMessage={errors.passwordConfirmation} containerClass="text-red-500 p-2" />
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.passwordConfirmation}</ErrorForm>
                     ) : null}
                   </div>
 
@@ -204,17 +204,21 @@ const UserCreate = (): any => {
                     />
                   </div>
                   <div className="mt-10 flex justify-around">
-                    <ClickButton
+                    <Button
+                      buttonType="button"
                       buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
                       buttonClick={() => Router.push("/users")}
-                      buttonText="Close"
-                    />                    
+                    >   
+                    Close
+                    </Button>                 
 
-                    <TypeButton
+                    <Button
+                      buttonClick="none"
                       buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
                       buttonType="submit"
-                      buttonText="Save"
-                    />
+                    >
+                      Save
+                    </Button>
                   </div>
                 </div>
               </Form>

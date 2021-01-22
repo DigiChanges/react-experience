@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import Button from "../../atoms/Button";
 import Modal from "../../molecules/Modal";
 import { removeUser, unselectedUser } from '../../redux/users/actions'
 
@@ -69,20 +70,20 @@ const ConfirmDelete = ({ open, close }: any): any => {
               ) : <p>No user selected</p>}
 
               <div className="mt-10 flex justify-around ">
-                <button
-                  className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                  onClick={closeModal}
-                  type="button"
+                <Button
+                  buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                  buttonClick={closeModal}
+                  buttonType="button"
                 >
                   <span className="mr-2">Close</span>
-                </button>
+                </Button>
 
-                <button
-                  className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                  type="button"
-                  onClick={ onHandleDeleteUser }
+                <Button
+                  buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                  buttonType="button"
+                  buttonClick={ onHandleDeleteUser }
                 > Delete
-                </button>
+                </Button>
               </div>
             </div>
           </div>

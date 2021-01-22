@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Modal from "../../molecules/Modal";
-import TitleH1 from "../../atoms/TitleH1";
-import ClickButton from "../../atoms/ClickButton";
-import TypeButton from "../../atoms/TypeButton"
+import Title from "../../atoms/Title";
+import Button from "../../atoms/Button"
 import ErrorForm from "../../atoms/ErrorForm"
 
 const AddUserModal = ({ open }: any): any => {
@@ -39,7 +38,11 @@ const AddUserModal = ({ open }: any): any => {
             {({ errors, touched }) => (
               <Form>
                 <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
-                  <TitleH1 titleName="Add user" titleClass="font-hairline text-5xl text-gray-400 mb-4 text-center" />
+                  <Title  
+                  titleType="h1"
+                  titleClass="font-hairline text-5xl text-gray-400 mb-4 text-center" >
+                    Add user
+                  </Title>
                   <div className="mb-4">
                     <label
                       htmlFor="firstName"
@@ -54,7 +57,7 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter First Name"
                     />
                     {errors.firstName && touched.firstName ? (
-                      <ErrorForm errorMessage={errors.firstName} containerClass="text-red-500 p-2" />
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.firstName}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
@@ -71,7 +74,7 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter Last Name"
                     />
                     {errors.lastName && touched.lastName ? (
-                      <ErrorForm errorMessage={errors.lastName} containerClass="text-red-500 p-2" />
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.lastName}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
@@ -88,7 +91,7 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter Email"
                     />
                     {errors.email && touched.email ? (
-                      <ErrorForm errorMessage={errors.email} containerClass="text-red-500 p-2" />
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.email}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-1">
@@ -105,7 +108,7 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter Password"
                     />
                     {errors.password && touched.password ? (
-                      <ErrorForm errorMessage={errors.password} containerClass="text-red-500 p-2" />
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.password}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-1">
@@ -122,8 +125,8 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Repeat Password"
                     />
                     {errors.passwordConfirmation &&
-                    touched.passwordConfirmation ? (                      
-                      <ErrorForm errorMessage={errors.passwordConfirmation} containerClass="text-red-500 p-2" />
+                    touched.passwordConfirmation ? (
+                      <ErrorForm containerClass="text-red-500 p-2" >{errors.passwordConfirmation}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
@@ -135,16 +138,20 @@ const AddUserModal = ({ open }: any): any => {
                     </label>
                   </div>
                   <div className="mt-10 flex justify-around">
-                    <ClickButton
+                    <Button
+                      buttonType="button"
                       buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                      buttonText="Close"
                       buttonClick={closeModal}
-                    />
-                    <TypeButton
+                    >
+                      Close
+                    </Button>
+                    <Button
+                      buttonClick="none"
                       buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
                       buttonType="submit"
-                      buttonText="Save"
-                    />
+                    >
+                      Save
+                    </Button>
                   </div>
                 </div>
               </Form>

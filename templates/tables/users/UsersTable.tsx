@@ -6,7 +6,7 @@ import { getUsers } from '../../../redux/users/actions';
 import { getPermissions } from '../../../redux/auth/actions';
 import { getRoles } from '../../../redux/roles/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import TitleH1 from '../../../atoms/TitleH1';
+import Title from '../../../atoms/Title';
 
 const UsersTable = () => {
 
@@ -70,7 +70,9 @@ const UsersTable = () => {
   return (
     <>
       <div className="px-16 pt-20">
-        <TitleH1 titleName="Users" titleClass="text-5xl text-gray-500" />
+        <Title titleClass="text-5xl text-gray-500" titleType="h1" >
+        Users
+        </Title>
         {usersList && (
           usersList.length > 0 ? (
             <DataTable
