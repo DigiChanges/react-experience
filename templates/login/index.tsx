@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import Title from "../../atoms/Title"
 import ErrorForm from "../../atoms/ErrorForm"
 import Button from "../../atoms/Button"
+import Label from "../../atoms/Label";
 
 const Login = () =>
 {
@@ -31,19 +32,17 @@ const Login = () =>
               <Form>
                 <Image image={"/logo.png"} />
                 <div className="bg-gray-800  rounded-lg border-teal p-8 border-t-12  mb-6 shadow-lg">
-                  <Title 
-                  titleType="h1"
-                  titleClass="font-hairline mb-4 text-center"
-                  >
+                  <Title titleType="h1" titleClass="font-hairline mb-4 text-center">
                     Login
                   </Title>
                   <div className="mb-4">
-                    <label htmlFor='email' className="font-bold text-grey-darker block mb-2">
+                    <Label hFor='email' labelClass="font-bold text-grey-darker block mb-2">
                       Email
-                    </label>
+                    </Label>
                     <Field
                       name="email"
                       type="text"
+                      id="email"
                       className="w-full bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey  rounded shadow"
                       placeholder="Your Email"
                     />
@@ -53,12 +52,13 @@ const Login = () =>
                   </div>
 
                   <div className="mb-1">
-                    <label htmlFor='password' className="font-bold text-grey-darker block mb-2">
+                    <Label hFor='password' labelClass="font-bold text-grey-darker block mb-2">
                       Password
-                    </label>
+                    </Label>
                     <Field
                       name="password"
                       type="password"
+                      id="password"
                       autoComplete="off"
                       className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey  rounded shadow"
                       placeholder="Your Password"

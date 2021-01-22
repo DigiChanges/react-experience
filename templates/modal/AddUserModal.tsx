@@ -5,6 +5,7 @@ import Modal from "../../molecules/Modal";
 import Title from "../../atoms/Title";
 import Button from "../../atoms/Button"
 import ErrorForm from "../../atoms/ErrorForm"
+import Label from "../../atoms/Label";
 
 const AddUserModal = ({ open }: any): any => {
   const [openModal, setOpenModal] = useState(false);
@@ -38,18 +39,16 @@ const AddUserModal = ({ open }: any): any => {
             {({ errors, touched }) => (
               <Form>
                 <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
-                  <Title  
-                  titleType="h1"
-                  titleClass="font-hairline text-5xl text-gray-400 mb-4 text-center" >
+                  <Title titleType="h1" titleClass="font-hairline text-5xl text-gray-400 mb-4 text-center" >
                     Add user
                   </Title>
                   <div className="mb-4">
-                    <label
-                      htmlFor="firstName"
-                      className="font-bold text-gray-400 block mb-2"
+                    <Label
+                      hFor="firstName"
+                      labelClass="font-bold text-gray-400 block mb-2"
                     >
                       First Name
-                    </label>
+                    </Label>
                     <Field
                       name="firstName"
                       type="text"
@@ -61,15 +60,16 @@ const AddUserModal = ({ open }: any): any => {
                     ) : null}
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="lastName"
-                      className="font-bold text-gray-400 block mb-2"
+                    <Label
+                      hFor="lastName"
+                      labelClass="font-bold text-gray-400 block mb-2"
                     >
                       Last Name
-                    </label>
+                    </Label>
                     <Field
                       name="lastName"
                       type="text"
+                      id="lastName"
                       className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-gray px-2 py-2 rounded shadow"
                       placeholder="Enter Last Name"
                     />
@@ -78,15 +78,16 @@ const AddUserModal = ({ open }: any): any => {
                     ) : null}
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="email"
-                      className="font-bold text-gray-400 block mb-2"
+                    <Label
+                      hFor="email"
+                      labelClass="font-bold text-gray-400 block mb-2"
                     >
                       Email
-                    </label>
+                    </Label>
                     <Field
                       name="email"
                       type="text"
+                      id="email"
                       className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                       placeholder="Enter Email"
                     />
@@ -95,15 +96,16 @@ const AddUserModal = ({ open }: any): any => {
                     ) : null}
                   </div>
                   <div className="mb-1">
-                    <label
-                      htmlFor="password"
-                      className="font-bold text-gray-400 block mb-2"
+                    <Label
+                      hFor="password"
+                      labelClass="font-bold text-gray-400 block mb-2"
                     >
                       Password
-                    </label>
+                    </Label>
                     <Field
                       name="password"
                       type="password"
+                      id="password"
                       className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                       placeholder="Enter Password"
                     />
@@ -112,15 +114,16 @@ const AddUserModal = ({ open }: any): any => {
                     ) : null}
                   </div>
                   <div className="mb-1">
-                    <label
-                      htmlFor="passwordConfirmation"
-                      className="font-bold text-gray-400 block mb-2"
+                    <Label
+                      hFor="passwordConfirmation"
+                      labelClass="font-bold text-gray-400 block mb-2"
                     >
                       Confirm Password
-                    </label>
+                    </Label>
                     <Field
                       name="passwordConfirmation"
                       type="password"
+                      id="passwordConfirmation"
                       className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                       placeholder="Repeat Password"
                     />
@@ -130,26 +133,20 @@ const AddUserModal = ({ open }: any): any => {
                     ) : null}
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="roles"
-                      className="font-bold text-gray-400 block mb-2"
+                    <Label
+                      hFor="roles"
+                      labelClass="font-bold text-gray-400 block mb-2"
                     >
                       Roles
-                    </label>
+                    </Label>
                   </div>
                   <div className="mt-10 flex justify-around">
-                    <Button
-                      buttonType="button"
-                      buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                      buttonClick={closeModal}
-                    >
+                    <Button buttonType="button" buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                      buttonClick={closeModal}>
                       Close
                     </Button>
-                    <Button
-                      buttonClick="none"
-                      buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                      buttonType="submit"
-                    >
+                    <Button buttonClick="none" buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                      buttonType="submit">
                       Save
                     </Button>
                   </div>

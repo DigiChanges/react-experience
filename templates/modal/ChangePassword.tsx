@@ -4,6 +4,7 @@ import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Title from "../../atoms/Title";
 import Button from "../../atoms/Button";
 import ErrorForm from "../../atoms/ErrorForm"
+import Label from "../../atoms/Label";
 
 const ChangePassword = ({ close }: any): any =>
 {
@@ -34,7 +35,7 @@ const ChangePassword = ({ close }: any): any =>
                   <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
                     {booleanXquit ? (
                       <div className="text-right ">
-                        <Button buttonClick={close} buttonClass="text-lg">
+                        <Button buttonClick={close} buttonClass="text-lg" buttonType="button">
                           x
                         </Button>
                       </div>
@@ -44,12 +45,13 @@ const ChangePassword = ({ close }: any): any =>
                     Change Password
                     </Title>
                     <div className="mb-1">
-                      <label className="font-bold text-gray-400 block mb-2">
+                      <Label labelClass="font-bold text-gray-400 block mb-2" hFor="oldPassword">
                         Old Password
-                      </label>
+                      </Label>
                       <Field
                         name="password"
                         type="password"
+                        id="oldPassword"
                         className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                         placeholder="Enter Old Password"
                       />
@@ -58,12 +60,13 @@ const ChangePassword = ({ close }: any): any =>
                       ) : null}
                     </div>
                     <div className="mb-1">
-                      <label className="font-bold text-gray-400 block mb-2">
+                      <Label labelClass="font-bold text-gray-400 block mb-2" hFor="newPassword">
                         New Password
-                      </label>
+                      </Label>
                       <Field
                         name="password"
                         type="password"
+                        id="newPassword"
                         className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                         placeholder="Enter New Password"
                       />
@@ -72,12 +75,13 @@ const ChangePassword = ({ close }: any): any =>
                       ) : null}
                     </div>
                     <div className="mb-1">
-                      <label className="font-bold text-gray-400 block mb-2">
+                      <Label labelClass="font-bold text-gray-400 block mb-2" hFor="passwordConfirmation">
                         Confirm New Password
-                      </label>
+                      </Label>
                       <Field
                         name="passwordConfirmation"
                         type="password"
+                        id="passwordConfirmation"
                         className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                         placeholder="Repeat New Password"
                       />
@@ -87,19 +91,13 @@ const ChangePassword = ({ close }: any): any =>
                       ) : null}
                     </div>
                     <div className="mt-10 flex justify-around ">
-                      <Button
-                        buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                        buttonClick={close}
-                        buttonType="button"
-                      >
+                      <Button buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                        buttonClick={close} buttonType="button">
                         <span className="mr-2">Close</span>
                       </Button>
 
-                      <Button
-                        buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                        buttonType="submit"
-                        buttonClick={() => console.log("props.user")}
-                      >
+                      <Button buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                        buttonType="submit" buttonClick={() => console.log("props.user")}>
                         Save
                       </Button>
                     </div>

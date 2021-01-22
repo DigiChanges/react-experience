@@ -13,6 +13,7 @@ const AuthProvider = ({ children, ...props }) => {
 
   const { user } = props.allCookies
   const isAuth = user && user.enable && user.id
+  //const isAuth = true
   const router = useRouter()
 
   useEffect(() => {

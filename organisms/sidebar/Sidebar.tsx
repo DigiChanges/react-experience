@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react'
 import SidebarItem from '../../molecules/SidebarItem'
 import { dashRoutes } from './dashRoutes'
+import Title from "../../atoms/Title"
 
 export default function Sidebar() {
 
@@ -22,9 +23,9 @@ export default function Sidebar() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="flex flex-col w-40 bg-blue rounded-r-3xl overflow-hidden">
+      <div className="flex flex-col w-16 md:w-32 lg:w-48 bg-blue rounded-r-3xl overflow-hidden">
         <div className="flex items-center justify-center h-20 shadow-md">
-          <h1 className="text-3xl uppercase text-indigo-500">Logo</h1>
+          <Title titleClass="text-x1 md:text-3xl uppercase text-indigo-500" titleType="h1">Logo</Title>
         </div>
         <ul className="flex flex-col py-4">
           { getDashRoutes() }

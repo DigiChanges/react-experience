@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateUser, unselectedUser } from '../../redux/users/actions';
 import Title from "../../atoms/Title"
 import Button from "../../atoms/Button";
+import Label from "../../atoms/Label";
 
 const UpdateUser = (): any => {
 
@@ -68,57 +69,49 @@ const UpdateUser = (): any => {
                 <Form>
                   <div className="flex flex-col  bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
                     <div className="mb-4">
-                      <label
-                        htmlFor="firstName"
-                        className="font-bold text-gray-400 block mb-2"
-                      >
+                      <Label hFor="firstName" labelClass="font-bold text-gray-400 block mb-2">
                         First Name
-                      </label>
+                      </Label>
                       <Field
                         name="firstName"
                         type="text"
+                        id="firstName"
                         className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-2 rounded shadow"
                         placeholder="FirstName"
                       />
                     </div>
                     <div className="mb-4">
-                      <label
-                        htmlFor="lastName"
-                        className="font-bold text-gray-400 block mb-2"
-                      >
+                      <Label hFor="lastName" labelClass="font-bold text-gray-400 block mb-2">
                         Last Name
-                      </label>
+                      </Label>
                       <Field
                         name="lastName"
                         type="text"
+                        id="lastName"
                         className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-2 rounded shadow"
                         placeholder="lastName"
                       />
                     </div>
                     <div className="mb-1">
-                      <label
-                        htmlFor="email"
-                        className="font-bold text-gray-400 block mb-2"
-                      >
+                      <Label hFor="email" labelClass="font-bold text-gray-400 block mb-2">
                         Email
-                      </label>
+                      </Label>
                       <Field
                         name="email"
                         type="text"
+                        id="email"
                         className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-2 rounded shadow"
                         placeholder="email"
                       />
                     </div>
 
                     <div className="mb-4 ">
-                      <label
-                        htmlFor="enable"
-                        className="font-bold text-gray-400 block mb-2 "
-                      >
+                      <Label hFor="enable" labelClass="font-bold text-gray-400 block mb-2">
                         State
-                      </label>
+                      </Label>
                       <Field
                         name="enable"
+                        id="enable"
                         component={ Select }
                         items={ STATES }
                         primary25="#4a5568"
@@ -162,18 +155,12 @@ const UpdateUser = (): any => {
                     </div> */}
                   </div>
                   <div className="flex justify-evenly mt-8">
-                    <Button
-                      buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                      buttonType="button"
-                      buttonClick={() => Router.push("/users")}
-                    >
+                    <Button buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                      buttonType="button" buttonClick={() => Router.push("/users")}>
                       <span className="mr-2">Back</span>
                     </Button>
-                    <Button
-                      buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                      buttonType="submit"
-                      buttonClick="none"
-                    >
+                    <Button buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                      buttonType="submit" buttonClick="none">
                       Save
                     </Button>
                   </div>
