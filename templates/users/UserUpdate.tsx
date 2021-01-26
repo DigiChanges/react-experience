@@ -39,7 +39,7 @@ const UpdateUser = (): any => {
     <section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
       <div className="w-full">
         <div className="text-4xl mb-2">
-        <Title titleClass="text-left" titleType="h1">Update User</Title>
+        <Title className="text-left" titleType="h1">Update User</Title>
         </div>
         <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
           {userSelected ? (
@@ -69,7 +69,7 @@ const UpdateUser = (): any => {
                 <Form>
                   <div className="flex flex-col  bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
                     <div className="mb-4">
-                      <Label hFor="firstName" labelClass="font-bold text-gray-400 block mb-2">
+                      <Label htmlFor="firstName" className="font-bold text-gray-400 block mb-2">
                         First Name
                       </Label>
                       <Field
@@ -81,7 +81,7 @@ const UpdateUser = (): any => {
                       />
                     </div>
                     <div className="mb-4">
-                      <Label hFor="lastName" labelClass="font-bold text-gray-400 block mb-2">
+                      <Label htmlFor="lastName" className="font-bold text-gray-400 block mb-2">
                         Last Name
                       </Label>
                       <Field
@@ -93,7 +93,7 @@ const UpdateUser = (): any => {
                       />
                     </div>
                     <div className="mb-1">
-                      <Label hFor="email" labelClass="font-bold text-gray-400 block mb-2">
+                      <Label htmlFor="email" className="font-bold text-gray-400 block mb-2">
                         Email
                       </Label>
                       <Field
@@ -106,7 +106,7 @@ const UpdateUser = (): any => {
                     </div>
 
                     <div className="mb-4 ">
-                      <Label hFor="enable" labelClass="font-bold text-gray-400 block mb-2">
+                      <Label htmlFor="enable" className="font-bold text-gray-400 block mb-2">
                         State
                       </Label>
                       <Field
@@ -155,11 +155,11 @@ const UpdateUser = (): any => {
                     </div> */}
                   </div>
                   <div className="flex justify-evenly mt-8">
-                    <Button buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                    <Button className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
                       buttonType="button" buttonClick={() => Router.push("/users")}>
                       <span className="mr-2">Back</span>
                     </Button>
-                    <Button buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                    <Button className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
                       buttonType="submit" buttonClick="none">
                       Save
                     </Button>

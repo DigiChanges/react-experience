@@ -4,49 +4,37 @@ import Router from "next/router";
 // import IconLockClosed from "../../atoms/IconLockClosed";
 // import IconLockOpen from "../../atoms/IconLockOpen";
 import { useSelector, useDispatch } from 'react-redux'
-import { unselectedUser, selectedUser } from '../../redux/users/actions';
+import { unselectedRole, selectedRole } from '../../redux/roles/actions';
 import Title from "../../atoms/Title";
 import Button from "../../atoms/Button";
 
 
-const UserView = () => {
+const RoleView = () => {
 
   const dispatch = useDispatch()
-  const { userSelected } = useSelector( state => state.Users )
+  const { roleSelected } = useSelector( state => state.Users )
 
   // const roles = ["admin", "tortuga ninja", "user", "power ranger"];
   // const enable = true;
 
-  let unselectUser = true
+  let unselectRole = true
 
-  const navigateToUpdateUser = () => {
-    if (!userSelected) return
-    unselectUser = false
-    Router.push(`/users/update/${userSelected.id}`)
+  const navigateToUpdateRole = () => {
+    if (!roleSelected) return
+    unselectRole = false
+    Router.push(`/roles/update/${roleSelected.id}`)
   }
 
   useEffect(() => {
     //unmount component
     return () => {
-      if (unselectUser) dispatch( unselectedUser() )
+      if (unselectRole) dispatch( unselectedRole() )
     }
   }, [])
 
-  const getRolesView = () => (
-    userSelected.roles && userSelected.roles.length > 0 ? (
-      userSelected.roles.map(role => (
-        <span
-          key={ role.id }
-          className='w-auto flex items-center bg-gray-700 rounded-lg mr-1 mb-1 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey shadow"'
-        >{ role.name }
-        </span>
-      ))
-    ) : <p>No roles</p>
-  )
-
   const getPermissionsView = () => (
-    userSelected.permissions && userSelected.permissions.length > 0 ? (
-      userSelected.permissions.map((permission, i) => (
+    roleSelected.permissions && roleSelected.permissions.length > 0 ? (
+      roleSelected.permissions.map((permission, i) => (
         <span
           key={ i }
           className='w-auto flex items-center bg-gray-700 rounded-lg mr-1 mb-1 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey shadow"'
@@ -58,7 +46,7 @@ const UserView = () => {
 
   return (
     <div className="w-128 flex flex-col justify-center items-center">
-      {userSelected ? (
+      {roleSelected ? (
         <div>
           <div className="z-10 flex justify-center">
             <AvatarImage
@@ -71,8 +59,8 @@ const UserView = () => {
           <div id="profile" className="rounded-lg shadow-2xl bg-gray-800 -m-12">
             <div className="p-4 md:p-12 text-center lg:text-left bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
               <div className="flex justify-center items-center relative">
-                <Title titleType="h1" titleClass="text-3xl font-bold text-white text-center pt-1">
-                { userSelected.firstName }
+                <Title titleType="h1" className="text-3xl font-bold text-white text-center pt-1">
+                { roleSelected.name }
                 </Title>
                 {/* <div className="absolute right-0 pt-1">
                   {enable ? (
@@ -84,31 +72,11 @@ const UserView = () => {
               </div>
               <div className="mx-auto w-auto pt-3 border-b-2 border-gray-600 opacity-25" />
               <p className="pt-4 text-lg text-gray-400 font-bold flex items-center justify-center text-center">
-                Email
+                Slug
               </p>
               <p className="text-white text-lg text-center pt-2">
-                { userSelected.email }
+                { roleSelected.slug }
               </p>
-              <p className="pt-4 pb-4 text-lg text-gray-400 font-bold flex items-center justify-center text-center">
-                Roles
-              </p>
-              <div className="w-full flex h-8 text-white pt-1 pl-1 text-base justify-center">
-                {/* {roles.length > 0 ? (
-                  roles.map((rol, index) => {
-                    return (
-                      <span
-                        key={index}
-                        className='w-auto flex items-center bg-gray-700 rounded-lg mr-1 mb-1 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey shadow"'
-                      >
-                        {rol}
-                      </span>
-                    );
-                  })
-                ) : (
-                  <p>El usuario no tiene rol</p>
-                )} */}
-                { getRolesView() }
-              </div>
               <p className="pt-4 pb-4 text-lg text-gray-400 font-bold flex items-center justify-center text-center">
                 Permissions
               </p>
@@ -131,22 +99,22 @@ const UserView = () => {
               </div>
             </div>
             <div className="inset-x-0.bottom-0 flex justify-around pt-4 pb-4">
-              <Button buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                buttonType="button" buttonClick={() => Router.push("/users")}>
+              <Button className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                buttonType="button" buttonClick={() => Router.push("/roles")}>
                 Back
               </Button>
-              <Button buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                buttonType="button" buttonClick={ navigateToUpdateUser }>
+              <Button className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                buttonType="button" buttonClick={ navigateToUpdateRole }>
                 Edit
               </Button>
             </div>
           </div>
         </div>
       ) : (
-        <p>No user selected</p>
+        <p>No role selected</p>
       )}
     </div>
   );
 };
 
-export default UserView;
+export default RoleView;

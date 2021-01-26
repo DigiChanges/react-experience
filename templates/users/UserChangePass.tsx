@@ -26,7 +26,7 @@ const UserChangePassword = (): any => {
       <section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
         <div className="w-full">
           <div className="text-4xl mb-2">
-            <Title titleType="h1" titleClass="noClass">
+            <Title titleType="h1" className="noClass">
               Change Password
             </Title>
           </div>
@@ -56,7 +56,7 @@ const UserChangePassword = (): any => {
                 <Form>
                   <div className="flex flex-col  bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
                     <div className="mb-4">
-                      <Label  hFor="password" labelClass="font-bold text-grey-darker block mb-2">
+                      <Label htmlFor="password" className="font-bold text-grey-darker block mb-2">
                         New Password
                       </Label>
                       <Field
@@ -67,11 +67,11 @@ const UserChangePassword = (): any => {
                         placeholder="New password"
                       />
                       {errors.password && touched.password ? (
-                        <ErrorForm containerClass="text-red-500 p-2" >{errors.password}</ErrorForm>
+                        <ErrorForm className="text-red-500 p-2" >{errors.password}</ErrorForm>
                       ) : null}
                     </div>
                     <div className="mb-4">
-                      <Label hFor="passwordConfirmation" labelClass="font-bold text-grey-darker block mb-2">
+                      <Label htmlFor="passwordConfirmation" className="font-bold text-grey-darker block mb-2">
                         Confirm New Password
                       </Label>
                       <Field
@@ -82,16 +82,16 @@ const UserChangePassword = (): any => {
                         placeholder="Confirm new password"
                       />
                       {errors.password && touched.password ? (
-                        <ErrorForm containerClass="text-red-500 p-2" >{errors.password}</ErrorForm>
+                        <ErrorForm className="text-red-500 p-2" >{errors.password}</ErrorForm>
                       ) : null}
                     </div>
                   </div>
                   <div className="flex justify-evenly mt-8">
-                    <Button buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                    <Button className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
                       buttonType="button" buttonClick={() => Router.push("/users")}>
                     Back
                     </Button>
-                    <Button buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                    <Button className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
                       buttonType="submit" buttonClick="none">
                       Save
                     </Button>

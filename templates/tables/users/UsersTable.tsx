@@ -70,7 +70,7 @@ const UsersTable = () => {
   return (
     <>
       <div className="px-16 pt-20">
-        <Title titleClass="text-5xl text-gray-500" titleType="h1" >
+        <Title className="text-5xl text-gray-500" titleType="h1" >
         Users
         </Title>
         {usersList && (
@@ -83,6 +83,7 @@ const UsersTable = () => {
               noHeader
               theme="DGDarkTheme"
               customStyles={TableUsersStyle}
+              className="flex-col md:flex-row"
 
               //TODO: REMOVE COMMENTED CODE
 

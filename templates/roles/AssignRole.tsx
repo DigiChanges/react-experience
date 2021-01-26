@@ -1,15 +1,15 @@
 import { Fragment, useEffect } from "react";
 import { Field, Form, Formik } from "formik";
-import ChangeRoleSchema from "../../SchemaValidations/ChangeRoleSchema";
+import AssignRoleSchema from "../../SchemaValidations/AssignRoleSchema";
 import Router from "next/router";
 import { useSelector, useDispatch } from 'react-redux'
-import { changeRole, unselectedRole } from '../../redux/roles/actions'
+import { assignRole, unselectedRole } from '../../redux/roles/actions'
 import Title from "../../atoms/Title"
 import Button from "../../atoms/Button"
 import ErrorForm from "../../atoms/ErrorForm"
 import Label from "../../atoms/Label";
 
-const RoleChange = (): any => {
+const AssignRole = (): any => {
 
   const { roleSelected } = useSelector( state => state.Roles )
   const dispatch = useDispatch()
@@ -26,25 +26,25 @@ const RoleChange = (): any => {
       <section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
         <div className="w-full">
           <div className="text-4xl mb-2">
-            <Title titleType="h1" titleClass="noClass">
+            <Title titleType="h1" className="noClass">
               Change Role
             </Title>
           </div>
           <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg ">
             <Formik
               initialValues={{
-                roleName: "",
-                roleLevel: "",
+                name: "",
+                slug: "",
               }}
-              validationSchema={ ChangeRoleSchema }
+              validationSchema={ AssignRoleSchema }
               onSubmit={async (values) => {
                 if (roleSelected && roleSelected.id) {
-                  const { roleName, roleLevel } = values
+                  const { name, slug } = values
                   dispatch( 
-                    changeRole(
+                    assignRole(
                       roleSelected.id, 
-                      roleName, 
-                      roleLevel
+                      name, 
+                      slug
                     ) 
                   )
                 }
@@ -56,42 +56,42 @@ const RoleChange = (): any => {
                 <Form>
                   <div className="flex flex-col  bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
                     <div className="mb-4">
-                      <Label  hFor="roleName" labelClass="font-bold text-grey-darker block mb-2">
-                        New Role Name
+                      <Label htmlFor="roleName" className="font-bold text-grey-darker block mb-2">
+                        Role Name
                       </Label>
                       <Field
-                        name="roleName"
+                        name="name"
                         type="text"
-                        id="roleName"
+                        id="name"
                         className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
-                        placeholder="New password"
+                        placeholder="Role Name"
                       />
-                      {errors.roleName && touched.roleName ? (
-                        <ErrorForm containerClass="text-red-500 p-2" >{errors.roleName}</ErrorForm>
+                      {errors.name && touched.name ? (
+                        <ErrorForm className="text-red-500 p-2" >{errors.name}</ErrorForm>
                       ) : null}
                     </div>
                     <div className="mb-4">
-                      <Label hFor="roleLevel" labelClass="font-bold text-grey-darker block mb-2">
-                        Role Level
+                      <Label htmlFor="roleLevel" className="font-bold text-grey-darker block mb-2">
+                        Role Slug
                       </Label>
                       <Field
-                        name="roleLevel"
-                        type="number"
-                        id="roleLevel"
+                        name="slug"
+                        type="text"
+                        id="slug"
                         className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
-                        placeholder="Role Level"
+                        placeholder="Role Slug"
                       />
-                      {errors.roleLevel && touched.roleLevel ? (
-                        <ErrorForm containerClass="text-red-500 p-2" >{errors.roleLevel}</ErrorForm>
+                      {errors.slug && touched.slug ? (
+                        <ErrorForm className="text-red-500 p-2" >{errors.slug}</ErrorForm>
                       ) : null}
                     </div>
                   </div>
                   <div className="flex justify-evenly mt-8">
-                    <Button buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                    <Button className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
                       buttonType="button" buttonClick={() => Router.push("/roles")}>
                     Back
                     </Button>
-                    <Button buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                    <Button className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
                       buttonType="submit" buttonClick="none">
                       Save
                     </Button>
@@ -106,4 +106,4 @@ const RoleChange = (): any => {
   );
 };
 
-export default RoleChange;
+export default AssignRole;

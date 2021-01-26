@@ -38,7 +38,7 @@ export const putRole = (id: string, body: {}) => {
   return HttpRequest.request(requestOptions)
 }
 
-export const changeRoles = (id: string, body: {}) => {
+export const assignRoles = (id: string, body: {}) => {
   const requestOptions = {
     url: `${ protocol }://${ hostname }:${ port }/${ editRole.replace(':id', id) }`,
     method: 'PUT',

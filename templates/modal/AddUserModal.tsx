@@ -39,13 +39,13 @@ const AddUserModal = ({ open }: any): any => {
             {({ errors, touched }) => (
               <Form>
                 <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
-                  <Title titleType="h1" titleClass="font-hairline text-5xl text-gray-400 mb-4 text-center" >
+                  <Title titleType="h1" className="font-hairline text-5xl text-gray-400 mb-4 text-center" >
                     Add user
                   </Title>
                   <div className="mb-4">
                     <Label
-                      hFor="firstName"
-                      labelClass="font-bold text-gray-400 block mb-2"
+                      htmlFor="firstName"
+                      className="font-bold text-gray-400 block mb-2"
                     >
                       First Name
                     </Label>
@@ -56,13 +56,13 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter First Name"
                     />
                     {errors.firstName && touched.firstName ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.firstName}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.firstName}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
                     <Label
-                      hFor="lastName"
-                      labelClass="font-bold text-gray-400 block mb-2"
+                      htmlFor="lastName"
+                      className="font-bold text-gray-400 block mb-2"
                     >
                       Last Name
                     </Label>
@@ -74,13 +74,13 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter Last Name"
                     />
                     {errors.lastName && touched.lastName ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.lastName}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.lastName}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
                     <Label
-                      hFor="email"
-                      labelClass="font-bold text-gray-400 block mb-2"
+                      htmlFor="email"
+                      className="font-bold text-gray-400 block mb-2"
                     >
                       Email
                     </Label>
@@ -92,13 +92,13 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter Email"
                     />
                     {errors.email && touched.email ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.email}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.email}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-1">
                     <Label
-                      hFor="password"
-                      labelClass="font-bold text-gray-400 block mb-2"
+                      htmlFor="password"
+                      className="font-bold text-gray-400 block mb-2"
                     >
                       Password
                     </Label>
@@ -110,13 +110,13 @@ const AddUserModal = ({ open }: any): any => {
                       placeholder="Enter Password"
                     />
                     {errors.password && touched.password ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.password}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.password}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-1">
                     <Label
-                      hFor="passwordConfirmation"
-                      labelClass="font-bold text-gray-400 block mb-2"
+                      htmlFor="passwordConfirmation"
+                      className="font-bold text-gray-400 block mb-2"
                     >
                       Confirm Password
                     </Label>
@@ -129,23 +129,23 @@ const AddUserModal = ({ open }: any): any => {
                     />
                     {errors.passwordConfirmation &&
                     touched.passwordConfirmation ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.passwordConfirmation}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.passwordConfirmation}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
                     <Label
-                      hFor="roles"
-                      labelClass="font-bold text-gray-400 block mb-2"
+                      htmlFor="roles"
+                      className="font-bold text-gray-400 block mb-2"
                     >
                       Roles
                     </Label>
                   </div>
                   <div className="mt-10 flex justify-around">
-                    <Button buttonType="button" buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                    <Button buttonType="button" className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
                       buttonClick={closeModal}>
                       Close
                     </Button>
-                    <Button buttonClick="none" buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                    <Button buttonClick="none" className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
                       buttonType="submit">
                       Save
                     </Button>

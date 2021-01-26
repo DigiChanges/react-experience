@@ -32,11 +32,11 @@ const Login = () =>
               <Form>
                 <Image image={"/logo.png"} />
                 <div className="bg-gray-800  rounded-lg border-teal p-8 border-t-12  mb-6 shadow-lg">
-                  <Title titleType="h1" titleClass="font-hairline mb-4 text-center">
+                  <Title titleType="h1" className="font-hairline mb-4 text-center">
                     Login
                   </Title>
                   <div className="mb-4">
-                    <Label hFor='email' labelClass="font-bold text-grey-darker block mb-2">
+                    <Label htmlFor='email' className="font-bold text-grey-darker block mb-2">
                       Email
                     </Label>
                     <Field
@@ -47,12 +47,12 @@ const Login = () =>
                       placeholder="Your Email"
                     />
                     {errors.email && touched.email ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.email}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.email}</ErrorForm>
                     ) : null}
                   </div>
 
                   <div className="mb-1">
-                    <Label hFor='password' labelClass="font-bold text-grey-darker block mb-2">
+                    <Label htmlFor='password' className="font-bold text-grey-darker block mb-2">
                       Password
                     </Label>
                     <Field
@@ -64,7 +64,7 @@ const Login = () =>
                       placeholder="Your Password"
                     />
                     {errors.password && touched.password ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.password}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.password}</ErrorForm>
                     ) : null}
                   </div>
 
@@ -80,7 +80,7 @@ const Login = () =>
                     <Button
                     buttonClick="none"
                     buttonType="submit" 
-                    buttonClass="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                    className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
                     >
                       Login
                     </Button>

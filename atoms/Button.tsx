@@ -1,15 +1,16 @@
 import React from 'react'
 
-const defaultClick = () => {
+
+const Button = ({children, className, buttonClick, buttonType}) => {
+    const defaultClick = () => {
         return true;
-}
-
-const Button = ({children, buttonClass, buttonClick, buttonType}) => (
-
-    <button className={buttonClass} type={buttonType}
+    }
+    return (
+    <button className={className} type={buttonType}
     onClick={buttonClick === "none" ? defaultClick : buttonClick}>
         {children}
     </button>
     )
+}
 
 export default Button

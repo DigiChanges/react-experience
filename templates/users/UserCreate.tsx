@@ -34,7 +34,7 @@ const UserCreate = (): any => {
     <section className="text-gray-500 body-font bg-gray-900 w-128">
       <div className="w-full px-5">
         <div className="text-4xl mb-2 ">
-          <Title titleClass="text-left" titleType="h1">Add User</Title>
+          <Title className="text-left" titleType="h1">Add User</Title>
         </div>
         <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
           <Formik
@@ -67,10 +67,7 @@ const UserCreate = (): any => {
               <Form>
                 <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
                   <div className="mb-4">
-                    <Label
-                      hFor="firstName"
-                      labelClass="font-bold  text-gray-400 block mb-2 "
-                    >
+                    <Label htmlFor="firstName" className="font-bold  text-gray-400 block mb-2">
                       First Name
                     </Label>
                     <Field
@@ -81,14 +78,11 @@ const UserCreate = (): any => {
                       placeholder="Enter First Name"
                     />
                     {errors.firstName && touched.firstName ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.firstName}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.firstName}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
-                    <Label
-                      hFor="lastName"
-                      labelClass="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="lastName" className="font-bold text-gray-400 block mb-2">
                       Last Name
                     </Label>
                     <Field
@@ -99,14 +93,11 @@ const UserCreate = (): any => {
                       placeholder="Enter Last Name"
                     />
                     {errors.lastName && touched.lastName ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.lastName}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.lastName}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
-                    <Label
-                      hFor="email"
-                      labelClass="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="email" className="font-bold text-gray-400 block mb-2">
                       Email
                     </Label>
                     <Field
@@ -117,14 +108,11 @@ const UserCreate = (): any => {
                       placeholder="Enter Email"
                     />
                     {errors.email && touched.email ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.email}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.email}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-1">
-                    <Label
-                      hFor="password"
-                      labelClass="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="password" className="font-bold text-gray-400 block mb-2">
                       Password
                     </Label>
                     <Field
@@ -135,14 +123,11 @@ const UserCreate = (): any => {
                       placeholder="Enter Password"
                     />
                     {errors.password && touched.password ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.password}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.password}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-1">
-                    <Label
-                      hFor="passwordConfirmation"
-                      labelClass="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="passwordConfirmation" className="font-bold text-gray-400 block mb-2">
                       Confirm Password
                     </Label>
                     <Field
@@ -154,15 +139,12 @@ const UserCreate = (): any => {
                     />
                     {errors.passwordConfirmation &&
                     touched.passwordConfirmation ? (
-                      <ErrorForm containerClass="text-red-500 p-2" >{errors.passwordConfirmation}</ErrorForm>
+                      <ErrorForm className="text-red-500 p-2" >{errors.passwordConfirmation}</ErrorForm>
                     ) : null}
                   </div>
 
                   <div className="mb-4">
-                    <Label
-                      hFor="permissions"
-                      labelClass="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="permissions" className="font-bold text-gray-400 block mb-2">
                       Permissions
                     </Label>
                     <Field
@@ -186,10 +168,7 @@ const UserCreate = (): any => {
                   </div>
 
                   <div className="mb-4">
-                    <Label
-                      hFor="roles"
-                      labelClass="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="roles" className="font-bold text-gray-400 block mb-2">
                       Roles
                     </Label>
                     <Field
@@ -212,12 +191,12 @@ const UserCreate = (): any => {
                     />
                   </div>
                   <div className="mt-10 flex justify-around">
-                    <Button buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                    <Button className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
                       buttonType="button" buttonClick={() => Router.push("/users")}>   
                     Close
                     </Button>                 
 
-                    <Button buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                    <Button className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
                       buttonType="submit" buttonClick="none">
                       Save
                     </Button>

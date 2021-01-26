@@ -6,7 +6,7 @@ import { GET_ROLES,
   CREATE_ROLE_SUCCESS,
   UPDATE_ROLE,
   UPDATE_ROLE_SUCCESS,
-  CHANGE_ROLE,
+  ASSIGN_ROLE,
   REMOVE_ROLE,
   REMOVE_ROLE_SUCCESS
  } from './constants';
@@ -37,12 +37,12 @@ export const unselectedRole = (): RolesActions => ({
 })
 
 export const createRole = (
-  id: string,
-  roleName: string, 
-  roleLevel: number
+  name: string, 
+  slug: string,
+  permissions: {},
   ): RolesActions => ({
     type: CREATE_ROLE,
-    payload: { id, roleName, roleLevel }
+    payload: { name, slug, permissions }
   })
 
 export const createRoleSuccess = (roles: {}): RolesActions => ({
@@ -52,12 +52,12 @@ export const createRoleSuccess = (roles: {}): RolesActions => ({
 
 export const updateRole = (
   id: string,
-  roleName: string, 
-  roleLevel: number,
+  name: string, 
+  slug: string,
   enable: boolean
 ): RolesActions => ({
   type: UPDATE_ROLE,
-  payload: { id, roleName, roleLevel, enable }
+  payload: {id, name, slug, enable }
 })
 
 export const updateRoleSuccess = (roles: {}): RolesActions => ({
@@ -65,14 +65,14 @@ export const updateRoleSuccess = (roles: {}): RolesActions => ({
   payload: roles
 })
 
-export const changeRole = (
-  id: string, 
-  roleName: string, 
-  roleLevel: string
+export const assignRole = (
+  id: string,
+  name: string, 
+  slug: string
 ): RolesActions => {
   return {
-    type: CHANGE_ROLE,
-    payload: { id, roleName, roleLevel } 
+    type: ASSIGN_ROLE,
+    payload: {id, name, slug } 
   }
 }
 

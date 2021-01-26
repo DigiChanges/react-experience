@@ -4,14 +4,14 @@ import {
   getAllRoles, 
   postRole, 
   putRole, 
-  changeRoles, 
+  assignRoles, 
   deleteRole  } from '../../services/rolesService';
 import { notificationTypes, notification } from '../../entities/notification';
 import { 
   GET_ROLES,
   CREATE_ROLE,
   UPDATE_ROLE,
-  CHANGE_ROLE,
+  ASSIGN_ROLE,
   REMOVE_ROLE
 } from './constants';
 import { 
@@ -63,12 +63,12 @@ function* getRolesList() {
 function* createNewRole(
   {payload: {
     id, 
-    roleName,
-    roleLevel
+    name,
+    slug
   }}) {
   yield put( startGeneralLoading() )
   try {
-    const newRole = { id, roleName, roleLevel }
+    const newRole = { id, name, slug }
     //create user
     const res = yield call( postRole, newRole )
     const { data } = res
@@ -92,13 +92,13 @@ function* createNewRole(
 
 function* updateRole({ payload: {
   id,
-  roleName,
-  roleLevel,
+  name,
+  slug,
   enable
 }}) {
   yield put( startGeneralLoading() )
   try {
-    const res = yield call( putRole, id, {roleName, roleLevel, enable} )
+    const res = yield call( putRole, id, {name, slug, enable} )
     const { data } = res
     if (!data) return yield put( showErrorNotification('Internal Server Error') )
     yield put( showSuccessNotification('Role Updated!') )
@@ -111,16 +111,16 @@ function* updateRole({ payload: {
   }
 }
 
-function* changeRole({ payload: { 
+function* assignRole({ payload: { 
   id, 
-  roleName,
-  roleLevel
+  name,
+  slug
 }}) {
   yield put( startGeneralLoading() )
   try {
-    const res = yield call( changeRoles, id, { 
-          roleName: roleName, 
-          roleLevel: roleLevel 
+    const res = yield call( assignRoles, id, { 
+          name: name,
+          slug: slug 
         }
       )
     const { data } = res
@@ -182,9 +182,9 @@ export function* watchUpdateRole(): any {
   yield takeEvery(UPDATE_ROLE, updateRole);
 }
 
-export function* watchChangeRoles(): any {
+export function* watchAssignRoles(): any {
   // @ts-ignore
-  yield takeEvery(CHANGE_ROLE, changeRole)
+  yield takeEvery(ASSIGN_ROLE, assignRole)
 }
 
 export function* watchRemoveRole(): any {
@@ -197,7 +197,7 @@ function* rolesSagas(): any {
     fork(watchGetRoles),
     fork(watchCreateRole),
     fork(watchUpdateRole), 
-    fork(watchChangeRoles),
+    fork(watchAssignRoles),
     fork(watchRemoveRole)
   ])
 }

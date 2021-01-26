@@ -30,12 +30,12 @@ const ForgotPassword = (): any => (
               <Form>
                 <Image image={"/logo.png"} />
                 <div className="bg-gray-800 rounded-lg border-teal p-8 border-t-12 mb-6 shadow-lg">
-                  <Title  titleType="h1" titleClass="font-hairline mb-4 text-center">
+                  <Title  titleType="h1" className="font-hairline mb-4 text-center">
                     Forgot Password
                   </Title>
                     
                   <div className="mb-4">
-                    <Label hFor="email" labelClass="font-bold text-grey-darker block mb-2">
+                    <Label htmlFor="email" className="font-bold text-grey-darker block mb-2">
                       Email
                     </Label>
                     <Field
@@ -51,7 +51,7 @@ const ForgotPassword = (): any => (
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <Button buttonClick="none" buttonType="button" buttonClass="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                    <Button buttonClick="none" buttonType="button" className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                       Send
                     </Button>
                       

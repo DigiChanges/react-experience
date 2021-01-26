@@ -1,8 +1,8 @@
 import React from 'react'
 
-const ErrorForm = ({children, containerClass}) => (
+const ErrorForm = ({children, className}) => (
     
-    <div className={containerClass}>
+    <div className={className}>
         {children}
     </div>
 )

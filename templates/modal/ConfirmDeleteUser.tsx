@@ -39,7 +39,7 @@ const ConfirmDelete = ({ open, close }: any): any => {
             <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
               {booleanXquit ? (
                 <div className="text-right ">
-                  <Button buttonClick={closeModal} buttonClass="text-lg" buttonType="button">
+                  <Button buttonClick={closeModal} className="text-lg" buttonType="button">
                     x
                   </Button>
                 </div>
@@ -70,12 +70,12 @@ const ConfirmDelete = ({ open, close }: any): any => {
               ) : <p>No user selected</p>}
 
               <div className="mt-10 flex justify-around ">
-                <Button buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                <Button className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
                   buttonClick={closeModal} buttonType="button">
                   <span className="mr-2">Close</span>
                 </Button>
 
-                <Button buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                <Button className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
                   buttonType="button" buttonClick={ onHandleDeleteUser }> 
                   Delete
                 </Button>

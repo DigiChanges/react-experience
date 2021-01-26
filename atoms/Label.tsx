@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Label = ({children, hFor, labelClass}) => (
-        <label htmlFor={hFor} className={labelClass}>
+const Label = ({children, htmlFor, className}) => (
+        <label htmlFor={htmlFor} className={className}>
            {children}
         </label>
     )
