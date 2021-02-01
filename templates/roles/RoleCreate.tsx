@@ -29,6 +29,14 @@ const RoleCreate = (): any => {
       ? permissions.map((label, value) => ({ label, value }))
       : []
   )
+  
+  const formatPerms = (perms) => (
+    perms && perms.length > 0
+    ? perms.map(label => (
+      label.label
+    ))
+    : []
+  )
 
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-128">
@@ -36,21 +44,22 @@ const RoleCreate = (): any => {
         <div className="text-4xl mb-2 ">
           <Title className="text-left" titleType="h1">Create Role</Title>
         </div>
-        <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
+        <div className="bg-gray-800 p-6 border-teal border-t-12  mb-6 rounded-lg shadow-lg">
           <Formik
             initialValues={{
               name: "",
               slug: "",
-              permissions: {},
+              permissions: []
             }}
             validationSchema={RoleSchema}
             onSubmit={async (values) => {
               const { name, slug, permissions } = values
+              const newPerms = formatPerms(permissions)
               dispatch( 
                 createRole(
                   name,
                   slug,
-                  permissions
+                  newPerms
                 ) 
               )
             }}
@@ -75,7 +84,7 @@ const RoleCreate = (): any => {
                   </div>
                   <div className="mb-4">
                     <Label htmlFor="lastName" className="font-bold text-gray-400 block mb-2">
-                      Last Name
+                      Slug
                     </Label>
                     <Field
                       name="slug"

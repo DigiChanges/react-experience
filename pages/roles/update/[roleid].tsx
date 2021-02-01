@@ -1,10 +1,10 @@
 import React  from "react";
-import UserUpdate from "../../../templates/users/UserUpdate";
+import RoleUpdate from "../../../templates/roles/RoleUpdate";
 
 const IndexPage = (): any =>
 {
     return (
-        <UserUpdate />
+        <RoleUpdate />
     )
 };
 

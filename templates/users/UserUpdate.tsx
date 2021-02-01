@@ -12,6 +12,8 @@ const UpdateUser = (): any => {
 
   const dispatch = useDispatch()
   const { userSelected } = useSelector( state => state.Users )
+  const { rolesList } = useSelector( state => state.Roles )
+  const { permissions } = useSelector( store => store.Auth )
 
   useEffect(() => {
     //unmount component
@@ -24,17 +26,42 @@ const UpdateUser = (): any => {
     { label: 'Enabled', value: 1 },
     { label: 'Disabled', value: 0 },
   ]
-
   const getUserInitialState = () => ( userSelected.enable ? STATES[0] : STATES[1] )
-
-  const getUserInitialRoles = () => {
-    const roles = []
-    userSelected.roles.map(role => {
-      roles.push({ label: role.name })
-    })
-    return roles
-  }
-
+  
+  const getUserInitialRoles = () => (
+    userSelected.roles && userSelected.roles.length > 0
+      ? userSelected.roles.map((label, value) => ({ label: label.name, value, id:label.id }))
+      : []
+  )
+  const getUserInitialPerms = () => (
+    userSelected.permissions && userSelected.permissions.length > 0
+      ? userSelected.permissions.map((label, value) => ({ label, value }))
+      : []
+  )
+  const getPermissionsList = () => (
+    permissions && permissions.length > 0
+      ? permissions.map((label, value) => ({ label, value }))
+      : []
+  )
+  const getRolesList = () => (
+    rolesList && rolesList.length > 0
+      ? rolesList.map((label, value) => ({ label: label.name, value, id:label.id, }))
+      : []
+  )
+  const formatPerms = (perms) => (
+    perms && perms.length > 0
+    ? perms.map(label => (
+      label.label
+    ))
+    : []
+  )
+  const formatRoles = (role) => (
+    role && role.length > 0
+    ? role.map(label => (
+      label.id
+    ))
+    : []
+  )
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
       <div className="w-full">
@@ -48,18 +75,23 @@ const UpdateUser = (): any => {
                 firstName: userSelected.firstName,
                 lastName: userSelected.lastName,
                 email: userSelected.email,
-                enable: getUserInitialState(),
                 roles: getUserInitialRoles(),
+                permissions: getUserInitialPerms(),
+                enable: getUserInitialState(),
               }}
               onSubmit={async (values) => {
                 //TODO enable
-                const { firstName, lastName, email, enable } = values
+                const { firstName, lastName, email, permissions, roles, enable } = values
+                const newPerms = formatPerms(permissions)
+                const newRoles = formatRoles(roles)
                 dispatch( 
                   updateUser(
                     userSelected.id,
                     firstName,
                     lastName,
                     email,
+                    newPerms,
+                    newRoles,
                     !!enable.value
                   ) 
                 )
@@ -127,32 +159,51 @@ const UpdateUser = (): any => {
                         dangerLight="#1a202c"
                       />
                     </div>
-                    
-                    {/* <div className="mb-4 ">
-                      <label
-                        htmlFor="roles"
-                        className="font-bold text-gray-400 block mb-2 "
-                      >
-                        Roles
-                      </label>
-                      <Field
-                        name="roles"
-                        component={Select}
-                        items={rolesPrueba}
-                        isMulti
-                        primary25="#4a5568"
-                        primary="#667eea"
-                        neutral0="#2d3748"
-                        neutral20="#4a5568"
-                        neutral50="#a0aec0"
-                        neutral80="#fff"
-                        neutral10="#4a5568"
-                        neutral30="#667eea"
-                        primary50="#718096"
-                        danger="#a0aec0"
-                        dangerLight="#1a202c"
-                      />
-                    </div> */}
+                    <div className="mb-4">
+                    <Label htmlFor="roles" className="font-bold text-gray-400 block mb-2">
+                      Roles
+                    </Label>
+                    <Field
+                      name="roles"
+                      id="roles"
+                      component={Select}
+                      items={ getRolesList() }
+                      primary25="#4a5568"
+                      primary="#667eea"
+                      neutral0="#2d3748"
+                      neutral20="#4a5568"
+                      neutral50="#a0aec0"
+                      neutral80="#fff"
+                      neutral10="#4a5568"
+                      neutral30="#667eea"
+                      primary50="#718096"
+                      danger="#a0aec0"
+                      dangerLight="#1a202c"
+                    />
+                  </div>
+                    <div className="mb-4">
+                    <Label htmlFor="permissions" className="font-bold text-gray-400 block mb-2">
+                      Permissions
+                    </Label>
+                    <Field
+                      name="permissions"
+                      id="permissions"
+                      component={Select}
+                      items={ getPermissionsList() }
+                      isMulti
+                      primary25="#4a5568"
+                      primary="#667eea"
+                      neutral0="#2d3748"
+                      neutral20="#4a5568"
+                      neutral50="#a0aec0"
+                      neutral80="#fff"
+                      neutral10="#4a5568"
+                      neutral30="#667eea"
+                      primary50="#718096"
+                      danger="#a0aec0"
+                      dangerLight="#1a202c"
+                    />
+                  </div>
                   </div>
                   <div className="flex justify-evenly mt-8">
                     <Button className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"

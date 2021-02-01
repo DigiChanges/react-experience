@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import UsersTable from "../../templates/tables/users/UsersTable";
-import ConfirmDeleteUser from "../../templates/modal/ConfirmDeleteUser";
-import AddUserModal from "../../templates/modal/AddUserModal";
+import RolesTable from "../../templates/tables/roles/RolesTable";
+import ConfirmDeleteRole from "../../templates/modal/ConfirmDeleteRole";
+import AddRoleModal from "../../templates/modal/AddRoleModal";
 import IconPlus from "../../atoms/IconPlus";
 import Link from "next/link";
 
-const UsersPage = (): any => {
+const RolesPage = (): any => {
     
   const [booleanConfirmDelete, setBooleanConfirmDelete] = useState(false);
 
@@ -15,14 +15,14 @@ const UsersPage = (): any => {
 
   return (
     <>
-      <div className="container mx-auto w-full h-full flex flex-col justify-between">
-        <UsersTable />
-        <AddUserModal />
+      <div className="container mx-auto w-auto h-auto md:w-full md:h-screen flex flex-col justify-between">
+        <RolesTable />
+        <AddRoleModal />
         {booleanConfirmDelete ? (
-          <ConfirmDeleteUser close={openConfirmDelete} />
+          <ConfirmDeleteRole close={openConfirmDelete} />
         ) : null}
-        <div className="flex justify-end items-end pr-8 mb-8">
-          <Link href="/users/create">
+        <div className="flex justify-center items-center md:justify-end md:items-end pr-8 mb-8">
+          <Link href="/roles/create">
             <button className="p-0 w-16 h-16 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
               <IconPlus />
             </button>
@@ -33,4 +33,4 @@ const UsersPage = (): any => {
   );
 };
 
-export default UsersPage;
+export default RolesPage;

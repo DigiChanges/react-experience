@@ -46,8 +46,7 @@ export const config = {
         getAll: `${BACKEND_BASE_PATH}/roles`,
         create: `${BACKEND_BASE_PATH}/roles`,
         update: `${BACKEND_BASE_PATH}/roles/:id`,
-        remove: `${BACKEND_BASE_PATH}/roles/:id`,
-        assignRole: `${BACKEND_BASE_PATH}/roles/assignRole/:id`
+        remove: `${BACKEND_BASE_PATH}/roles/:id`
       }
     }
   }

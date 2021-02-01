@@ -12,6 +12,7 @@ const RoleUpdate = (): any => {
 
   const dispatch = useDispatch()
   const { roleSelected } = useSelector( state => state.Roles )
+  const { permissions } = useSelector( store => store.Auth )
 
   useEffect(() => {
     //unmount component
@@ -27,11 +28,28 @@ const RoleUpdate = (): any => {
 
   const getRoleInitialState = () => ( roleSelected.enable ? STATES[0] : STATES[1] )
 
+  const getRoleInitialPerms = () => (
+    roleSelected.permissions && roleSelected.permissions.length > 0
+      ? roleSelected.permissions.map((label, value) => ({ label, value }))
+      : []
+  )
+  const getPermissionsList = () => (
+    permissions && permissions.length > 0
+      ? permissions.map((label, value) => ({ label, value }))
+      : []
+  )
+  const formatPerms = (perms) => (
+    perms && perms.length > 0
+    ? perms.map(label => (
+      label.label
+    ))
+    : []
+  )
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
       <div className="w-full">
         <div className="text-4xl mb-2">
-        <Title titleClass="text-left" titleType="h1">Update Role</Title>
+        <Title className="text-left" titleType="h1">Update Role</Title>
         </div>
         <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
           {roleSelected ? (
@@ -39,16 +57,19 @@ const RoleUpdate = (): any => {
               initialValues={{
                 name: roleSelected.name,
                 slug: roleSelected.slug,
+                permissions: getRoleInitialPerms(),
                 enable: getRoleInitialState(),
               }}
               onSubmit={async (values) => {
                 //TODO enable
-                const { name, slug, enable } = values
+                const { name, slug, permissions, enable } = values
+                const newPerms = formatPerms(permissions)
                 dispatch( 
                   updateRole(
                     roleSelected.id,
                     name,
                     slug,
+                    newPerms,
                     !!enable.value,
                   ) 
                 )
@@ -58,7 +79,7 @@ const RoleUpdate = (): any => {
                 <Form>
                   <div className="flex flex-col  bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
                     <div className="mb-4">
-                      <Label hFor="name" labelClass="font-bold text-gray-400 block mb-2">
+                      <Label htmlFor="name" className="font-bold text-gray-400 block mb-2">
                         Name
                       </Label>
                       <Field
@@ -70,7 +91,7 @@ const RoleUpdate = (): any => {
                       />
                     </div>
                     <div className="mb-1">
-                      <Label hFor="slug" labelClass="font-bold text-gray-400 block mb-2">
+                      <Label htmlFor="slug" className="font-bold text-gray-400 block mb-2">
                         Slug
                       </Label>
                       <Field
@@ -83,7 +104,7 @@ const RoleUpdate = (): any => {
                     </div>
 
                     <div className="mb-4 ">
-                      <Label hFor="enable" labelClass="font-bold text-gray-400 block mb-2">
+                      <Label htmlFor="enable" className="font-bold text-gray-400 block mb-2">
                         State
                       </Label>
                       <Field
@@ -104,18 +125,14 @@ const RoleUpdate = (): any => {
                         dangerLight="#1a202c"
                       />
                     </div>
-                    
-                    {/* <div className="mb-4 ">
-                      <label
-                        htmlFor="roles"
-                        className="font-bold text-gray-400 block mb-2 "
-                      >
-                        Roles
-                      </label>
+                     <div className="mb-4 ">
+                      <Label htmlFor="permissions" className="font-bold text-gray-400 block mb-2">
+                        Permissions
+                      </Label>
                       <Field
-                        name="roles"
+                        name="permissions"
                         component={Select}
-                        items={rolesPrueba}
+                        items={getPermissionsList()}
                         isMulti
                         primary25="#4a5568"
                         primary="#667eea"
@@ -129,14 +146,14 @@ const RoleUpdate = (): any => {
                         danger="#a0aec0"
                         dangerLight="#1a202c"
                       />
-                    </div> */}
+                    </div>
                   </div>
                   <div className="flex justify-evenly mt-8">
-                    <Button buttonClass="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                    <Button className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
                       buttonType="button" buttonClick={() => Router.push("/roles")}>
                       <span className="mr-2">Back</span>
                     </Button>
-                    <Button buttonClass="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                    <Button className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
                       buttonType="submit" buttonClick="none">
                       Save
                     </Button>

@@ -7,7 +7,6 @@ const {
   getAll, 
   create, 
   update, 
-  editRole, 
   remove  } = config.apiGateway.routes.roles
 
 export const getAllRoles = () => {
@@ -31,16 +30,6 @@ export const postRole = (body: {}) => {
 export const putRole = (id: string, body: {}) => {
   const requestOptions = {
     url: `${ protocol }://${ hostname }:${ port }/${ update.replace(':id', id) }`,
-    method: 'PUT',
-    body,
-    headers: getHeader()
-  }
-  return HttpRequest.request(requestOptions)
-}
-
-export const assignRoles = (id: string, body: {}) => {
-  const requestOptions = {
-    url: `${ protocol }://${ hostname }:${ port }/${ editRole.replace(':id', id) }`,
     method: 'PUT',
     body,
     headers: getHeader()

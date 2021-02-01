@@ -91,13 +91,21 @@ function* updateUser({ payload: {
   firstName,
   lastName,
   email,
+  permissions,
+  roles,
   enable
 }}) {
   yield put( startGeneralLoading() )
   try {
-    const res = yield call( putUser, id, {firstName, lastName, email, enable} )
+    const res = yield call( putUser, id, {firstName, lastName, email, permissions, roles, enable} )
     const { data } = res
     if (!data) return yield put( showErrorNotification('Internal Server Error') )
+    //assign roles
+    if (roles && roles.length > 0) {
+      const { id } = data
+      const rolesRes = yield call( assignUserRole, id, { rolesId: roles } )
+      if (!rolesRes) return yield put( showErrorNotification('Internal Server Error') )
+    }
     yield put( showSuccessNotification('User Updated!') )
     yield put( updateUserSuccess(data) )
     Router.push('/users')

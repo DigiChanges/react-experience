@@ -9,7 +9,7 @@ import { RolesActions } from './actions';
 
 const INIT_STATE = {
   rolesList: null,
-  roleSelected: null
+  roleSelected: null,
 }
 
 type State = {
@@ -54,7 +54,7 @@ const Roles = (state: State = INIT_STATE, action: RolesActions) => {
       return { ...state, rolesList: action.payload }
 
     case SELECTED_ROLE:
-      return { ...state, userSelected: getSelectedRole(action.payload, state.rolesList) }
+      return { ...state, roleSelected: getSelectedRole(action.payload, state.rolesList) }
     
     case UNSELECTED_ROLE:
       return { ...state, roleSelected: INIT_STATE.roleSelected }

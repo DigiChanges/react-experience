@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 
 const IconHome =  dynamic(() => import ('../../atoms/IconHome'));
 const IconDashboard = dynamic(() => import ('../../atoms/IconDashboard'));
+const IconRoles = dynamic(() => import ('../../atoms/IconRoles'));
 const IconLogout = dynamic(() => import ('../../atoms/IconLogout'));
 
 export const dashRoutes = [
@@ -16,6 +17,12 @@ export const dashRoutes = [
 		name: 'Users',
 		icon: IconDashboard,
 		permission: 'usersList'
+	},
+	{
+		path: '/roles',
+		name: 'Roles',
+		icon: IconRoles,
+		permission: 'roleList'
 	},
   {
     //TODO paths with children

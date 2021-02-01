@@ -1,10 +1,10 @@
 import React  from "react";
-import UserCreate from "../../../templates/users/UserCreate";
+import RoleCreate from "../../../templates/roles/RoleCreate";
 
 const IndexPage = (): any =>
 {
     return (
-        <UserCreate />
+        <RoleCreate />
     )
 };
 

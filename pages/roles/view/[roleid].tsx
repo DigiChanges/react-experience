@@ -1,10 +1,10 @@
 import React  from "react";
-import UserView from "../../../templates/users/UserView";
+import RoleView from "../../../templates/roles/RoleView";
 
 const IndexPage = (): any =>
 {
     return (
-        <UserView />
+        <RoleView />
     )
 };
 

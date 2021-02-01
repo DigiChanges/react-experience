@@ -3,15 +3,13 @@ import Router from 'next/router'
 import { 
   getAllRoles, 
   postRole, 
-  putRole, 
-  assignRoles, 
+  putRole,  
   deleteRole  } from '../../services/rolesService';
 import { notificationTypes, notification } from '../../entities/notification';
 import { 
   GET_ROLES,
   CREATE_ROLE,
   UPDATE_ROLE,
-  ASSIGN_ROLE,
   REMOVE_ROLE
 } from './constants';
 import { 
@@ -64,11 +62,12 @@ function* createNewRole(
   {payload: {
     id, 
     name,
-    slug
+    slug,
+    permissions
   }}) {
   yield put( startGeneralLoading() )
   try {
-    const newRole = { id, name, slug }
+    const newRole = { id, name, slug, permissions }
     //create user
     const res = yield call( postRole, newRole )
     const { data } = res
@@ -94,11 +93,12 @@ function* updateRole({ payload: {
   id,
   name,
   slug,
+  permissions,
   enable
 }}) {
   yield put( startGeneralLoading() )
   try {
-    const res = yield call( putRole, id, {name, slug, enable} )
+    const res = yield call( putRole, id, {name, slug, permissions, enable} )
     const { data } = res
     if (!data) return yield put( showErrorNotification('Internal Server Error') )
     yield put( showSuccessNotification('Role Updated!') )
@@ -111,28 +111,6 @@ function* updateRole({ payload: {
   }
 }
 
-function* assignRole({ payload: { 
-  id, 
-  name,
-  slug
-}}) {
-  yield put( startGeneralLoading() )
-  try {
-    const res = yield call( assignRoles, id, { 
-          name: name,
-          slug: slug 
-        }
-      )
-    const { data } = res
-    if (!data) return yield put( showErrorNotification('Internal Server Error') )
-    yield put( showSuccessNotification('Role Changed!') )
-    Router.push('/roles')
-  } catch (e) {
-    yield put( showErrorNotification(e.message) )
-  } finally {
-    yield put( stopGeneralLoading() )
-  }
-}
 
 function* removeRole({ payload: id }) {
   yield put( startGeneralLoading() )
@@ -182,11 +160,6 @@ export function* watchUpdateRole(): any {
   yield takeEvery(UPDATE_ROLE, updateRole);
 }
 
-export function* watchAssignRoles(): any {
-  // @ts-ignore
-  yield takeEvery(ASSIGN_ROLE, assignRole)
-}
-
 export function* watchRemoveRole(): any {
   // @ts-ignore
   yield takeEvery(REMOVE_ROLE, removeRole)
@@ -197,7 +170,6 @@ function* rolesSagas(): any {
     fork(watchGetRoles),
     fork(watchCreateRole),
     fork(watchUpdateRole), 
-    fork(watchAssignRoles),
     fork(watchRemoveRole)
   ])
 }

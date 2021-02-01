@@ -43,8 +43,8 @@ export const createUser = (
   email: string,
   password: string,
   passwordConfirmation: string,
-  permissions: {},
-  roles: {}
+  permissions: [],
+  roles: []
   ): UserActions => ({
     type: CREATE_USER,
     payload: { firstName, lastName, email, password, passwordConfirmation, permissions, roles }
@@ -60,10 +60,12 @@ export const updateUser = (
   firstName: string, 
   lastName: string,
   email: string,
+  permissions: [],
+  roles: [],
   enable: boolean
 ): UserActions => ({
   type: UPDATE_USER,
-  payload: { id, firstName, lastName, email, enable }
+  payload: { id, firstName, lastName, email, permissions, roles, enable }
 })
 
 export const updateUserSuccess = (user: {}): UserActions => ({

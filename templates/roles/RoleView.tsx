@@ -12,7 +12,7 @@ import Button from "../../atoms/Button";
 const RoleView = () => {
 
   const dispatch = useDispatch()
-  const { roleSelected } = useSelector( state => state.Users )
+  const { roleSelected } = useSelector( state => state.Roles )
 
   // const roles = ["admin", "tortuga ninja", "user", "power ranger"];
   // const enable = true;
@@ -45,7 +45,7 @@ const RoleView = () => {
   )
 
   return (
-    <div className="w-128 flex flex-col justify-center items-center">
+    <div className="w-full h-auto md:w-128 flex flex-col justify-center items-center">
       {roleSelected ? (
         <div>
           <div className="z-10 flex justify-center">
@@ -80,7 +80,7 @@ const RoleView = () => {
               <p className="pt-4 pb-4 text-lg text-gray-400 font-bold flex items-center justify-center text-center">
                 Permissions
               </p>
-              <div className="w-full flex h-8 text-white pt-1 pl-1 text-base justify-center">
+              <div className="w-full h-auto flex flex-col md:flex-row h-8 text-white pt-1 pl-1 text-base justify-center">
                 {/* {roles.length > 0 ? (
                   roles.map((rol, index) => {
                     return (
