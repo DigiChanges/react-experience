@@ -15,7 +15,9 @@ export default function Sidebar({className}) {
           key={ key } 
           name={ prop.name } 
           path={ prop.path }
-          icon={ prop.icon }
+          icon={ prop.icon ? prop.icon : false }
+          isMulti={ prop.isMulti ? prop.isMulti : false }
+          levels={ prop.levels ? prop.levels : false }
         />
       )
     })
