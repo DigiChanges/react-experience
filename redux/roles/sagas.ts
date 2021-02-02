@@ -29,6 +29,7 @@ function* getRolesList() {
   try {
     const res = yield call( getAllRoles )
     const { data } = res
+    console.log('data');
     if (!data) {
       return yield put( 
         showGeneralNotification(

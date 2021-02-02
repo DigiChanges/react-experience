@@ -11,14 +11,13 @@ import Title from '../../../atoms/Title';
 const UsersTable = () => {
 
   const dispatch = useDispatch()
-  const { usersList } = useSelector( state => state.Users )
+  const { usersList } = useSelector( state => state.Users );
   // const { permissions } = useSelector( state => state.Auth )
   // const { rolesList } = useSelector( state => state.Roles )
 
   useEffect(() => {
-    dispatch( getUsers() )
-    dispatch( getRoles() )
-    dispatch( getPermissions() )
+    dispatch( getUsers() );
+    dispatch( getPermissions() );
   }, []);
 
   //TODO REMOVE COMMENTED CODE

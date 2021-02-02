@@ -3,32 +3,38 @@ import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Select from "../../atoms/Select";
 import Router from "next/router";
-import { useDispatch, useSelector } from 'react-redux'
-import { createUser } from '../../redux/users/actions'
-import Title from "../../atoms/Title"
-import ErrorForm from "../../atoms/ErrorForm"
+import { useDispatch, useSelector } from 'react-redux';
+import { createUser } from '../../redux/users/actions';
+import { getRoles } from '../../redux/roles/actions';
+import Title from "../../atoms/Title";
+import ErrorForm from "../../atoms/ErrorForm";
 import Button from "../../atoms/Button";
 import Label from "../../atoms/Label";
 
 const UserCreate = (): any => {
 
   const dispatch = useDispatch()
-  const { permissions } = useSelector( store => store.Auth )
-  const { rolesList } = useSelector( store => store.Roles )
+  const { permissions } = useSelector( store => store.Auth );
+  const { rolesList } = useSelector( store => store.Roles );
+
+  useEffect(() => {
+    dispatch( getRoles() );
+  }, []);
+
 
   //TODO child key issue
   const getRolesList = () => (
     rolesList && rolesList.length > 0
       ? rolesList.map(item => ({ label: item.name, id: item.id }))
       : []
-  )
+  );
 
   //TODO child key issue
   const getPermissionsList = () => (
     permissions && permissions.length > 0
       ? permissions.map((label, value) => ({ label, value }))
       : []
-  )
+  );
 
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-128">
@@ -57,7 +63,7 @@ const UserCreate = (): any => {
                   email, 
                   password, 
                   passwordConfirmation,
-                  permissions.map(permission => permission.label),
+                  permissions.map((permission: any) => permission.label),
                   roles.map(role => role.id)
                 ) 
               )

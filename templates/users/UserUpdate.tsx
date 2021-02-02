@@ -1,26 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Field, Formik, Form } from "formik";
 import Select from "../../atoms/Select";
 import Router from "next/router";
-import { useDispatch, useSelector } from 'react-redux'
-import { updateUser, unselectedUser } from '../../redux/users/actions';
+import { useDispatch } from 'react-redux'
+import { updateUser } from '../../redux/users/actions';
 import Title from "../../atoms/Title"
 import Button from "../../atoms/Button";
 import Label from "../../atoms/Label";
 
-const UpdateUser = (): any => {
+const UpdateUser = ({userSelected, rolesList, permissions}): any => {
 
   const dispatch = useDispatch()
-  const { userSelected } = useSelector( state => state.Users )
-  const { rolesList } = useSelector( state => state.Roles )
-  const { permissions } = useSelector( store => store.Auth )
-
-  useEffect(() => {
-    //unmount component
-    return () => {
-      dispatch( unselectedUser() )
-    }
-  }, [])
 
   const STATES = [
     { label: 'Enabled', value: 1 },
@@ -32,36 +22,36 @@ const UpdateUser = (): any => {
     userSelected.roles && userSelected.roles.length > 0
       ? userSelected.roles.map((label, value) => ({ label: label.name, value, id:label.id }))
       : []
-  )
+  );
   const getUserInitialPerms = () => (
     userSelected.permissions && userSelected.permissions.length > 0
       ? userSelected.permissions.map((label, value) => ({ label, value }))
       : []
-  )
+  );
   const getPermissionsList = () => (
     permissions && permissions.length > 0
       ? permissions.map((label, value) => ({ label, value }))
       : []
-  )
+  );
   const getRolesList = () => (
     rolesList && rolesList.length > 0
       ? rolesList.map((label, value) => ({ label: label.name, value, id:label.id, }))
       : []
-  )
+  );
   const formatPerms = (perms) => (
     perms && perms.length > 0
     ? perms.map(label => (
       label.label
     ))
     : []
-  )
+  );
   const formatRoles = (role) => (
     role && role.length > 0
     ? role.map(label => (
       label.id
     ))
     : []
-  )
+  );
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
       <div className="w-full">
@@ -83,7 +73,9 @@ const UpdateUser = (): any => {
                 //TODO enable
                 const { firstName, lastName, email, permissions, roles, enable } = values
                 const newPerms = formatPerms(permissions)
+                console.log(roles);
                 const newRoles = formatRoles(roles)
+                console.log(newRoles);
                 dispatch( 
                   updateUser(
                     userSelected.id,
@@ -166,6 +158,7 @@ const UpdateUser = (): any => {
                     <Field
                       name="roles"
                       id="roles"
+                      isMulti
                       component={Select}
                       items={ getRolesList() }
                       primary25="#4a5568"
