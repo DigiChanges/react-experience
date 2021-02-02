@@ -8,7 +8,7 @@ const TableUsersStyle = {
   cells: {
     style: {
       fontSize: "0.8rem",
-      justifyContent: "center",
+      justifyContent: "center"
     },
   },
 };

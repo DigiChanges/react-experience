@@ -43,7 +43,10 @@ export const config = {
         assignRole: `${BACKEND_BASE_PATH}/users/assignRole/:id`
       },
       roles: {
-        getAll: `${BACKEND_BASE_PATH}/roles`
+        getAll: `${BACKEND_BASE_PATH}/roles`,
+        create: `${BACKEND_BASE_PATH}/roles`,
+        update: `${BACKEND_BASE_PATH}/roles/:id`,
+        remove: `${BACKEND_BASE_PATH}/roles/:id`
       }
     }
   }

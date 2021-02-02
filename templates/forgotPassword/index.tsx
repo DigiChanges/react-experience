@@ -4,6 +4,9 @@ import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Router from "next/router";
 import loginData from "../../data/logindata.json";
 import Image from "../../atoms/Image";
+import Title from "../../atoms/Title"
+import Button from "../../atoms/Button";
+import Label from "../../atoms/Label";
 
 const ForgotPassword = (): any => (
   <Fragment>
@@ -27,16 +30,18 @@ const ForgotPassword = (): any => (
               <Form>
                 <Image image={"/logo.png"} />
                 <div className="bg-gray-800 rounded-lg border-teal p-8 border-t-12 mb-6 shadow-lg">
-                  <h1 className="font-hairline mb-4 text-center">
+                  <Title  titleType="h1" className="font-hairline mb-4 text-center">
                     Forgot Password
-                  </h1>
+                  </Title>
+                    
                   <div className="mb-4">
-                    <label htmlFor='email' className="font-bold text-grey-darker block mb-2">
+                    <Label htmlFor="email" className="font-bold text-grey-darker block mb-2">
                       Email
-                    </label>
+                    </Label>
                     <Field
                       name="email"
                       type="text"
+                      id="email"
                       className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-2 rounded shadow"
                       placeholder="Your Email"
                     />
@@ -46,9 +51,10 @@ const ForgotPassword = (): any => (
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                    <Button buttonClick="none" buttonType="button" className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                       Send
-                    </button>
+                    </Button>
+                      
                   </div>
                 </div>
                 <div className="text-center">

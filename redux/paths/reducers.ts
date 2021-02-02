@@ -7,13 +7,13 @@ const INIT_STATE = {
 
 type State = { startPathname: string }
 
-const Paths = (state: State = INIT_STATE, action: PathActions) => {
-  switch( action.type ) {
+const Paths = (state: State = INIT_STATE, action: PathActions) =>
+{
+  switch( action.type )
+  {
     case START_PATHNAME: 
-      return {
-        ...state,
-        startPathname: action.payload
-      }
+      return {...state, startPathname: action.payload}
+
     default: return { ...state }
   }
 }

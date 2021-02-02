@@ -1,5 +1,1 @@
-export const apiResult = (
-  data: object | [],
-) => ({
-  data
-})
+export const apiResult = ( data: any | []) => ({ data });

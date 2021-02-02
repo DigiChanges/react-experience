@@ -4,7 +4,7 @@ import usersSaga from './users/saga';
 import rolesSagas from './roles/sagas';
 
 //TODO - CHECK THAT getState
-export default function* rootSaga(getState: any): any {
+export default function* rootSaga(): any {
   yield all([
     authSaga(), 
     usersSaga(),

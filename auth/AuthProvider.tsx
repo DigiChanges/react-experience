@@ -12,7 +12,7 @@ const AuthProvider = ({ children, ...props }) => {
   const dispatch = useDispatch()
 
   const { user } = props.allCookies
-  const isAuth = user && user.enable && user.id 
+  const isAuth = user && user.enable && user.id
   const router = useRouter()
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const AuthProvider = ({ children, ...props }) => {
       dispatch( setStartPathname(router.pathname) )
       router.replace('/login')
     }
-  }, [])
+  }, []) 
 
   const renderChildren = () => {
     if (isAuth) {

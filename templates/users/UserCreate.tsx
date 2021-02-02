@@ -3,34 +3,43 @@ import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Select from "../../atoms/Select";
 import Router from "next/router";
-import { useDispatch, useSelector } from 'react-redux'
-import { createUser } from '../../redux/users/actions'
+import { useDispatch, useSelector } from 'react-redux';
+import { createUser } from '../../redux/users/actions';
+import { getRoles } from '../../redux/roles/actions';
+import Title from "../../atoms/Title";
+import ErrorForm from "../../atoms/ErrorForm";
+import Button from "../../atoms/Button";
+import Label from "../../atoms/Label";
 
-const UserCreate = (): any => {
-
+const UserCreate = (): any =>
+{
   const dispatch = useDispatch()
-  const { permissions } = useSelector( store => store.Auth )
-  const { rolesList } = useSelector( store => store.Roles )
+  const { permissions } = useSelector( store => store.Auth );
+  const { rolesList } = useSelector( store => store.Roles );
+
+  useEffect(() => {
+    dispatch( getRoles() );
+  }, []);
 
   //TODO child key issue
   const getRolesList = () => (
     rolesList && rolesList.length > 0
-      ? rolesList.map(item => ({ label: item.name, id: item.id }))
+      ? rolesList.map(role => ({ label: role.name, id: role.id }))
       : []
-  )
+  );
 
   //TODO child key issue
   const getPermissionsList = () => (
     permissions && permissions.length > 0
       ? permissions.map((label, value) => ({ label, value }))
       : []
-  )
+  );
 
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-128">
       <div className="w-full px-5">
         <div className="text-4xl mb-2 ">
-          <h1 className="text-left">Add User</h1>
+          <Title className="text-left" titleType="h1">Add User</Title>
         </div>
         <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
           <Formik
@@ -53,7 +62,7 @@ const UserCreate = (): any => {
                   email, 
                   password, 
                   passwordConfirmation,
-                  permissions.map(permission => permission.label),
+                  permissions.map((permission: any) => permission.label),
                   roles.map(role => role.id)
                 ) 
               )
@@ -63,103 +72,89 @@ const UserCreate = (): any => {
               <Form>
                 <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
                   <div className="mb-4">
-                    <label
-                      htmlFor="firstName"
-                      className="font-bold  text-gray-400 block mb-2 "
-                    >
+                    <Label htmlFor="firstName" className="font-bold  text-gray-400 block mb-2">
                       First Name
-                    </label>
+                    </Label>
                     <Field
                       name="firstName"
                       type="text"
+                      id="firstName"
                       className="w-full h-8 bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
                       placeholder="Enter First Name"
                     />
                     {errors.firstName && touched.firstName ? (
-                      <div className="text-red-500 p-2">{errors.firstName}</div>
+                      <ErrorForm className="text-red-500 p-2" >{errors.firstName}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="lastName"
-                      className="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="lastName" className="font-bold text-gray-400 block mb-2">
                       Last Name
-                    </label>
+                    </Label>
                     <Field
                       name="lastName"
                       type="text"
+                      id="lastName"
                       className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-gray px-2 py-2 rounded shadow"
                       placeholder="Enter Last Name"
                     />
                     {errors.lastName && touched.lastName ? (
-                      <div className="text-red-500 p-2">{errors.lastName}</div>
+                      <ErrorForm className="text-red-500 p-2" >{errors.lastName}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-4">
-                    <label
-                      htmlFor="email"
-                      className="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="email" className="font-bold text-gray-400 block mb-2">
                       Email
-                    </label>
+                    </Label>
                     <Field
                       name="email"
                       type="text"
+                      id="email"
                       className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                       placeholder="Enter Email"
                     />
                     {errors.email && touched.email ? (
-                      <div className="text-red-500 p-2">{errors.email}</div>
+                      <ErrorForm className="text-red-500 p-2" >{errors.email}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-1">
-                    <label
-                      htmlFor="password"
-                      className="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="password" className="font-bold text-gray-400 block mb-2">
                       Password
-                    </label>
+                    </Label>
                     <Field
                       name="password"
                       type="password"
+                      id="password"
                       className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                       placeholder="Enter Password"
                     />
                     {errors.password && touched.password ? (
-                      <div className="text-red-500 p-2">{errors.password}</div>
+                      <ErrorForm className="text-red-500 p-2" >{errors.password}</ErrorForm>
                     ) : null}
                   </div>
                   <div className="mb-1">
-                    <label
-                      htmlFor="passwordConfirmation"
-                      className="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="passwordConfirmation" className="font-bold text-gray-400 block mb-2">
                       Confirm Password
-                    </label>
+                    </Label>
                     <Field
                       name="passwordConfirmation"
                       type="password"
+                      id="passwordConfirmation"
                       className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
                       placeholder="Repeat Password"
                     />
                     {errors.passwordConfirmation &&
                     touched.passwordConfirmation ? (
-                      <div className="text-red-500 p-2">
-                        {errors.passwordConfirmation}
-                      </div>
+                      <ErrorForm className="text-red-500 p-2" >{errors.passwordConfirmation}</ErrorForm>
                     ) : null}
                   </div>
 
                   <div className="mb-4">
-                    <label
-                      htmlFor="permissions"
-                      className="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="permissions" className="font-bold text-gray-400 block mb-2">
                       Permissions
-                    </label>
+                    </Label>
                     <Field
                       name="permissions"
+                      id="permissions"
                       component={Select}
                       items={ getPermissionsList() }
                       isMulti
@@ -178,14 +173,12 @@ const UserCreate = (): any => {
                   </div>
 
                   <div className="mb-4">
-                    <label
-                      htmlFor="roles"
-                      className="font-bold text-gray-400 block mb-2"
-                    >
+                    <Label htmlFor="roles" className="font-bold text-gray-400 block mb-2">
                       Roles
-                    </label>
+                    </Label>
                     <Field
                       name="roles"
+                      id="roles"
                       component={Select}
                       items={ getRolesList() }
                       isMulti
@@ -202,20 +195,16 @@ const UserCreate = (): any => {
                       dangerLight="#1a202c"
                     />
                   </div>
-                  <div className="mt-10 flex justify-around ">
-                    <button
-                      className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                      onClick={() => Router.push("/users")}
-                    >
-                      <span className="mr-2">Close</span>
-                    </button>
+                  <div className="mt-10 flex justify-around">
+                    <Button className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                      buttonType="button" buttonClick={() => Router.push("/users")}>   
+                    Close
+                    </Button>                 
 
-                    <button
-                      className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                      type="submit"
-                    >
+                    <Button className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                      buttonType="submit" buttonClick="none">
                       Save
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </Form>

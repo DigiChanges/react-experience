@@ -14,7 +14,7 @@ import {
 
 export interface UserActions {
   type: string
-  payload: {} | null
+  payload: any | null
 }
 
 export const getUsers = (): UserActions => ({
@@ -22,7 +22,7 @@ export const getUsers = (): UserActions => ({
   payload: null
 })
 
-export const getUserSuccess = (users: {}): UserActions => ({
+export const getUserSuccess = (users: any): UserActions => ({
   type: GET_USERS_SUCCESS,
   payload: users
 })
@@ -43,14 +43,14 @@ export const createUser = (
   email: string,
   password: string,
   passwordConfirmation: string,
-  permissions: {},
-  roles: {}
+  permissions: string[],
+  roles: any[]
   ): UserActions => ({
     type: CREATE_USER,
     payload: { firstName, lastName, email, password, passwordConfirmation, permissions, roles }
   })
 
-export const createUserSuccess = (user: {}): UserActions => ({
+export const createUserSuccess = (user: any): UserActions => ({
   type: CREATE_USER_SUCCESS,
   payload: user
 })
@@ -60,13 +60,15 @@ export const updateUser = (
   firstName: string, 
   lastName: string,
   email: string,
+  permissions: [],
+  roles: [],
   enable: boolean
 ): UserActions => ({
   type: UPDATE_USER,
-  payload: { id, firstName, lastName, email, enable }
+  payload: { id, firstName, lastName, email, permissions, roles, enable }
 })
 
-export const updateUserSuccess = (user: {}): UserActions => ({
+export const updateUserSuccess = (user: any): UserActions => ({
   type: UPDATE_USER_SUCCESS,
   payload: user
 })
@@ -87,7 +89,7 @@ export const removeUser = (id: string): UserActions => ({
   payload: id
 })
 
-export const removeUserSuccess = (user: {}): UserActions => ({
+export const removeUserSuccess = (user: any): UserActions => ({
   type: REMOVE_USER_SUCCESS,
   payload: user
 })

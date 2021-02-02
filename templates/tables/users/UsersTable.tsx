@@ -4,20 +4,17 @@ import ListUsersTemplateColumns from "./ListUsersTemplateColumns";
 import TableUsersStyle from "../../../assets/customStyles/TableUsersStyle";
 import { getUsers } from '../../../redux/users/actions';
 import { getPermissions } from '../../../redux/auth/actions';
-import { getRoles } from '../../../redux/roles/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import Title from '../../../atoms/Title';
 
 const UsersTable = () => {
 
   const dispatch = useDispatch()
-  const { usersList } = useSelector( state => state.Users )
-  // const { permissions } = useSelector( state => state.Auth )
-  // const { rolesList } = useSelector( state => state.Roles )
+  const { usersList } = useSelector( state => state.Users );
 
   useEffect(() => {
-    dispatch( getUsers() )
-    dispatch( getRoles() )
-    dispatch( getPermissions() )
+    dispatch( getUsers() );
+    dispatch( getPermissions() );
   }, []);
 
   //TODO REMOVE COMMENTED CODE
@@ -69,7 +66,9 @@ const UsersTable = () => {
   return (
     <>
       <div className="px-16 pt-20">
-        <h1 className="text-5xl text-gray-500">Users</h1>
+        <Title className="text-5xl text-gray-500" titleType="h1" >
+        Users
+        </Title>
         {usersList && (
           usersList.length > 0 ? (
             <DataTable
@@ -80,13 +79,7 @@ const UsersTable = () => {
               noHeader
               theme="DGDarkTheme"
               customStyles={TableUsersStyle}
-
-              //TODO: REMOVE COMMENTED CODE
-
-              // progressPending={pending}
-              // progressComponent={
-              //   <CustomLoader cssClassName={"justify-center text-gray-700"} />
-              // }
+              className="flex-col md:flex-row"
             />
           ) : (
             <p>No Users</p>

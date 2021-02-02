@@ -15,7 +15,7 @@ const INIT_STATE = {
 
 type State = { 
   usersList: [] | null,
-  userSelected: {} | null
+  userSelected: any | null
 }
 
 const addUser = (newUser, users) => {

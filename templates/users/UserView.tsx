@@ -1,19 +1,15 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import AvatarImage from "../../atoms/AvatarImage";
 import Router from "next/router";
-// import IconLockClosed from "../../atoms/IconLockClosed";
-// import IconLockOpen from "../../atoms/IconLockOpen";
 import { useSelector, useDispatch } from 'react-redux'
-import { unselectedUser, selectedUser } from '../../redux/users/actions';
-
+import { unselectedUser } from '../../redux/users/actions';
+import Title from "../../atoms/Title";
+import Button from "../../atoms/Button";
 
 const UserView = () => {
 
   const dispatch = useDispatch()
   const { userSelected } = useSelector( state => state.Users )
-
-  // const roles = ["admin", "tortuga ninja", "user", "power ranger"];
-  // const enable = true;
 
   let unselectUser = true
 
@@ -69,9 +65,9 @@ const UserView = () => {
           <div id="profile" className="rounded-lg shadow-2xl bg-gray-800 -m-12">
             <div className="p-4 md:p-12 text-center lg:text-left bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
               <div className="flex justify-center items-center relative">
-                <h1 className="text-3xl font-bold text-white text-center pt-1">
-                  { userSelected.firstName }
-                </h1>
+                <Title titleType="h1" className="text-3xl font-bold text-white text-center pt-1">
+                { userSelected.firstName }
+                </Title>
                 {/* <div className="absolute right-0 pt-1">
                   {enable ? (
                     <IconLockOpen className={"w-6 text-green-600"} />
@@ -129,18 +125,14 @@ const UserView = () => {
               </div>
             </div>
             <div className="inset-x-0.bottom-0 flex justify-around pt-4 pb-4">
-              <button
-                className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                onClick={() => Router.push("/users")}
-              >
+              <Button className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
+                buttonType="button" buttonClick={() => Router.push("/users")}>
                 Back
-              </button>
-              <button
-                className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-                onClick={ navigateToUpdateUser }
-              >
+              </Button>
+              <Button className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                buttonType="button" buttonClick={ navigateToUpdateUser }>
                 Edit
-              </button>
+              </Button>
             </div>
           </div>
         </div>
