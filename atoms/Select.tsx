@@ -35,7 +35,6 @@ const MultiSelect: React.FC<OwnProps & FieldProps> = ({
   dangerLight,
   ...selectProps
 }) => {
-  //Para que el componente sea multiSelect declarar en props isMulti
   const onChange = (value) => {
     selectProps.form.setFieldValue(selectProps.field.name, value);
   };

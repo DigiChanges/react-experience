@@ -75,7 +75,7 @@ const RoleUpdate = (): any => {
                 )
               }}
             >
-              {(props): any => (
+              {(): any => (
                 <Form>
                   <div className="flex flex-col  bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
                     <div className="mb-4">

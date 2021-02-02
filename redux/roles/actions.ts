@@ -12,7 +12,7 @@ import { GET_ROLES,
 
 export interface RolesActions {
   type: string,
-  payload: {} | null
+  payload: any | null
 }
 
 export const getRoles = (): RolesActions => ({
@@ -44,7 +44,7 @@ export const createRole = (
     payload: { name, slug, permissions }
   })
 
-export const createRoleSuccess = (roles: {}): RolesActions => ({
+export const createRoleSuccess = (roles: any): RolesActions => ({
   type: CREATE_ROLE_SUCCESS,
   payload: roles
 })
@@ -60,21 +60,17 @@ export const updateRole = (
   payload: {id, name, slug, permissions,enable }
 })
 
-export const updateRoleSuccess = (roles: {}): RolesActions => ({
+export const updateRoleSuccess = (roles: any): RolesActions => ({
   type: UPDATE_ROLE_SUCCESS,
   payload: roles
 })
-
 
 export const removeRole = (id: string): RolesActions => ({
   type: REMOVE_ROLE,
   payload: id
 })
 
-export const removeRoleSuccess = (roles: {}): RolesActions => ({
+export const removeRoleSuccess = (roles: any): RolesActions => ({
   type: REMOVE_ROLE_SUCCESS,
   payload: roles
 })
-
-
-

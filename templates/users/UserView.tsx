@@ -1,21 +1,15 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import AvatarImage from "../../atoms/AvatarImage";
 import Router from "next/router";
-// import IconLockClosed from "../../atoms/IconLockClosed";
-// import IconLockOpen from "../../atoms/IconLockOpen";
 import { useSelector, useDispatch } from 'react-redux'
-import { unselectedUser, selectedUser } from '../../redux/users/actions';
+import { unselectedUser } from '../../redux/users/actions';
 import Title from "../../atoms/Title";
 import Button from "../../atoms/Button";
-
 
 const UserView = () => {
 
   const dispatch = useDispatch()
   const { userSelected } = useSelector( state => state.Users )
-
-  // const roles = ["admin", "tortuga ninja", "user", "power ranger"];
-  // const enable = true;
 
   let unselectUser = true
 

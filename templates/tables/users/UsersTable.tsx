@@ -4,7 +4,6 @@ import ListUsersTemplateColumns from "./ListUsersTemplateColumns";
 import TableUsersStyle from "../../../assets/customStyles/TableUsersStyle";
 import { getUsers } from '../../../redux/users/actions';
 import { getPermissions } from '../../../redux/auth/actions';
-import { getRoles } from '../../../redux/roles/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Title from '../../../atoms/Title';
 
@@ -12,8 +11,6 @@ const UsersTable = () => {
 
   const dispatch = useDispatch()
   const { usersList } = useSelector( state => state.Users );
-  // const { permissions } = useSelector( state => state.Auth )
-  // const { rolesList } = useSelector( state => state.Roles )
 
   useEffect(() => {
     dispatch( getUsers() );
@@ -83,13 +80,6 @@ const UsersTable = () => {
               theme="DGDarkTheme"
               customStyles={TableUsersStyle}
               className="flex-col md:flex-row"
-
-              //TODO: REMOVE COMMENTED CODE
-
-              // progressPending={pending}
-              // progressComponent={
-              //   <CustomLoader cssClassName={"justify-center text-gray-700"} />
-              // }
             />
           ) : (
             <p>No Users</p>

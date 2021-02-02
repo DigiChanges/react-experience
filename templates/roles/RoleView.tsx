@@ -1,21 +1,15 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import AvatarImage from "../../atoms/AvatarImage";
 import Router from "next/router";
-// import IconLockClosed from "../../atoms/IconLockClosed";
-// import IconLockOpen from "../../atoms/IconLockOpen";
 import { useSelector, useDispatch } from 'react-redux'
-import { unselectedRole, selectedRole } from '../../redux/roles/actions';
+import { unselectedRole } from '../../redux/roles/actions';
 import Title from "../../atoms/Title";
 import Button from "../../atoms/Button";
-
 
 const RoleView = () => {
 
   const dispatch = useDispatch()
   const { roleSelected } = useSelector( state => state.Roles )
-
-  // const roles = ["admin", "tortuga ninja", "user", "power ranger"];
-  // const enable = true;
 
   let unselectRole = true
 
@@ -51,7 +45,6 @@ const RoleView = () => {
           <div className="z-10 flex justify-center">
             <AvatarImage
               avatar={"/userAvatar.jpg"}
-              // image={props.image}
               alt={"avatar user"}
               className={"w-32 h-32 rounded-full object-cover shadow-kx1"}
             />
@@ -81,20 +74,6 @@ const RoleView = () => {
                 Permissions
               </p>
               <div className="w-full h-auto flex flex-col md:flex-row h-8 text-white pt-1 pl-1 text-base justify-center">
-                {/* {roles.length > 0 ? (
-                  roles.map((rol, index) => {
-                    return (
-                      <span
-                        key={index}
-                        className='w-auto flex items-center bg-gray-700 rounded-lg mr-1 mb-1 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey shadow"'
-                      >
-                        {rol}
-                      </span>
-                    );
-                  })
-                ) : (
-                  <p>El usuario no tiene rol</p>
-                )} */}
                 { getPermissionsView() }
               </div>
             </div>

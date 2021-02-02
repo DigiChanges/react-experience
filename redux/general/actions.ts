@@ -6,7 +6,7 @@ import {
 
 export interface GeneralActions {
   type: string
-  payload: {} | null
+  payload: any | null
 }
 
 export const startGeneralLoading = (): GeneralActions => ({ 
@@ -19,7 +19,7 @@ export const stopGeneralLoading = () => ({
   payload: null
 })
 
-export const showGeneralNotification = (notification: {}) => ({ 
+export const showGeneralNotification = (notification: any) => ({
   type: SHOW_GENERAL_NOTIFICATION, 
   payload: notification 
 })

@@ -6,7 +6,7 @@ const tBody = (type:string) => ({
 	position: toast.POSITION.TOP_RIGHT,
 	transition: Slide,
 	style: ToastStyle(type)
-})
+});
 
 const getToast = {
   [notificationTypes.SUCCESS]: toast.success,
@@ -15,6 +15,4 @@ const getToast = {
   [notificationTypes.ERROR]: toast.error
 }
 
-export const showToast = (type: string, msg: string) => {
-	return getToast[type](msg, tBody(type))
-}
+export const showToast = (type: string, msg: string) => (getToast[type](msg, tBody(type)))

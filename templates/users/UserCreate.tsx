@@ -11,8 +11,8 @@ import ErrorForm from "../../atoms/ErrorForm";
 import Button from "../../atoms/Button";
 import Label from "../../atoms/Label";
 
-const UserCreate = (): any => {
-
+const UserCreate = (): any =>
+{
   const dispatch = useDispatch()
   const { permissions } = useSelector( store => store.Auth );
   const { rolesList } = useSelector( store => store.Roles );
@@ -21,11 +21,10 @@ const UserCreate = (): any => {
     dispatch( getRoles() );
   }, []);
 
-
   //TODO child key issue
   const getRolesList = () => (
     rolesList && rolesList.length > 0
-      ? rolesList.map(item => ({ label: item.name, id: item.id }))
+      ? rolesList.map(role => ({ label: role.name, id: role.id }))
       : []
   );
 

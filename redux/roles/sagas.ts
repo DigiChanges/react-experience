@@ -25,11 +25,11 @@ import {
 } from './actions';
 
 function* getRolesList() {
-  // yield put( startGeneralLoading() )
+  yield put( startGeneralLoading() )
   try {
     const res = yield call( getAllRoles )
     const { data } = res
-    console.log('data');
+
     if (!data) {
       return yield put( 
         showGeneralNotification(
@@ -51,9 +51,9 @@ function* getRolesList() {
       )
     )
   } 
-  // finally {
-  //   yield put( stopGeneralLoading() )
-  // }
+  finally {
+    yield put( stopGeneralLoading() )
+  }
 }
 
 /**
@@ -176,4 +176,3 @@ function* rolesSagas(): any {
 }
 
 export default rolesSagas;
-

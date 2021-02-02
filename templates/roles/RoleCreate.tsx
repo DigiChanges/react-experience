@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React  from "react";
 import { Field, Form, Formik } from "formik";
 import RoleSchema from "../../SchemaValidations/RoleSchema";
 import Select from "../../atoms/Select";
@@ -14,14 +14,6 @@ const RoleCreate = (): any => {
 
   const dispatch = useDispatch()
   const { permissions } = useSelector( store => store.Auth )
-  const { rolesList } = useSelector( store => store.Roles )
-
-  //TODO child key issue
-  const getRolesList = () => (
-    rolesList && rolesList.length > 0
-      ? rolesList.map(item => ({ label: item.name, id: item.id }))
-      : []
-  )
 
   //TODO child key issue
   const getPermissionsList = () => (

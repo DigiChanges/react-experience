@@ -8,7 +8,7 @@ import Label from "../../atoms/Label";
 
 const ChangePassword = ({ close }: any): any =>
 {
-  let booleanXquit = false;
+  const booleanXQuit = false;
 
   return (
     <Fragment>
@@ -26,14 +26,14 @@ const ChangePassword = ({ close }: any): any =>
                 roles: "",
               }}
               validationSchema={SignUpSchema}
-              onSubmit={(values) => {
+              onSubmit={() => {
                 // same shape as initial values
               }}
             >
               {({ errors, touched }: any) => (
                 <Form>
                   <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
-                    {booleanXquit ? (
+                    {booleanXQuit ? (
                       <div className="text-right ">
                         <Button buttonClick={close} className="text-lg" buttonType="button">
                           x

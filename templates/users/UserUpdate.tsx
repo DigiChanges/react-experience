@@ -10,19 +10,24 @@ import Label from "../../atoms/Label";
 
 const UpdateUser = ({userSelected, rolesList, permissions}): any => {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch(); // Remove it
 
   const STATES = [
     { label: 'Enabled', value: 1 },
     { label: 'Disabled', value: 0 },
-  ]
-  const getUserInitialState = () => ( userSelected.enable ? STATES[0] : STATES[1] )
+  ];
+
+  const getUserInitialState = () => ( userSelected.enable ? STATES[0] : STATES[1] );
   
-  const getUserInitialRoles = () => (
-    userSelected.roles && userSelected.roles.length > 0
-      ? userSelected.roles.map((label, value) => ({ label: label.name, value, id:label.id }))
-      : []
-  );
+  const getUserInitialRoles = () =>
+  {
+    const roles = getRolesList();
+
+    return userSelected && userSelected.roles.map((userRole) => {
+        return roles.find((role) => userRole.name === role.label  );
+    });
+  };
+
   const getUserInitialPerms = () => (
     userSelected.permissions && userSelected.permissions.length > 0
       ? userSelected.permissions.map((label, value) => ({ label, value }))
@@ -35,9 +40,10 @@ const UpdateUser = ({userSelected, rolesList, permissions}): any => {
   );
   const getRolesList = () => (
     rolesList && rolesList.length > 0
-      ? rolesList.map((label, value) => ({ label: label.name, value, id:label.id, }))
+      ? rolesList.map((label, value) => ({ label: label.name, value, id: label.id }))
       : []
   );
+
   const formatPerms = (perms) => (
     perms && perms.length > 0
     ? perms.map(label => (
@@ -45,6 +51,7 @@ const UpdateUser = ({userSelected, rolesList, permissions}): any => {
     ))
     : []
   );
+
   const formatRoles = (role) => (
     role && role.length > 0
     ? role.map(label => (
@@ -52,6 +59,7 @@ const UpdateUser = ({userSelected, rolesList, permissions}): any => {
     ))
     : []
   );
+
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
       <div className="w-full">
@@ -73,9 +81,7 @@ const UpdateUser = ({userSelected, rolesList, permissions}): any => {
                 //TODO enable
                 const { firstName, lastName, email, permissions, roles, enable } = values
                 const newPerms = formatPerms(permissions)
-                console.log(roles);
                 const newRoles = formatRoles(roles)
-                console.log(newRoles);
                 dispatch( 
                   updateUser(
                     userSelected.id,
@@ -89,7 +95,7 @@ const UpdateUser = ({userSelected, rolesList, permissions}): any => {
                 )
               }}
             >
-              {(props): any => (
+              {(): any => (
                 <Form>
                   <div className="flex flex-col  bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
                     <div className="mb-4">
