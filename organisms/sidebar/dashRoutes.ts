@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-
+import {permissions} from './permissions'
 const IconHome =  dynamic(() => import ('../../atoms/IconHome'));
 const IconDashboard = dynamic(() => import ('../../atoms/IconDashboard'));
 const IconRoles = dynamic(() => import ('../../atoms/IconRoles'));
@@ -16,19 +16,19 @@ export const dashRoutes = [
 		path: '/users',
 		name: 'Users',
 		icon: IconDashboard,
-		permission: 'usersList',
+		permission: permissions.USERS_LIST,
 		isMulti: true,
 		levels: [
 			{
 				path: '/users/create',
 				name: 'Create User',
-				permission: 'usersSave'
+				permission: permissions.USERS_LIST
 			},
 			{
 				path: '/users',
 				name: 'View Users',
 				icon: IconRoles,
-				permission: 'usersShow'
+				permission: permissions.USERS_LIST
 			}
 		]
 	},
@@ -36,7 +36,7 @@ export const dashRoutes = [
 		path: '/roles',
 		name: 'Roles',
 		icon: IconRoles,
-		permission: 'roleList'
+		permission: permissions.ROLES_LIST
 	},
   {
     //TODO paths with children
