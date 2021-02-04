@@ -16,7 +16,7 @@ const UsersPage = (): any =>
 
 	return (
 		<>
-			<div className="container mx-auto w-full h-full flex flex-col justify-between">
+			<div className="container mx-auto w-full h-full md:h-screen flex flex-col justify-between">
 				<UsersTable/>
 				{booleanConfirmDelete ? (
 					<ConfirmDeleteUser close={openConfirmDelete}/>

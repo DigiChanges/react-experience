@@ -1,0 +1,45 @@
+import React, {Fragment} from 'react'
+import SidebarItem from '../../molecules/SidebarItem'
+import { dashRoutes } from './dashRoutes';
+import { useSelector } from 'react-redux';
+import Image from "../../atoms/Image"
+
+export default function Sidebar({className}) {
+  
+  
+  // user data to get user permissions, declared to future conditions
+  const {user} = useSelector( state => state.Auth );
+
+  const getDashRoutes = () => (
+    dashRoutes.map((prop, key) => {
+        // TODO:
+        return prop.children ? (
+            <Fragment key={ key } ></Fragment>
+      ) : (
+        <SidebarItem 
+          key={ key } 
+          theKey={ key }
+          name={ prop.name } 
+          path={ prop.path }
+          itemPerms={ prop.permission }
+          userPerms={ user ? user.permissions : false }
+          icon={ prop.icon ? prop.icon : false }
+          levels={ prop.levels ? prop.levels : false }
+        />
+      )
+    })
+  )
+
+  return (
+    <div className={className}>
+      <div className="flex flex-row md:flex-col w-full md:w-32 lg:w-48 bg-blue  overflow-hidden">
+        <div className="flex items-center justify-center h-20 shadow-md">
+        <Image image={"/logo.png"} className="pt-0 md:pt-2 h-16 w-32 ml-3 md:ml-0 md:h-24 md:w-50" alt="Logo DigiChanges" />
+        </div>
+        <ul className="flex flex-row md:flex-col py-4 items-center justify-end md:items-start md:justify-center w-full">
+          { getDashRoutes() }
+        </ul>
+      </div>
+    </div>
+  )
+} 

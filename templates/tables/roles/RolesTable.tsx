@@ -27,7 +27,7 @@ const RolesTable = () =>
 
 	return (
 		<>
-			<div className="px-16 pt-20">
+			<div className="px-16 pt-20 rounded-xl">
 				<Title className="text-5xl text-gray-500" titleType="h1">
 					Roles
 				</Title>

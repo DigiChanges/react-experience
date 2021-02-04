@@ -10,11 +10,11 @@ const SideBarSubItem = ({theKey, name, path, icon}) =>
 
 	return (
 		<Link href={path} key={theKey}>
-			<a className="flex flex-row items-center justify-center md:justify-end h-6 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-400 hover:text-gray-600">
-				{(Icon ? <span className="inline-flex items-center justify-center h-6 w-12 text-lg text-gray-300">
+			<a className="flex flex-row items-center justify-center h-6 transform hover:translate-y-2 hover:translate-x-0 md:hover:translate-x-2 md:hover:translate-y-0 transition-transform ease-in duration-200 text-gray-400 hover:text-gray-600">
+				{(Icon ? <span className="inline-flex flex-grow items-center justify-center md:justify-start h-6 w-12 text-lg text-gray-300">
             <Icon size={size} color={color}/>
-          </span> : <span className="inline-flex items-center justify-center h-6 w-12 text-lg text-gray-300"/>)}
-				<span className="text-sm font-medium hidden md:block justify-end">
+          </span> : <span className="inline-flex flex-grow items-center justify-center h-6 w-12 text-lg text-gray-300"/>)}
+				<span className="text-sm font-medium hidden md:block justify-start md:justify-start">
             {name}
           </span>
 			</a>

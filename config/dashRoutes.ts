@@ -5,6 +5,8 @@ const IconHome = dynamic(() => import ('../atoms/Icons/IconHome'));
 const IconDashboard = dynamic(() => import ('../atoms/Icons/IconDashboard'));
 const IconRoles = dynamic(() => import ('../atoms/Icons/IconRoles'));
 const IconLogout = dynamic(() => import ('../atoms/Icons/IconLogout'));
+const IconEye = dynamic(() => import ('../atoms/IconEye'));
+const IconPlus = dynamic(() => import ('../atoms/IconPlus'));
 
 export const dashRoutes = [
 	{
@@ -23,12 +25,13 @@ export const dashRoutes = [
 			{
 				path: '/users/create',
 				name: 'Create',
+				icon: IconPlus,
 				permission: permissions.USERS.SAVE
 			},
 			{
 				path: '/users',
 				name: 'List',
-				icon: IconRoles,
+				icon: IconEye,
 				permission: permissions.USERS.LIST
 			}
 		]
@@ -42,12 +45,13 @@ export const dashRoutes = [
 			{
 				path: '/roles/create',
 				name: 'Create',
+				icon: IconPlus,
 				permission: permissions.ROLES.SAVE
 			},
 			{
 				path: '/roles',
 				name: 'List',
-				icon: IconRoles,
+				icon: IconEye,
 				permission: permissions.ROLES.LIST
 			}
 		]

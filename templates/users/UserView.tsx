@@ -117,7 +117,7 @@ const UserView = () =>
 							<p className="pt-4 pb-4 text-lg text-gray-400 font-bold flex items-center justify-center text-center">
 								Permissions
 							</p>
-							<div className="w-full flex h-8 text-white pt-1 pl-1 text-base justify-center">
+							<div className="w-full flex flex-wrap h-auto text-white pt-1 pl-1 text-base justify-center">
 								{/* {roles.length > 0 ? (
 								 roles.map((rol, index) => {
 								 return (
