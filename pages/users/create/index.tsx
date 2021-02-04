@@ -1,11 +1,11 @@
-import React  from "react";
+import React from "react";
 import UserCreate from "../../../templates/users/UserCreate";
 
 const IndexPage = (): any =>
 {
-    return (
-        <UserCreate />
-    )
+	return (
+		<UserCreate/>
+	)
 };
 
 export default IndexPage;

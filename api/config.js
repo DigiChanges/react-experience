@@ -1,9 +1,8 @@
-
 // const AUTH_PROTOCOL =  process.env.NEXT_PUBLIC_AUTH_PROTOCOL // 'http'
 // const AUTH_HOSTNAME = process.env.NEXT_PUBLIC_AUTH_HOSTNAME // 'localhost'
 // const AUTH_PORT = process.env.NEXT_PUBLIC_AUTH_PORT // '8089'
 
-const API_PROTOCOL =  process.env.NEXT_PUBLIC_API_PROTOCOL // 'http'
+const API_PROTOCOL = process.env.NEXT_PUBLIC_API_PROTOCOL // 'http'
 const API_HOSTNAME = process.env.NEXT_PUBLIC_API_HOSTNAME //'localhost'
 const API_PORT = process.env.NEXT_PUBLIC_API_PORT // '8089'
 
@@ -27,7 +26,7 @@ export const config = {
     server: {
       protocol: API_PROTOCOL,
       hostname: API_HOSTNAME,
-      port: API_PORT 
+      port: API_PORT
     },
     routes: {
       auth: {

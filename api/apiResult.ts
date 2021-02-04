@@ -1,1 +1,1 @@
-export const apiResult = ( data: any | []) => ({ data });
+export const apiResult = (data: any | []) => ({data});

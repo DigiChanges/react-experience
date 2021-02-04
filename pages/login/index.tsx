@@ -1,11 +1,12 @@
-import React  from "react";
+import React from "react";
 import Login from '../../templates/login/index';
 
-const IndexPage = () => {
+const IndexPage = () =>
+{
 
-  return (
-    <Login />
-  )
+	return (
+		<Login/>
+	)
 }
 
 export default IndexPage;

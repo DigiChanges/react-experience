@@ -1,9 +1,10 @@
 import dynamic from 'next/dynamic'
 import {permissions} from './permissions'
-const IconHome =  dynamic(() => import ('../atoms/IconHome'));
-const IconDashboard = dynamic(() => import ('../atoms/IconDashboard'));
-const IconRoles = dynamic(() => import ('../atoms/IconRoles'));
-const IconLogout = dynamic(() => import ('../atoms/IconLogout'));
+
+const IconHome = dynamic(() => import ('../atoms/Icons/IconHome'));
+const IconDashboard = dynamic(() => import ('../atoms/Icons/IconDashboard'));
+const IconRoles = dynamic(() => import ('../atoms/Icons/IconRoles'));
+const IconLogout = dynamic(() => import ('../atoms/Icons/IconLogout'));
 
 export const dashRoutes = [
 	{
@@ -51,7 +52,7 @@ export const dashRoutes = [
 			}
 		]
 	},
-  	{
+	{
 		path: '/logout',
 		name: 'Logout',
 		icon: IconLogout,

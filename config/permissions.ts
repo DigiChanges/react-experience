@@ -1,3 +1,5 @@
+export const ADMIN = 'admin';
+
 export const permissions = {
 	USERS: {
 		LIST: "usersList",
