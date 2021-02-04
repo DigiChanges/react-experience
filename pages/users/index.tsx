@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import UsersTable from "../../templates/tables/users/UsersTable";
 import ConfirmDeleteUser from "../../templates/modal/ConfirmDeleteUser";
-import AddUserModal from "../../templates/modal/AddUserModal";
 import IconPlus from "../../atoms/IconPlus";
 import Link from "next/link";
 
@@ -17,7 +16,6 @@ const UsersPage = (): any => {
     <>
       <div className="container mx-auto w-full h-full flex flex-col justify-between">
         <UsersTable />
-        <AddUserModal />
         {booleanConfirmDelete ? (
           <ConfirmDeleteUser close={openConfirmDelete} />
         ) : null}

@@ -2,8 +2,6 @@ import {
   LOGIN_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILED,
-  GET_PERMISSIONS,
-  GET_PERMISSIONS_SUCCESS,
   LOGOUT_USER,
   REGISTER_USER,
   REGISTER_USER_SUCCESS,
@@ -37,16 +35,6 @@ export const loginUserFailed = (error: string): AuthAction => ({
   type: LOGIN_USER_FAILED,
   payload: error,
 });
-
-export const getPermissions = (): AuthAction => ({
-  type: GET_PERMISSIONS,
-  payload: null
-})
-
-export const getPermissionsSuccess = (permissions: []): AuthAction => ({
-  type: GET_PERMISSIONS_SUCCESS,
-  payload: permissions
-})
 
 export const registerUser = (fullName: string, email: string, password: string): AuthAction => ({
     type: REGISTER_USER,

@@ -4,9 +4,9 @@ import { signin, getAllPermissions } from '../../services/authService'
 import { notificationTypes, notification } from '../../entities/notification';
 import Router from 'next/router';
 
-import { LOGIN_USER, GET_PERMISSIONS, LOGOUT_USER } from './constants';
+import { LOGIN_USER, LOGOUT_USER } from './constants';
 import { startGeneralLoading, stopGeneralLoading, showGeneralNotification} from '../general/actions';
-import { loginUserSuccess, getPermissionsSuccess} from './actions';
+import { loginUserSuccess } from './actions';
 import {removeSession, setSession} from "../../helpers/authSession";
 
 function* login({ payload: { email, password } })
@@ -49,34 +49,6 @@ function* login({ payload: { email, password } })
   finally
   {
     yield put( stopGeneralLoading() )
-  }
-}
-
-function* getPermissionsList()
-{
-  try {
-    const res = yield call( getAllPermissions )
-    const { data } = res
-    if (!data) {
-      return yield put( 
-        showGeneralNotification(
-          notification(
-            notificationTypes.ERROR, 
-            'Internal Server Error'
-          )
-        )
-      )
-    }
-    yield put( getPermissionsSuccess(data) )
-  } catch (e) {
-    yield put(
-      showGeneralNotification(
-        notification(
-          notificationTypes.ERROR, 
-          e.message
-        )
-      )
-    )
   }
 }
 
@@ -160,11 +132,6 @@ export function* watchLoginUser(): any {
   yield takeEvery(LOGIN_USER, login);
 }
 
-export function* watchGetPermissions(): any {
-  // @ts-ignore
-  yield takeEvery(GET_PERMISSIONS, getPermissionsList);
-}
-
 export function* watchLogoutUser(): any {
   // @ts-ignore
   yield takeEvery(LOGOUT_USER, logout);
@@ -183,7 +150,6 @@ export function* watchLogoutUser(): any {
 function* authSaga(): any {
   yield all([
     fork(watchLoginUser),
-    fork(watchGetPermissions), 
     fork(watchLogoutUser), 
     // fork(watchForgetPassword),
     // fork(watchChangeForgotPassword)

@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import DataTable from "react-data-table-component";
 import ListRolesTemplateColumns from "./ListRolesTemplateColumns";
 import TableUsersStyle from "../../../assets/customStyles/TableUsersStyle";
-// import { getUsers } from '../../../redux/users/actions';
-import { getPermissions } from '../../../redux/auth/actions';
 import { getRoles } from '../../../redux/roles/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Title from '../../../atoms/Title';
@@ -11,52 +9,11 @@ import Title from '../../../atoms/Title';
 const RolesTable = () => {
 
   const dispatch = useDispatch()
-  // const { usersList } = useSelector( state => state.Users )
-  // const { permissions } = useSelector( state => state.Auth )
   const { rolesList } = useSelector( state => state.Roles )
 
   useEffect(() => {
-    // dispatch( getUsers() )
     dispatch( getRoles() )
-    dispatch( getPermissions() )
   }, []);
-
-  //TODO REMOVE COMMENTED CODE
-
-  //wait some seconds before consuming the api
-  // const getUsersData = async () => {
-  //   console.log('Waiting to get users data')
-  //   setTimeout(() => {
-  //     console.log('Dispatching users data')
-  //     dispatch( getUsers() )
-  //   }, 2000);
-  // }
-  // const getPermissionsData = async () => {
-  //   console.log('Waiting to get permissions data')
-  //   setTimeout(() => {
-  //     console.log('Dispatching permissions data')
-  //     dispatch( getPermissions() )
-  //   }, 4000)
-  // }
-  // const getRolesData = async () => {
-  //   console.log('Waiting to get roles data')
-  //   setTimeout(() => {
-  //     console.log('Dispatching roles data')
-  //     dispatch( getRoles() )
-  //   }, 10000)
-  // }
-
- /* const mapRoles = roles => {
-    if (roles && roles.length > 0) {
-      let rolesData = ''
-      roles.map(role => {
-        rolesData = rolesData.concat(`${ role.name } `)
-      })
-      return rolesData
-    } 
-    return ''
-  }
-  */
 
   const getRoleRow = (id, name, slug) => ({
     id,
@@ -83,13 +40,6 @@ const RolesTable = () => {
               theme="DGDarkTheme"
               customStyles={TableUsersStyle}
               className="flex-col md:flex-row"
-
-              //TODO: REMOVE COMMENTED CODE
-
-              // progressPending={pending}
-              // progressComponent={
-              //   <CustomLoader cssClassName={"justify-center text-gray-700"} />
-              // }
             />
           ) : (
             <p>No Roles</p>

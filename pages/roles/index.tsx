@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import RolesTable from "../../templates/tables/roles/RolesTable";
 import ConfirmDeleteRole from "../../templates/modal/ConfirmDeleteRole";
-import AddRoleModal from "../../templates/modal/AddRoleModal";
 import IconPlus from "../../atoms/IconPlus";
 import Link from "next/link";
 
@@ -17,7 +16,6 @@ const RolesPage = (): any => {
     <>
       <div className="container mx-auto w-auto h-auto md:w-full md:h-screen flex flex-col justify-between">
         <RolesTable />
-        <AddRoleModal />
         {booleanConfirmDelete ? (
           <ConfirmDeleteRole close={openConfirmDelete} />
         ) : null}

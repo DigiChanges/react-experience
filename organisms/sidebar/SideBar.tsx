@@ -1,28 +1,26 @@
 import React, {Fragment} from 'react'
-import SidebarItem from '../../molecules/SidebarItem'
-import { dashRoutes } from './dashRoutes';
+import SideBarItem from '../../molecules/SideBarItem'
+import { dashRoutes } from '../../config/dashRoutes';
 import { useSelector } from 'react-redux';
 import Title from "../../atoms/Title"
 
-export default function Sidebar({className}) {
-  
-  
-  // user data to get user permissions, declared to future conditions
-  const {user} = useSelector( state => state.Auth );
+const SideBar = ({className}) =>
+{
+    const { permissions } = useSelector( store => store.Auth )
 
   const getDashRoutes = () => (
     dashRoutes.map((prop, key) => {
-        // TODO:
+        // @ts-ignore
         return prop.children ? (
-            <Fragment key={ key } ></Fragment>
+            <Fragment key={key} />
       ) : (
-        <SidebarItem 
+        permissions && permissions.includes(prop.permission) && <SideBarItem
           key={ key } 
           theKey={ key }
           name={ prop.name } 
           path={ prop.path }
-          itemPerms={ prop.permission }
-          userPerms={ user ? user.permissions : false }
+          permission={ prop.permission }
+          permissions={ permissions }
           icon={ prop.icon ? prop.icon : false }
           levels={ prop.levels ? prop.levels : false }
         />
@@ -43,3 +41,5 @@ export default function Sidebar({className}) {
     </div>
   )
 } 
+
+export default SideBar;
