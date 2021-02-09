@@ -4,10 +4,10 @@ import {signin, getAllPermissions} from '../../services/authService'
 import {notificationTypes, notification} from '../../entities/notification';
 import Router from 'next/router';
 
-import {LOGIN_USER, LOGOUT_USER, GET_PERMISSIONS} from './constants';
+import {LOGIN_USER, LOGOUT_USER, GET_PERMISSIONS, SET_DATA_AFTER_RELOADING} from './constants';
 import {startGeneralLoading, stopGeneralLoading, showGeneralNotification} from '../general/actions';
-import {getPermissionsSuccess, loginUserSuccess} from './actions';
-import {removeSession, setSession} from "../../helpers/authSession";
+import {getPermissionsSuccess, loginUserSuccess, setDataAfterReloadingSuccess} from './actions';
+import {removeSession, setSession, setPermsCookies} from "../../helpers/authSession";
 
 function* login({payload: {email, password}})
 {
@@ -78,7 +78,12 @@ function* getPermissionsList()
 	{
 		const res = yield call(getAllPermissions)
 		const {data} = res
-		if (!data)
+		if (data)
+		{
+			setPermsCookies(data)
+			yield put(getPermissionsSuccess(data))
+		}
+		else
 		{
 			return yield put(
 				showGeneralNotification(
@@ -89,7 +94,6 @@ function* getPermissionsList()
 				)
 			)
 		}
-		yield put(getPermissionsSuccess(data))
 	} catch (e)
 	{
 		yield put(
@@ -97,6 +101,27 @@ function* getPermissionsList()
 				notification(
 					notificationTypes.ERROR,
 					e.message
+				)
+			)
+		)
+	}
+}
+
+function* setDataAfterReloading({payload: {user, permissionsList}})
+{
+	const SUCCESS = user && permissionsList
+
+	if(SUCCESS)
+	{
+		yield put(setDataAfterReloadingSuccess(user, permissionsList))
+	}
+	else
+	{
+		return yield put(
+			showGeneralNotification(
+				notification(
+					notificationTypes.ERROR,
+					'Internal Server Error'
 				)
 			)
 		)
@@ -177,6 +202,12 @@ export function* watchGetPermissions(): any
 	// @ts-ignore
 	yield takeEvery(GET_PERMISSIONS, getPermissionsList);
 }
+export function* watchSetDataAfterReloading(): any
+{
+	// @ts-ignore
+	yield takeEvery(SET_DATA_AFTER_RELOADING, setDataAfterReloading);
+}
+
 
 // export function* watchForgetPassword(): any {
 //   // @ts-ignore
@@ -194,6 +225,7 @@ function* authSaga(): any
 		fork(watchLoginUser),
 		fork(watchLogoutUser),
 		fork(watchGetPermissions),
+		fork(watchSetDataAfterReloading)
 		// fork(watchForgetPassword),
 		// fork(watchChangeForgotPassword)
 	])

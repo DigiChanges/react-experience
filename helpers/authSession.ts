@@ -5,6 +5,7 @@ import Router from 'next/router'
 const USER = 'user'
 const EXPIRES = 'expires'
 const TOKEN = 'token'
+const PERMISSIONSLIST = 'permissionsList'
 
 let cookies
 const getCookies = () =>
@@ -16,13 +17,18 @@ const getCookies = () =>
 	return cookies
 }
 
-export const setSession = data =>
+export const setSession = ({expires, user, token}) =>
 {
 	const cookies = getCookies()
-	const {expires, user, token} = data
 	cookies.set(USER, JSON.stringify(user), {path: '/'});
 	cookies.set(EXPIRES, JSON.stringify(expires), {path: '/'});
 	cookies.set(TOKEN, JSON.stringify(token), {path: '/'});
+}
+
+export const setPermsCookies = data =>
+{
+	const cookies = getCookies()
+	cookies.set(PERMISSIONSLIST, JSON.stringify(data), {path: '/'});
 }
 
 export const getSession = () =>
@@ -60,4 +66,5 @@ export const removeSession = () =>
 	cookies.remove(USER, {path: '/'});
 	cookies.remove(EXPIRES, {path: '/'});
 	cookies.remove(TOKEN, {path: '/'});
+	cookies.remove(PERMISSIONSLIST, {path: '/'});
 }

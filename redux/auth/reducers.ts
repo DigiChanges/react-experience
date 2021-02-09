@@ -6,6 +6,7 @@ import {
 	REGISTER_USER,
 	REGISTER_USER_SUCCESS,
 	REGISTER_USER_FAILED,
+	SET_DATA_AFTER_RELOADING_SUCCESS
 } from './constants';
 import {AuthAction} from "./actions";
 
@@ -40,6 +41,9 @@ const Auth = (state: State = INIT_STATE, action: AuthAction) =>
 
 		case LOGIN_USER_FAILED:
 			return {...state, error: action.payload, loading: false};
+		
+		case SET_DATA_AFTER_RELOADING_SUCCESS:
+			return {...state, user: action.payload.user, permissionsList: action.payload.permissionsList, userPermissions: action.payload.user.permissions}
 
 		case GET_PERMISSIONS_SUCCESS:
 			return {...state, permissionsList: action.payload}

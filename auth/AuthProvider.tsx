@@ -3,8 +3,9 @@ import IndexPage from '../pages/login'
 import HomePage from '../pages/index';
 import {useRouter} from 'next/router'
 import {withCookies} from 'react-cookie'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {setStartPathname} from '../redux/paths/actions'
+import {setDataAfterReloading} from '../redux/auth/actions'
 import PrivateLayout from '../templates/layout/PrivateLayout'
 
 const AuthProvider = ({children, ...props}) =>
@@ -12,7 +13,10 @@ const AuthProvider = ({children, ...props}) =>
 
 	const dispatch = useDispatch()
 
-	const {user} = props.allCookies
+	const {user, permissionsList } = props.allCookies
+	
+	const auth  = useSelector(store => store.Auth);
+	
 	const isAuth = user && user.enable && user.id
 	const router = useRouter()
 
@@ -22,6 +26,10 @@ const AuthProvider = ({children, ...props}) =>
 		{
 			dispatch(setStartPathname(router.pathname))
 			router.replace('/login')
+		}
+		if (!auth?.user && user && permissionsList) 
+		{
+			dispatch(setDataAfterReloading(user, permissionsList))
 		}
 	}, [])
 

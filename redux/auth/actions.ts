@@ -8,6 +8,8 @@ import {
 	REGISTER_USER,
 	REGISTER_USER_SUCCESS,
 	REGISTER_USER_FAILED,
+	SET_DATA_AFTER_RELOADING,
+	SET_DATA_AFTER_RELOADING_SUCCESS
 	// FORGET_PASSWORD,
 	// FORGET_PASSWORD_SUCCESS,
 	// FORGET_PASSWORD_FAILED,
@@ -65,8 +67,18 @@ export const registerUserFailed = (error: string): AuthAction => ({
 
 export const logoutUser = (history: any): AuthAction => ({
 	type: LOGOUT_USER,
-	payload: {history},
+	payload: { history },
 });
+
+export const setDataAfterReloading = (user: any, permissionsList: any[]): AuthAction => ({
+	type: SET_DATA_AFTER_RELOADING,
+	payload: { user, permissionsList }
+})
+
+export const setDataAfterReloadingSuccess = (user: any, permissionsList: any[]): AuthAction => ({
+	type: SET_DATA_AFTER_RELOADING_SUCCESS,
+	payload: { user, permissionsList }
+})
 
 // export const forgetPassword = (email: string): AuthAction => ({
 //     type: FORGET_PASSWORD,
