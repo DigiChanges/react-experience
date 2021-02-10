@@ -1,4 +1,4 @@
-import {START_PATHNAME} from './constants'
+import {START_PATHNAME, SET_CURRENT_PATHNAME} from './constants'
 
 export interface PathActions
 {
@@ -8,5 +8,10 @@ export interface PathActions
 
 export const setStartPathname = (pathname: string): PathActions => ({
 	type: START_PATHNAME,
+	payload: pathname
+})
+
+export const setCurrentPathname = (pathname: string): PathActions => ({
+	type: SET_CURRENT_PATHNAME,
 	payload: pathname
 })

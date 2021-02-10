@@ -97,42 +97,14 @@ const UserView = () =>
 							<p className="pt-4 pb-4 text-lg text-gray-400 font-bold flex items-center justify-center text-center">
 								Roles
 							</p>
-							<div className="w-full flex h-8 text-white pt-1 pl-1 text-base justify-center">
-								{/* {roles.length > 0 ? (
-								 roles.map((rol, index) => {
-								 return (
-								 <span
-								 key={index}
-								 className='w-auto flex items-center bg-gray-700 rounded-lg mr-1 mb-1 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey shadow"'
-								 >
-								 {rol}
-								 </span>
-								 );
-								 })
-								 ) : (
-								 <p>El usuario no tiene rol</p>
-								 )} */}
-								{getRolesView()}
+							<div className="w-full flex flex-col md:flex-wrap h-auto flex-wrap text-white pt-1 pl-1 text-base justify-center">
+								{ getRolesView() }
 							</div>
 							<p className="pt-4 pb-4 text-lg text-gray-400 font-bold flex items-center justify-center text-center">
 								Permissions
 							</p>
 							<div className="w-full flex flex-wrap h-auto text-white pt-1 pl-1 text-base justify-center">
-								{/* {roles.length > 0 ? (
-								 roles.map((rol, index) => {
-								 return (
-								 <span
-								 key={index}
-								 className='w-auto flex items-center bg-gray-700 rounded-lg mr-1 mb-1 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey shadow"'
-								 >
-								 {rol}
-								 </span>
-								 );
-								 })
-								 ) : (
-								 <p>El usuario no tiene rol</p>
-								 )} */}
-								{getPermissionsView()}
+								{ getPermissionsView() }
 							</div>
 						</div>
 						<div className="inset-x-0.bottom-0 flex justify-around pt-4 pb-4">

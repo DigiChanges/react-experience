@@ -4,7 +4,7 @@ import HomePage from '../pages/index';
 import {useRouter} from 'next/router'
 import {withCookies} from 'react-cookie'
 import {useDispatch, useSelector} from 'react-redux'
-import {setStartPathname} from '../redux/paths/actions'
+import {setCurrentPathname, setStartPathname} from '../redux/paths/actions'
 import {setDataAfterReloading} from '../redux/auth/actions'
 import PrivateLayout from '../templates/layout/PrivateLayout'
 
@@ -16,6 +16,7 @@ const AuthProvider = ({children, ...props}) =>
 	const {user, permissionsList } = props.allCookies
 	
 	const auth  = useSelector(store => store.Auth);
+	const { isLoading } = useSelector(state => state.General)
 	
 	const isAuth = user && user.enable && user.id
 	const router = useRouter()
@@ -30,6 +31,12 @@ const AuthProvider = ({children, ...props}) =>
 		if (!auth?.user && user && permissionsList) 
 		{
 			dispatch(setDataAfterReloading(user, permissionsList))
+			dispatch(setCurrentPathname(router.pathname))	
+			router.replace(router.pathname)
+		}
+		if(!isLoading){
+			dispatch(setCurrentPathname(router.pathname))
+			router.replace(router.pathname)
 		}
 	}, [])
 

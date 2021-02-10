@@ -20,7 +20,6 @@ export const dashRoutes = [
 		name: 'Users',
 		icon: IconDashboard,
 		permission: permissions.USERS.LIST,
-		isMulti: true,
 		levels: [
 			{
 				path: '/users/create',

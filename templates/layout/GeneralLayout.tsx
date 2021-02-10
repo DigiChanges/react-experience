@@ -3,9 +3,11 @@ import GeneralLoader from "../../atoms/GeneralLoader";
 import {useSelector} from 'react-redux';
 import GeneralToast from '../../atoms/GeneralToast'
 
+
 const GeneralLayout = (props: any): any =>
 {
 	const {isLoading, notification} = useSelector(state => state.General)
+
 	return (
 		<Fragment>
 			{isLoading && (

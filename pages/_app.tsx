@@ -13,6 +13,7 @@ createTheme("DGDarkTheme", {
 	text: {
 		primary: "#E1E8E8",
 		secondary: "#D2D9D9",
+		yellow: "#F0E68C"
 	},
 
 	background: {
