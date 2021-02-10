@@ -14,8 +14,10 @@ const Paths = (state: State = INIT_STATE, action: PathActions) =>
 	{
 		case START_PATHNAME:
 			return {...state, startPathname: action.payload}
+
 		case SET_CURRENT_PATHNAME:
 			return {...state, currentPathname: action.payload}
+
 		default:
 			return {...state}
 	}

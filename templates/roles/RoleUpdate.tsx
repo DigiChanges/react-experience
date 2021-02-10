@@ -35,11 +35,13 @@ const RoleUpdate = (): any =>
 			? roleSelected.permissions.map((label, value) => ({label, value}))
 			: []
 	)
+	
 	const getPermissionsList = () => (
 		permissions && permissions.length > 0
 			? permissions.map((label, value) => ({label, value}))
 			: []
 	)
+
 	const formatPerms = (perms) => (
 		perms && perms.length > 0
 			? perms.map(label => (
