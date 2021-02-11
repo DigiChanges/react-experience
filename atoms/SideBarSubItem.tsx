@@ -16,10 +16,10 @@ const SideBarSubItem = ({theKey, name, path, equalPath, icon}) =>
 				Icon ? 
 				<span className="inline-flex flex-grow items-center justify-center md:justify-start h-6 w-12 text-lg text-gray-300">
            			 <Icon size={size} color={color}/>
-          		</span> 
+				</span> 
 				: 
 				<span className="inline-flex flex-grow items-center justify-center h-6 w-12 text-lg text-gray-300"/>
-				
+
 				)}
 
 				<span className="text-sm font-medium hidden md:block justify-start md:justify-start">
