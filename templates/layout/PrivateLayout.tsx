@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from '../../organisms/sidebar/SideBar';
+import SideBar from '../../organisms/SideBar';
 
 const PrivateLayout = ({children}) =>
 {

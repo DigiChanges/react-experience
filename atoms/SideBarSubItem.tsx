@@ -10,7 +10,7 @@ const SideBarSubItem = ({theKey, name, path, equalPath, icon}) =>
 
 	return (
 		<Link href={path} key={theKey}>
-			<a className={`w-full flex flex-row items-center justify-center md:justify-start h-12 transform hover:translate-y-2 hover:translate-x-0 md:hover:translate-x-2 md:hover:translate-y-0 transition-transform ease-in duration-200 ${equalPath.subEqual ? 'text-yellow-100' : 'text-gray-500 hover:text-gray-800'} cursor-pointer`}>
+			<a className={`w-full flex flex-row items-center justify-center md:justify-start h-12 transform hover:translate-y-2 hover:translate-x-0 md:hover:translate-x-2 md:hover:translate-y-0 transition-transform ease-in duration-200 ${equalPath?.subEqual ? 'text-yellow-100' : 'text-gray-500 hover:text-gray-800'} cursor-pointer`}>
 				{(
 
 				Icon ? 

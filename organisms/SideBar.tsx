@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
-import SideBarItem from '../../molecules/SideBarItem';
-import {dashRoutes} from '../../config/dashRoutes';
-import {ADMIN} from "../../config/permissions";
+import SideBarItem from '../molecules/SideBarItem';
+import {dashRoutes} from '../config/dashRoutes';
+import {ADMIN} from "../config/permissions";
 import {useSelector} from 'react-redux';
-import Image from "../../atoms/Image"
+import Image from "../atoms/Image"
 
 const SideBar = ({className}) =>
 {
