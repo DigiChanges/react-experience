@@ -59,6 +59,6 @@ export const dashRoutes = [
 		path: '/logout',
 		name: 'Logout',
 		icon: IconLogout,
-		permission: 'Logout'
+		permission: permissions.USERS.LIST
 	}
 ];
