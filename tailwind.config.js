@@ -57,7 +57,7 @@ module.exports = {
         900: "#7b341e",
       },
       yellow: {
-        100: "#fffff0",
+        100: "#FFFF00",
         200: "#fefcbf",
         300: "#faf089",
         400: "#f6e05e",
@@ -229,6 +229,7 @@ module.exports = {
       default: "0.25rem",
       md: "0.375rem",
       lg: "0.5rem",
+      xl: "2rem",
       full: "9999px",
     },
     borderWidth: {
@@ -253,6 +254,7 @@ module.exports = {
       kx1: "0 1px 3px 0 rgba(0, 0, 0, 0.73)",
       inner: "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)",
       outline: "0 0 0 3px rgba(66, 153, 225, 0.5)",
+      oneside: "15px 0px 15px -9px rgba(0, 0, 0, 0.4)",
       none: "none",
     },
     container: {},
@@ -709,6 +711,7 @@ module.exports = {
         "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
       colors: "background-color, border-color, color, fill, stroke",
       opacity: "opacity",
+      height: "height",
       shadow: "box-shadow",
       transform: "transform",
     },

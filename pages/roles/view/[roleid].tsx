@@ -1,11 +1,11 @@
-import React  from "react";
+import React from "react";
 import RoleView from "../../../templates/roles/RoleView";
 
 const IndexPage = (): any =>
 {
-    return (
-        <RoleView />
-    )
+	return (
+		<RoleView/>
+	)
 };
 
 export default IndexPage;

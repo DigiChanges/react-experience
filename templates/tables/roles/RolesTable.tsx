@@ -1,103 +1,55 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import DataTable from "react-data-table-component";
 import ListRolesTemplateColumns from "./ListRolesTemplateColumns";
 import TableUsersStyle from "../../../assets/customStyles/TableUsersStyle";
-// import { getUsers } from '../../../redux/users/actions';
-import { getPermissions } from '../../../redux/auth/actions';
-import { getRoles } from '../../../redux/roles/actions';
-import { useDispatch, useSelector } from 'react-redux';
+import {getRoles} from '../../../redux/roles/actions';
+import {useDispatch, useSelector} from 'react-redux';
 import Title from '../../../atoms/Title';
 
-const RolesTable = () => {
+const RolesTable = () =>
+{
 
-  const dispatch = useDispatch()
-  // const { usersList } = useSelector( state => state.Users )
-  // const { permissions } = useSelector( state => state.Auth )
-  const { rolesList } = useSelector( state => state.Roles )
+	const dispatch = useDispatch()
+	const {rolesList} = useSelector(state => state.Roles)
 
-  useEffect(() => {
-    // dispatch( getUsers() )
-    dispatch( getRoles() )
-    dispatch( getPermissions() )
-  }, []);
+	useEffect(() =>
+	{
+		dispatch(getRoles())
+	}, []);
 
-  //TODO REMOVE COMMENTED CODE
+	const getRoleRow = (id, name, slug) => ({
+		id,
+		name,
+		slug
+	})
 
-  //wait some seconds before consuming the api
-  // const getUsersData = async () => {
-  //   console.log('Waiting to get users data')
-  //   setTimeout(() => {
-  //     console.log('Dispatching users data')
-  //     dispatch( getUsers() )
-  //   }, 2000);
-  // }
-  // const getPermissionsData = async () => {
-  //   console.log('Waiting to get permissions data')
-  //   setTimeout(() => {
-  //     console.log('Dispatching permissions data')
-  //     dispatch( getPermissions() )
-  //   }, 4000)
-  // }
-  // const getRolesData = async () => {
-  //   console.log('Waiting to get roles data')
-  //   setTimeout(() => {
-  //     console.log('Dispatching roles data')
-  //     dispatch( getRoles() )
-  //   }, 10000)
-  // }
+	const getRows = () => rolesList.map(r => getRoleRow(r.id, r.name, r.slug))
 
- /* const mapRoles = roles => {
-    if (roles && roles.length > 0) {
-      let rolesData = ''
-      roles.map(role => {
-        rolesData = rolesData.concat(`${ role.name } `)
-      })
-      return rolesData
-    } 
-    return ''
-  }
-  */
-
-  const getRoleRow = (id, name, slug) => ({
-    id,
-    name,
-    slug
-  })
-
-  const getRows = () => rolesList.map(r => getRoleRow(r.id, r.name, r.slug))
-
-  return (
-    <>
-      <div className="px-16 pt-20">
-        <Title className="text-5xl text-gray-500" titleType="h1" >
-        Roles
-        </Title>
-        {rolesList && (
-          rolesList.length > 0 ? (
-            <DataTable
-              columns={ListRolesTemplateColumns}
-              data={getRows()}
-              title={false}
-              striped={true}
-              noHeader
-              theme="DGDarkTheme"
-              customStyles={TableUsersStyle}
-              className="flex-col md:flex-row"
-
-              //TODO: REMOVE COMMENTED CODE
-
-              // progressPending={pending}
-              // progressComponent={
-              //   <CustomLoader cssClassName={"justify-center text-gray-700"} />
-              // }
-            />
-          ) : (
-            <p>No Roles</p>
-          )
-        )}
-      </div>
-    </>
-  );
+	return (
+		<>
+			<div className="px-16 pt-20 rounded-xl">
+				<Title className="text-5xl text-gray-500" titleType="h1">
+					Roles
+				</Title>
+				{rolesList && (
+					rolesList.length > 0 ? (
+						<DataTable
+							columns={ListRolesTemplateColumns}
+							data={getRows()}
+							title={false}
+							striped={true}
+							noHeader
+							theme="DGDarkTheme"
+							customStyles={TableUsersStyle}
+							className="flex-col md:flex-row"
+						/>
+					) : (
+						<p>No Roles</p>
+					)
+				)}
+			</div>
+		</>
+	);
 };
 
 export default RolesTable;

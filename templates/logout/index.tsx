@@ -1,16 +1,17 @@
-import { useRouter } from 'next/router'
-import { removeSession } from '../../helpers/authSession'
+import React from "react";
+import {useRouter} from 'next/router'
+import {removeSession} from '../../helpers/authSession'
 
-const Logout = () => {
-  
-  const router = useRouter()
+const Logout = () =>
+{
+	const router = useRouter()
 
-  removeSession()
-  router.replace('/login')
+	removeSession()
+	router.replace('/login')
 
-  return (
-    <div>Logging Out</div>
-  )
+	return (
+		<div>Logging Out</div>
+	)
 }
 
-export default Logout
+export default Logout;
