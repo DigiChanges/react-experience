@@ -3,6 +3,7 @@ import UserUpdate from "../../../templates/users/UserUpdate";
 import {useDispatch, useSelector} from 'react-redux'
 import {unselectedUser} from '../../../redux/users/actions';
 import {getRoles} from '../../../redux/roles/actions';
+import { getPermissions } from "../../../redux/actions";
 
 const IndexPage = (): any =>
 {
@@ -10,11 +11,12 @@ const IndexPage = (): any =>
 
 	const {userSelected} = useSelector(state => state.Users);
 	const {rolesList} = useSelector(state => state.Roles);
-	const {permissions} = useSelector(store => store.Auth);
+	const {permissionsList} = useSelector(store => store.Auth);
 
 	useEffect(() =>
 	{
 		dispatch(getRoles());
+		dispatch(getPermissions())
 		//unmount component
 		return () =>
 		{
@@ -22,7 +24,7 @@ const IndexPage = (): any =>
 		}
 	}, [])
 	return (
-		<UserUpdate userSelected={userSelected} rolesList={rolesList} permissions={permissions}/>
+		<UserUpdate userSelected={userSelected} rolesList={rolesList} permissions={permissionsList}/>
 	)
 };
 

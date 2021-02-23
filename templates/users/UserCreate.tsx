@@ -10,32 +10,34 @@ import Title from "../../atoms/Title";
 import ErrorForm from "../../atoms/ErrorForm";
 import Button from "../../atoms/Button";
 import Label from "../../atoms/Label";
+import { getPermissions } from "../../redux/auth/actions";
 
 const UserCreate = (): any =>
 {
 	const dispatch = useDispatch()
-	const {permissions} = useSelector(store => store.Auth);
+	const {permissionsList} = useSelector(store => store.Auth);
 	const {rolesList} = useSelector(store => store.Roles);
 
 	useEffect(() =>
 	{
 		dispatch(getRoles());
+		dispatch(getPermissions());
 	}, []);
 
 	//TODO child key issue
-	const getRolesList = () => (
+	const getRolesList = () => {
+		return(
 		rolesList && rolesList.length > 0
-			? rolesList.map(role => ({label: role.name, id: role.id}))
+			? rolesList.map(role => ({label: role.name, value: role.id}))
 			: []
-	);
+	)};
 
 	//TODO child key issue
 	const getPermissionsList = () => (
-		permissions && permissions.length > 0
-			? permissions.map((label, value) => ({label, value}))
+		permissionsList && permissionsList.length > 0
+			? permissionsList.map((label, value) => ({label, value}))
 			: []
 	);
-
 	return (
 		<section className="text-gray-500 body-font bg-gray-900 w-128">
 			<div className="w-full px-5">
@@ -65,6 +67,7 @@ const UserCreate = (): any =>
 								permissions,
 								roles
 							} = values
+							
 							dispatch(
 								createUser(
 									firstName,
