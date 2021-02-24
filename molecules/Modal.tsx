@@ -11,7 +11,7 @@ const Modal = (props: any): any =>
                 style={{background: "rgba(0,0,0,0.8)"}}
             >
               <div className="container mx-auto h-full flex justify-center items-center">
-				  {children}
+			{children}
               </div>
             </div>}
 		</>

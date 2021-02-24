@@ -9,7 +9,7 @@ const GeneralLoader = ({
   cssSpinnerContainer,
   cssSpinner 
 }) => {
-  	
+  
 	const dispatch = useDispatch()	
 	const router = useRouter()
 

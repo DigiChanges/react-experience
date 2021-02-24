@@ -105,14 +105,14 @@ function* createNewRole(
 }
 
 function* updateRole({
-						 payload: {
-							 id,
-							 name,
-							 slug,
-							 permissions,
-							 enable
-						 }
-					 })
+		payload: {
+			id,
+			name,
+			slug,
+			permissions,
+			enable
+		}
+	})
 {
 	yield put(startGeneralLoading())
 	try

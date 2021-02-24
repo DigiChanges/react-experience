@@ -1,18 +1,18 @@
 import axios from 'axios'
 import {apiResult} from '../api/apiResult'
 /*
- 2xx Success
- 200 OK
- 201 Created
- 204 No Content
- 4xx Client errors
- 401 Unauthorized
- 403 Forbidden
- 404 Not Found
- 412 Precondition Failed
- 5xx Server errors
- 500 Internal Server Error
- 501 Not Implemented
+2xx Success
+200 OK
+201 Created
+204 No Content
+4xx Client errors
+401 Unauthorized
+403 Forbidden
+404 Not Found
+412 Precondition Failed
+5xx Server errors
+500 Internal Server Error
+501 Not Implemented
  */
 const HTTP_SUCCESS_STATUS = [200, 201, 204]
 const HTTP_ERROR_STATUS = [400, 401, 403, 404, 412, 500, 501]
@@ -20,12 +20,12 @@ const HTTP_ERROR_STATUS = [400, 401, 403, 404, 412, 500, 501]
 class HttpRequest
 {
 	static async request({
-							 url = '',
-							 method = 'POST',
-							 headers,
-							 path = '',
-							 body = {}
-						 })
+		url = '',
+		method = 'POST',
+		headers,
+		path = '',
+		body = {}
+	})
 	{
 		if (headers === null)
 		{
