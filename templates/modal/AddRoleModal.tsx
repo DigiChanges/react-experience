@@ -41,7 +41,7 @@ const AddRoleModal = ({open}: any): any =>
 							<Form>
 								<div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
 									<Title titleType="h1"
-										   className="font-hairline text-5xl text-gray-400 mb-4 text-center">
+											className="font-hairline text-5xl text-gray-400 mb-4 text-center">
 										Add Role
 									</Title>
 									<div className="mb-4">

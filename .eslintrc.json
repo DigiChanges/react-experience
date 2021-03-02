@@ -50,12 +50,12 @@
         "@typescript-eslint/explicit-module-boundary-types": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx",".ts", ".tsx"] }],
         "jsx-a11y/anchor-is-valid": [
-          "error",
-          {
-            "components": ["Link"],
-            "specialLink": ["hrefLeft", "hrefRight"],
-            "aspects": ["invalidHref", "preferButton"]
-          }
+        "error",
+        {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
+        }
         ],
         "@typescript-eslint/no-var-requires": "off"
     }

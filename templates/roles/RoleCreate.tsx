@@ -4,8 +4,7 @@ import RoleSchema from "../../SchemaValidations/RoleSchema";
 import Select from "../../atoms/Select";
 import Router from "next/router";
 import {useDispatch, useSelector} from 'react-redux'
-import {createRole} from '../../redux/roles/actions'
-import {getRoles} from '../../redux/roles/actions';
+import {createRole, getRoles} from '../../redux/roles/actions'
 import Title from "../../atoms/Title"
 import ErrorForm from "../../atoms/ErrorForm"
 import Button from "../../atoms/Button";

@@ -21,21 +21,21 @@ interface OwnProps
 }
 
 const MultiSelect: React.FC<OwnProps & FieldProps> = ({
-														  items,
-														  isMulti,
-														  primary25,
-														  primary,
-														  neutral0,
-														  neutral20,
-														  neutral50,
-														  neutral80,
-														  neutral10,
-														  neutral30,
-														  primary50,
-														  danger,
-														  dangerLight,
-														  ...selectProps
-													  }) =>
+		items,
+		isMulti,
+		primary25,
+		primary,
+		neutral0,
+		neutral20,
+		neutral50,
+		neutral80,
+		neutral10,
+		neutral30,
+		primary50,
+		danger,
+		dangerLight,
+		...selectProps
+		}) =>
 {
 	const onChange = (value) =>
 	{
