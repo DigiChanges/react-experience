@@ -38,6 +38,7 @@
     "lint": "^0.7.0",
     "multiselect-react-dropdown": "^1.6.1",
     "next": "^10.0.3",
+    "nextjs-breadcrumbs": "^0.9.9",
     "react": "16.13.1",
     "react-cookie": "^4.0.3",
     "react-data-table-component": "^6.11.5",
