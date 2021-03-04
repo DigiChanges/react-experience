@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import SideBarSubItem from "../atoms/SideBarSubItem";
 import { ADMIN } from "../config/permissions";
+import { useRouter } from "next/router";
 
 const size = 6; // TODO: Change config style
 const color = "gray-500"; // TODO: Change config style
@@ -17,6 +18,8 @@ const SideBarItem = ({
   userPermissions,
   isLoading,
 }) => {
+  const router = useRouter();
+  console.log("Caminito", router.pathname === path);
   const [open, setOpen] = useState(false);
   const multi = levels && levels.length > 0;
   const Icon: any = icon;
@@ -54,16 +57,16 @@ const SideBarItem = ({
       : "";
 
   return (
-    <li className="justify-center" key={theKey}>
+    <li className="justify-center w-full" key={theKey}>
       {multi ? (
         <div>
           <a
             onClick={toggleMenu}
             href="#"
-            className={`w-full flex flex-row items-center justify-center md:justify-start h-12 transform hover:translate-y-2 hover:translate-x-0 md:hover:translate-x-2 md:hover:translate-y-0 transition-transform ease-in duration-200 ${
+            className={`w-full flex flex-row items-center justify-center md:justify-start h-12  ${
               equalPath.equal
-                ? "text-yellow-100"
-                : "text-gray-500 hover:text-gray-800"
+                ? "text-white border-r-3 border-blue-700 "
+                : "text-gray-500 hover:text-white"
             } cursor-pointer`}
           >
             {Icon ? (
@@ -98,10 +101,10 @@ const SideBarItem = ({
       ) : (
         <Link href={path} key={theKey}>
           <a
-            className={`flex flex-row items-center justify-center md:justify-start h-12 transform hover:translate-y-2 hover:translate-x-0 md:hover:translate-x-2 md:hover:translate-y-0 transition-transform ease-in duration-200  ${
+            className={`flex flex-row items-center justify-center md:justify-start h-12 ${
               equalPath.equal
-                ? "text-yellow-100"
-                : "text-gray-500 hover:text-gray-800"
+                ? "text-white border-r-2 border-blue-600"
+                : "text-gray-500 hover:text-white"
             } cursor-pointer`}
           >
             {Icon ? (
