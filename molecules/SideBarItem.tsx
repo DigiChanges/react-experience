@@ -19,10 +19,10 @@ const SideBarItem = ({
   isLoading,
 }) => {
   const router = useRouter();
-  console.log("Caminito", router.pathname === path);
   const [open, setOpen] = useState(false);
   const multi = levels && levels.length > 0;
   const Icon: any = icon;
+  const isLogoutClass = path === "/logout" ? "mt-auto" : " ";
 
   const hasPermission = (permission, user) =>
     (userPermissions && user?.roles && userPermissions.includes(permission)) ||
@@ -55,9 +55,8 @@ const SideBarItem = ({
           );
         })
       : "";
-
   return (
-    <li className="justify-center w-full" key={theKey}>
+    <li className={`justify-center w-full ${isLogoutClass}`} key={theKey}>
       {multi ? (
         <div>
           <a
@@ -77,7 +76,9 @@ const SideBarItem = ({
               <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400" />
             )}
 
-            <span className="text-sm font-medium hidden md:block">{name}</span>
+            <span className="text-sm font-extrabold hidden md:block">
+              {name}
+            </span>
 
             {open && multi ? (
               <span className="inline-flex items-center justify-end">-</span>
@@ -91,7 +92,7 @@ const SideBarItem = ({
           <div
             className={
               open
-                ? "dropdown-menu block w-100 flex flex-col pl-5"
+                ? "dropdown-menu w-100 flex flex-col pl-5"
                 : "dropdown-menu hidden w-full"
             }
           >
@@ -114,7 +115,9 @@ const SideBarItem = ({
             ) : (
               <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400" />
             )}
-            <span className="text-sm font-medium hidden md:block">{name}</span>
+            <span className="text-sm font-extrabold hidden md:block">
+              {name}
+            </span>
           </a>
         </Link>
       )}

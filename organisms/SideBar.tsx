@@ -16,10 +16,6 @@ const SideBar = ({ className }) => {
 
   const getDashRoutes = () =>
     dashRoutes.map((prop: any, key) => {
-      console.log(
-        "🚀 ~ file: SideBar.tsx ~ line 33 ~ dashRoutes.map ~ currentPathname",
-        currentPathname
-      );
       return prop.children ? (
         <Fragment key={key} />
       ) : (
@@ -46,14 +42,14 @@ const SideBar = ({ className }) => {
 
   return (
     <div className={className}>
-      <div className="flex flex-row md:flex-col w-full w-full  rounded-r-3xl overflow-hidden">
+      <div className="flex flex-row md:flex-col w-full h-full rounded-r-3xl overflow-hidden">
         {/* <div className="flex items-center justify-center h-20 shadow-md">
           <Image
             image={"/logo.png"}
             className="pt-0 md:pt-5 h-16 w-32 md:h-32 md:w-auto pl-3 md:pl-0"
           />
         </div> */}
-        <ul className="flex flex-row md:flex-col py-4 items-center justify-end md:items-start md:justify-center w-full ">
+        <ul className="flex flex-row md:flex-col py-4 items-center h-full justify-end md:items-start md:justify-center w-full ">
           {getDashRoutes()}
         </ul>
       </div>

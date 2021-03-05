@@ -21,10 +21,10 @@ const SideBarSubItem = ({ theKey, name, path, equalPath, icon }) => {
             <Icon size={size} color={color} />
           </span>
         ) : (
-          <span className="inline-flex w-8 items-center justify-center h-6 w-12 text-lg text-gray-300" />
+          <span className="inline-flex w-12 items-center justify-center h-6 text-lg text-gray-300" />
         )}
 
-        <span className="text-sm font-medium hidden md:block justify-start md:justify-start">
+        <span className="text-sm font-extrabold hidden md:block justify-start md:justify-start">
           {name}
         </span>
       </a>
