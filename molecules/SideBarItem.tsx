@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import SideBarSubItem from "../atoms/SideBarSubItem";
 import { ADMIN } from "../config/permissions";
+import { useRouter } from "next/router";
 
 const size = 6; // TODO: Change config style
 const color = "gray-500"; // TODO: Change config style
@@ -17,9 +18,11 @@ const SideBarItem = ({
   userPermissions,
   isLoading,
 }) => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const multi = levels && levels.length > 0;
   const Icon: any = icon;
+  const isLogoutClass = path === "/logout" ? "mt-auto" : " ";
 
   const hasPermission = (permission, user) =>
     (userPermissions && user?.roles && userPermissions.includes(permission)) ||
@@ -52,18 +55,17 @@ const SideBarItem = ({
           );
         })
       : "";
-
   return (
-    <li className="justify-center" key={theKey}>
+    <li className={`justify-center w-full ${isLogoutClass}`} key={theKey}>
       {multi ? (
         <div>
           <a
             onClick={toggleMenu}
             href="#"
-            className={`w-full flex flex-row items-center justify-center md:justify-start h-12 transform hover:translate-y-2 hover:translate-x-0 md:hover:translate-x-2 md:hover:translate-y-0 transition-transform ease-in duration-200 ${
+            className={`w-full flex flex-row items-center justify-center md:justify-start h-12  ${
               equalPath.equal
-                ? "text-yellow-100"
-                : "text-gray-500 hover:text-gray-800"
+                ? "text-white border-r-3 border-blue-700 "
+                : "text-gray-500 hover:text-white"
             } cursor-pointer`}
           >
             {Icon ? (
@@ -74,7 +76,9 @@ const SideBarItem = ({
               <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400" />
             )}
 
-            <span className="text-sm font-medium hidden md:block">{name}</span>
+            <span className="text-sm font-extrabold hidden md:block">
+              {name}
+            </span>
 
             {open && multi ? (
               <span className="inline-flex items-center justify-end">-</span>
@@ -88,7 +92,7 @@ const SideBarItem = ({
           <div
             className={
               open
-                ? "dropdown-menu block w-100 flex flex-col pl-5"
+                ? "dropdown-menu w-100 flex flex-col pl-5"
                 : "dropdown-menu hidden w-full"
             }
           >
@@ -98,10 +102,10 @@ const SideBarItem = ({
       ) : (
         <Link href={path} key={theKey}>
           <a
-            className={`flex flex-row items-center justify-center md:justify-start h-12 transform hover:translate-y-2 hover:translate-x-0 md:hover:translate-x-2 md:hover:translate-y-0 transition-transform ease-in duration-200  ${
+            className={`flex flex-row items-center justify-center md:justify-start h-12 ${
               equalPath.equal
-                ? "text-yellow-100"
-                : "text-gray-500 hover:text-gray-800"
+                ? "text-white border-r-2 border-blue-600"
+                : "text-gray-500 hover:text-white"
             } cursor-pointer`}
           >
             {Icon ? (
@@ -111,7 +115,9 @@ const SideBarItem = ({
             ) : (
               <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400" />
             )}
-            <span className="text-sm font-medium hidden md:block">{name}</span>
+            <span className="text-sm font-extrabold hidden md:block">
+              {name}
+            </span>
           </a>
         </Link>
       )}
