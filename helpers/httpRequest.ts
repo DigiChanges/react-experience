@@ -1,5 +1,7 @@
 import axios from 'axios'
 import {apiResult} from '../api/apiResult'
+import {getCookies, getNowTimestamp, getSession} from "./authSession";
+import {config} from "../api/config";
 /*
 2xx Success
 200 OK
@@ -44,7 +46,35 @@ class HttpRequest
 
 		try
 		{
-			const res = await axios(requestOptions)
+			const { minutesDifferenceToken, expires } = getSession();
+
+			if (minutesDifferenceToken)
+			{
+				const now = getNowTimestamp();
+				const totalPercentage = -(((+minutesDifferenceToken * 20) / 100) - +minutesDifferenceToken)
+				const newExpires = expires - (totalPercentage*60);
+				const isValid = newExpires < now;
+
+				if (isValid)
+				{
+					const pathKeepAlive = config.apiGateway.routes.auth.keepAlive;
+					const url = `${config.apiGateway.server.protocol}:${config.apiGateway.server.hostname}:${config.apiGateway.server.port}`;
+
+					const options: { [key: string]: any } = {
+						url: `${url}/${pathKeepAlive}`,
+						method: "POST",
+						mode: requestOptions.mode,
+						headers: requestOptions.headers
+					};
+
+					console.log(options);
+					const res1 = await axios(options);
+					console.log('res1');
+					console.log(res1);
+				}
+			}
+
+			const res = await axios(requestOptions);
 			const {data} = res
 			if (HTTP_SUCCESS_STATUS.includes(res.status))
 			{
@@ -61,6 +91,7 @@ class HttpRequest
 			}
 		} catch (e)
 		{
+			console.log(e);
 			const {message} = e.response.data
 			throw new Error(message)
 		}

@@ -70,14 +70,14 @@ export const logoutUser = (history: any): AuthAction => ({
 	payload: { history },
 });
 
-export const setDataAfterReloading = (user: any, permissionsList: any[]): AuthAction => ({
+export const setDataAfterReloading = (user: any): AuthAction => ({
 	type: SET_DATA_AFTER_RELOADING,
-	payload: { user, permissionsList }
+	payload: { user }
 })
 
-export const setDataAfterReloadingSuccess = (user: any, permissionsList: any[]): AuthAction => ({
+export const setDataAfterReloadingSuccess = (user: any): AuthAction => ({
 	type: SET_DATA_AFTER_RELOADING_SUCCESS,
-	payload: { user, permissionsList }
+	payload: { user }
 })
 
 // export const forgetPassword = (email: string): AuthAction => ({

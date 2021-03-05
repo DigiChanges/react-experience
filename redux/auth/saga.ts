@@ -1,8 +1,8 @@
 // @flow
+import Router from 'next/router';
 import {all, call, fork, put, takeEvery} from 'redux-saga/effects';
 import {signin, getAllPermissions} from '../../services/authService'
 import {notificationTypes, notification} from '../../entities/notification';
-import Router from 'next/router';
 
 import {LOGIN_USER, LOGOUT_USER, GET_PERMISSIONS, SET_DATA_AFTER_RELOADING} from './constants';
 import {startGeneralLoading, stopGeneralLoading, showGeneralNotification} from '../general/actions';
@@ -107,13 +107,11 @@ function* getPermissionsList()
 	}
 }
 
-function* setDataAfterReloading({payload: {user, permissionsList}})
+function* setDataAfterReloading({payload: {user}})
 {
-	const SUCCESS = user && permissionsList
-
-	if(SUCCESS)
+	if(user)
 	{
-		yield put(setDataAfterReloadingSuccess(user, permissionsList))
+		yield put(setDataAfterReloadingSuccess(user))
 	}
 	else
 	{

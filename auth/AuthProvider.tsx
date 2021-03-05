@@ -10,10 +10,9 @@ import PrivateLayout from '../templates/layout/PrivateLayout'
 
 const AuthProvider = ({children, ...props}) =>
 {
-
 	const dispatch = useDispatch()
 
-	const {user, permissionsList } = props.allCookies
+	const { user, permissionsList } = props.allCookies
 	
 	const auth  = useSelector(store => store.Auth);
 	const { isLoading } = useSelector(state => state.General)
@@ -23,14 +22,20 @@ const AuthProvider = ({children, ...props}) =>
 
 	useEffect(() =>
 	{
+		console.log('isAuth')
+		console.log(isAuth)
+		console.log(auth)
+		console.log(user)
+		console.log(permissionsList)
+
 		if (!isAuth)
 		{
 			dispatch(setStartPathname(router.pathname))
 			router.replace('/login')
 		}
-		if (!auth?.user && user && permissionsList) 
+		if (!auth?.user && user)
 		{
-			dispatch(setDataAfterReloading(user, permissionsList))
+			dispatch(setDataAfterReloading(user))
 			dispatch(setCurrentPathname(router.pathname))	
 			router.replace(router.pathname)
 		}
