@@ -72,7 +72,7 @@ class HttpRequest
 
 					const res1 = await axios(options);
 
-					setSession(res1.data.data)
+					setSession(res1.data.data);
 
 					const newHeader = {
 							'Content-Type': 'application/json',

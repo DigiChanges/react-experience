@@ -7,7 +7,7 @@ import {notificationTypes, notification} from '../../entities/notification';
 import {LOGIN_USER, LOGOUT_USER, GET_PERMISSIONS, SET_DATA_AFTER_RELOADING} from './constants';
 import {startGeneralLoading, stopGeneralLoading, showGeneralNotification} from '../general/actions';
 import {getPermissionsSuccess, loginUserSuccess, setDataAfterReloadingSuccess} from './actions';
-import {removeSession, setSession, setPermsCookies} from "../../helpers/authSession";
+import {removeSession, setSession} from "../../helpers/authSession";
 
 function* login({payload: {email, password}})
 {
@@ -80,8 +80,7 @@ function* getPermissionsList()
 		const {data} = res
 		if (data)
 		{
-			setPermsCookies(data)
-			yield put(getPermissionsSuccess(data))
+			yield put(getPermissionsSuccess(data));
 		}
 		else
 		{
@@ -185,23 +184,27 @@ function* setDataAfterReloading({payload: {user}})
 
 export function* watchLoginUser(): any
 {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	yield takeEvery(LOGIN_USER, login);
 }
 
 export function* watchLogoutUser(): any
 {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	yield takeEvery(LOGOUT_USER, logout);
 }
 
 export function* watchGetPermissions(): any
 {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	yield takeEvery(GET_PERMISSIONS, getPermissionsList);
 }
 export function* watchSetDataAfterReloading(): any
 {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	yield takeEvery(SET_DATA_AFTER_RELOADING, setDataAfterReloading);
 }
