@@ -1,7 +1,8 @@
 import axios from 'axios'
 import {apiResult} from '../api/apiResult'
-import {getCookies, getNowTimestamp, getSession} from "./authSession";
+import {getCookies, getNowTimestamp, getSession, setSession} from "./authSession";
 import {config} from "../api/config";
+import {getHeader} from "../api/auth";
 /*
 2xx Success
 200 OK
@@ -33,12 +34,14 @@ class HttpRequest
 		{
 			throw new Error('Token Expired')
 		}
-		const requestOptions: { [key: string]: any } = {
+
+		let requestOptions: { [key: string]: any } = {
 			method,
 			url: `${url}${path}`,
 			mode: 'cors',
 			headers: Object.assign({}, headers)
 		}
+
 		if (typeof body === 'object' && Object.keys(body).length !== 0)
 		{
 			requestOptions.data = JSON.stringify(body)
@@ -67,14 +70,21 @@ class HttpRequest
 						headers: requestOptions.headers
 					};
 
-					console.log(options);
 					const res1 = await axios(options);
-					console.log('res1');
-					console.log(res1);
+
+					setSession(res1.data.data)
+
+					const newHeader = {
+							'Content-Type': 'application/json',
+							Authorization: `Bearer ${res1.data.data.token}`
+					}
+
+					requestOptions = {...requestOptions, headers: newHeader}
 				}
 			}
 
 			const res = await axios(requestOptions);
+
 			const {data} = res
 			if (HTTP_SUCCESS_STATUS.includes(res.status))
 			{

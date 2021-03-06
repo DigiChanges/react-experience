@@ -12,7 +12,7 @@ const AuthProvider = ({children, ...props}) =>
 {
 	const dispatch = useDispatch()
 
-	const { user, permissionsList } = props.allCookies
+	const { user } = props.allCookies
 	
 	const auth  = useSelector(store => store.Auth);
 	const { isLoading } = useSelector(state => state.General)
@@ -22,12 +22,6 @@ const AuthProvider = ({children, ...props}) =>
 
 	useEffect(() =>
 	{
-		console.log('isAuth')
-		console.log(isAuth)
-		console.log(auth)
-		console.log(user)
-		console.log(permissionsList)
-
 		if (!isAuth)
 		{
 			dispatch(setStartPathname(router.pathname))
@@ -39,7 +33,8 @@ const AuthProvider = ({children, ...props}) =>
 			dispatch(setCurrentPathname(router.pathname))	
 			router.replace(router.pathname)
 		}
-		if(!isLoading){
+		if(!isLoading)
+		{
 			dispatch(setCurrentPathname(router.pathname))
 			router.replace(router.pathname)
 		}

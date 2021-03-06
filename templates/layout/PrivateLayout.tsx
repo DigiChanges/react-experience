@@ -6,7 +6,7 @@ const PrivateLayout = ({ children }) => {
   return (
     <>
       <div className="flex flex-col md:flex-row bg-gray-900">
-        <SideBar className="m-2 w-auto md:w-64 min-h-auto md:min-h-screen bg-gray-800 rounded-xl shadow-md overflow-hidden" />
+        <SideBar className="m-4 w-auto md:w-64 min-h-auto md:min-h-screen bg-gray-800 rounded-xl shadow-md overflow-hidden" />
         <div className="flex flex-col">
           <Breadcrumb />
         </div>
