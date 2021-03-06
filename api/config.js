@@ -31,7 +31,8 @@ export const config = {
     routes: {
       auth: {
         login: `${BACKEND_BASE_PATH}/auth/login`,
-        permissionsGetAll: `${BACKEND_BASE_PATH}/auth/permissions`
+        permissionsGetAll: `${BACKEND_BASE_PATH}/auth/permissions`,
+        keepAlive: `${BACKEND_BASE_PATH}/auth/keepAlive`
       },
       users: {
         getAll: `${BACKEND_BASE_PATH}/users`,

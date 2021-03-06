@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "../auth/AuthProvider";
 import GeneralLayout from "../templates/layout/GeneralLayout";
-import Breadcrumb from "../molecules/Breadcrumb";
 
 createTheme("DGDarkTheme", {
   text: {

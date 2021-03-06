@@ -1,5 +1,8 @@
 import axios from 'axios'
 import {apiResult} from '../api/apiResult'
+import {getCookies, getNowTimestamp, getSession, setSession} from "./authSession";
+import {config} from "../api/config";
+import {getHeader} from "../api/auth";
 /*
 2xx Success
 200 OK
@@ -31,12 +34,14 @@ class HttpRequest
 		{
 			throw new Error('Token Expired')
 		}
-		const requestOptions: { [key: string]: any } = {
+
+		let requestOptions: { [key: string]: any } = {
 			method,
 			url: `${url}${path}`,
 			mode: 'cors',
 			headers: Object.assign({}, headers)
 		}
+
 		if (typeof body === 'object' && Object.keys(body).length !== 0)
 		{
 			requestOptions.data = JSON.stringify(body)
@@ -44,7 +49,42 @@ class HttpRequest
 
 		try
 		{
-			const res = await axios(requestOptions)
+			const { minutesDifferenceToken, expires } = getSession();
+
+			if (minutesDifferenceToken)
+			{
+				const now = getNowTimestamp();
+				const totalPercentage = -(((+minutesDifferenceToken * 20) / 100) - +minutesDifferenceToken)
+				const newExpires = expires - (totalPercentage*60);
+				const isValid = newExpires < now;
+
+				if (isValid)
+				{
+					const pathKeepAlive = config.apiGateway.routes.auth.keepAlive;
+					const url = `${config.apiGateway.server.protocol}:${config.apiGateway.server.hostname}:${config.apiGateway.server.port}`;
+
+					const options: { [key: string]: any } = {
+						url: `${url}/${pathKeepAlive}`,
+						method: "POST",
+						mode: requestOptions.mode,
+						headers: requestOptions.headers
+					};
+
+					const res1 = await axios(options);
+
+					setSession(res1.data.data);
+
+					const newHeader = {
+							'Content-Type': 'application/json',
+							Authorization: `Bearer ${res1.data.data.token}`
+					}
+
+					requestOptions = {...requestOptions, headers: newHeader}
+				}
+			}
+
+			const res = await axios(requestOptions);
+
 			const {data} = res
 			if (HTTP_SUCCESS_STATUS.includes(res.status))
 			{
@@ -61,6 +101,7 @@ class HttpRequest
 			}
 		} catch (e)
 		{
+			console.log(e);
 			const {message} = e.response.data
 			throw new Error(message)
 		}

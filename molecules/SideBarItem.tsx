@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import SideBarSubItem from "../atoms/SideBarSubItem";
 import { ADMIN } from "../config/permissions";
-import { useRouter } from "next/router";
 
 const size = 6; // TODO: Change config style
 const color = "gray-500"; // TODO: Change config style
@@ -18,7 +17,6 @@ const SideBarItem = ({
   userPermissions,
   isLoading,
 }) => {
-  const router = useRouter();
   const [open, setOpen] = useState(false);
   const multi = levels && levels.length > 0;
   const Icon: any = icon;
@@ -59,9 +57,8 @@ const SideBarItem = ({
     <li className={`justify-center w-full ${isLogoutClass}`} key={theKey}>
       {multi ? (
         <div>
-          <a
+          <button
             onClick={toggleMenu}
-            href="#"
             className={`w-full flex flex-row items-center justify-center md:justify-start h-12  ${
               equalPath.equal
                 ? "text-white border-r-3 border-blue-700 "
@@ -87,7 +84,7 @@ const SideBarItem = ({
             ) : (
               ""
             )}
-          </a>
+          </button>
 
           <div
             className={
