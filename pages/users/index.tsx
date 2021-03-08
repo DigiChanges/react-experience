@@ -1,37 +1,22 @@
-import React, {useState} from "react";
-import UsersTable from "../../templates/tables/users/UsersTable";
-import ConfirmDeleteUser from "../../templates/modal/ConfirmDeleteUser";
-import IconPlus from "../../atoms/Icons/IconPlus";
-import Link from "next/link";
+import React, {useEffect} from "react";
+import {useRouter} from "next/router";
 
-const UsersPage = (): any =>
+const UsersIndexPage = (): any =>
 {
+	const router = useRouter();
 
-	const [booleanConfirmDelete, setBooleanConfirmDelete] = useState(false);
-
-	const openConfirmDelete = (): any =>
+	useEffect(() =>
 	{
-		setBooleanConfirmDelete(!booleanConfirmDelete);
-	};
+			router.replace('/users/list')
+	})
 
 	return (
 		<>
-			<div className="container mx-auto w-full h-full md:h-screen flex flex-col justify-between">
-				<UsersTable/>
-				{booleanConfirmDelete ? (
-					<ConfirmDeleteUser close={openConfirmDelete}/>
-				) : null}
-				<div className="flex justify-end items-end pr-8 mb-8">
-					<Link href="/users/create">
-						<button
-							className="p-0 w-16 h-16 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
-							<IconPlus/>
-						</button>
-					</Link>
-				</div>
+			<div>
+				Redirecting...
 			</div>
 		</>
 	);
 };
 
-export default UsersPage;
+export default UsersIndexPage;

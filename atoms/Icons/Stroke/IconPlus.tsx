@@ -1,10 +1,9 @@
 import React  from "react";
 
-const IconPlus = ({ size, color }): any => (
+const IconPlus = (): any => (
     <svg
       viewBox="0 0 20 20"
       enableBackground="new 0 0 20 20"
-      className={`h-${size} w-${size} text-${color}`}
     >
       <path
         fill="#FFFFFF"

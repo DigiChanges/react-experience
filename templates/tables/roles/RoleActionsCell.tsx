@@ -2,9 +2,9 @@ import {Fragment, useState} from "react";
 import {useDispatch} from 'react-redux';
 import Router from 'next/router';
 import {selectedRole} from '../../../redux/roles/actions';
-import IconEye from "../../../atoms/Icons/IconEye";
-import IconPencilAlt from "../../../atoms/Icons/IconPencilAlt";
-import IconTrash from "../../../atoms/Icons/IconTrash";
+import IconEye from "../../../atoms/Icons/Stroke/IconEye";
+import IconPencilAlt from "../../../atoms/Icons/Stroke/IconPencilAlt";
+import IconTrash from "../../../atoms/Icons/Stroke/IconTrash";
 import ConfirmDelete from "../../modal/ConfirmDeleteUser"
 
 
