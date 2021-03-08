@@ -1,8 +1,7 @@
 import React from "react";
 
-const IconEye = ({ size, color }): any => (
+const IconEye = (): any => (
       <svg
-        className={`h-${size} w-${size} text-${color}`}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

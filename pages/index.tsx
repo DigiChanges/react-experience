@@ -4,7 +4,6 @@ import {useSelector} from 'react-redux'
 
 const HomePage = (): any =>
 {
-
 	const router = useRouter()
 	const {startPathname} = useSelector(state => state.Paths)
 

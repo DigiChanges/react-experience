@@ -10,6 +10,13 @@ module.exports = {
   separator: ":",
   darkMode: "media",
   theme: {
+    gridTemplateAreas: {
+      'md-private-layout': [
+        'header header header',
+        'sidebar main main',
+        'footer footer footer',
+      ]
+    },
     screens: {
       sm: "640px",
       md: "768px",
@@ -23,6 +30,13 @@ module.exports = {
       black: "#000",
       white: "#fff",
 
+      "main-gray": {
+        100: "#989A9E",
+        200: "#76797E",
+        300: "#5A5E63",
+        400: "#3F4349",
+        500: "#1E2125",
+      },
       gray: {
         100: "#f7fafc",
         200: "#edf2f7",
@@ -229,6 +243,7 @@ module.exports = {
       default: "0.25rem",
       md: "0.375rem",
       lg: "0.5rem",
+      "lg-md": "1rem",
       xl: "2rem",
       full: "9999px",
     },
@@ -883,5 +898,7 @@ module.exports = {
     animation: ["responsive"],
   },
   corePlugins: {},
-  plugins: [],
+  plugins: [
+      require('@savvywombat/tailwindcss-grid-areas')
+  ],
 };

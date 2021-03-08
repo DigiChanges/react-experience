@@ -1,37 +1,22 @@
-import React, {useState} from "react";
-import RolesTable from "../../templates/tables/roles/RolesTable";
-import ConfirmDeleteRole from "../../templates/modal/ConfirmDeleteRole";
-import IconPlus from "../../atoms/Icons/IconPlus";
-import Link from "next/link";
+import React, {useEffect} from "react";
+import {useRouter} from "next/router";
 
-const RolesPage = (): any =>
+const RolesIndexPage = (): any =>
 {
+	const router = useRouter();
 
-	const [booleanConfirmDelete, setBooleanConfirmDelete] = useState(false);
-
-	const openConfirmDelete = (): any =>
+	useEffect(() =>
 	{
-		setBooleanConfirmDelete(!booleanConfirmDelete);
-	};
+			router.replace('/roles/list')
+	})
 
 	return (
 		<>
-			<div className="container mx-auto w-auto h-auto md:w-full md:h-screen flex flex-col justify-between">
-				<RolesTable/>
-				{booleanConfirmDelete ? (
-					<ConfirmDeleteRole close={openConfirmDelete}/>
-				) : null}
-				<div className="flex justify-center items-center md:justify-end md:items-end pr-8 mb-8">
-					<Link href="/roles/create">
-						<button
-							className="p-0 w-16 h-16 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
-							<IconPlus/>
-						</button>
-					</Link>
-				</div>
+			<div>
+				Redirecting...
 			</div>
 		</>
 	);
 };
 
-export default RolesPage;
+export default RolesIndexPage;

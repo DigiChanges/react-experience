@@ -57,6 +57,8 @@
         "aspects": ["invalidHref", "preferButton"]
         }
         ],
-        "@typescript-eslint/no-var-requires": "off"
+        "@typescript-eslint/no-var-requires": "off",
+        "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+        "@typescript-eslint/ban-ts-comment": "off"
     }
 }

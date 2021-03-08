@@ -1,12 +1,12 @@
 import dynamic from 'next/dynamic'
 import {permissions} from './permissions'
 
-const IconHome = dynamic(() => import ('../atoms/Icons/IconHome'));
-const IconDashboard = dynamic(() => import ('../atoms/Icons/IconDashboard'));
-const IconRoles = dynamic(() => import ('../atoms/Icons/IconRoles'));
-const IconLogout = dynamic(() => import ('../atoms/Icons/IconLogout'));
-const IconEye = dynamic(() => import ('../atoms/IconEye'));
-const IconPlus = dynamic(() => import ('../atoms/IconPlus'));
+const IconHome = dynamic(() => import ('../atoms/Icons/Stroke/IconHome'));
+const IconLogout = dynamic(() => import ('../atoms/Icons/Stroke/IconLogout'));
+const IconPlus = dynamic(() => import ('../atoms/Icons/Stroke/IconPlus'));
+const IconUsers = dynamic(() => import ('../atoms/Icons/Stroke/IconUsers'));
+const IconViewList = dynamic(() => import ('../atoms/Icons/Stroke/IconViewList'));
+const IconCog = dynamic(() => import ('../atoms/Icons/Stroke/IconCog'));
 
 export const dashRoutes = [
 	{
@@ -18,7 +18,7 @@ export const dashRoutes = [
 	{
 		path: '/users',
 		name: 'Users',
-		icon: IconDashboard,
+		icon: IconUsers,
 		permission: permissions.USERS.LIST,
 		levels: [
 			{
@@ -28,9 +28,9 @@ export const dashRoutes = [
 				permission: permissions.USERS.SAVE
 			},
 			{
-				path: '/users',
+				path: '/users/list',
 				name: 'List',
-				icon: IconEye,
+				icon: IconViewList,
 				permission: permissions.USERS.LIST
 			}
 		]
@@ -38,7 +38,7 @@ export const dashRoutes = [
 	{
 		path: '/roles',
 		name: 'Roles',
-		icon: IconRoles,
+		icon: IconCog,
 		permission: permissions.ROLES.LIST,
 		levels: [
 			{
@@ -48,9 +48,9 @@ export const dashRoutes = [
 				permission: permissions.ROLES.SAVE
 			},
 			{
-				path: '/roles',
+				path: '/roles/list',
 				name: 'List',
-				icon: IconEye,
+				icon: IconViewList,
 				permission: permissions.ROLES.LIST
 			}
 		]

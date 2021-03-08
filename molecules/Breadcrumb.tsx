@@ -1,12 +1,12 @@
 import React from "react";
 import { Breadcrumbs } from "nextjs-breadcrumbs";
 
-const Breadcrumb = () => {
+const Breadcrumb = ({ className }) => {
   const breadcrumb = Breadcrumbs();
   const values = breadcrumb?.props?.children?.props?.children[1];
 
   return (
-    <ul className="flex text-gray-500 text-sm lg:text-base p-5">
+    <ul className={className}>
       {values &&
         values.map((value, index, array) => {
           const isTheLast = index === array.length - 1;

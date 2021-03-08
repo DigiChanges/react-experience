@@ -2,10 +2,10 @@ import {Fragment, useState} from "react";
 import {useDispatch} from 'react-redux';
 import Router from 'next/router';
 import {selectedUser} from '../../../redux/users/actions';
-import IconEye from "../../../atoms/Icons/IconEye";
-import IconPencilAlt from "../../../atoms/Icons/IconPencilAlt";
-import IconCog from "../../../atoms/Icons/IconCog";
-import IconTrash from "../../../atoms/Icons/IconTrash";
+import IconEye from "../../../atoms/Icons/Stroke/IconEye";
+import IconPencilAlt from "../../../atoms/Icons/Stroke/IconPencilAlt";
+import IconCog from "../../../atoms/Icons/Stroke/IconCog";
+import IconTrash from "../../../atoms/Icons/Stroke/IconTrash";
 import ConfirmDelete from "../../modal/ConfirmDeleteUser"
 
 

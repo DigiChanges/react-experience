@@ -1,6 +1,6 @@
 import React from "react";
-import IconLockOpen from "../../../atoms/Icons/IconLockOpen";
-import IconLockClosed from "../../../atoms/Icons/IconLockClosed";
+import IconLockOpen from "../../../atoms/Icons/Stroke/IconLockOpen";
+import IconLockClosed from "../../../atoms/Icons/Stroke/IconLockClosed";
 
 const UserStateCell = (row: any): any =>
 {

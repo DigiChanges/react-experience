@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import SideBarSubItem from "../atoms/SideBarSubItem";
 import { ADMIN } from "../config/permissions";
-
-const size = 6; // TODO: Change config style
-const color = "gray-500"; // TODO: Change config style
+import IconChevronDown from "../atoms/Icons/Stroke/IconChevronDown";
+import IconChevronRight from "../atoms/Icons/Stroke/IconChevronRight";
 
 const SideBarItem = ({
   theKey,
@@ -54,7 +53,7 @@ const SideBarItem = ({
         })
       : "";
   return (
-    <li className={`justify-center w-full ${isLogoutClass}`} key={theKey}>
+    <li className={`w-full ${isLogoutClass} pb-1`} key={theKey}>
       {multi ? (
         <div>
           <button
@@ -62,25 +61,29 @@ const SideBarItem = ({
             className={`w-full flex flex-row items-center justify-center md:justify-start h-12  ${
               equalPath.equal
                 ? "text-white border-r-3 border-blue-700 "
-                : "text-gray-500 hover:text-white"
+                : "text-main-gray-100 hover:text-white"
             } cursor-pointer`}
           >
             {Icon ? (
-              <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400">
-                <Icon size={size} color={color} />
+              <span className={`inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300 ${
+              equalPath.equal
+                ? "text-blue-700"
+                : ""
+            }`}>
+                <Icon />
               </span>
             ) : (
-              <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400" />
+              <span className="inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300" />
             )}
 
-            <span className="text-sm font-extrabold hidden md:block">
+            <span className="text-sm font-extrabold hidden md:block pl-4">
               {name}
             </span>
 
             {open && multi ? (
-              <span className="inline-flex items-center justify-end">-</span>
+              <span className="inline-flex items-center justify-end pl-1 w-6"> <IconChevronDown/> </span>
             ) : !open && multi ? (
-              <span className="inline-flex items-center justify-end">+</span>
+              <span className="inline-flex items-center justify-end pl-1 w-6"> <IconChevronRight/> </span>
             ) : (
               ""
             )}
@@ -99,20 +102,24 @@ const SideBarItem = ({
       ) : (
         <Link href={path} key={theKey}>
           <a
-            className={`flex flex-row items-center justify-center md:justify-start h-12 ${
+            className={`flex flex-row items-center justify-center md:justify-start h-8 ${
               equalPath.equal
                 ? "text-white border-r-2 border-blue-600"
                 : "text-gray-500 hover:text-white"
             } cursor-pointer`}
           >
             {Icon ? (
-              <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400">
-                <Icon size={size} color={color} />
+              <span className={`inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300  ${
+              equalPath.equal
+                ? "text-blue-700"
+                : ""
+            }`}>
+                <Icon />
               </span>
             ) : (
-              <span className="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400" />
+              <span className="inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300" />
             )}
-            <span className="text-sm font-extrabold hidden md:block">
+            <span className="text-sm font-extrabold hidden md:block pl-4">
               {name}
             </span>
           </a>

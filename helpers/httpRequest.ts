@@ -1,8 +1,8 @@
 import axios from 'axios'
 import {apiResult} from '../api/apiResult'
-import {getCookies, getNowTimestamp, getSession, setSession} from "./authSession";
+import {getNowTimestamp, getSession, setSession} from "./authSession";
 import {config} from "../api/config";
-import {getHeader} from "../api/auth";
+
 /*
 2xx Success
 200 OK
