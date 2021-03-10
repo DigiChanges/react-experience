@@ -8,7 +8,6 @@ import IconCog from "../../../atoms/Icons/Stroke/IconCog";
 import IconTrash from "../../../atoms/Icons/Stroke/IconTrash";
 import ConfirmDelete from "../../modal/ConfirmDeleteUser"
 
-
 const UserActionsCell = (user: any): any =>
 {
 
