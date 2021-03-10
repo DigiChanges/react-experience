@@ -10,6 +10,12 @@ const IconCog = dynamic(() => import ('../atoms/Icons/Stroke/IconCog'));
 
 export const dashRoutes = [
 	{
+		path: null,
+		name: 'Menu',
+		icon: null,
+		permission: null
+	},
+	{
 		path: '/dashboard',
 		name: 'Dashboard',
 		icon: IconHome,

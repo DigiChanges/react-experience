@@ -3,8 +3,14 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
-  purge: ["./components/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}"],
-  target: "relaxed",
+  purge: [
+      "./components/**/*.{js,ts,jsx,tsx}",
+      "./atoms/**/*.{js,ts,jsx,tsx}",
+      "./molecules/**/*.{js,ts,jsx,tsx}",
+      "./organisms/**/*.{js,ts,jsx,tsx}",
+      "./templates/**/*.{js,ts,jsx,tsx}",
+      "./pages/**/*.{js,ts,jsx,tsx}"
+  ],
   prefix: "",
   important: false,
   separator: ":",
@@ -531,6 +537,7 @@ module.exports = {
     width: (theme) => ({
       auto: "auto",
       ...theme("spacing"),
+      "100/10": "10%",
       "1/2": "50%",
       "1/3": "33.333333%",
       "2/3": "66.666667%",
@@ -899,6 +906,9 @@ module.exports = {
   },
   corePlugins: {},
   plugins: [
-      require('@savvywombat/tailwindcss-grid-areas')
+      require('@savvywombat/tailwindcss-grid-areas'),
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/aspect-ratio'),
+      require('@tailwindcss/line-clamp'),
   ],
 };

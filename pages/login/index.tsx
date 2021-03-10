@@ -3,7 +3,6 @@ import Login from '../../templates/login/index';
 
 const IndexPage = () =>
 {
-
 	return (
 		<Login/>
 	)

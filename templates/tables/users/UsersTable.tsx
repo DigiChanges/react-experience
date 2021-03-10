@@ -43,7 +43,7 @@ const UsersTable = () =>
 
 	return (
 		<>
-			<div className="px-16 pt-20 rounded-xl">
+			<div className="pt-2 rounded-xl">
 				<Title className="text-5xl text-gray-500" titleType="h1">
 					Users
 				</Title>

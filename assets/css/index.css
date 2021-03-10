@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --input-background-main: #11161E;
+    --input-border-color-main: #191E25;
+}
+
+@layer base {
+  input [type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    border-radius: 80px 80px;
+    background: var(--input-background-main);
+    border-width: 1px;
+    border-color: var(--input-border-color-main);
+  }
+}

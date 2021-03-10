@@ -29,6 +29,43 @@ const SideBarItem = ({
     levels && levels.length > 0 ? setOpen(!open) : false;
   };
 
+  const getLabelOrItem = (path, theKey, name, equalPath) =>
+	{
+		if (path) {
+			return (
+        <Link href={path} key={theKey}>
+          <a
+            className={`flex flex-row items-center justify-center md:justify-start h-8 ${
+              equalPath.equal
+                ? "text-white border-r-2 border-blue-600"
+                : "text-gray-500 hover:text-white"
+            } cursor-pointer`}
+          >
+            {Icon ? (
+              <span className={`inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300  ${
+              equalPath.equal
+                ? "text-blue-700"
+                : ""
+            }`}>
+                <Icon />
+              </span>
+            ) : (
+              <span className="inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300" />
+            )}
+            <span className="text-sm font-extrabold hidden md:block pl-4">
+              {name}
+            </span>
+          </a>
+        </Link>)
+		}
+		else {
+			return (<div className="text-sm font-extrabold text-xl text-main-gray-300 hidden md:block pb-2">
+              {name}
+        </div>)
+		}
+
+	}
+
   const getDropDownItems = () =>
     levels
       ? levels.map((prop, k) => {
@@ -99,32 +136,7 @@ const SideBarItem = ({
             {open && multi ? getDropDownItems() : ""}
           </div>
         </div>
-      ) : (
-        <Link href={path} key={theKey}>
-          <a
-            className={`flex flex-row items-center justify-center md:justify-start h-8 ${
-              equalPath.equal
-                ? "text-white border-r-2 border-blue-600"
-                : "text-gray-500 hover:text-white"
-            } cursor-pointer`}
-          >
-            {Icon ? (
-              <span className={`inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300  ${
-              equalPath.equal
-                ? "text-blue-700"
-                : ""
-            }`}>
-                <Icon />
-              </span>
-            ) : (
-              <span className="inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300" />
-            )}
-            <span className="text-sm font-extrabold hidden md:block pl-4">
-              {name}
-            </span>
-          </a>
-        </Link>
-      )}
+      ) : (getLabelOrItem(path, theKey, name, equalPath))}
     </li>
   );
 };
