@@ -40,7 +40,7 @@ const UsersListPage = (): any =>
               //   )
               // );
             }}>
-						<Form className="flex md:flex-col lg:flex-row justify-between w-full text-main-gray-300 cursor-pointer">
+						<Form className="flex flex-col lg:flex-row justify-between w-full text-main-gray-300 cursor-pointer">
 							<Field
 								name="search"
 								type="search"
