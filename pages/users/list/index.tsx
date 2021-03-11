@@ -20,7 +20,7 @@ const UsersListPage = (): any =>
 
 	return (
 		<>
-			<div className="container mx-auto w-full h-full md:h-screen flex flex-col justify-between px-10">
+			<div className="flex flex-col justify-between">
 				{/*<div className="flex flex-row justify-between w-full text-main-gray-300 cursor-pointer"> /!* We need to refactor on molecule *!/*/}
 					<Formik initialValues={{
               search: "",

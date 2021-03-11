@@ -18,9 +18,9 @@ module.exports = {
   theme: {
     gridTemplateAreas: {
       'md-private-layout': [
-        'header header header',
-        'sidebar main main',
-        'footer footer footer',
+        'header header header header header header header header header header header header',
+        'sidebar main main main main main main main main main main main',
+        'footer footer footer footer footer footer footer footer footer footer footer footer',
       ]
     },
     screens: {
@@ -39,6 +39,7 @@ module.exports = {
       "main-gray": {
         100: "#989A9E",
         200: "#76797E",
+        250: "#585858",
         300: "#5A5E63",
         400: "#3F4349",
         500: "#1E2125",
@@ -53,7 +54,7 @@ module.exports = {
         700: "#11151e",
         800: "#14191f",
         900: "#070b14",
-      }, 
+      },
       red: {
         100: "#fff5f5",
         200: "#fed7d7",
