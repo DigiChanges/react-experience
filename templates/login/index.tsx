@@ -33,7 +33,7 @@ const Login = () =>
               <Form>
                 <div className="bg-gray-800 rounded-lg border-teal p-8 border-t-12 mb-6 shadow-lg">
 									<Image className="w-2/5 m-auto" image={"/logo.png"} />
-                  <Title titleType="h1" className="font-bold mb-4 text-left text-main-gray-250">
+                  <Title titleType="h6" className="font-bold mb-4 text-left text-main-gray-250">
                     LOGIN
 									</Title>
                   <div className="mb-4">

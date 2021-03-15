@@ -18,12 +18,13 @@ module.exports = {
   theme: {
     gridTemplateAreas: {
       'md-private-layout': [
-        'header header header header header header header header header header header header',
-        'sidebar main main main main main main main main main main main',
-        'footer footer footer footer footer footer footer footer footer footer footer footer',
+        'header header header header',
+        'sidebar main main main',
+        'footer footer footer footer',
       ]
     },
     screens: {
+      xs: "320px",
       sm: "640px",
       md: "768px",
       lg: "1024px",
@@ -35,6 +36,12 @@ module.exports = {
 
       black: "#000",
       white: "#fff",
+
+      primary: {
+        main: "#1174EA",
+        hover: "#1D84FF",
+        active: "#0D4F9F"
+      },
 
       "main-gray": {
         100: "#989A9E",
@@ -594,6 +601,7 @@ module.exports = {
       10: "repeat(10, minmax(0, 1fr))",
       11: "repeat(11, minmax(0, 1fr))",
       12: "repeat(12, minmax(0, 1fr))",
+      13: "15% auto",
     },
     gridColumn: {
       auto: "auto",

@@ -8,7 +8,6 @@ import Title from '../../../atoms/Title';
 
 const UsersTable = () =>
 {
-
 	const dispatch = useDispatch()
 	const {usersList} = useSelector(state => state.Users);
 
@@ -44,9 +43,6 @@ const UsersTable = () =>
 	return (
 		<>
 			<div className="pt-2 rounded-xl">
-				<Title className="text-5xl text-gray-500" titleType="h1">
-					Users
-				</Title>
 				{usersList && (
 					usersList.length > 0 ? (
 						<DataTable

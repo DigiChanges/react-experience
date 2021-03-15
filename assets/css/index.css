@@ -15,6 +15,7 @@
     --button-background-color-secondary-hover: #41454B;
     --button-background-color-secondary-click: #1B2027;
     --label-color: #FFFFFF;
+    --title-color: #FFFFFF;
 }
 
 @layer base {
@@ -48,6 +49,7 @@
         background-color: var(--button-background-color-primary);
         color: var(--button-color);
         border-radius: 80px 80px;
+        text-align: center;
     }
 
     button.button-primary:hover {
@@ -75,5 +77,35 @@
     label {
         font-weight: lighter;
         color: var(--label-color);
+    }
+
+    h1 {
+        font-size: 6rem;
+        color: var(--title-color);
+    }
+
+    h2 {
+        font-size: 5rem;
+        color: var(--title-color);
+    }
+
+    h3 {
+        font-size: 4rem;
+        color: var(--title-color);
+    }
+
+    h4 {
+        font-size: 3rem;
+        color: var(--title-color);
+    }
+
+    h5 {
+        font-size: 2rem;
+        color: var(--title-color);
+    }
+
+    h6 {
+        font-size: 1rem;
+        color: var(--title-color);
     }
 }

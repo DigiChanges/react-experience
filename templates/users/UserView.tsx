@@ -8,7 +8,6 @@ import Button from "../../atoms/Button";
 
 const UserView = () =>
 {
-
 	const dispatch = useDispatch()
 	const {userSelected} = useSelector(state => state.Users)
 
