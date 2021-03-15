@@ -5,7 +5,7 @@ import Image from "../atoms/Image";
 
 // const { user } = useSelector(store => store.Auth);
 
-const NavBar = (): any => {
+export default function NavBar() {
   return (
     <nav className="grid grid-cols-3 gap-2 justify-items-stretch p-5 shadow-md text-white " >
 
@@ -24,4 +24,3 @@ const NavBar = (): any => {
   )
 }
 
-export default NavBar;

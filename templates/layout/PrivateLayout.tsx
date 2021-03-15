@@ -4,7 +4,9 @@ import SideBar from "../../organisms/SideBar";
 import Footer from "../../organisms/Footer";
 import NavBar from "../../organisms/NavBar";
 
+
 const PrivateLayout = ({ children }) => {
+
   return (
     <>
       <div className="grid grid-areas-md-private-layout h-full text-gray-700 body-font bg-gray-900">
