@@ -13,12 +13,14 @@ export default function NavBar() {
         <Image image={"/logonav.png"} className="inline" />
         DIGICHANGES</div>
 
-      <div className="justify-self-end self-center ">
+      <div className="justify-self-end self-center grid grid-cols-2 gap-2 ">
         {/* TODO agregar userview correctamente */}
         {/* <UserView ¿¿¿??? /> */}
         {/* // const { user } = useSelector(store => store.Auth); */}
         <span className="">Usuario    </span>
-        <IconBurger />
+        <span>
+          <IconBurger />
+        </span>
       </div>
     </nav>
   )
