@@ -1,8 +1,16 @@
 import React from "react";
 
+<<<<<<< HEAD
 const IconChevronDown = (): any => (
   <svg xmlns="http://www.w3.org/2000/svg"
     viewBox='0 0 20 20'
+=======
+const IconChevronDown = (props): any => (
+  <svg xmlns="http://www.w3.org/2000/svg"
+    viewBox={`0 0 ${props.svgWidth} ${props.svgHeigth}`}
+    width={`${props.svgWidth}mm`}
+    height={`${props.svgHeight}mm`}
+>>>>>>> cc365e6 (WIP navbar)
     fill="currentColor">
     <path
       fillRule="evenodd"
