@@ -1,11 +1,11 @@
 import React from "react";
+import IconBell from "../atoms/Icons/Stroke/IconBell";
 import IconBurger from "../atoms/Icons/Stroke/IconBurger";
+import IconChevronDown from "../atoms/Icons/Stroke/IconChevronDown";
 import Image from "../atoms/Image";
 
 
-// const { user } = useSelector(store => store.Auth);
-
-const NavBar = (): any => {
+const NavBar = ({ email }): any => {
   return (
     <nav className="grid grid-cols-3 gap-2 justify-items-stretch p-5 shadow-md text-white " >
 
@@ -20,7 +20,7 @@ const NavBar = (): any => {
         <span className="">Usuario    </span>
         <IconBurger />
       </div>
-    </nav>
+    </nav >
   )
 }
 
