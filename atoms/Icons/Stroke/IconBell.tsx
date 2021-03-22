@@ -1,13 +1,12 @@
 import React from "react";
 
-const IconBell = (props): any => (
+const IconBell = (): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    viewBox={`0 0 ${props.svgWidth} ${props.svgHeigth}`}
-    width={`${props.svgWidth}mm`}
-    height={`${props.svgHeight}mm`}
-    stroke="currentColor">
+    viewBox='0 0 24 24'
+    stroke="currentColor"
+  >
 
     <path
       strokeLinecap="round"
