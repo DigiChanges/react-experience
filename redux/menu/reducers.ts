@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { TOGGLE_SIDEBAR } from './constants'
 import { MenuActions } from './actions';
 
@@ -24,55 +25,22 @@ import {
   // REMOVE_USER_SUCCESS
 } from './constants'
 import { UserActions } from './actions';
+=======
+import { TOGGLE_SIDEBAR } from './constants'
+import { MenuActions } from './actions';
+>>>>>>> abd0100 ((WIP))
 
 const INIT_STATE = {
-  usersList: null,
-  userSelected: null
+  showSidebar: true,
 }
 
 type State = {
-  usersList: [] | null,
-  userSelected: any | null
+  showSidebar: boolean,
 }
 
-// const addUser = (newUser, users) =>
-// {
-// 	if (!users)
-// 	{
-// 		users = []
-// 	}
-// 	users.push(newUser)
-// 	return users
-// }
-
-// const updateUser = (user, users) =>
-// {
-// 	if (users && users.length > 0)
-// 	{
-// 		const userIndex = users.findIndex(u => u.id === user.id)
-// 		if (userIndex > -1)
-// 		{
-// 			users[userIndex] = user
-// 		}
-// 		return users
-// 	}
-// 	return INIT_STATE.usersList
-// }
-
-// const deleteUser = (user, users) => (
-// 	users && users.length > 0
-// 		? users.filter(u => u.id !== user.id)
-// 		: INIT_STATE.usersList
-// )
-
-const getSelectedUser = (id, users) => (
-  users &&
-  users.length > 0 &&
-  users.find(user => user.id === id)
-)
-
-const Users = (state: State = INIT_STATE, action: UserActions) => {
+const Menu = (state: State = INIT_STATE, action: MenuActions) => {
   switch (action.type) {
+<<<<<<< HEAD
 
     case GET_USERS_SUCCESS:
       return { ...state, usersList: action.payload }
@@ -92,6 +60,10 @@ const Users = (state: State = INIT_STATE, action: UserActions) => {
     // case REMOVE_USER_SUCCESS:
     // 	return {...state, usersList: deleteUser(action.payload, state.usersList)}
 >>>>>>> cc365e6 (WIP navbar)
+=======
+    case TOGGLE_SIDEBAR:
+      return { ...state, showSidebar: !state.showSidebar }
+>>>>>>> abd0100 ((WIP))
 
     default:
       return { ...state }
@@ -99,7 +71,11 @@ const Users = (state: State = INIT_STATE, action: UserActions) => {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export default Menu
 =======
 export default Users
 >>>>>>> cc365e6 (WIP navbar)
+=======
+export default Menu
+>>>>>>> abd0100 ((WIP))

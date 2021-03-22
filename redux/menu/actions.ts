@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { TOGGLE_SIDEBAR } from './constants'
 
 export interface MenuActions {
@@ -22,16 +23,18 @@ import {
   // REMOVE_USER,
   // REMOVE_USER_SUCCESS
 } from './constants'
+=======
+import { TOGGLE_SIDEBAR } from './constants'
+>>>>>>> abd0100 ((WIP))
 
-export interface UserActions {
-  type: string
-  payload: any | null
+export interface MenuActions {
+  type: string,
 }
 
-export const getUsers = (): UserActions => ({
-  type: GET_USERS,
-  payload: null
+export const setShowSidebar = (): MenuActions => ({
+  type: TOGGLE_SIDEBAR,
 })
+<<<<<<< HEAD
 
 export const getUserSuccess = (users: any): UserActions => ({
   type: GET_USERS_SUCCESS,
@@ -106,3 +109,5 @@ export const selectedUser = (id: string): UserActions => ({
 // 	payload: user
 // })
 >>>>>>> cc365e6 (WIP navbar)
+=======
+>>>>>>> abd0100 ((WIP))

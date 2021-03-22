@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR'
 =======
 // export const GET_USERS = 'GET_USERS';
@@ -18,3 +19,6 @@ export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR'
 // export const REMOVE_USER = 'REMOVE_USER';
 // export const REMOVE_USER_SUCCESS = 'REMOVE_USER_SUCCESS';
 >>>>>>> cc365e6 (WIP navbar)
+=======
+export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR'
+>>>>>>> abd0100 ((WIP))

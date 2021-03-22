@@ -1,6 +1,7 @@
 import React from "react";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const IconChevronDown = (): any => (
   <svg xmlns="http://www.w3.org/2000/svg"
     viewBox='0 0 20 20'
@@ -11,6 +12,11 @@ const IconChevronDown = (props): any => (
     width={`${props.svgWidth}mm`}
     height={`${props.svgHeight}mm`}
 >>>>>>> cc365e6 (WIP navbar)
+=======
+const IconChevronDown = (): any => (
+  <svg xmlns="http://www.w3.org/2000/svg"
+    viewBox='0 0 20 20'
+>>>>>>> abd0100 ((WIP))
     fill="currentColor">
     <path
       fillRule="evenodd"

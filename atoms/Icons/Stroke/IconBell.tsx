@@ -1,6 +1,7 @@
 import React from "react";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const IconBell = (): any => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -18,6 +19,15 @@ const IconBell = (props): any => (
     height={`${props.svgHeight}mm`}
     stroke="currentColor">
 >>>>>>> cc365e6 (WIP navbar)
+=======
+const IconBell = (): any => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox='0 0 24 24'
+    stroke="currentColor"
+  >
+>>>>>>> abd0100 ((WIP))
 
     <path
       strokeLinecap="round"
