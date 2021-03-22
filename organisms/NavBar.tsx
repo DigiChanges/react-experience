@@ -5,7 +5,7 @@ import Image from "../atoms/Image";
 
 // const { user } = useSelector(store => store.Auth);
 
-export default function NavBar() {
+const NavBar = (): any => {
   return (
     <nav className="grid grid-cols-3 gap-2 justify-items-stretch p-5 shadow-md text-white " >
 
@@ -13,16 +13,15 @@ export default function NavBar() {
         <Image image={"/logonav.png"} className="inline" />
         DIGICHANGES</div>
 
-      <div className="justify-self-end self-center grid grid-cols-2 gap-2 ">
+      <div className="justify-self-end self-center ">
         {/* TODO agregar userview correctamente */}
         {/* <UserView ¿¿¿??? /> */}
         {/* // const { user } = useSelector(store => store.Auth); */}
         <span className="">Usuario    </span>
-        <span>
-          <IconBurger />
-        </span>
+        <IconBurger />
       </div>
     </nav>
   )
 }
 
+export default NavBar;

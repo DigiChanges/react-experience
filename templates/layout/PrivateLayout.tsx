@@ -4,7 +4,6 @@ import SideBar from "../../organisms/SideBar";
 import Footer from "../../organisms/Footer";
 import NavBar from "../../organisms/NavBar";
 
-
 const PrivateLayout = ({ children }) => {
 
   return (
