@@ -80,7 +80,7 @@ const SideBar = ({ className }) => {
           {getDashRoutes()}
         </ul>
       </div>
-    </div >
+    </div>
   );
 };
 

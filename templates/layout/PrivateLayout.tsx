@@ -6,6 +6,7 @@ import NavBar from "../../organisms/NavBar";
 import { useSelector, useDispatch } from "react-redux";
 import { setShowSidebar } from '../../redux/menu/actions';
 
+
 const PrivateLayout = ({ children }) => {
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.Auth);
