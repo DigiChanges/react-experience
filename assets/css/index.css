@@ -1,111 +1,129 @@
+@import url("http://fonts.cdnfonts.com/css/gilroy-bold");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --input-background-main: #1E2229;
-    --input-border-color-main: #191E25;
-    --input-font-color-main: #FFFFFF;
-    --title-h: #FFFFFF;
-    --button-color: #FFFF;
-    --button-background-color-primary: #1174EA;
-    --button-background-color-primary-hover: #1D84FF;
-    --button-background-color-primary-click: #0D4F9F;
-    --button-background-color-secondary: #2B3037;
-    --button-background-color-secondary-hover: #41454B;
-    --button-background-color-secondary-click: #1B2027;
-    --label-color: #FFFFFF;
-    --title-color: #FFFFFF;
+  --input-background-main: #1e2229;
+  --input-border-color-main: #191e25;
+  --input-font-color-main: #ffffff;
+  --title-h: #ffffff;
+  --button-color: #ffff;
+  --button-background-color-primary: #1174ea;
+  --button-background-color-primary-hover: #1d84ff;
+  --button-background-color-primary-click: #0d4f9f;
+  --button-background-color-secondary: #2b3037;
+  --button-background-color-secondary-hover: #41454b;
+  --button-background-color-secondary-click: #1b2027;
+  --label-color: #ffffff;
+  --title-color: #ffffff;
 }
 
 @layer base {
-    [type="text"],
-    [type="email"],
-    [type="url"],
-    [type="password"],
-    [type="number"],
-    [type="date"],
-    [type="datetime-local"],
-    [type="month"],
-    [type="search"],
-    [type="tel"],
-    [type="time"],
-    [type="week"],
-    [multiple],
-    textarea,
-    select {
-        border-radius: 80px 80px;
-        background: var(--input-background-main);
-        border-width: 1px;
-        border-color: var(--input-border-color-main);
-        color: var(--input-font-color-main);
-    }
+  [type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    border-radius: 80px 80px;
+    background: var(--input-background-main);
+    border-width: 1px;
+    border-color: var(--input-border-color-main);
+    color: var(--input-font-color-main);
+  }
 
-    h1, h2, h3, h4, h5, h6 {
-        color: var(--title-h);
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--title-h);
+  }
+  .gilroy {
+    font-family: "Gilroy-Regular", sans-serif;
+  }
+  button.button-primary {
+    background-color: var(--button-background-color-primary);
+    color: var(--button-color);
+    border-radius: 80px 80px;
+  }
 
-    button.button-primary {
-        background-color: var(--button-background-color-primary);
-        color: var(--button-color);
-        border-radius: 80px 80px;
-        text-align: center;
-    }
+  button.button-primary {
+    background-color: var(--button-background-color-primary);
+    color: var(--button-color);
+    border-radius: 80px 80px;
+    text-align: center;
+  }
 
-    button.button-primary:hover {
-        background-color: var(--button-background-color-primary-hover);
-    }
+  button.button-primary:active {
+    background-color: var(--button-background-color-primary-click);
+  }
 
-    button.button-primary:active {
-        background-color: var(--button-background-color-primary-click);
-    }
+  button.button-secondary {
+    background-color: var(--button-background-color-secondary);
+    color: var(--button-color);
+    border-radius: 80px 80px;
+  }
 
-    button.button-secondary {
-        background-color: var(--button-background-color-secondary);
-        color: var(--button-color);
-        border-radius: 80px 80px;
-    }
+  button.button-secondary:hover {
+    background-color: var(--button-background-color-secondary-hover);
+  }
 
-    button.button-secondary:hover {
-        background-color: var(--button-background-color-secondary-hover);
-    }
+  button.button-secondary:active {
+    background-color: var(--button-background-color-secondary-click);
+  }
 
-    button.button-secondary:active {
-        background-color: var(--button-background-color-secondary-click);
-    }
+  button.button-secondary:active {
+    background-color: var(--button-background-color-secondary-click);
+  }
 
-    label {
-        font-weight: lighter;
-        color: var(--label-color);
-    }
+  label {
+    font-weight: lighter;
+    color: var(--label-color);
+  }
 
-    h1 {
-        font-size: 6rem;
-        color: var(--title-color);
-    }
+  h1 {
+    font-size: 6rem;
+    color: var(--title-color);
+  }
 
-    h2 {
-        font-size: 5rem;
-        color: var(--title-color);
-    }
+  h2 {
+    font-size: 5rem;
+    color: var(--title-color);
+  }
 
-    h3 {
-        font-size: 4rem;
-        color: var(--title-color);
-    }
+  h3 {
+    font-size: 4rem;
+    color: var(--title-color);
+  }
 
-    h4 {
-        font-size: 3rem;
-        color: var(--title-color);
-    }
+  h4 {
+    font-size: 3rem;
+    color: var(--title-color);
+  }
 
-    h5 {
-        font-size: 2rem;
-        color: var(--title-color);
-    }
+  h5 {
+    font-size: 2rem;
+    color: var(--title-color);
+  }
 
-    h6 {
-        font-size: 1rem;
-        color: var(--title-color);
-    }
+  h6 {
+    font-size: 1rem;
+    color: var(--title-color);
+  }
+  label {
+    font-weight: lighter;
+    color: var(--label-color);
+  }
 }
