@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
@@ -10,7 +11,13 @@ import Title from "../../atoms/Title";
 import ErrorForm from "../../atoms/ErrorForm";
 import Button from "../../atoms/Button";
 import Label from "../../atoms/Label";
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker"
 import { getPermissions } from "../../redux/auth/actions";
+
+export interface identityValues {
+  singleLanguage: string;
+}
 
 const UserCreate = (): any => {
   const dispatch = useDispatch();
@@ -22,31 +29,38 @@ const UserCreate = (): any => {
     dispatch(getPermissions());
   }, []);
 
+  const identityOptions = [
+    { label: 'DNI', value: 'DNI' },
+    { label: 'CC', value: 'CC' },
+    { label: 'TODO', value: 'TODO'},
+  ];
   //TODO child key issue
   const getRolesList = () => {
     return rolesList && rolesList.length > 0
       ? rolesList.map((role) => ({ label: role.name, value: role.id }))
       : [];
   };
-
   //TODO child key issue
   const getPermissionsList = () =>
     permissionsList && permissionsList.length > 0
       ? permissionsList.map((label, value) => ({ label, value }))
       : [];
+
   return (
-    <section className="text-gray-500 body-font bg-gray-900 w-128">
-      <div className="w-full px-5">
-        <div className="text-4xl mb-2 ">
+    <section className="md:pl-16 text-gray-500 body-font">
+      <div className="w-full">
+        <div className="mb-2 md:pl-20">
           <Title className="text-left" titleType="h1">
-            Add User
+            Create User
           </Title>
         </div>
-        <div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
+        <div className="pl-4 md:p-10">
+
           <Formik
             initialValues={{
               firstName: "",
               lastName: "",
+              cc: "",
               email: "",
               password: "",
               passwordConfirmation: "",
@@ -80,11 +94,14 @@ const UserCreate = (): any => {
           >
             {({ errors, touched }) => (
               <Form>
-                <div className="bg-gray-800 p-6 rounded-lg border-teal  border-t-12  mb-6  shadow-lg">
-                  <div className="mb-4">
+
+                <div className="w-full flex flex-wrap mb-6 shadow-lg">
+                  
+        <span className="w-full">PERSONAL INFORMATION</span>
+                  <div className="w-full md:w-1/2">
                     <Label
                       htmlFor="firstName"
-                      className="font-bold  text-gray-400 block mb-2"
+                      className=" text-gray-400 block mb-2"
                     >
                       First Name
                     </Label>
@@ -92,7 +109,7 @@ const UserCreate = (): any => {
                       name="firstName"
                       type="text"
                       id="firstName"
-                      className="w-full h-8 bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
+                      className="w-11/12 h-8 bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
                       placeholder="Enter First Name"
                     />
                     {errors.firstName && touched.firstName ? (
@@ -101,18 +118,18 @@ const UserCreate = (): any => {
                       </ErrorForm>
                     ) : null}
                   </div>
-                  <div className="mb-4">
+                  <div className="w-full md:w-1/2">
                     <Label
                       htmlFor="lastName"
-                      className="font-bold text-gray-400 block mb-2"
+                      className="text-gray-400 block mb-2"
                     >
-                      Last Name
+                      Last name
                     </Label>
                     <Field
                       name="lastName"
                       type="text"
                       id="lastName"
-                      className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-gray px-2 py-2 rounded shadow"
+                      className="w-11/12 h-8 bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
                       placeholder="Enter Last Name"
                     />
                     {errors.lastName && touched.lastName ? (
@@ -121,10 +138,131 @@ const UserCreate = (): any => {
                       </ErrorForm>
                     ) : null}
                   </div>
-                  <div className="mb-4">
+
+                  <div className=" w-1/2 lg:w-1/4">
+                    <Label
+                      htmlFor="cc"
+                      className="text-gray-400 block mb-2"
+                    >
+                      ID number
+                    </Label>
+
+                    <Field
+                      name="cc"
+                      id="cC"
+                      component={Select}
+                      items={identityOptions}
+                      isMulti={false}
+                      className="inline-flex"
+                      primary25="#4a5568"
+                      primary="#667eea"
+                      neutral0="#2d3748"
+                      neutral20="#4a5568"
+                      neutral50="#a0aec0"
+                      neutral80="#fff"
+                      neutral10="#4a5568"
+                      neutral30="#667eea"
+                      primary50="#718096"
+                      danger="#a0aec0"
+                      dangerLight="#1a202c"
+                      />
+
+                    <Field
+                      name="cc"
+                      type="text"
+                      id="cC"
+                      className="w-7/12 md:w-9/12 h-8 bg-gray-800 border rounded-r-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
+                      placeholder='ex: "11.111.111"'
+                    />
+                  </div>
+
+                  <div className="w-1/2 lg:w-1/4 ">
+                    <Label
+                      htmlFor="gender"
+                      className="text-gray-400 block mb-2"
+                      >
+                        Gender
+                      </Label>
+                      <label>
+              <Field type="radio" value="F" className=" mt-2 border-gray-700 bg-gray-800 p-3 mx-1 focus:bg-indigo-500 " />
+              F
+            </label>
+            <label>
+              <Field type="radio" value="M" className="mt-2 border-gray-700 bg-gray-800 p-3 mx-1 focus:bg-indigo-500"  />
+              M
+            </label>
+            <label>
+              <Field type="radio" value="Other" className="mt-2 border-gray-700 bg-gray-800 p-3 mx-1 focus:bg-indigo-500" />
+              Other
+            </label>
+                  </div>
+
+<div className="lg:w-1/4">
+<Label 
+  htmlFor="birthdate"
+  className="text-gray-400 block mb-2"
+  >
+    Date picker (WIP)
+  </Label>
+  <DatePicker 
+  name="birthdate" 
+  placeholderText="Choose birthdate" 
+  onChange={(date) => {}}
+  className="w-11/12 h-8 bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
+  />
+</div>
+
+<div className="w-1/4">
+<Label
+  htmlFor="Age"
+  className="text-gray-400 block mb-2"
+  >
+    Age(wip)
+</Label>
+<Field
+  name="Age"
+  id="date"
+  className="h-8 w-10/12 bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
+  placeholder={Date}
+  ></Field>
+</div>
+
+<div className="w-full md:w-1/2">
+<Label
+  htmlFor="Age"
+  className="text-gray-400 block mb-2"
+  >
+    Address
+</Label>
+<Field
+  name="address"
+  id="address"
+  className="w-11/12 h-8 bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
+  placeholder="Your address..."
+  ></Field>
+</div>
+
+<div className="w-full md:w-1/2">
+<Label
+  htmlFor="Age"
+  className="text-gray-400 block mb-2"
+  >
+    State(wip)
+</Label>
+<Field
+  name="address"
+  id="address"
+  className="w-11/12 h-8 bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
+  placeholder="Pick your country..."
+  ></Field>
+</div>
+
+<span className="w-full mt-5">CONTACT INFORMATION</span>
+
+                  <div className="w-full">
                     <Label
                       htmlFor="email"
-                      className="font-bold text-gray-400 block mb-2"
+                      className="text-gray-400 block mb-2"
                     >
                       Email
                     </Label>
@@ -132,7 +270,7 @@ const UserCreate = (): any => {
                       name="email"
                       type="text"
                       id="email"
-                      className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
+                      className="w-11/12 h-8 bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
                       placeholder="Enter Email"
                     />
                     {errors.email && touched.email ? (
@@ -141,10 +279,10 @@ const UserCreate = (): any => {
                       </ErrorForm>
                     ) : null}
                   </div>
-                  <div className="mb-1">
+                  <div className="w-full">
                     <Label
                       htmlFor="password"
-                      className="font-bold text-gray-400 block mb-2"
+                      className="text-gray-400 block mb-2"
                     >
                       Password
                     </Label>
@@ -152,7 +290,7 @@ const UserCreate = (): any => {
                       name="password"
                       type="password"
                       id="password"
-                      className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
+                      className="w-11/12 h-8 bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
                       placeholder="Enter Password"
                     />
                     {errors.password && touched.password ? (
@@ -161,10 +299,10 @@ const UserCreate = (): any => {
                       </ErrorForm>
                     ) : null}
                   </div>
-                  <div className="mb-1">
+                  <div className="w-full">
                     <Label
                       htmlFor="passwordConfirmation"
-                      className="font-bold text-gray-400 block mb-2"
+                      className="text-gray-400 block"
                     >
                       Confirm Password
                     </Label>
@@ -172,7 +310,7 @@ const UserCreate = (): any => {
                       name="passwordConfirmation"
                       type="password"
                       id="passwordConfirmation"
-                      className="w-full h-8 bg-gray-800  border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-gray px-2 py-2 rounded shadow"
+                      className="w-11/12 h-8 bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
                       placeholder="Repeat Password"
                     />
                     {errors.passwordConfirmation &&
