@@ -53,17 +53,19 @@
   .gilroy {
     font-family: "Gilroy-Regular", sans-serif;
   }
-  button.button-primary {
-    background-color: var(--button-background-color-primary);
-    color: var(--button-color);
-    border-radius: 80px 80px;
-  }
 
   button.button-primary {
     background-color: var(--button-background-color-primary);
     color: var(--button-color);
-    border-radius: 80px 80px;
     text-align: center;
+    width: 138px;
+    height: 41px;
+    padding: 12px 52px 12px 53px;
+    border-radius: 20.5px;
+  }
+
+  button.button-primary:hover {
+    background-color: var(--button-background-color-primary-hover);
   }
 
   button.button-primary:active {
@@ -73,7 +75,11 @@
   button.button-secondary {
     background-color: var(--button-background-color-secondary);
     color: var(--button-color);
-    border-radius: 80px 80px;
+    text-align: center;
+    width: 138px;
+    height: 41px;
+    padding: 12px 52px 12px 53px;
+    border-radius: 20.5px;
   }
 
   button.button-secondary:hover {
@@ -126,5 +132,8 @@
     font-weight: lighter;
     color: var(--label-color);
   }
+  .react-datepicker-wrapper {
+   width: 100%;
+}
 }
 

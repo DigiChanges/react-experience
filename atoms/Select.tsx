@@ -18,6 +18,7 @@ interface OwnProps {
   danger: any;
   dangerLight: any;
   neutral70: any;
+  borderWidth: any;
 }
 
 const MultiSelect: React.FC<OwnProps & FieldProps> = ({
