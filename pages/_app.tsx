@@ -58,7 +58,7 @@ const MyApp = ({ Component, pageProps }: any): any => {
       <Provider store={configureStore}>
         <GeneralLayout>
           <AuthProvider>
-            <Component {...pageProps} />
+            <Component {...pageProps}/>
           </AuthProvider>
         </GeneralLayout>
       </Provider>

@@ -7,15 +7,18 @@ import {
 	REMOVE_USER_SUCCESS
 } from './constants'
 import {UserActions} from './actions';
+import {UserEntity, UserFilter} from "./interfaces";
 
 const INIT_STATE = {
 	usersList: null,
-	userSelected: null
+	userSelected: null,
+	userFilter: null
 }
 
 type State = {
-	usersList: [] | null,
-	userSelected: any | null
+	usersList: UserEntity[],
+	userSelected: UserEntity | null
+	userFilter: UserFilter | null
 }
 
 const addUser = (newUser, users) =>
@@ -58,7 +61,6 @@ const Users = (state: State = INIT_STATE, action: UserActions) =>
 {
 	switch (action.type)
 	{
-
 		case GET_USERS_SUCCESS:
 			return {...state, usersList: action.payload}
 
@@ -82,4 +84,4 @@ const Users = (state: State = INIT_STATE, action: UserActions) =>
 	}
 }
 
-export default Users
+export default Users;

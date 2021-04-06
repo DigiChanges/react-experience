@@ -1,7 +1,5 @@
 import React from "react";
-import Button from "../atoms/Button";
 import Title from "../atoms/Title";
-import { useRouter } from 'next/router'
 import ButtonIcon from "./ButtonIcon";
 
 const TitleWithButton = ({title, icon, labelButtonName, buttonAction}): any =>

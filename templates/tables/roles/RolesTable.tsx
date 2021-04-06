@@ -8,7 +8,6 @@ import Title from '../../../atoms/Title';
 
 const RolesTable = () =>
 {
-
 	const dispatch = useDispatch()
 	const {rolesList} = useSelector(state => state.Roles)
 

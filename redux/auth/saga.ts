@@ -7,7 +7,7 @@ import {notificationTypes, notification} from '../../entities/notification';
 import {LOGIN_USER, LOGOUT_USER, GET_PERMISSIONS, SET_DATA_AFTER_RELOADING} from './constants';
 import {startGeneralLoading, stopGeneralLoading, showGeneralNotification} from '../general/actions';
 import {getPermissionsSuccess, loginUserSuccess, setDataAfterReloadingSuccess} from './actions';
-import {removeSession, setSession} from "../../helpers/authSession";
+import {removeSession, setSession} from "../../helpers/AuthSession";
 
 function* login({payload: {email, password}})
 {

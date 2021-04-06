@@ -2,20 +2,9 @@ import React, {useEffect} from "react";
 import DataTable from "react-data-table-component";
 import ListUsersTemplateColumns from "./ListUsersTemplateColumns";
 import TableUsersStyle from "../../../assets/customStyles/TableUsersStyle";
-import {getUsers} from '../../../redux/users/actions';
-import {useDispatch, useSelector} from 'react-redux';
-import Title from '../../../atoms/Title';
 
-const UsersTable = () =>
+const UsersTable = ({usersList, query}) =>
 {
-	const dispatch = useDispatch()
-	const {usersList} = useSelector(state => state.Users);
-
-	useEffect(() =>
-	{
-		dispatch(getUsers());
-	}, []);
-
 	const mapRoles = roles =>
 	{
 		if (roles && roles.length > 0)

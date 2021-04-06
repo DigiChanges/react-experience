@@ -1,4 +1,4 @@
-import {getSession, isSessionTokenAlive} from '../helpers/authSession'
+import {getSession, isSessionTokenAlive} from '../helpers/AuthSession'
 
 export const getHeader = () =>
 {

@@ -1,6 +1,9 @@
 export const GET_USERS = 'GET_USERS';
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 
+export const GET_USERS_FILTER = 'GET_USERS';
+export const GET_USERS_SUCCESS_FILTER = 'GET_USERS_SUCCESS';
+
 export const SELECTED_USER = 'SELECTED_USER';
 export const UNSELECTED_USER = 'UNSELECTED_USER';
 

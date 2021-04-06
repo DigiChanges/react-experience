@@ -11,6 +11,7 @@ import {
 	REMOVE_USER,
 	REMOVE_USER_SUCCESS
 } from './constants'
+import {UserFilter} from "./interfaces";
 
 export interface UserActions
 {
@@ -18,9 +19,9 @@ export interface UserActions
 	payload: any | null
 }
 
-export const getUsers = (): UserActions => ({
+export const getUsers = (userFilterQueryParam?: string): UserActions => ({
 	type: GET_USERS,
-	payload: null
+	payload: userFilterQueryParam
 })
 
 export const getUserSuccess = (users: any): UserActions => ({

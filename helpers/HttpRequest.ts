@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {apiResult} from '../api/apiResult'
-import {getNowTimestamp, getSession, setSession} from "./authSession";
+import {getNowTimestamp, getSession, setSession} from "./AuthSession";
 import {config} from "../api/config";
 
 /*

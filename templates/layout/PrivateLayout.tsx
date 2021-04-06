@@ -6,7 +6,7 @@ import NavBar from "../../organisms/NavBar";
 import { useSelector, useDispatch } from "react-redux";
 import { setShowSidebar } from '../../redux/menu/actions';
 
-const PrivateLayout = ({ children }) => {
+const PrivateLayout = ({ children, ...pageProps }) => {
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.Auth);
   const { showSidebar } = useSelector(state => state.Menu);
@@ -14,6 +14,7 @@ const PrivateLayout = ({ children }) => {
   const onClick = () => {
     dispatch(setShowSidebar())
   }
+
   return (
     <>
       <div className="grid grid-areas-md-private-layout h-full text-gray-700 body-font bg-gray-900">

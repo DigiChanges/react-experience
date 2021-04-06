@@ -7,36 +7,43 @@ import {useDispatch, useSelector} from 'react-redux'
 import {setCurrentPathname, setStartPathname} from '../redux/paths/actions'
 import {setDataAfterReloading} from '../redux/auth/actions'
 import PrivateLayout from '../templates/layout/PrivateLayout'
+import FilterFactory from "../helpers/FilterFactory";
 
 const AuthProvider = ({children, ...props}) =>
 {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
-	const { user } = props.allCookies
+	const { user } = props.allCookies;
 	
 	const auth  = useSelector(store => store.Auth);
-	const { isLoading } = useSelector(state => state.General)
+	const { isLoading } = useSelector(state => state.General);
 	
-	const isAuth = user && user.enable && user.id
-	const router = useRouter()
+	const isAuth = user && user.enable && user.id;
+	const router = useRouter();
 
 	useEffect(() =>
 	{
+		console.log("router.query", router.query)
+
+		const uriParam = FilterFactory.getPath(router.query);
+
 		if (!isAuth)
 		{
-			dispatch(setStartPathname(router.pathname))
-			router.replace('/login')
+			dispatch(setStartPathname(router.pathname));
+			router.push('/login');
 		}
 		if (!auth?.user && user)
 		{
+			console.log(router.pathname)
+			console.log(router.route)
 			dispatch(setDataAfterReloading(user))
-			dispatch(setCurrentPathname(router.pathname))	
-			router.replace(router.pathname)
+			dispatch(setCurrentPathname(router.pathname))
+			// router.replace(router.pathname)
 		}
 		if(!isLoading)
 		{
 			dispatch(setCurrentPathname(router.pathname))
-			router.replace(router.pathname)
+			// router.replace(router.pathname)
 		}
 	}, [])
 
@@ -54,7 +61,7 @@ const AuthProvider = ({children, ...props}) =>
 		}
 	}
 
-	return renderChildren()
+	return renderChildren();
 }
 
-export default withCookies(AuthProvider)
+export default withCookies(AuthProvider);

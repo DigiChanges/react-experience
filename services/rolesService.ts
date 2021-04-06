@@ -1,6 +1,6 @@
 import {config} from '../api/config'
 import {getHeader} from '../api/auth'
-import HttpRequest from "../helpers/httpRequest";
+import HttpRequest from "../helpers/HttpRequest";
 
 const {protocol, hostname, port} = config.apiGateway.server
 const {getAll, create, update, remove} = config.apiGateway.routes.roles

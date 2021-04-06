@@ -1,6 +1,6 @@
 import React from "react";
 import {useRouter} from 'next/router'
-import {removeSession} from '../../helpers/authSession'
+import {removeSession} from '../../helpers/AuthSession'
 
 const Logout = () =>
 {

@@ -29,7 +29,10 @@ import {
   removeUserSuccess,
 } from "./actions";
 
-function* getUsersList() {
+function* getUsersList({payload})
+{
+	console.log('payload', payload)
+
   yield put(startGeneralLoading());
   try {
     const res = yield call(getAllUsers);
