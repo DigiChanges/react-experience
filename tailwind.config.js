@@ -50,6 +50,7 @@ module.exports = {
         300: "#5A5E63",
         400: "#3F4349",
         500: "#1E2125",
+        600: "#181D24",
       },
       gray: {
         100: "#f7fafc",
@@ -466,6 +467,7 @@ module.exports = {
     },
     maxWidth: (theme, { breakpoints }) => ({
       none: "none",
+      xxs: "16rem",
       xs: "20rem",
       sm: "24rem",
       md: "28rem",

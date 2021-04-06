@@ -49,7 +49,7 @@ const UserCreate = (): any => {
       : [];
 
   return (
-    <section className="text-gray-500 body-font bg-gray-900 mx-auto w-11/12">
+    <section className="text-gray-500 body-font bg-gray-900 w-full md:container mx-auto px-3">
       <div className="mb-2 ">
         <Title className="text-3xl font-bold sm:px-0 md:px-18 lg:px-14" titleType="h1">
           Create User
@@ -66,7 +66,7 @@ const UserCreate = (): any => {
           cc: "",
           cctext: "",
           email: "",
-          gender: "",
+          gender: null,
           phone: "",
           password: "",
           passwordConfirmation: "",
@@ -185,6 +185,7 @@ const UserCreate = (): any => {
                 ) : null}
 
               </div>
+
               <div className="w-full md:w-1/4 px-2 center align-center self-center justify-center items-center mb-5">
                 <Label
                   htmlFor="gender"
@@ -192,24 +193,29 @@ const UserCreate = (): any => {
                 >
                   Gender
                       </Label>
-                <Field type="checkbox" id="gender" value="F" className="border-1 rounded-full border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
+
+                <Field name="gender" type="radio" id="gender" value="F" className="border-1 rounded-full border-main-gray-500 bg-gray-800 p-3 focus:bg-white focus:border-white m-1" />
                 <label className="text-gray-400 text-xs font-bold mr-1">
                   F
                 </label>
-                <Field type="radio" id="gender" value="M" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
+
+                <Field name="gender" type="radio" id="gender" value="M" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
                 <label className="text-gray-400 text-xs font-bold mr-1">
                   M
                 </label>
-                <Field type="radio" id="gender" value="Other" className="border-1 border-main-gray-500 bg-gray-800 focus:bg-indigo-300 focus:border-white m-1 focus:p-3" />
-                <label className="text-gray-400 text-xs font-bold">
+
+                <Field name="gender" type="radio" id="gender" value="Other" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
+                <label className="text-gray-400 text-xs font-bold mr-1">
                   Other
                 </label>
+
                 {errors.gender && touched.gender ? (
                   <ErrorForm className="text-red-500 p-2">
                     {errors.gender}
                   </ErrorForm>
                 ) : null}
               </div>
+
               <div className="w-full md:w-1/4 px-2 mb-5">
                 <Label
                   htmlFor="birthdate"

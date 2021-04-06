@@ -26,6 +26,7 @@
     "@tailwindcss/forms": "^0.2.1",
     "@tailwindcss/line-clamp": "^0.2.0",
     "@types/react-datepicker": "^3.1.8",
+    "ahooks": "^2.10.0",
     "axios": "^0.21.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-preset-es2020": "^1.0.2",
