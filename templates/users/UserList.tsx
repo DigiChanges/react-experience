@@ -1,140 +1,95 @@
-import React, { useEffect } from "react";
-import Button from "../../atoms/Button";
-// import UsersTable from "../tables/users/UsersTable";
-// import Link from "next/link";
-import IconPlus from "../../atoms/Icons/Stroke/IconPlus";
-import { Field, Formik, Form } from "formik";
-import Label from "../../atoms/Label";
-import SearchInput from "../../atoms/SearchInput";
-import TitleWithButton from "../../molecules/TitleWithButton";
-import { getUsers } from "../../redux/users/actions";
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
 import { useRouter } from "next/router";
+import UsersTable from "../tables/users/UsersTable";
+import ConfirmDeleteUser from "../modal/ConfirmDeleteUser";
+import IconPlus from "../../atoms/Icons/Stroke/IconPlus";
+import TitleWithButton from "../../molecules/TitleWithButton";
+import FilterSort from "../../organisms/FilterSort";
+import FilterFactory from "../../helpers/FilterFactory";
 import MediaObject from "../../molecules/MediaObject";
+import Title from "../../atoms/Title";
+import Button from "../../atoms/Button";
+import IconArrowCircleLeft from "../../atoms/Icons/Solid/IconArrowCircleLeft";
 
-//copypaste rancio 💀
-// const asyncFn = ({ pageSize, offset }: any): Promise<Result> =>
-// new Promise((resolve) => {
-//   setTimeout(() => {
-//     resolve({
-//       total: dataSource.length,
-//       list: dataSource.slice(offset, offset + pageSize),
-//     });
-//   }, 1000);
-//   });
-
-const UserList = () => {
-
-  const dispatch = useDispatch();
-  const { usersList } = useSelector((state) => state.Users)
-
-  useEffect(() => {
-    dispatch(getUsers())
-  }, []);
-
-  //another rancid code fragment
-  // const containerRef = useRef<HTMLDivElement>(null);
-  // const { data, loading, loadingMore, reload, loadMore, noMore } = useRequest(
-  //   (d: Result | undefined) =>
-  //     asyncFn({
-  //       offset: d?.list?.length || 0,
-  //       pageSize: 6,
-  //     }),
-  //   {
-  //     loadMore: true,
-  //     ref: containerRef,
-  //     isNoMore: (d) => (d ? d.list.length >= d.total : false),
-  //   },
-  // );
-
-  // const { list = [] } = data || {};
-  //end rancid code
-
-
+const UserList = ({ usersList, query }) => {
   const router = useRouter();
+  const [booleanConfirmDelete, setBooleanConfirmDelete] = useState(false);
+
+  const openConfirmDelete = (): any => {
+    setBooleanConfirmDelete(!booleanConfirmDelete);
+  };
 
   const actionCreateButton = () => {
     return router.push("/users/create");
   }
 
+  const onClickFilter = (search: string, filterBy: string, orderBy: string, sort: 'asc' | 'desc') => {
+    const uriParam = FilterFactory.getUriParam({ search, filterBy, orderBy, sort });
+
+    router.push(`/users/list?${uriParam}`, undefined, { shallow: false });
+  }
+
+  const [showScroll, setShowScroll] = useState(false)
+
+  const checkScrollTop = () => {
+    if (!showScroll && window.pageYOffset > 300) {
+      setShowScroll(true)
+    } else if (showScroll && window.pageYOffset <= 300) {
+      setShowScroll(false)
+    }
+  };
+
+  window.addEventListener('scroll', checkScrollTop)
+
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const nextPagination = (page: string,) => {
+    console.log({ page })
+    // const uriPage = FilterFactory.getUriParam({page})
+
+    //   router.push(`/users/list?${uriPage}`);
+  };
+
   return (
-    <div className="container">
-      <Formik initialValues={{
-        search: "",
-        filterBy: "",
-        orderBy: "desc",
-      }}
-        onSubmit={async (values) => {
-          // const { search, filterBy, orderBy } = values;
+    <>
+      <div className="flex flex-col justify-between">
+        <FilterSort actionFilter={onClickFilter} />
+        <TitleWithButton
+          title="Users"
+          labelButtonName="Create User"
+          icon={IconPlus}
+          buttonAction={actionCreateButton}
+        />
 
-          console.log(values);
+      </div>
+      <section className="w-full">
+        <div className="text-gray-500 bg-gray-900 flex flex-row items-center flex-wrap w-full justify-start">
+          {usersList && usersList.map((user, i) => (
+            <MediaObject key={i} className="md:max-w-xs w-full md:w-1/2 p-2 bg-main-gray-600 h-18 rounded-lg mx-1 my-1 flex items-center font-semibold text-sm text-main-gray-250">
+              <div className="flex-col w-10 h-10 bg-white text-black justify-center content-center rounded-full">a</div>
+              <div className="flex-col justify-center content-center ml-3">
+                <Title titleType="h6" className="h-6 font-bold">{user.firstName}{' '}{user.lastName}</Title>
+                {user.email}
+              </div>
+            </MediaObject>
+          ))}
+          <div className="flex justify-center w-3/4 mt-10">
+            <Button buttonClick={nextPagination} className="w-32 h-10 bg-gray-800 rounded-xl text-white font-bold text-sm mx-auto">
+              View more
+            </Button>
+            <Button buttonClick={scrollTop} className={'h-10 w-10 transform rotate-90 text-main-gray-250 ' + (showScroll ? 'flex' : 'hidden')} >
+              <IconArrowCircleLeft />
+            </Button>
+          </div>
+        </div>
+      </section>
 
-          // dispatch(
-          //   createUser(
-          //     search,
-          //     filterBy,
-          //     orderBy,
-          //   )
-          // );
-        }}>
-        <Form className="flex flex-col lg:flex-row justify-between w-full text-main-gray-300 cursor-pointer">
-          <Field
-            name="search"
-            type="search"
-            id="search"
-            // className="w-full h-8 bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-2 rounded shadow"
-            placeholder={"Search by... "}
-            component={SearchInput}
-          />
-          <Label
-            htmlFor="roles"
-            className="font-bold text-gray-400 block mb-2"
-          >
-            Search By
-						</Label>
-          <Button
-            className="shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-            buttonType="submit"
-            buttonClick="none"
-          >
-            Save
-						</Button>
-        </Form>
-      </Formik>
-      <TitleWithButton
-        title="Users"
-        labelButtonName="Create User"
-        icon={IconPlus}
-        buttonAction={actionCreateButton}
-      />
-
-
-      {/* <div ref={containerRef} className="flex flex-wrap text-white overflow-y-auto h-128"> */}
-      {/* <button type="button" onClick={reload} disabled={loading} className="w-full">
-        {loading ? 'loading' : 'Reload'}
-      </button> */}
-
-
-      {/* users.map*/}
-      {usersList && usersList.map((user, i) => (
-        <MediaObject key={i} className="bg-main-gray-600 h-18 rounded-lg p-3 w-1/2">
-          {user.lastName}
-        </MediaObject>
-      ))}
-
-      {/* {!noMore && (
-          <button type="button" onClick={loadMore} disabled={loadingMore}>
-            {loadingMore ? 'Loading more...' : 'Click to load more'}
-          </button>
-        )} */}
-
-      {/* {noMore && <span>No more data</span>} */}
-      {/* que si data es un array vacio, no te de la opcion de cargar mas */}
-      {/*
-        <span style={{ fontSize: 12 }}>total: {data?.total}</span> */}
-
-    </div>
-    // </div>
+      {booleanConfirmDelete ? (
+        <ConfirmDeleteUser close={openConfirmDelete} />
+      ) : null}
+    </>
   );
 };
 

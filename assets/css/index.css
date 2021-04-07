@@ -20,7 +20,7 @@
 }
 
 @layer base {
-  /*[type="text"], comentado para seguir con create user */
+  [type="text"],
   [type="email"],
   [type="url"],
   [type="password"],

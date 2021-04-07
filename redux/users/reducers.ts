@@ -6,21 +6,6 @@ import {
   UPDATE_USER_SUCCESS,
   REMOVE_USER_SUCCESS
 } from './constants'
-<<<<<<< HEAD
-import { UserActions } from './actions';
-import { UserEntity, UserFilter } from "./interfaces";
-
-const INIT_STATE = {
-  usersList: null,
-  userSelected: null,
-  userFilter: null
-}
-
-type State = {
-  usersList: UserEntity[],
-  userSelected: UserEntity | null
-  userFilter: UserFilter | null
-=======
 import { UserActions } from './actions';
 
 const INIT_STATE = {
@@ -31,8 +16,8 @@ const INIT_STATE = {
 
 type State = {
   usersList: [] | null,
-  userSelected: any | null
->>>>>>> db70a81 (wip user-list)
+  userSelected: any | null,
+  nextQueryParamsPagination: string | null
 }
 
 const addUser = (newUser, users) => {
@@ -66,17 +51,10 @@ const getSelectedUser = (id, users) => (
   users.find(user => user.id === id)
 )
 
-// const getPagination = (payload, users) => {
-//   const page = users.concat(payload)
-//   return page;
-// }
-
 const Users = (state: State = INIT_STATE, action: UserActions) => {
   switch (action.type) {
-
-
     case GET_USERS_SUCCESS:
-      return { ...state, usersList: action.payload }
+      return { ...state, usersList: action.payload.users, nextQueryParamsPagination: action.payload.nextQueryParamsPagination }
 
     case SELECTED_USER:
       return { ...state, userSelected: getSelectedUser(action.payload, state.usersList) }

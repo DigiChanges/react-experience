@@ -29,18 +29,18 @@ import {
   removeUserSuccess,
 } from "./actions";
 
-function* getUsersList({payload})
-{
-	console.log('payload', payload)
+function* getUsersList({ payload }) {
+  console.log('payload', payload)
 
   yield put(startGeneralLoading());
   try {
-    const res = yield call(getAllUsers);
+    const res = yield call(getAllUsers, payload.nextQueryParamsPagination);
     const { data } = res;
     if (!data) {
       return yield put(showErrorNotification("Internal Server Error"));
     }
-    yield put(getUserSuccess(data));
+    const uriParam = payload.nextQueryParamsPagination.split("?")[1];
+    yield put(getUserSuccess(data, uriParam));
   } catch (e) {
     yield put(showErrorNotification(e.message));
   } finally {
