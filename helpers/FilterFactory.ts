@@ -1,3 +1,4 @@
+import * as queryString from "querystring";
 
 interface IFilter
 {
@@ -9,7 +10,7 @@ interface IFilter
 
 class FilterFactory
 {
-	static getUriParam(filter: IFilter)
+	static getUriParam(filter: IFilter): string
 	{
 		const {search, filterBy, orderBy, sort} = filter;
 		const order =  orderBy.length <= 0 ? filterBy : orderBy;
@@ -17,23 +18,10 @@ class FilterFactory
 		return `filter[${filterBy}]=${search}&sort[${order}]=${sort}`;
 	}
 
-	static getPath(query: any)
+	static getPath(query: any | null): string | null
 	{
-		console.log("getPath query", query);
-
-		let pathQuery = '';
-
-		for (const key in query)
-		{
-			if (Object.prototype.hasOwnProperty.call(query, key)) {
-				console.log(query[key]);
-				console.log(query[key]);
-			}
-		}
-		// const order =  orderBy.length <= 0 ? filterBy : orderBy;
-
-		// return `filter[${filterBy}]=${search}&sort[${order}]=${sort}`;
-		return `filter`;
+		console.log('getPath', queryString.stringify(query));
+		return query ? queryString.stringify(query) : null;
 	}
 }
 

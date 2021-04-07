@@ -27,23 +27,24 @@ const AuthProvider = ({children, ...props}) =>
 
 		const uriParam = FilterFactory.getPath(router.query);
 
+		console.log("useEffect", uriParam)
+
+		const pathNameComplete = uriParam ? `${router.pathname}?${uriParam}` : router.pathname;
+
 		if (!isAuth)
 		{
-			dispatch(setStartPathname(router.pathname));
+			dispatch(setStartPathname(pathNameComplete));
 			router.push('/login');
 		}
 		if (!auth?.user && user)
 		{
-			console.log(router.pathname)
-			console.log(router.route)
+			console.log("pathNameComplete", pathNameComplete)
 			dispatch(setDataAfterReloading(user))
-			dispatch(setCurrentPathname(router.pathname))
-			// router.replace(router.pathname)
+			dispatch(setCurrentPathname(pathNameComplete))
 		}
 		if(!isLoading)
 		{
-			dispatch(setCurrentPathname(router.pathname))
-			// router.replace(router.pathname)
+			dispatch(setCurrentPathname(pathNameComplete))
 		}
 	}, [])
 
