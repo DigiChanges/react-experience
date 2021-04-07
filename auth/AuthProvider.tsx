@@ -23,12 +23,7 @@ const AuthProvider = ({children, ...props}) =>
 
 	useEffect(() =>
 	{
-		console.log("router.query", router.query)
-
 		const uriParam = FilterFactory.getPath(router.query);
-
-		console.log("useEffect", uriParam)
-
 		const pathNameComplete = uriParam ? `${router.pathname}?${uriParam}` : router.pathname;
 
 		if (!isAuth)
@@ -38,11 +33,10 @@ const AuthProvider = ({children, ...props}) =>
 		}
 		if (!auth?.user && user)
 		{
-			console.log("pathNameComplete", pathNameComplete)
 			dispatch(setDataAfterReloading(user))
 			dispatch(setCurrentPathname(pathNameComplete))
 		}
-		if(!isLoading)
+		if(!isLoading && (auth?.user && user)) // TODO: Verified
 		{
 			dispatch(setCurrentPathname(pathNameComplete))
 		}

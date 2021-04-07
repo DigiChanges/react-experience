@@ -20,7 +20,6 @@ class FilterFactory
 
 	static getPath(query: any | null): string | null
 	{
-		console.log('getPath', queryString.stringify(query));
 		return query ? queryString.stringify(query) : null;
 	}
 }

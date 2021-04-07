@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { useRouter } from "next/router";
-import UsersTable from "../tables/users/UsersTable";
 import ConfirmDeleteUser from "../modal/ConfirmDeleteUser";
 import IconPlus from "../../atoms/Icons/Stroke/IconPlus";
 import TitleWithButton from "../../molecules/TitleWithButton";
@@ -11,11 +10,12 @@ import Title from "../../atoms/Title";
 import Button from "../../atoms/Button";
 import IconArrowCircleLeft from "../../atoms/Icons/Solid/IconArrowCircleLeft";
 
-const UserList = ({ usersList, query }) => {
+const UserList = ({ usersList, query, viewMore }) =>
+{
   const router = useRouter();
   const [booleanConfirmDelete, setBooleanConfirmDelete] = useState(false);
 
-  const openConfirmDelete = (): any => {
+  const openConfirmDelete = (): void => {
     setBooleanConfirmDelete(!booleanConfirmDelete);
   };
 
@@ -45,13 +45,6 @@ const UserList = ({ usersList, query }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const nextPagination = (page: string,) => {
-    console.log({ page })
-    // const uriPage = FilterFactory.getUriParam({page})
-
-    //   router.push(`/users/list?${uriPage}`);
-  };
-
   return (
     <>
       <div className="flex flex-col justify-between">
@@ -76,7 +69,7 @@ const UserList = ({ usersList, query }) => {
             </MediaObject>
           ))}
           <div className="flex justify-center w-3/4 mt-10">
-            <Button buttonClick={nextPagination} className="w-32 h-10 bg-gray-800 rounded-xl text-white font-bold text-sm mx-auto">
+            <Button buttonClick={viewMore} className="w-32 h-10 bg-gray-800 rounded-xl text-white font-bold text-sm mx-auto">
               View more
             </Button>
             <Button buttonClick={scrollTop} className={'h-10 w-10 transform rotate-90 text-main-gray-250 ' + (showScroll ? 'flex' : 'hidden')} >

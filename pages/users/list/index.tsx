@@ -1,23 +1,34 @@
 import React, { useEffect } from "react";
 import UserList from "../../../templates/users/UserList";
 import {useDispatch, useSelector} from 'react-redux';
-import {getUsers} from "../../../redux/users/actions";
+import {getUsers, resetUsers} from "../../../redux/users/actions";
+import {resetQueryPagination} from "../../../redux/general/actions";
 
 const UsersListPage = ({query}): any =>
 {
 	const dispatch = useDispatch()
-	const {usersList, nextQueryParamsPagination} = useSelector(state => state.Users);
+	const {usersList} = useSelector(state => state.Users);
+	const {nextQueryParamsPagination} = useSelector(state => state.General);
 
   useEffect(() => {
     dispatch(getUsers(query, nextQueryParamsPagination));
+
+		return () => {
+      dispatch(resetUsers());
+      dispatch(resetQueryPagination());
+    };
   }, [query]);
+
+  const viewMore = (): void => {
+		dispatch(getUsers(query, nextQueryParamsPagination));
+	}
 
   return (
     <>
-      <UserList usersList={usersList} query={query} />
+      <UserList viewMore={viewMore} usersList={usersList} query={query} />
     </>
   );
-};
+}
 
 UsersListPage.getInitialProps = async ({query}) => {
 	return {query};

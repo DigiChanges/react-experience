@@ -18,9 +18,9 @@ import {
   REMOVE_USER,
 } from "./constants";
 import {
-  startGeneralLoading,
-  stopGeneralLoading,
-  showGeneralNotification,
+	startGeneralLoading,
+	stopGeneralLoading,
+	showGeneralNotification, nextQueryPagination,
 } from "../general/actions";
 import {
   getUserSuccess,
@@ -29,18 +29,21 @@ import {
   removeUserSuccess,
 } from "./actions";
 
-function* getUsersList({ payload }) {
-  console.log('payload', payload)
-
+function* getUsersList({ payload })
+{
   yield put(startGeneralLoading());
+
   try {
     const res = yield call(getAllUsers, payload.nextQueryParamsPagination);
-    const { data } = res;
+    const { data, pagination } = res;
+
     if (!data) {
       return yield put(showErrorNotification("Internal Server Error"));
     }
-    const uriParam = payload.nextQueryParamsPagination.split("?")[1];
-    yield put(getUserSuccess(data, uriParam));
+
+    yield put(getUserSuccess(data));
+    yield put(nextQueryPagination(pagination));
+
   } catch (e) {
     yield put(showErrorNotification(e.message));
   } finally {

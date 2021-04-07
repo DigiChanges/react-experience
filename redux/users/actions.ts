@@ -1,31 +1,35 @@
 import {
-  GET_USERS,
-  GET_USERS_SUCCESS,
-  SELECTED_USER,
-  UNSELECTED_USER,
-  CREATE_USER,
-  CREATE_USER_SUCCESS,
-  UPDATE_USER,
-  UPDATE_USER_SUCCESS,
-  CHANGE_PASSWORD,
-  REMOVE_USER,
-  REMOVE_USER_SUCCESS
-} from './constants'
-import { UserFilter } from "./interfaces";
+	GET_USERS,
+	GET_USERS_SUCCESS,
+	SELECTED_USER,
+	UNSELECTED_USER,
+	CREATE_USER,
+	CREATE_USER_SUCCESS,
+	UPDATE_USER,
+	UPDATE_USER_SUCCESS,
+	CHANGE_PASSWORD,
+	REMOVE_USER,
+	REMOVE_USER_SUCCESS, RESET_USERS
+} from './constants';
 
 export interface UserActions {
   type: string
   payload: any | null
 }
 
-export const getUsers = (userFilterQueryParam?: string, nextQueryParamsPagination?: string): UserActions => ({
+export const getUsers = (userFilterQueryParam: string, nextQueryParamsPagination: string): UserActions => ({
   type: GET_USERS,
   payload: { userFilterQueryParam, nextQueryParamsPagination }
 })
 
-export const getUserSuccess = (users: any, nextQueryParamsPagination: string): UserActions => ({
+export const getUserSuccess = (users: any): UserActions => ({
   type: GET_USERS_SUCCESS,
-  payload: { users, nextQueryParamsPagination }
+  payload: users
+})
+
+export const resetUsers = (): UserActions => ({
+  type: RESET_USERS,
+  payload: null
 })
 
 export const selectedUser = (id: string): UserActions => ({

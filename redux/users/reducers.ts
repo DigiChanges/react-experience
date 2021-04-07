@@ -1,23 +1,22 @@
 import {
-  GET_USERS_SUCCESS,
-  SELECTED_USER,
-  UNSELECTED_USER,
-  CREATE_USER_SUCCESS,
-  UPDATE_USER_SUCCESS,
-  REMOVE_USER_SUCCESS
+	GET_USERS_SUCCESS,
+	SELECTED_USER,
+	UNSELECTED_USER,
+	CREATE_USER_SUCCESS,
+	UPDATE_USER_SUCCESS,
+	REMOVE_USER_SUCCESS, RESET_USERS
 } from './constants'
 import { UserActions } from './actions';
+import _ from "lodash";
 
 const INIT_STATE = {
-  usersList: null,
-  userSelected: null,
-  nextQueryParamsPagination: "pagination[limit]=10&pagination[offset]=0",
+  usersList: [],
+  userSelected: null
 }
 
 type State = {
-  usersList: [] | null,
-  userSelected: any | null,
-  nextQueryParamsPagination: string | null
+  usersList: any[],
+  userSelected: any | null
 }
 
 const addUser = (newUser, users) => {
@@ -51,10 +50,17 @@ const getSelectedUser = (id, users) => (
   users.find(user => user.id === id)
 )
 
+const getUsers = (newUsers, currentUsers) => {
+	return _.concat(currentUsers, newUsers);
+}
+
 const Users = (state: State = INIT_STATE, action: UserActions) => {
   switch (action.type) {
     case GET_USERS_SUCCESS:
-      return { ...state, usersList: action.payload.users, nextQueryParamsPagination: action.payload.nextQueryParamsPagination }
+      return { ...state, usersList: getUsers(action.payload, state.usersList) }
+
+		case RESET_USERS:
+      return { ...state, usersList: INIT_STATE.usersList }
 
     case SELECTED_USER:
       return { ...state, userSelected: getSelectedUser(action.payload, state.usersList) }
