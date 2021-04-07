@@ -50,6 +50,7 @@ module.exports = {
         300: "#5A5E63",
         400: "#3F4349",
         500: "#1E2125",
+        600: "#181D24",
       },
       gray: {
         100: "#f7fafc",
@@ -175,6 +176,7 @@ module.exports = {
       10: "2.5rem",
       12: "3rem",
       16: "4rem",
+      18: "4.5rem",
       20: "5rem",
       24: "6rem",
       32: "8rem",
@@ -373,6 +375,7 @@ module.exports = {
       ...theme("spacing"),
       full: "100%",
       screen: "100vh",
+      90: "90vh",
     }),
     inset: {
       0: "0",
@@ -464,6 +467,7 @@ module.exports = {
     },
     maxWidth: (theme, { breakpoints }) => ({
       none: "none",
+      xxs: "16rem",
       xs: "20rem",
       sm: "24rem",
       md: "28rem",

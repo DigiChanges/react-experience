@@ -13,9 +13,9 @@ const SideBar = ({ className }) => {
 
   const [isExpanded, setExpanded] = useState(true);
 
-  let classNameUl = "flex flex-col pt-6 pb-6 pl-6 items-center h-full justify-end md:items-start md:justify-center md:max-w-64";
+  let classNameUl = "ml-3 mt-3 flex flex-col items-center h-full md:items-start md:justify-center md:max-w-64";
 
-  classNameUl = isExpanded ? classNameUl : "flex flex-col pt-6 pb-6 pl-6 items-center h-full justify-end md:items-start md:justify-center w-max";
+  classNameUl = isExpanded ? classNameUl : "ml-3 mt-3 flex flex-col items-center h-full md:items-start md:justify-center w-max";
 
 
   const hasPermission = (permission, user) =>
@@ -51,7 +51,7 @@ const SideBar = ({ className }) => {
 
   return (
     <div className={className} >
-      <div className={`flex flex-row md:flex-col ${isExpanded ? (`max-w-64`) : ``}  h-full rounded-r-3xl overflow-hidden`}>
+      <div className={`flex flex-row md:flex-col h-full`}>
         {/* TODO: Change image logic*/}
         {/* <div className="flex items-center justify-center h-20 shadow-md">
 								 <Image
@@ -62,21 +62,24 @@ const SideBar = ({ className }) => {
         <ul className={classNameUl}>
           {/* <ul className="flex flex-col pt-6 pb-6 pl-6 items-center h-full justify-end md:items-start md:justify-center w-full"> */}
           {/* <li className="flex justify-end w-full pr-6 pb-2"> */}
-          <li className="flex justify-end object-fit pr-6 pb-2">
-            {
-              isExpanded ? (
+          {
+            isExpanded ? (
+              <li className="flex flex-row-reverse w-full p-3">
                 <button
                   onClick={() => setExpanded(false)}
-                  type="button" className="flex flex-row justify-end w-6 text-main-gray-300 cursor-pointer" >
+                  type="button" className="right-0 w-5 text-main-gray-300" >
                   <IconArrowCircleLeft />
                 </button>
-              ) : <button
-                onClick={() => setExpanded(true)}
-                type="button" className="transform rotate-180 flex flex-row justify-end w-6 text-main-gray-300 cursor-pointer" >
-                <IconArrowCircleLeft />
-              </button>
-            }
-          </li>
+              </li>
+            )
+              : <li className="flex justify-center w-full p-3">
+                <button
+                  onClick={() => setExpanded(true)}
+                  type="button" className="transform rotate-180 w-5 text-white" >
+                  <IconArrowCircleLeft />
+                </button>
+              </li>
+          }
           {getDashRoutes()}
         </ul>
       </div>

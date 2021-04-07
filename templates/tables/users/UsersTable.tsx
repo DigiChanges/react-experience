@@ -1,56 +1,62 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import DataTable from "react-data-table-component";
 import ListUsersTemplateColumns from "./ListUsersTemplateColumns";
 import TableUsersStyle from "../../../assets/customStyles/TableUsersStyle";
+import { getUsers } from '../../../redux/users/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
-const UsersTable = ({usersList, query}) =>
-{
-	const mapRoles = roles =>
-	{
-		if (roles && roles.length > 0)
-		{
-			let rolesData = ''
-			roles.map(role =>
-			{
-				rolesData = rolesData.concat(`${role.name} `)
-			})
-			return rolesData
-		}
-		return ''
-	}
+const UsersTable = () => {
+  const dispatch = useDispatch()
+  const { usersList } = useSelector(state => state.Users);
 
-	const getUserRow = (id, firstName, lastName, email, roles) => ({
-		id,
-		firstName,
-		lastName,
-		email,
-		rolesData: mapRoles(roles)
-	})
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
 
-	const getRows = () => usersList.map(u => getUserRow(u.id, u.firstName, u.lastName, u.email, u.roles))
+  const mapRoles = roles => {
+    if (roles && roles.length > 0) {
+      let rolesData = ''
+      roles.map(role => {
+        rolesData = rolesData.concat(`${role.name} `)
+      })
+      return rolesData
+    }
+    return ''
+  }
 
-	return (
-		<>
-			<div className="pt-2 rounded-xl">
+  const getUserRow = (id, firstName, lastName, email, roles) => ({
+    id,
+    firstName,
+    lastName,
+    email,
+    rolesData: mapRoles(roles)
+  })
+
+  const getRows = () => usersList.map(u => getUserRow(u.id, u.firstName, u.lastName, u.email, u.roles))
+
+  return (
+    <>
+      <div className="pt-2 rounded-xl">
+        Holas
 				{usersList && (
-					usersList.length > 0 ? (
-						<DataTable
-							columns={ListUsersTemplateColumns}
-							data={getRows()}
-							title={false}
-							striped={true}
-							noHeader
-							theme="DGDarkTheme"
-							customStyles={TableUsersStyle}
-							className="flex-col md:flex-row"
-						/>
-					) : (
-						<p>No Users</p>
-					)
-				)}
-			</div>
-		</>
-	);
+          usersList.length > 0 ? (
+            <DataTable
+              columns={ListUsersTemplateColumns}
+              data={getRows()}
+              title={false}
+              striped={true}
+              noHeader
+              theme="DGDarkTheme"
+              customStyles={TableUsersStyle}
+              className="flex-col md:flex-row"
+            />
+          ) : (
+            <p>No Users</p>
+          )
+        )}
+      </div>
+    </>
+  );
 };
 
 export default UsersTable;

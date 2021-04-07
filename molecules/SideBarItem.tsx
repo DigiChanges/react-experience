@@ -59,8 +59,8 @@ const SideBarItem = ({
         </Link>)
     }
     else {
-      // palabra 'menu'
-      return (<div className="text-sm font-extrabold text-xl text-main-gray-300 md:block pb-2">
+      // 'menu'
+      return (<div className="text-md font-bold text-main-gray-300 text-center ">
         {name}
       </div>)
     }
