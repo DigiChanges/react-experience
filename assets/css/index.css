@@ -36,9 +36,9 @@
   textarea,
   select {
     border-radius: 80px 80px;
-    background: var(--input-background-main);
+    background: rgba(255, 255, 255, 0.04);
     border-width: 1px;
-    border-color: var(--input-border-color-main);
+    border: solid 1px rgba(218, 218, 218, 0.07);
     color: var(--input-font-color-main);
   }
 
@@ -53,7 +53,11 @@
   .gilroy {
     font-family: "Gilroy-Regular", sans-serif;
   }
-
+ /* TODO: coloco esta clase general temporalmente, yo se que igual hay que pasar todo con @apply en el futuro */
+  html {
+    font-family: "Gilroy-Regular", sans-serif;
+  }
+/* fin de yet-another-chanchada */
   button.button-primary {
     background-color: var(--button-background-color-primary);
     color: var(--button-color);

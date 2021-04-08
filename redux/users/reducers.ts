@@ -1,22 +1,26 @@
 import {
-	GET_USERS_SUCCESS,
-	SELECTED_USER,
-	UNSELECTED_USER,
-	CREATE_USER_SUCCESS,
-	UPDATE_USER_SUCCESS,
-	REMOVE_USER_SUCCESS, RESET_USERS
+  GET_USERS_SUCCESS,
+  SELECTED_USER,
+  UNSELECTED_USER,
+  CREATE_USER_SUCCESS,
+  UPDATE_USER_SUCCESS,
+  REMOVE_USER_SUCCESS,
+  TOGGLE_RECOVER_PASSWORD,
+	RESET_USERS
 } from './constants'
 import { UserActions } from './actions';
 import _ from "lodash";
 
 const INIT_STATE = {
   usersList: [],
-  userSelected: null
+  userSelected: null,
+  showRecoverPassword: false,
 }
 
 type State = {
   usersList: any[],
-  userSelected: any | null
+  userSelected: any | null,
+  showRecoverPassword: boolean,
 }
 
 const addUser = (newUser, users) => {
@@ -76,6 +80,9 @@ const Users = (state: State = INIT_STATE, action: UserActions) => {
 
     case REMOVE_USER_SUCCESS:
       return { ...state, usersList: deleteUser(action.payload, state.usersList) }
+
+    case TOGGLE_RECOVER_PASSWORD:
+      return { ...state, showRecoverPassword: !state.showRecoverPassword }
 
     default:
       return { ...state }

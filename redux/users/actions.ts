@@ -9,7 +9,9 @@ import {
 	UPDATE_USER_SUCCESS,
 	CHANGE_PASSWORD,
 	REMOVE_USER,
-	REMOVE_USER_SUCCESS, RESET_USERS
+	REMOVE_USER_SUCCESS,
+	RESET_USERS,
+	TOGGLE_RECOVER_PASSWORD
 } from './constants';
 import {ParsedUrlQuery} from "querystring";
 
@@ -98,4 +100,8 @@ export const removeUser = (id: string): UserActions => ({
 export const removeUserSuccess = (user: any): UserActions => ({
   type: REMOVE_USER_SUCCESS,
   payload: user
+})
+export const setShowRecoverPassword = (): UserActions => ({
+  type: TOGGLE_RECOVER_PASSWORD,
+	payload: null
 })
