@@ -1,10 +1,10 @@
 // @flow
 import Router from 'next/router';
 import {all, call, fork, put, takeEvery} from 'redux-saga/effects';
-import {signin, getAllPermissions} from '../../services/authService'
+import {signin, getAllPermissions, getForgotPassword} from '../../services/authService'
 import {notificationTypes, notification} from '../../entities/notification';
 
-import {LOGIN_USER, LOGOUT_USER, GET_PERMISSIONS, SET_DATA_AFTER_RELOADING} from './constants';
+import {LOGIN_USER, LOGOUT_USER, GET_PERMISSIONS, SET_DATA_AFTER_RELOADING, FORGET_PASSWORD} from './constants';
 import {startGeneralLoading, stopGeneralLoading, showGeneralNotification} from '../general/actions';
 import {getPermissionsSuccess, loginUserSuccess, setDataAfterReloadingSuccess} from './actions';
 import {removeSession, setSession} from "../../helpers/AuthSession";
@@ -125,31 +125,45 @@ function* setDataAfterReloading({payload: {user}})
 	}
 }
 
-// /**
-//  * forget password
-//  */
-// function* forgetPassword({ payload: { email } }) {
-//     const options = {
-//         body: JSON.stringify({ email }),
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//     };
+/**
+ * forget password
+ */
+function* forgetPassword({ payload: { email } })
+{
+	try
+	{
+		yield put(startGeneralLoading());
 
-// try {
-// const response = null;
-// const response = yield call(fetchJSON, currentApiRoute.apiEnv + '/auth/forgotPassword', options);
+		const res = yield call(getForgotPassword, email);
 
-// if (response.status === "error")
-// {
-//     yield put(forgetPasswordFailed(response.message));
-//     return;
-// }
-
-// yield put(forgetPasswordSuccess(response.message));
-// } catch (error) {
-// yield put(forgetPasswordFailed(error.message));
-//     }
-// }
+		console.log(res)
+		if (res)
+		{
+			yield put(
+				showGeneralNotification(notification( notificationTypes.SUCCESS, res.message))
+			)
+		}
+		else
+		{
+			yield put(
+				showGeneralNotification(notification(notificationTypes.ERROR, 'Internal Server Error'))
+			)
+		}
+	} catch (e)
+	{
+		yield put(
+			showGeneralNotification(
+				notification(
+					notificationTypes.ERROR,
+					e.message)
+			)
+		)
+	}
+	finally
+	{
+		yield put(stopGeneralLoading())
+	}
+}
 
 // /**
 // * change forget password
@@ -202,6 +216,7 @@ export function* watchGetPermissions(): any
 	// @ts-ignore
 	yield takeEvery(GET_PERMISSIONS, getPermissionsList);
 }
+
 export function* watchSetDataAfterReloading(): any
 {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -209,11 +224,11 @@ export function* watchSetDataAfterReloading(): any
 	yield takeEvery(SET_DATA_AFTER_RELOADING, setDataAfterReloading);
 }
 
-
-// export function* watchForgetPassword(): any {
-//   // @ts-ignore
-//   yield takeEvery(FORGET_PASSWORD, forgetPassword);
-// }
+export function* watchForgetPassword(): any {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  yield takeEvery(FORGET_PASSWORD, forgetPassword);
+}
 
 // export function* watchChangeForgotPassword(): any {
 //   // @ts-ignore
@@ -226,8 +241,8 @@ function* authSaga(): any
 		fork(watchLoginUser),
 		fork(watchLogoutUser),
 		fork(watchGetPermissions),
-		fork(watchSetDataAfterReloading)
-		// fork(watchForgetPassword),
+		fork(watchSetDataAfterReloading),
+		fork(watchForgetPassword),
 		// fork(watchChangeForgotPassword)
 	])
 }

@@ -85,11 +85,6 @@ export const forgetPassword = (email: string): AuthAction => ({
     payload: { email },
 });
 
-export const forgetPasswordSuccess = (passwordResetStatus: string): AuthAction => ({
-    type: FORGET_PASSWORD_SUCCESS,
-    payload: passwordResetStatus,
-});
-
 // export const changeForgotPassword = (confirmationToken: string, password: string, passwordConfirmation: string): AuthAction => ({
 //     type: CHANGE_FORGOT_PASSWORD,
 //     payload: { confirmationToken, password, passwordConfirmation},

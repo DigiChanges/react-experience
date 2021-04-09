@@ -21,7 +21,6 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ ...props}) =>
 
   return (
     <>
-
         <Formik
           initialValues={{
             email: ""
@@ -29,7 +28,9 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ ...props}) =>
           validationSchema={ForgetPasswordSchema}
           onSubmit={async (values) => {
             const { email } = values
+						console.log(email)
             dispatch(forgetPassword(email))
+						props.onClick();
           }}
         >
           {({ errors, touched }) => (
@@ -61,13 +62,13 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ ...props}) =>
                     className="flex mx-auto text-white bg-red-700 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded-full text-sm font-bold"
                   >
                     Cancel
-										</Button>
+									</Button>
                   <Button
                     buttonType="submit"
                     className="mx-auto text-white bg-primary-main border-0 py-2 px-6 focus:outline-none hover:bg-primary-hover rounded-full text-sm font-bold text-center"
                   >
-                    Send Recovery Mail
-										</Button>
+                    Send
+									</Button>
                 </div>
               </div>
             </Form>

@@ -60,15 +60,6 @@ const Auth = (state: State = INIT_STATE, action: AuthAction) =>
 		case LOGOUT_USER:
 			return {...state, user: null, loading: false,};
 
-		// case FORGET_PASSWORD:
-		//   return { ...state, loading: true };
-		//
-		// case FORGET_PASSWORD_SUCCESS:
-		//   return { ...state, passwordResetStatus: action.payload, loading: false, error: null };
-		//
-		// case FORGET_PASSWORD_FAILED:
-		//   return { ...state, error: action.payload, loading: false };
-		//
 		// case CHANGE_FORGOT_PASSWORD:
 		//   return { ...state, loading: true, errorFields: null };
 		//
