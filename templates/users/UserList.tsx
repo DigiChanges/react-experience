@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
+import {useDispatch} from 'react-redux';
 import { useRouter } from "next/router";
 import ConfirmDeleteUser from "../modal/ConfirmDeleteUser";
 import IconPlus from "../../atoms/Icons/Stroke/IconPlus";
@@ -9,11 +10,15 @@ import MediaObject from "../../molecules/MediaObject";
 import Title from "../../atoms/Title";
 import Button from "../../atoms/Button";
 import IconArrowCircleLeft from "../../atoms/Icons/Solid/IconArrowCircleLeft";
+import {resetUsers} from "../../redux/users/actions";
+import {resetQueryPagination} from "../../redux/general/actions";
 
 const UserList = ({ usersList, query, viewMore }) =>
 {
   const router = useRouter();
+	const dispatch = useDispatch();
   const [booleanConfirmDelete, setBooleanConfirmDelete] = useState(false);
+  const [showScroll, setShowScroll] = useState(false);
 
   const openConfirmDelete = (): void => {
     setBooleanConfirmDelete(!booleanConfirmDelete);
@@ -23,18 +28,24 @@ const UserList = ({ usersList, query, viewMore }) =>
     return router.push("/users/create");
   }
 
-  const onClickFilter = (search: string, filterBy: string, orderBy: string, sort: 'asc' | 'desc') => {
+  const onClickFilter = (search: string, filterBy: string, orderBy: string, sort: 'asc' | 'desc') =>
+	{
+		dispatch(resetUsers());
+		dispatch(resetQueryPagination());
+
     const uriParam = FilterFactory.getUriParam({ search, filterBy, orderBy, sort });
 
     router.push(`/users/list?${uriParam}`, undefined, { shallow: false });
   }
 
-  const [showScroll, setShowScroll] = useState(false)
-
-  const checkScrollTop = () => {
-    if (!showScroll && window.pageYOffset > 300) {
+  const checkScrollTop = () =>
+	{
+    if (!showScroll && window.pageYOffset > 300)
+    {
       setShowScroll(true)
-    } else if (showScroll && window.pageYOffset <= 300) {
+    }
+    else if (showScroll && window.pageYOffset <= 300)
+    {
       setShowScroll(false)
     }
   };
@@ -48,7 +59,7 @@ const UserList = ({ usersList, query, viewMore }) =>
   return (
     <>
       <div className="flex flex-col justify-between">
-        <FilterSort actionFilter={onClickFilter} />
+        <FilterSort actionFilter={onClickFilter} filterQuery={query} />
         <TitleWithButton
           title="Users"
           labelButtonName="Create User"
@@ -70,7 +81,7 @@ const UserList = ({ usersList, query, viewMore }) =>
           ))}
           <div className="flex justify-center w-3/4 mt-10">
             <Button buttonClick={viewMore} className="w-32 h-10 bg-gray-800 rounded-xl text-white font-bold text-sm mx-auto">
-              View more
+              View More
             </Button>
             <Button buttonClick={scrollTop} className={'h-10 w-10 transform rotate-90 text-main-gray-250 ' + (showScroll ? 'flex' : 'hidden')} >
               <IconArrowCircleLeft />

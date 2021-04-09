@@ -20,7 +20,8 @@ import {
 import {
 	startGeneralLoading,
 	stopGeneralLoading,
-	showGeneralNotification, nextQueryPagination,
+	showGeneralNotification,
+	nextQueryPagination,
 } from "../general/actions";
 import {
   getUserSuccess,
@@ -28,13 +29,17 @@ import {
   updateUserSuccess,
   removeUserSuccess,
 } from "./actions";
+import FilterFactory from "../../helpers/FilterFactory";
 
 function* getUsersList({ payload })
 {
   yield put(startGeneralLoading());
 
   try {
-    const res = yield call(getAllUsers, payload.nextQueryParamsPagination);
+
+		const query = FilterFactory.getPath(payload.userFilterQueryParam, payload.nextQueryParamsPagination);
+
+    const res = yield call(getAllUsers, query);
     const { data, pagination } = res;
 
     if (!data) {

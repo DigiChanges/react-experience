@@ -1,4 +1,5 @@
 import * as queryString from "querystring";
+import {ParsedUrlQuery} from "querystring";
 
 interface IFilter
 {
@@ -18,9 +19,13 @@ class FilterFactory
 		return `filter[${filterBy}]=${search}&sort[${order}]=${sort}`;
 	}
 
-	static getPath(query: any | null): string | null
+	static getPath(userFilterQueryParam: ParsedUrlQuery, nextQueryParamsPagination: string): string
 	{
-		return query ? queryString.stringify(query) : null;
+		const filterSort = userFilterQueryParam ? queryString.stringify(userFilterQueryParam) : '';
+
+		return filterSort && nextQueryParamsPagination && !nextQueryParamsPagination.includes(filterSort)
+														? `${nextQueryParamsPagination}&${filterSort}`
+														: nextQueryParamsPagination;
 	}
 }
 

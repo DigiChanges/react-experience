@@ -6,7 +6,7 @@ import {resetQueryPagination} from "../../../redux/general/actions";
 
 const UsersListPage = ({query}): any =>
 {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const {usersList} = useSelector(state => state.Users);
 	const {nextQueryParamsPagination} = useSelector(state => state.General);
 

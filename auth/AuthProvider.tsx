@@ -9,7 +9,7 @@ import {setDataAfterReloading} from '../redux/auth/actions'
 import PrivateLayout from '../templates/layout/PrivateLayout'
 import FilterFactory from "../helpers/FilterFactory";
 
-const AuthProvider = ({children, ...props}) =>
+const AuthProvider = ({children, query, ...props}) =>
 {
 	const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ const AuthProvider = ({children, ...props}) =>
 
 	useEffect(() =>
 	{
-		const uriParam = FilterFactory.getPath(router.query);
+		const uriParam = FilterFactory.getPath(query, '');
 		const pathNameComplete = uriParam ? `${router.pathname}?${uriParam}` : router.pathname;
 
 		if (!isAuth)
@@ -57,6 +57,10 @@ const AuthProvider = ({children, ...props}) =>
 	}
 
 	return renderChildren();
+}
+
+AuthProvider.getInitialProps = async ({query}) => {
+	return {query};
 }
 
 export default withCookies(AuthProvider);

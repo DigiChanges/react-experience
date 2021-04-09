@@ -11,13 +11,14 @@ import {
 	REMOVE_USER,
 	REMOVE_USER_SUCCESS, RESET_USERS
 } from './constants';
+import {ParsedUrlQuery} from "querystring";
 
 export interface UserActions {
   type: string
   payload: any | null
 }
 
-export const getUsers = (userFilterQueryParam: string, nextQueryParamsPagination: string): UserActions => ({
+export const getUsers = (userFilterQueryParam: ParsedUrlQuery, nextQueryParamsPagination: string): UserActions => ({
   type: GET_USERS,
   payload: { userFilterQueryParam, nextQueryParamsPagination }
 })
