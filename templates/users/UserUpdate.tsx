@@ -10,7 +10,6 @@ import Label from "../../atoms/Label";
 
 const UpdateUser = ({userSelected, rolesList, permissions}): any =>
 {
-
 	const dispatch = useDispatch(); // Remove it
 
 	const STATES = [

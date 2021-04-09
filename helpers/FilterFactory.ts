@@ -1,3 +1,5 @@
+import * as queryString from "querystring";
+import {ParsedUrlQuery} from "querystring";
 
 interface IFilter
 {
@@ -9,7 +11,7 @@ interface IFilter
 
 class FilterFactory
 {
-	static getUriParam(filter: IFilter)
+	static getUriParam(filter: IFilter): string
 	{
 		const {search, filterBy, orderBy, sort} = filter;
 		const order =  orderBy.length <= 0 ? filterBy : orderBy;
@@ -17,23 +19,13 @@ class FilterFactory
 		return `filter[${filterBy}]=${search}&sort[${order}]=${sort}`;
 	}
 
-	static getPath(query: any)
+	static getPath(userFilterQueryParam: ParsedUrlQuery, nextQueryParamsPagination: string): string
 	{
-		console.log("getPath query", query);
+		const filterSort = userFilterQueryParam ? queryString.stringify(userFilterQueryParam) : '';
 
-		let pathQuery = '';
-
-		for (const key in query)
-		{
-			if (Object.prototype.hasOwnProperty.call(query, key)) {
-				console.log(query[key]);
-				console.log(query[key]);
-			}
-		}
-		// const order =  orderBy.length <= 0 ? filterBy : orderBy;
-
-		// return `filter[${filterBy}]=${search}&sort[${order}]=${sort}`;
-		return `filter`;
+		return filterSort && nextQueryParamsPagination && !nextQueryParamsPagination.includes(filterSort)
+														? `${nextQueryParamsPagination}&${filterSort}`
+														: nextQueryParamsPagination;
 	}
 }
 

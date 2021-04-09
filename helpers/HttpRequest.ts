@@ -88,7 +88,7 @@ class HttpRequest
 			const {data} = res
 			if (HTTP_SUCCESS_STATUS.includes(res.status))
 			{
-				return apiResult(data.data)
+				return apiResult(data)
 			}
 			else if (HTTP_ERROR_STATUS.includes(res.status))
 			{

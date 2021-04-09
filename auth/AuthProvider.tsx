@@ -9,7 +9,7 @@ import {setDataAfterReloading} from '../redux/auth/actions'
 import PrivateLayout from '../templates/layout/PrivateLayout'
 import FilterFactory from "../helpers/FilterFactory";
 
-const AuthProvider = ({children, ...props}) =>
+const AuthProvider = ({children, query, ...props}) =>
 {
 	const dispatch = useDispatch();
 
@@ -23,27 +23,22 @@ const AuthProvider = ({children, ...props}) =>
 
 	useEffect(() =>
 	{
-		console.log("router.query", router.query)
-
-		const uriParam = FilterFactory.getPath(router.query);
+		const uriParam = FilterFactory.getPath(query, '');
+		const pathNameComplete = uriParam ? `${router.pathname}?${uriParam}` : router.pathname;
 
 		if (!isAuth)
 		{
-			dispatch(setStartPathname(router.pathname));
+			dispatch(setStartPathname(pathNameComplete));
 			router.push('/login');
 		}
 		if (!auth?.user && user)
 		{
-			console.log(router.pathname)
-			console.log(router.route)
 			dispatch(setDataAfterReloading(user))
-			dispatch(setCurrentPathname(router.pathname))
-			// router.replace(router.pathname)
+			dispatch(setCurrentPathname(pathNameComplete))
 		}
-		if(!isLoading)
+		if(!isLoading && (auth?.user && user)) // TODO: Verified
 		{
-			dispatch(setCurrentPathname(router.pathname))
-			// router.replace(router.pathname)
+			dispatch(setCurrentPathname(pathNameComplete))
 		}
 	}, [])
 
@@ -62,6 +57,10 @@ const AuthProvider = ({children, ...props}) =>
 	}
 
 	return renderChildren();
+}
+
+AuthProvider.getInitialProps = async ({query}) => {
+	return {query};
 }
 
 export default withCookies(AuthProvider);

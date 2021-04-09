@@ -1,10 +1,9 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useState} from "react";
 import SideBarItem from "../molecules/SideBarItem";
 import { dashRoutes } from "../config/dashRoutes";
 import { ADMIN } from "../config/permissions";
 import { useSelector } from "react-redux";
 import IconArrowCircleLeft from "../atoms/Icons/Solid/IconArrowCircleLeft";
-// import Image from "../atoms/Image";
 
 const SideBar = ({ className }) => {
   const { userPermissions, user } = useSelector((store) => store.Auth);

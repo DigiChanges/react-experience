@@ -1,25 +1,10 @@
-import React, {useEffect} from 'react'
-
-import {useDispatch} from 'react-redux';
-import {setCurrentPathname} from '../redux/paths/actions'
-import {useRouter} from 'next/router'
+import React from 'react'
 
 const GeneralLoader = ({
   cssScreenContainer,
   cssSpinnerContainer,
   cssSpinner 
 }) => {
-  
-	const dispatch = useDispatch()	
-	const router = useRouter()
-
-	useEffect(() => {
-		const setCurrentPath = dispatch(setCurrentPathname(router.pathname))
-		return () => {
-			setCurrentPath
-		}
-	}, [])
-
   return (
     <div className={ cssScreenContainer }>
       <div className={ cssSpinnerContainer }>

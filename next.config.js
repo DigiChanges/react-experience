@@ -1,7 +1,7 @@
 module.exports = {
-  future: {
-    webpack5: true,
-  },
+  // future: {
+  //   webpack5: true,
+  // },
   webpack: (config, { dev }) => {
     if (dev) {
       config.module.rules.push({
