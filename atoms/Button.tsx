@@ -1,20 +1,20 @@
-import React from "react";
+import React, {PropsWithChildren} from "react";
 
-interface ButtonProps {
-  children: React.ReactNode;
+interface ButtonProps extends PropsWithChildren<any> {
+  buttonType: "button" | "submit" | "reset";
   props?: any;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, props }) => {
-  return (
-    <button
-      type="button"
-      className=" w-1/12 h-12 bg-gray-700 text-white text-sm rounded-full font-bold opacity-5 py-9 px-3 gilroy"
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
+const Button: React.FC<ButtonProps> = ({ children, buttonType = null, ...props}) =>
+{
+	return (
+		<button
+			type={buttonType ?? "button"}
+			{...props}
+		>
+			{children}
+		</button>
+	)
+}
 
-export default Button;
+export default Button
