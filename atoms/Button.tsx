@@ -1,15 +1,17 @@
-import React from 'react'
+import React, {PropsWithChildren} from "react";
 
-const Button = ({children, className, buttonClick, buttonType = null}) =>
+interface ButtonProps extends PropsWithChildren<any> {
+  buttonType: "button" | "submit" | "reset";
+  props?: any;
+}
+
+const Button: React.FC<ButtonProps> = ({ children, buttonType = null, ...props}) =>
 {
-	const defaultClick = () =>
-	{
-		return true;
-	}
-
 	return (
-		<button className={className} type={buttonType ?? "button"}
-				onClick={buttonClick === "none" ? defaultClick : buttonClick}>
+		<button
+			type={buttonType ?? "button"}
+			{...props}
+		>
 			{children}
 		</button>
 	)
