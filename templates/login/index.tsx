@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 
-import { setShowRecoverPassword } from "../../redux/actions";
-import ForgotPasswdForm from "./ForgotPasswdForm";
+import ForgotPasswordForm from "./ForgotPasswordForm";
 import LoginForm from "./LoginForm";
 
-const Login = () => {
+const Login = () =>
+{
   const [showRecoverPassword, setShowRecoverPassword] = useState(false);
 
   const togglePasswordRecovery = () => {
@@ -18,8 +17,8 @@ const Login = () => {
         <div className="w-1/2 md:w-1/3 ">
           {
             showRecoverPassword
-              ? (<ForgotPasswdForm onClick={togglePasswordRecovery} showRecoverPassword={showRecoverPassword} />)
-              : (<LoginForm onClick={togglePasswordRecovery} showRecoverPassword={showRecoverPassword} />)
+              ? (<ForgotPasswordForm onClick={togglePasswordRecovery} />)
+              : (<LoginForm onClick={togglePasswordRecovery} />)
           }
         </div>
       </div>

@@ -1,3 +1,4 @@
+import {ParsedUrlQuery} from "querystring";
 import {
 	GET_USERS,
 	GET_USERS_SUCCESS,
@@ -10,10 +11,8 @@ import {
 	CHANGE_PASSWORD,
 	REMOVE_USER,
 	REMOVE_USER_SUCCESS,
-	RESET_USERS,
-	TOGGLE_RECOVER_PASSWORD
+	RESET_USERS
 } from './constants';
-import {ParsedUrlQuery} from "querystring";
 
 export interface UserActions {
   type: string
@@ -100,8 +99,4 @@ export const removeUser = (id: string): UserActions => ({
 export const removeUserSuccess = (user: any): UserActions => ({
   type: REMOVE_USER_SUCCESS,
   payload: user
-})
-export const setShowRecoverPassword = (): UserActions => ({
-  type: TOGGLE_RECOVER_PASSWORD,
-	payload: null
 })
