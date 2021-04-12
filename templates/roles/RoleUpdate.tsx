@@ -157,12 +157,15 @@ const RoleUpdate = (): any =>
 									<div className="flex justify-evenly mt-8">
 										<Button
 											className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-											buttonType="button" buttonClick={() => Router.push("/roles")}>
+											buttonType="button"
+											onClick={() => Router.push("/roles")}
+										>
 											<span className="mr-2">Back</span>
 										</Button>
 										<Button
 											className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-											buttonType="submit" buttonClick="none">
+											buttonType="submit"
+										>
 											Save
 										</Button>
 									</div>

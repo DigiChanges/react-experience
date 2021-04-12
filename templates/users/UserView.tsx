@@ -109,12 +109,15 @@ const UserView = () =>
 						<div className="inset-x-0.bottom-0 flex justify-around pt-4 pb-4">
 							<Button
 								className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-								buttonType="button" buttonClick={() => Router.push("/users")}>
+								buttonType="button"
+								onClick={() => Router.push("/users")}
+							>
 								Back
 							</Button>
 							<Button
 								className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-								buttonType="button" buttonClick={navigateToUpdateUser}>
+								buttonType="button"
+								onClick={navigateToUpdateUser}>
 								Edit
 							</Button>
 						</div>

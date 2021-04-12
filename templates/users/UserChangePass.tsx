@@ -97,14 +97,13 @@ const UserChangePassword = (): any => {
                     <Button
                       className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
                       buttonType="button"
-                      buttonClick={() => Router.push("/users")}
+                      onClick={() => Router.push("/users")}
                     >
                       Back
                     </Button>
                     <Button
                       className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
                       buttonType="submit"
-                      buttonClick="none"
                     >
                       Save
                     </Button>

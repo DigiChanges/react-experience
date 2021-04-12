@@ -12,7 +12,7 @@ const TitleWithButton = ({title, icon, labelButtonName, buttonAction}): any =>
 				</Title>
 				<ButtonIcon
 					icon={icon}
-					buttonClick={buttonAction}
+					onClick={buttonAction}
 					labelName={labelButtonName}
 				/>
 			</section>

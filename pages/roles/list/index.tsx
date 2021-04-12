@@ -23,7 +23,8 @@ const RolesPage = (): any =>
 				<div className="flex justify-center items-center md:justify-end md:items-end pr-8 mb-8"> {/* TODO: REMOVE THIS BUTTON*/}
 					<Link href={"/roles/create"}>
 						<button
-							className="p-0 w-12 h-12 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+							className="p-0 w-12 h-12 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+						>
 								<IconPlus/>
 						</button>
 					</Link>

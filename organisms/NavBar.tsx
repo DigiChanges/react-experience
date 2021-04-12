@@ -5,7 +5,6 @@ import IconChevronDown from "../atoms/Icons/Stroke/IconChevronDown";
 import IconCross from "../atoms/Icons/Stroke/IconCross";
 import Image from "../atoms/Image";
 
-
 const NavBar = ({ email, onClick, showSidebar }): any => {
   const [toggledDrop, toggleDrop] = useState(false);
 
@@ -24,8 +23,8 @@ const NavBar = ({ email, onClick, showSidebar }): any => {
             <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white h-8 w-8 hidden md:block lg:block">
               <span className="sr-only">View notifications</span>
               <span>
-                <span className="ml-1 animate-ping absolute inline-flex h-2 w-2 rounded-full bg-blue-600 opacity-75 "></span>
-                <span className="ml-1 absolute inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                <span className="ml-1 animate-ping absolute inline-flex h-2 w-2 rounded-full bg-blue-600 opacity-75 "/>
+                <span className="ml-1 absolute inline-flex rounded-full h-2 w-2 bg-blue-500"/>
                 <span className=""><IconBell /></span>
               </span>
             </button>
@@ -91,10 +90,6 @@ const NavBar = ({ email, onClick, showSidebar }): any => {
               )}
             </button>
           </div>
-
-
-
-
         </div>
       </div>
     </nav >

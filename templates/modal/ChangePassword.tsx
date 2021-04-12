@@ -35,7 +35,7 @@ const ChangePassword = ({ close }: any): any => {
                     {booleanXQuit ? (
                       <div className="text-right ">
                         <Button
-                          buttonClick={close}
+                          onClick={close}
                           className="text-lg"
                           buttonType="button"
                         >
@@ -114,7 +114,7 @@ const ChangePassword = ({ close }: any): any => {
                     <div className="mt-10 flex justify-around ">
                       <Button
                         className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-                        buttonClick={close}
+                        onClick={close}
                         buttonType="button"
                       >
                         <span className="mr-2">Close</span>
@@ -123,7 +123,7 @@ const ChangePassword = ({ close }: any): any => {
                       <Button
                         className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
                         buttonType="submit"
-                        buttonClick={() => console.log("props.user")}
+                        onClick={() => console.log("props.user")}
                       >
                         Save
                       </Button>

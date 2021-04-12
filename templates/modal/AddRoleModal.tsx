@@ -79,10 +79,10 @@ const AddRoleModal = ({open}: any): any =>
 									<div className="mt-10 flex justify-around">
 										<Button buttonType="button"
 												className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-												buttonClick={closeModal}>
+												onClick={closeModal}>
 											Close
 										</Button>
-										<Button buttonClick="none"
+										<Button
 												className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
 												buttonType="submit">
 											Save
