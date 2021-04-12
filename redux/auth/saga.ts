@@ -58,7 +58,7 @@ function* logout({payload: {history}})
 {
 	try
 	{
-		// setSession(null);
+		setSession(null);
 		yield call(() =>
 		{
 			if (history)

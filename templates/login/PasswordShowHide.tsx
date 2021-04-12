@@ -3,7 +3,7 @@ import Button from "../../atoms/Button";
 import IconEye from "../../atoms/Icons/Stroke/IconEye";
 import IconEyeCrossed from "../../atoms/Icons/Stroke/IconEyeCrossed";
 
-const PasswordShowHide = ({ field, type }) =>
+const PasswordShowHide = ({ field }) =>
 {
   const [isShowingPassword, setIsShowingPassword] = useState(false);
 
