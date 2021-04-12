@@ -63,7 +63,7 @@ const SideBar = ({ className }) => {
                 </button>
               </div>
             )
-              : <div className="flex w-full ml-14">
+              : <div className="flex w-full ml-14 mb-8">
                 <button
                   onClick={() => setExpanded(true)}
                   type="button" className="transform rotate-180 w-5 text-white" >

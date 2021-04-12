@@ -36,18 +36,15 @@ const SideBarItem = ({
       return (
         <Link href={path} key={theKey}>
           <a
-            className={`flex flex-row items-center w-auto
-              hover:text-blue-700
+            className={`flex flex-row items-center w-auto text-gray-500
+              hover:text-blue-500 hover:border-blue-500 border-r-2 border-main-gray-600
               h-8 ${equalPath.equal
-                ? "text-blue-700 border-r-2 border-blue-700"
-                : "text-gray-500 hover:text-blue-700"
+                ? "text-blue-700 border-blue-700"
+                : "text-gray-500 border-main-gray-600"
               } cursor-pointer`}
           >
             {Icon ? (
-              <span className={`${!isToggled ? "ml-3" : ""} inline-flex items-center justify-center h-8 w-6 text-lg  ${equalPath.equal
-                ? "text-blue-700"
-                : ""
-                }`}>
+              <span className={`${!isToggled ? "ml-3" : ""} inline-flex items-center justify-center h-8 w-6 text-lg `}>
                 <Icon />
               </span>
             ) : (
@@ -97,24 +94,22 @@ const SideBarItem = ({
 
   return (
 
-    <div className={`hover:text-blue-600 ${isToggled ? "" : "pl-4 mx-1"}  w-full ${isLogoutClass}`} key={theKey}>
+    <div className={`${isToggled ? "" : "pl-4 mx-1"}  w-full ${isLogoutClass}`} key={theKey}>
       {multi ? (
         <>
-
           <button
             onClick={toggleMenu}
-            className={`w-full
-            ${open ? "text-blue-700 bg-main-gray-500" : "text-main-gray-100"}
-            hover:text-blue-600  flex flex-row items-center h-8 ${equalPath.equal
-                ? "text-blue-700 border-r-3 border-blue-700"
-                : "hover:text-blue-700"
-              } cursor-pointer`}
+            className={`
+            w-full focus:outline-none
+            hover:text-blue-500 hover:border-blue-500 border-r-2 border-main-gray-600 flex flex-row items-center h-8
+            ${open ? "text-blue-500 hover:text-blue-500 hover:border-blue-500" : "text-main-gray-100"}
+            ${equalPath.equal
+                ? "text-blue-700 border-blue-700"
+                : ""
+              }`}
           >
             {Icon ? (
-              <span className={`${!isToggled ? "ml-3" : ""} inline-flex items-center h-8 w-6 text-lg ${equalPath.equal
-                ? "text-blue-700"
-                : ""
-                }`}>
+              <span className={`${!isToggled ? "ml-3" : ""} inline-flex items-center h-8 w-6 text-lg`}>
                 <Icon />
               </span>
             ) : (
@@ -134,10 +129,10 @@ const SideBarItem = ({
             ) : (
               ""
             )}
-            {multi && open && !isToggled ? (<div className="text-main-gray-100 absolute ml-15 mt-8 pl-2">{getDropDownItems()}</div>) : null}
+            {/* ver si con :focus o :focus-within puedo hacer que se cierre */}
+            {multi && open && !isToggled ? (<div className="bg-main-gray-600 absolute ml-15 mt-8 pl-2">{getDropDownItems()}</div>) : null}
           </button>
 
-          {/* este div maneja los submenus de sidebarsubitem*/}
           <div
             className={`
             ${open ? `text-main-gray-100` : `hidden w-full`}
