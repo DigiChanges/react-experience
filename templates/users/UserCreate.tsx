@@ -1,40 +1,30 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect } from "react";
+import React, {PropsWithChildren} from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Select from "../../atoms/Select";
-// import Router from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { createUser } from "../../redux/users/actions";
-import { getRoles } from "../../redux/roles/actions";
 import Title from "../../atoms/Title";
 import ErrorForm from "../../atoms/ErrorForm";
 import Label from "../../atoms/Label";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { getPermissions } from "../../redux/auth/actions";
 import CountrySelector from "../../molecules/CountrySelector";
 import ButtonConfirm from "../../molecules/ButtonConfirm";
 import ButtonClose from "../../molecules/ButtonClose";
 
-const UserCreate = (): any => {
-  const dispatch = useDispatch();
-  const { permissionsList } = useSelector((store) => store.Auth);
-  const { rolesList } = useSelector((store) => store.Roles);
+interface UserCreateTemplateProps extends PropsWithChildren<any> {
+  permissionsList: string[];
+  rolesList: any[];
+  createAction: any;
+  props?: any;
+}
 
-  useEffect(() => {
-    dispatch(getRoles());
-    dispatch(getPermissions());
-  }, []);
-
-  // por que cuando tiro este console log se ejecuta mas de una vez?
-  // console.log(new Date());
-
+const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesList, createAction}): any =>
+{
   const identityOptions = [
     { label: 'DNI', value: 'DNI' },
     { label: 'CC', value: 'CC' }
   ];
-
 
   //TODO child key issue
   const getRolesList = () => {
@@ -59,14 +49,13 @@ const UserCreate = (): any => {
       <Formik
         initialValues={{
           today: new Date(),
-          actualAge: "",
           startDate: "",
           firstName: "",
           lastName: "",
-          cc: "",
-          cctext: "",
+          documentType: "",
+          documentNumber: "",
           email: "",
-          gender: null,
+          gender: "male | female | other",
           phone: "",
           password: "",
           passwordConfirmation: "",
@@ -75,34 +64,13 @@ const UserCreate = (): any => {
         }}
         validationSchema={SignUpSchema}
         onSubmit={async (values) => {
-          const {
-            firstName,
-            lastName,
-            email,
-            password,
-            passwordConfirmation,
-            permissions,
-            roles,
-          } = values;
-
-          dispatch(
-            createUser(
-              firstName,
-              lastName,
-              email,
-              password,
-              passwordConfirmation,
-              permissions.map((permission: any) => permission.label),
-              roles.map((role) => role.id)
-            )
-          );
+					createAction(values);
         }}
       >
         {({ errors, touched, values, setFieldValue }) => (
           <Form>
 
             <div className="sm:px-0 md:px-16 lg:px-14 flex flex-wrap mb-6 text-sm">
-
               <span className="w-full px-2 text-xs text-bold">PERSONAL INFORMATION</span>
               <div className="w-full md:w-1/2 px-2 mb-5">
                 <Label
@@ -146,19 +114,19 @@ const UserCreate = (): any => {
               </div>
               <div className="w-full md:w-1/4 px-2 mb-5">
                 <Label
-                  htmlFor="cc"
+                  htmlFor="documentType"
                   className="text-gray-400 block mb-1"
                 >
                   ID number
                     </Label>
                 <div className="flex w-full">
                   <Field
-                    name="cc"
-                    id="cc"
+                    name="documentType"
+                    id="documentType"
                     component={Select}
                     items={identityOptions}
                     className="flex-1 w-1/4 border-main-gray-500 text-white rounded-l-full focus:outline-none focus:border-indigo-500 text-base hover:border-grey h-10 shadow font-bold"
-                    primary25="#fff"
+                    primary25="#a0aec0"
                     primary="#667eea"
                     neutral0="rgba(20,25,31)"
                     neutral20="rgba(17,21,30)"
@@ -171,16 +139,16 @@ const UserCreate = (): any => {
                     dangerLight="#fff"
                   />
                   <Field
-                    name="cctext"
+                    name="documentNumber"
                     type="text"
-                    id="cctext"
+                    id="documentNumber"
                     className="flex-1 w-3/4 bg-gray-800 border rounded-r-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
                     placeholder="Enter ID"
                   />
                 </div>
-                {errors.cc && touched.cc ? (
+                {errors.documentNumber && touched.documentNumber ? (
                   <ErrorForm className="text-red-500 p-2">
-                    {errors.cc}
+                    {errors.documentNumber}
                   </ErrorForm>
                 ) : null}
 
@@ -233,46 +201,31 @@ const UserCreate = (): any => {
                   onChange={date => setFieldValue('startDate', date)}
                 />
               </div>
-              <div className="w-full md:w-1/4 px-2 mb-5">
-                <Label
-                  htmlFor="Age"
-                  className="text-gray-400 block mb-1"
-                >
-                  Age(wip)
-                </Label>
-                {/* {({
-                  field
-                }) => {
-                  values.startDate - values.today = values.actualAge;
-                  console.log(field); 💀rancid code💀
-                }} */}
-
-              </div>
               <div className="w-full md:w-1/2 px-2 mb-5">
                 <Label
                   htmlFor="Age"
                   className="text-gray-400 block mb-1"
                 >
                   Country
-</Label>
+								</Label>
                 <Field
-                  name="country"
-                  id="country"
-                  component={CountrySelector}
-                  className="bg-gray-800 border rounded-full border-gray-700 text-base  hover:border-grey shadow font-bold"
-                  placeholder="Select country"
-                  primary25="#fff"
-                  primary="#667eea"
-                  neutral0="rgba(20,25,31)"
-                  neutral20="rgba(17,21,30)"
-                  neutral50="#a0aec0"
-                  neutral80="#718096"
-                  neutral10="#fff"
-                  neutral30="#667eea"
-                  primary50="#718096"
-                  danger="#a0aec0"
-                  dangerLight="#fff"
-                ></Field>
+									name="country"
+									id="country"
+									component={CountrySelector}
+									className="bg-gray-800 border rounded-full border-gray-700 text-base  hover:border-grey shadow font-bold"
+									placeholder="Select country"
+									primary25="#a0aec0"
+									primary="#667eea"
+									neutral0="rgba(20,25,31)"
+									neutral20="rgba(17,21,30)"
+									neutral50="#a0aec0"
+									neutral80="#718096"
+									neutral10="#fff"
+									neutral30="#667eea"
+									primary50="#718096"
+									danger="#a0aec0"
+									dangerLight="#fff"
+									/>
               </div>
               <div className="w-full md:w-1/2 px-2 mb-5">
                 <Label
@@ -280,13 +233,13 @@ const UserCreate = (): any => {
                   className="text-gray-400 block mb-1"
                 >
                   Address
-</Label>
+								</Label>
                 <Field
-                  name="address"
-                  id="address"
-                  className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
-                  placeholder="Your address..."
-                ></Field>
+									name="address"
+									id="address"
+									className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
+									placeholder="Your address..."
+								/>
               </div>
               <span className="w-full mt-5 px-2">CONTACT INFORMATION </span>
               <div className="w-full md:w-1/2 px-2 mb-5">

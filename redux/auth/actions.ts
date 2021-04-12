@@ -9,9 +9,9 @@ import {
 	REGISTER_USER_SUCCESS,
 	REGISTER_USER_FAILED,
 	SET_DATA_AFTER_RELOADING,
-	SET_DATA_AFTER_RELOADING_SUCCESS
-	// FORGET_PASSWORD,
-	// FORGET_PASSWORD_SUCCESS,
+	SET_DATA_AFTER_RELOADING_SUCCESS,
+	FORGET_PASSWORD,
+	FORGET_PASSWORD_SUCCESS,
 	// FORGET_PASSWORD_FAILED,
 	// CHANGE_FORGOT_PASSWORD,
 	// CHANGE_FORGOT_PASSWORD_SUCCESS,
@@ -80,20 +80,10 @@ export const setDataAfterReloadingSuccess = (user: any): AuthAction => ({
 	payload: { user }
 })
 
-// export const forgetPassword = (email: string): AuthAction => ({
-//     type: FORGET_PASSWORD,
-//     payload: { email },
-// });
-//
-// export const forgetPasswordSuccess = (passwordResetStatus: string): AuthAction => ({
-//     type: FORGET_PASSWORD_SUCCESS,
-//     payload: passwordResetStatus,
-// });
-
-// export const forgetPasswordFailed = (error: string): AuthAction => ({
-//     type: FORGET_PASSWORD_FAILED,
-//     payload: error,
-// });
+export const forgetPassword = (email: string): AuthAction => ({
+    type: FORGET_PASSWORD,
+    payload: { email },
+});
 
 // export const changeForgotPassword = (confirmationToken: string, password: string, passwordConfirmation: string): AuthAction => ({
 //     type: CHANGE_FORGOT_PASSWORD,
@@ -103,11 +93,6 @@ export const setDataAfterReloadingSuccess = (user: any): AuthAction => ({
 // export const changeForgotPasswordSuccess = (changePasswordResetStatus: string): AuthAction => ({
 //     type: CHANGE_FORGOT_PASSWORD_SUCCESS,
 //     payload: changePasswordResetStatus,
-// });
-//
-// export const changeForgotPasswordFailed = (error: string): AuthAction => ({
-//     type: CHANGE_FORGOT_PASSWORD_FAILED,
-//     payload: error,
 // });
 //
 // export const changeForgotPasswordFieldsFailed = (errorsField: []): AuthAction => ({

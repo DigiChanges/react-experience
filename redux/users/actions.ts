@@ -1,3 +1,4 @@
+import {ParsedUrlQuery} from "querystring";
 import {
 	GET_USERS,
 	GET_USERS_SUCCESS,
@@ -9,9 +10,9 @@ import {
 	UPDATE_USER_SUCCESS,
 	CHANGE_PASSWORD,
 	REMOVE_USER,
-	REMOVE_USER_SUCCESS, RESET_USERS
+	REMOVE_USER_SUCCESS,
+	RESET_USERS
 } from './constants';
-import {ParsedUrlQuery} from "querystring";
 
 export interface UserActions {
   type: string
