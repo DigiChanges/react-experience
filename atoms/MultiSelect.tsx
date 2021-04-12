@@ -42,7 +42,6 @@ const MultiSelect: React.FC<OwnProps & FieldProps> = ({
     selectProps.form.setFieldValue(selectProps.field.name, value);
   };
 
-
   return (
     <Select
       {...selectProps.field}

@@ -2,7 +2,7 @@
 import React, {PropsWithChildren} from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
-import Select from "../../atoms/Select";
+import Select from "../../atoms/MultiSelect";
 import Title from "../../atoms/Title";
 import ErrorForm from "../../atoms/ErrorForm";
 import Label from "../../atoms/Label";
@@ -22,8 +22,8 @@ interface UserCreateTemplateProps extends PropsWithChildren<any> {
 const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesList, createAction}): any =>
 {
   const identityOptions = [
-    { label: 'DNI', value: 'DNI' },
-    { label: 'CC', value: 'CC' }
+    { label: 'DNI', value: 'dni' },
+    { label: 'CC', value: 'cc' }
   ];
 
   //TODO child key issue
@@ -48,15 +48,16 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
 
       <Formik
         initialValues={{
-          today: new Date(),
-          startDate: "",
           firstName: "",
           lastName: "",
+          email: "",
+          birthday: "",
           documentType: "",
           documentNumber: "",
-          email: "",
-          gender: "male | female | other",
+          gender: "",
           phone: "",
+					country: "",
+					address: "",
           password: "",
           passwordConfirmation: "",
           permissions: [],
@@ -78,7 +79,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className=" text-gray-400 block mb-1"
                 >
                   First name
-                    </Label>
+								</Label>
                 <Field
                   name="firstName"
                   type="text"
@@ -160,19 +161,19 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="text-gray-400 block mb-1"
                 >
                   Gender
-                      </Label>
+								</Label>
 
-                <Field name="gender" type="radio" id="gender" value="F" className="border-1 rounded-full border-main-gray-500 bg-gray-800 p-3 focus:bg-white focus:border-white m-1" />
+                <Field name="gender" type="radio" id="gender" value="female" className="border-1 rounded-full border-main-gray-500 bg-gray-800 p-3 focus:bg-white focus:border-white m-1" />
                 <label className="text-gray-400 text-xs font-bold mr-1">
                   F
                 </label>
 
-                <Field name="gender" type="radio" id="gender" value="M" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
+                <Field name="gender" type="radio" id="gender" value="male" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
                 <label className="text-gray-400 text-xs font-bold mr-1">
                   M
                 </label>
 
-                <Field name="gender" type="radio" id="gender" value="Other" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
+                <Field name="gender" type="radio" id="gender" value="other" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
                 <label className="text-gray-400 text-xs font-bold mr-1">
                   Other
                 </label>
@@ -192,18 +193,18 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   Date picker
                 </Label>
                 <Field
-                  name="startDate"
+                  name="birthday"
                   component={DatePicker}
                   id="date"
                   className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 h-10 py-3 shadow font-bold"
-                  selected={values.startDate}
+                  selected={values.birthday}
                   dateFormat="MMMM d, yyyy"
-                  onChange={date => setFieldValue('startDate', date)}
+                  onChange={date => setFieldValue('birthday', date)}
                 />
               </div>
               <div className="w-full md:w-1/2 px-2 mb-5">
                 <Label
-                  htmlFor="Age"
+                  htmlFor="country"
                   className="text-gray-400 block mb-1"
                 >
                   Country
@@ -229,7 +230,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
               </div>
               <div className="w-full md:w-1/2 px-2 mb-5">
                 <Label
-                  htmlFor="Address"
+                  htmlFor="address"
                   className="text-gray-400 block mb-1"
                 >
                   Address
@@ -237,6 +238,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                 <Field
 									name="address"
 									id="address"
+									type="text"
 									className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
 									placeholder="Your address..."
 								/>
@@ -268,7 +270,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="text-gray-400 block mb-1"
                 >
                   Phone
-                    </Label>
+								</Label>
                 <Field
                   name="phone"
                   type="text"

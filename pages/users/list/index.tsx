@@ -30,8 +30,6 @@ const UsersListPage = ({query}): any =>
   );
 }
 
-UsersListPage.getInitialProps = async ({query}) => {
-	return {query};
-}
+UsersListPage.getInitialProps = ({query}) => ({query})
 
 export default UsersListPage;

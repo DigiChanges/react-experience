@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {Field, Formik, Form} from "formik";
-import Select from "../../atoms/Select";
+import Select from "../../atoms/MultiSelect";
 import Router from "next/router";
 import {useDispatch, useSelector} from 'react-redux'
 import {updateRole, unselectedRole} from '../../redux/roles/actions';

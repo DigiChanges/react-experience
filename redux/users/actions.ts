@@ -48,13 +48,35 @@ export const createUser = (
   firstName: string,
   lastName: string,
   email: string,
+	birthday: string,
+	documentType: string,
+  documentNumber: string,
+  gender: string,
+  phone: string,
+	country: string,
+	address: string,
   password: string,
   passwordConfirmation: string,
   permissions: string[],
   roles: any[]
 ): UserActions => ({
   type: CREATE_USER,
-  payload: { firstName, lastName, email, password, passwordConfirmation, permissions, roles }
+  payload: {
+		firstName,
+		lastName,
+		email,
+		birthday,
+		documentType,
+		documentNumber,
+		gender,
+		phone,
+		country,
+		address,
+		password,
+		passwordConfirmation,
+		permissions,
+		roles
+  }
 })
 
 export const createUserSuccess = (user: any): UserActions => ({

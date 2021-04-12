@@ -60,29 +60,13 @@ function* getUsersList({ payload })
  * Create new user
  * Assign Role
  */
-function* createNewUser({
-  payload: {
-    firstName,
-    lastName,
-    email,
-    password,
-    passwordConfirmation,
-    permissions,
-    roles,
-  },
-}) {
+function* createNewUser({payload}) {
   yield put(startGeneralLoading());
   try {
-    const newUser = {
-      firstName,
-      lastName,
-      email,
-      password,
-      passwordConfirmation,
-      permissions,
-    };
+		console.log('createNewUser')
+		console.log(payload)
     //create user
-    const res = yield call(postUser, newUser);
+    const res = yield call(postUser, payload);
     const { data } = res;
     if (!data) {
       return yield put(showErrorNotification("Internal Server Error"));
@@ -95,9 +79,9 @@ function* createNewUser({
      */
 
     //assign roles
-    if (roles && roles.length > 0) {
+    if (payload.roles && payload.roles.length > 0) {
       const { id } = data;
-      const rolesRes = yield call(assignUserRole, id, { rolesId: roles });
+      const rolesRes = yield call(assignUserRole, id, { rolesId: payload.roles });
       if (!rolesRes) {
         return yield put(showErrorNotification("Internal Server Error"));
       }

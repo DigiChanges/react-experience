@@ -1,6 +1,6 @@
 import React from "react";
 import {Field, Formik, Form} from "formik";
-import Select from "../../atoms/Select";
+import Select from "../../atoms/MultiSelect";
 import Router from "next/router";
 import {useDispatch} from 'react-redux'
 import {updateUser} from '../../redux/users/actions';

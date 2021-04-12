@@ -4,6 +4,7 @@ import UserCreate from "../../../templates/users/UserCreate";
 import {getRoles} from "../../../redux/roles/actions";
 import {getPermissions} from "../../../redux/auth/actions";
 import {createUser} from "../../../redux/users/actions";
+import moment from "moment";
 
 const IndexPage: React.FC<any> = () =>
 {
@@ -17,6 +18,13 @@ const IndexPage: React.FC<any> = () =>
             firstName,
             lastName,
             email,
+            birthday,
+            documentType,
+            documentNumber,
+            gender,
+            phone,
+						country,
+						address,
             password,
             passwordConfirmation,
             permissions,
@@ -27,10 +35,17 @@ const IndexPage: React.FC<any> = () =>
 			firstName,
 			lastName,
 			email,
+			moment(birthday).format('dd/mm/y').toString(),
+      documentType.label,
+      documentNumber,
+      gender,
+      phone,
+			country.label,
+			address,
 			password,
 			passwordConfirmation,
 			permissions.map((permission: any) => permission.label),
-			roles.map((role) => role.id)
+			roles.map((role) => role.value)
 		));
 	}
 

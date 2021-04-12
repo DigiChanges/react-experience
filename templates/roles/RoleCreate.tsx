@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Field, Form, Formik} from "formik";
 import RoleSchema from "../../SchemaValidations/RoleSchema";
-import Select from "../../atoms/Select";
+import Select from "../../atoms/MultiSelect";
 import Router from "next/router";
 import {useDispatch, useSelector} from 'react-redux'
 import {createRole, getRoles} from '../../redux/roles/actions'
