@@ -62,7 +62,7 @@
     background-color: var(--button-background-color-primary);
     color: var(--button-color);
     text-align: center;
-    width: 138px;
+    min-width: 138px;
     height: 41px;
     padding: 12px 52px 12px 53px;
     border-radius: 20.5px;
@@ -80,7 +80,7 @@
     background-color: var(--button-background-color-secondary);
     color: var(--button-color);
     text-align: center;
-    width: 138px;
+    min-width: 138px;
     height: 41px;
     padding: 12px 52px 12px 53px;
     border-radius: 20.5px;
@@ -139,5 +139,11 @@
   .react-datepicker-wrapper {
    width: 100%;
 }
-}
+  .hover-trigger .hover-target {
+      display: none;
+  }
 
+  .hover-trigger:hover .hover-target {
+      display: block;
+  }
+}

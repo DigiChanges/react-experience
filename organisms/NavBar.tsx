@@ -17,7 +17,7 @@ const NavBar = ({ email, onClick, showSidebar }): any => {
             <div className="flex-shrink-0 flex items-center  cursor-pointer">
               <a href="/"> <Image image={"/logonav.png"} alt="" className="block h-8 w-auto" /></a>
             </div>
-            <a href="/"> <div className="sm:block sm:ml-6">DIGICHANGES</div></a>
+            <a href="/"> <div className="block ml-4">DIGICHANGES</div></a>
           </div>
           <div className="absolute flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white h-8 w-8 hidden md:block lg:block">

@@ -176,6 +176,9 @@ module.exports = {
       8: "2rem",
       10: "2.5rem",
       12: "3rem",
+      13: "3.3rem",
+      14: "3.5rem",
+      15: "3.75rem",
       16: "4rem",
       18: "4.5rem",
       20: "5rem",
@@ -377,7 +380,7 @@ module.exports = {
       ...theme("spacing"),
       full: "100%",
       screen: "100vh",
-      90: "90vh",
+      89: "89vh",
     }),
     inset: {
       0: "0",
