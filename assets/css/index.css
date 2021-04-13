@@ -53,16 +53,19 @@
   .gilroy {
     font-family: "Gilroy-Regular", sans-serif;
   }
- /* TODO: coloco esta clase general temporalmente, yo se que igual hay que pasar todo con @apply en el futuro */
+ /* TODO: adding this class temporarily before @apply */
   html {
     font-family: "Gilroy-Regular", sans-serif;
+  }
+  *:focus {
+    outline:none!important;
   }
 /* fin de yet-another-chanchada */
   button.button-primary {
     background-color: var(--button-background-color-primary);
     color: var(--button-color);
     text-align: center;
-    width: 138px;
+    min-width: 138px;
     height: 41px;
     padding: 12px 52px 12px 53px;
     border-radius: 20.5px;
@@ -80,7 +83,7 @@
     background-color: var(--button-background-color-secondary);
     color: var(--button-color);
     text-align: center;
-    width: 138px;
+    min-width: 138px;
     height: 41px;
     padding: 12px 52px 12px 53px;
     border-radius: 20.5px;
@@ -139,5 +142,20 @@
   .react-datepicker-wrapper {
    width: 100%;
 }
-}
+  .hover-trigger .hover-target {
+      display: none;
+  }
 
+  .hover-trigger:hover .hover-target {
+      display: block;
+  }
+  /* @apply */
+  /* icon-pill set: idealized for use on MediaObject component, but you know, you can use it everywhere. */
+  .dg-icon-pill {
+    @apply md:max-w-md w-full md:w-1/2 p-2 bg-main-gray-600 h-18 rounded-lg mx-1 my-1 flex items-center font-semibold text-sm text-main-gray-250;
+  }
+  /* Page Section Titles */
+  .dg-section-title {
+    @apply text-3xl font-bold sm:ml-2 md:px-18 lg:px-14 h-8 mt-4;
+  }
+}

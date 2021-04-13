@@ -20,7 +20,7 @@ const SideBarItem = ({
   const [open, setOpen] = useState(false);
   const multi = levels && levels.length > 0;
   const Icon: any = icon;
-  const isLogoutClass = path === "/logout" ? "mt-auto" : " ";
+  const isLogoutClass = path === "/logout" ? "mt-auto pb-8" : " ";
 
 
   const hasPermission = (permission, user) =>
@@ -36,23 +36,22 @@ const SideBarItem = ({
       return (
         <Link href={path} key={theKey}>
           <a
-            className={`flex flex-row items-center w-auto justify-start md:justify-start h-8 ${equalPath.equal
-              ? "text-white border-r-2 border-blue-600"
-              : "text-gray-500 hover:text-white"
+            className={`flex flex-row items-center w-auto text-gray-500
+              hover:text-blue-500 hover:border-blue-500 border-r-2 border-main-gray-600
+              h-8 ${equalPath.equal
+                ? "text-blue-700 border-blue-700"
+                : "text-gray-500 border-main-gray-600"
               } cursor-pointer`}
           >
             {Icon ? (
-              <span className={`inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300  ${equalPath.equal
-                ? "text-blue-700"
-                : ""
-                }`}>
+              <span className={`${!isToggled ? "ml-3" : ""} inline-flex items-center justify-center h-8 w-6 text-lg `}>
                 <Icon />
               </span>
             ) : (
-              <span className="inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300" />
+              <span className="inline-flex items-center justify-center h-8 w-6 text-lg " />
             )}
             {isToggled
-              ? (<span className="text-sm font-extrabold md:block pr-3 pl-4">
+              ? (<span className="text-sm font-bold md:block pr-3 pl-4">
                 {name}
               </span>) : null}
           </a>
@@ -60,7 +59,7 @@ const SideBarItem = ({
     }
     else {
       // 'menu'
-      return (<div className="text-md font-bold text-main-gray-300 text-center ">
+      return (<div className={`${isToggled ? "block" : "hidden"} ml-1 text-sm font-bold text-main-gray-100 text-start mb-2 mr-2`}>
         {name}
       </div>)
     }
@@ -91,54 +90,57 @@ const SideBarItem = ({
         );
       })
       : "";
+
   return (
-    <li className={`w-full ${isLogoutClass} pb-1`} key={theKey}>
+
+    <div className={`${isToggled ? "" : "pl-4 mx-1"}  w-full ${isLogoutClass}`} key={theKey}>
       {multi ? (
-        <div>
+        <>
           <button
             onClick={toggleMenu}
-            className={` flex flex-row items-center justify-start md:justify-start pr-3 h-12  ${equalPath.equal
-              ? "text-white border-r-3 border-blue-700 "
-              : "text-main-gray-100 hover:text-white"
-              } cursor-pointer`}
+            className={`
+            w-full focus:outline-none hover:text-blue-500 hover:border-blue-500 border-r-2 border-main-gray-600 flex flex-row items-center h-8
+            ${open ? "text-blue-500 hover:text-blue-500 hover:border-blue-500" : "text-main-gray-100"}
+            ${equalPath.equal
+                ? "text-blue-700 border-blue-700"
+                : ""
+              }`}
           >
             {Icon ? (
-              <span className={`inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300 ${equalPath.equal
-                ? "text-blue-700"
-                : ""
-                }`}>
+              <span className={`${!isToggled ? "ml-3" : ""} inline-flex items-center h-8 w-6 text-lg`}>
                 <Icon />
               </span>
             ) : (
-              <span className="inline-flex items-center justify-center h-8 w-8 text-lg text-main-gray-300" />
+              <span className=" inline-flex items-center justify-center h-8 w-6 text-lg" />
             )}
             {isToggled
-              ? (<span className="text-sm font-extrabold md:block pr-2 pl-4">
+              ? (<span className="text-sm font-bold md:block pr-2 pl-4">
                 {name}
               </span>)
               : null}
 
             {open && multi ? (
-              <span className="inline-flex items-center justify-end pl-1 w-6"> <IconChevronDown /> </span>
+              // si esta compactado esto no se ve
+              <span className={`${isToggled ? "" : "hidden"} inline-flex ml-auto mr-3 pl-1 w-6`}> <IconChevronDown /> </span>
             ) : !open && multi ? (
-              <span className="inline-flex items-center justify-end pl-1 w-6"> <IconChevronRight /> </span>
+              <span className={`${isToggled ? "" : "hidden"} inline-flex ml-auto mr-3 pl-1 w-6`}> <IconChevronRight /></span>
             ) : (
               ""
             )}
+            {multi && open && !isToggled ? (<div className="bg-main-gray-600 absolute ml-15 mt-8 pl-2">{getDropDownItems()}</div>) : null}
           </button>
 
           <div
-            className={
-              open
-                ? "dropdown-menu w-100 flex flex-col pl-5"
-                : "dropdown-menu hidden w-full"
-            }
+            className={`
+            ${open ? `text-main-gray-100` : `hidden w-full`}
+            ${open && isToggled ? `w-max flex flex-col ` : `ml-10`}
+            `}
           >
-            {open && multi ? getDropDownItems() : ""}
+            {multi && isToggled ? getDropDownItems() : ""}
           </div>
-        </div>
+        </>
       ) : (getLabelOrItem(path, theKey, name, equalPath))}
-    </li>
+    </div>
   );
 };
 
