@@ -53,9 +53,12 @@
   .gilroy {
     font-family: "Gilroy-Regular", sans-serif;
   }
- /* TODO: coloco esta clase general temporalmente, yo se que igual hay que pasar todo con @apply en el futuro */
+ /* TODO: adding this class temporarily before @apply */
   html {
     font-family: "Gilroy-Regular", sans-serif;
+  }
+  *:focus {
+    outline:none!important;
   }
 /* fin de yet-another-chanchada */
   button.button-primary {
@@ -145,5 +148,8 @@
 
   .hover-trigger:hover .hover-target {
       display: block;
+  }
+  .dg-icon-pill {
+    @apply md:max-w-md w-full md:w-1/2 p-2 bg-main-gray-600 h-18 rounded-lg mx-1 my-1 flex items-center font-semibold text-sm text-main-gray-250;
   }
 }
