@@ -13,7 +13,6 @@ const SideBarSubItem = ({ theKey, name, path, equalPath, icon, isToggled }) => {
             }`}
         >
           {Icon ? (
-            // <span className="md:hidden inline-flex w-8 items-center justify-center md:justify-start h-6 text-lg text-main-gray-300">
             <span className={`${isToggled ? "hidden" : ""} inline-flex w-6 items-center md:justify-start h-6 text-lg`}>
               <Icon />
             </span>

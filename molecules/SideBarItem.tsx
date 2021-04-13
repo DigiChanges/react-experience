@@ -60,7 +60,6 @@ const SideBarItem = ({
     else {
       // 'menu'
       return (<div className={`${isToggled ? "block" : "hidden"} ml-1 text-sm font-bold text-main-gray-100 text-start mb-2 mr-2`}>
-        {/* return (<div className="ml-1 text-sm font-bold text-main-gray-100 text-start mb-2 mr-2 "> */}
         {name}
       </div>)
     }
@@ -100,8 +99,7 @@ const SideBarItem = ({
           <button
             onClick={toggleMenu}
             className={`
-            w-full focus:outline-none
-            hover:text-blue-500 hover:border-blue-500 border-r-2 border-main-gray-600 flex flex-row items-center h-8
+            w-full focus:outline-none hover:text-blue-500 hover:border-blue-500 border-r-2 border-main-gray-600 flex flex-row items-center h-8
             ${open ? "text-blue-500 hover:text-blue-500 hover:border-blue-500" : "text-main-gray-100"}
             ${equalPath.equal
                 ? "text-blue-700 border-blue-700"
@@ -129,7 +127,6 @@ const SideBarItem = ({
             ) : (
               ""
             )}
-            {/* ver si con :focus o :focus-within puedo hacer que se cierre */}
             {multi && open && !isToggled ? (<div className="bg-main-gray-600 absolute ml-15 mt-8 pl-2">{getDropDownItems()}</div>) : null}
           </button>
 

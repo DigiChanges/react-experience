@@ -55,7 +55,7 @@ const MultiSelect: React.FC<OwnProps & FieldProps> = ({
         ...theme,
         borderWidth: 6,
         multiValue: {
-          borderRadius: 30,
+          borderRadius: 90,
         },
         colors: {
           ...theme.colors,

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, {PropsWithChildren} from "react";
+import React, { PropsWithChildren } from "react";
 import { Field, Form, Formik } from "formik";
 import SignUpSchema from "../../SchemaValidations/SignUpSchema";
 import Select from "../../atoms/MultiSelect";
@@ -19,8 +19,7 @@ interface UserCreateTemplateProps extends PropsWithChildren<any> {
   props?: any;
 }
 
-const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesList, createAction}): any =>
-{
+const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesList, createAction }): any => {
   const identityOptions = [
     { label: 'DNI', value: 'dni' },
     { label: 'CC', value: 'cc' }
@@ -56,8 +55,8 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
           documentNumber: "",
           gender: "",
           phone: "",
-					country: "",
-					address: "",
+          country: "",
+          address: "",
           password: "",
           passwordConfirmation: "",
           permissions: [],
@@ -65,7 +64,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
         }}
         validationSchema={SignUpSchema}
         onSubmit={async (values) => {
-					createAction(values);
+          createAction(values);
         }}
       >
         {({ errors, touched, values, setFieldValue }) => (
@@ -210,23 +209,23 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   Country
 								</Label>
                 <Field
-									name="country"
-									id="country"
-									component={CountrySelector}
-									className="bg-gray-800 border rounded-full border-gray-700 text-base  hover:border-grey shadow font-bold"
-									placeholder="Select country"
-									primary25="#a0aec0"
-									primary="#667eea"
-									neutral0="rgba(20,25,31)"
-									neutral20="rgba(17,21,30)"
-									neutral50="#a0aec0"
-									neutral80="#718096"
-									neutral10="#fff"
-									neutral30="#667eea"
-									primary50="#718096"
-									danger="#a0aec0"
-									dangerLight="#fff"
-									/>
+                  name="country"
+                  id="country"
+                  component={CountrySelector}
+                  className="bg-gray-800 border rounded-full border-gray-700 text-base  hover:border-grey shadow font-bold"
+                  placeholder="Select country"
+                  primary25="#a0aec0"
+                  primary="#667eea"
+                  neutral0="rgba(20,25,31)"
+                  neutral20="rgba(17,21,30)"
+                  neutral50="#a0aec0"
+                  neutral80="#718096"
+                  neutral10="#fff"
+                  neutral30="#667eea"
+                  primary50="#718096"
+                  danger="#a0aec0"
+                  dangerLight="#fff"
+                />
               </div>
               <div className="w-full md:w-1/2 px-2 mb-5">
                 <Label
@@ -236,12 +235,12 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   Address
 								</Label>
                 <Field
-									name="address"
-									id="address"
-									type="text"
-									className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
-									placeholder="Your address..."
-								/>
+                  name="address"
+                  id="address"
+                  type="text"
+                  className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
+                  placeholder="Your address..."
+                />
               </div>
               <span className="w-full mt-5 px-2">CONTACT INFORMATION </span>
               <div className="w-full md:w-1/2 px-2 mb-5">
@@ -326,10 +325,30 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   </ErrorForm>
                 ) : null}
               </div>
-              <div className="w-full md:w-1/2 mb-5">
+              {/* <div className="w-full md:w-1/2 px-2 mb-5">
+                <Label
+                  htmlFor="email"
+                  className="text-gray-400 block mb-1"
+                >
+                  Email
+                    </Label>
+                <Field
+                  name="email"
+                  type="text"
+                  id="email"
+                  className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
+                  placeholder="Enter Email"
+                />
+                {errors.email && touched.email ? (
+                  <ErrorForm className="text-red-500 p-2">
+                    {errors.email}
+                  </ErrorForm>
+                ) : null}
+              </div> */}
+              <div className="w-full md:w-1/2 mb-5 px-2">
                 <Label
                   htmlFor="permissions"
-                  className="font-bold text-gray-400 block mb-1"
+                  className="text-gray-400 block mb-1"
                 >
                   Permissions
                     </Label>
@@ -339,23 +358,25 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   component={Select}
                   items={getPermissionsList()}
                   isMulti
-                  primary25="#4a5568"
+                  className="bg-gray-800 border rounded-full border-gray-700 text-base hover:border-grey shadow font-bold"
+                  placeholder="Select permissions"
+                  primary25="#a0aec0"
                   primary="#667eea"
-                  neutral0="#2d3748"
-                  neutral20="#4a5568"
+                  neutral0="rgba(20,25,31)"
+                  neutral20="rgba(17,21,30)"
                   neutral50="#a0aec0"
-                  neutral80="#fff"
-                  neutral10="#4a5568"
+                  neutral80="#718096"
+                  neutral10="#fff"
                   neutral30="#667eea"
                   primary50="#718096"
                   danger="#a0aec0"
-                  dangerLight="#1a202c"
+                  dangerLight="#fff"
                 />
               </div>
-              <div className="w-full md:w-1/2 mb-5">
+              <div className="w-full md:w-1/2 mb-5 px-2">
                 <Label
                   htmlFor="roles"
-                  className="font-bold text-gray-400 block mb-1"
+                  className="text-gray-400 block mb-1"
                 >
                   Roles
                     </Label>
@@ -365,17 +386,19 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   component={Select}
                   items={getRolesList()}
                   isMulti
-                  primary25="#4a5568"
+                  className="bg-gray-800 border rounded-full border-gray-700 text-base hover:border-grey shadow font-bold"
+                  placeholder="Select roles"
+                  primary25="#a0aec0"
                   primary="#667eea"
-                  neutral0="#2d3748"
-                  neutral20="#4a5568"
+                  neutral0="rgba(20,25,31)"
+                  neutral20="rgba(17,21,30)"
                   neutral50="#a0aec0"
-                  neutral80="#fff"
-                  neutral10="#4a5568"
+                  neutral80="#718096"
+                  neutral10="#fff"
                   neutral30="#667eea"
                   primary50="#718096"
                   danger="#a0aec0"
-                  dangerLight="#1a202c"
+                  dangerLight="#fff"
                 />
               </div>
 
