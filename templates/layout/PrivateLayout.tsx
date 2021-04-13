@@ -36,7 +36,7 @@ const PrivateLayout = ({ children }) => {
           </div>
         )}
         <main className="grid-in-main min-h-screen w-full">
-          <Breadcrumb className="py-5 text-gray-500 lg:text-base ml-4 md:ml-32" />
+          <Breadcrumb className="pt-5 text-gray-500 lg:text-base ml-4 sm:ml-4" />
           {children}
         </main>
         <Footer className="flex grid-in-footer border m-4 w-auto p-4 text-sm text-gray-200 rounded justify-center">

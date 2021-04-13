@@ -149,7 +149,13 @@
   .hover-trigger:hover .hover-target {
       display: block;
   }
+  /* @apply */
+  /* icon-pill set: idealized for use on MediaObject component, but you know, you can use it everywhere. */
   .dg-icon-pill {
     @apply md:max-w-md w-full md:w-1/2 p-2 bg-main-gray-600 h-18 rounded-lg mx-1 my-1 flex items-center font-semibold text-sm text-main-gray-250;
+  }
+  /* Page Section Titles */
+  .dg-section-title {
+    @apply text-3xl font-bold sm:ml-2 md:px-18 lg:px-14 h-8 mt-4;
   }
 }

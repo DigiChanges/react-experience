@@ -2,11 +2,11 @@ import React from "react";
 import Title from "../atoms/Title";
 import ButtonIcon from "./ButtonIcon";
 
-const TitleWithButton = ({ title, icon, labelButtonName, buttonAction }): any => {
+const TitleWithButton = ({ title, icon, labelButtonName, buttonAction, className }): any => {
   return (
     <>
-      <section className="flex flex-row justify-between pt-6">
-        <Title className="" titleType="h4">
+      <section className="flex flex-row justify-between">
+        <Title className={className} titleType="h4">
           {title}
         </Title>
         <ButtonIcon

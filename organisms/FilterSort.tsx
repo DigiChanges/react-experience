@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import Button from "../atoms/Button";
 import Label from "../atoms/Label";
+import IconFilter from "../atoms/Icons/Solid/IconFilter";
 import SearchInput from "../atoms/SearchInput";
 import IconButtonActive from "../molecules/IconButtonActive";
 import IconSortAscending from "../atoms/Icons/Stroke/IconSortAscending";
@@ -66,7 +67,7 @@ const FilterSort = ({ actionFilter, filterButtonName = 'Filter', filterQuery = n
             id="search"
             placeholder={"Search users... "}
             component={SearchInput}
-            className={errors.search && touched.search ? 'border-red-500' : ''}
+            className={`h-9 font-semibold ${errors.search && touched.search ? 'border-red-500' : ''}`}
           />
           <Label htmlFor="roles" className="font-bold text-gray-400 block pt-4 mb-2">
             Filter By
@@ -92,7 +93,7 @@ const FilterSort = ({ actionFilter, filterButtonName = 'Filter', filterQuery = n
             <IconButtonActive classNameOnActive="text-white" onClick={onClickIsSortAsc} isActive={sortFields.isSort} iconEnable={IconSortAscending} iconDisable={IconSortDescending} />
           </span>
           <Button
-            className="shadow-kx1 button-primary text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+            className="shadow-kx1 my-5 button-primary text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
             buttonType="submit"
           >
             {filterButtonName}
