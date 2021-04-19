@@ -1,5 +1,5 @@
 import {START_PATHNAME, SET_CURRENT_PATHNAME} from './constants'
-import {PathActions} from './actions';
+import {ReduxActions} from "../../interfaces/default";
 
 const INIT_STATE = {
 	startPathname: '',
@@ -8,7 +8,7 @@ const INIT_STATE = {
 
 type State = { startPathname: string, currentPathname: string }
 
-const Paths = (state: State = INIT_STATE, action: PathActions) =>
+const Paths = (state: State = INIT_STATE, action: ReduxActions) =>
 {
 	switch (action.type)
 	{

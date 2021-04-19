@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../node-experience/.idea/node-experience.iml" filepath="$PROJECT_DIR$/../node-experience/.idea/node-experience.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/react-experience.iml" filepath="$PROJECT_DIR$/.idea/react-experience.iml" />
     </modules>
   </component>

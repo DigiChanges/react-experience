@@ -4,49 +4,17 @@ import UserCreate from "../../../templates/users/UserCreate";
 import {getRoles} from "../../../redux/roles/actions";
 import {getPermissions} from "../../../redux/auth/actions";
 import {createUser} from "../../../redux/users/actions";
-import moment from "moment";
+import {IUserPayload} from "../../../interfaces/user";
 
-const IndexPage: React.FC<any> = () =>
+const IndexPage: React.FC<void> = () =>
 {
   const dispatch = useDispatch();
   const { permissionsList } = useSelector((store) => store.Auth);
   const { rolesList } = useSelector((store) => store.Roles);
 
-  const createAction = (values: any) =>
+  const createAction = (payload: IUserPayload) =>
 	{
-		const {
-            firstName,
-            lastName,
-            email,
-            birthday,
-            documentType,
-            documentNumber,
-            gender,
-            phone,
-						country,
-						address,
-            password,
-            passwordConfirmation,
-            permissions,
-            roles,
-          } = values;
-
-		dispatch(createUser(
-			firstName,
-			lastName,
-			email,
-			moment(birthday).format('dd/mm/y').toString(),
-      documentType.label,
-      documentNumber,
-      gender,
-      phone,
-			country.label,
-			address,
-			password,
-			passwordConfirmation,
-			permissions.map((permission: any) => permission.label),
-			roles.map((role) => role.value)
-		));
+		dispatch(createUser(payload));
 	}
 
 	useEffect(() => {

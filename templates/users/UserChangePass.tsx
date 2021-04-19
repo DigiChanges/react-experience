@@ -3,7 +3,7 @@ import { Field, Form, Formik } from "formik";
 import ChangePasswordSchema from "../../SchemaValidations/ChangePasswordSchema";
 import Router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { changePassword, unselectedUser } from "../../redux/users/actions";
+import { changePassword } from "../../redux/users/actions";
 import Title from "../../atoms/Title";
 import Button from "../../atoms/Button";
 import ErrorForm from "../../atoms/ErrorForm";
@@ -16,7 +16,7 @@ const UserChangePassword = (): any => {
   useEffect(() => {
     //unmount component
     return () => {
-      dispatch(unselectedUser());
+      // dispatch(unselectedUser());
     };
   }, []);
 

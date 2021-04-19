@@ -1,9 +1,12 @@
+// TODO: Refactor to repository pattern
+
 import { config } from '../api/config'
 import { getHeader } from '../api/auth'
 import HttpRequest from "../helpers/HttpRequest";
+import {IUserPayload} from "../interfaces/user";
 
 const { protocol, hostname, port } = config.apiGateway.server
-const { getAll, create, update, editPassword, remove, assignRole } = config.apiGateway.routes.users
+const { getAll, getOne, create, update, editPassword, remove, assignRole } = config.apiGateway.routes.users
 
 export const getAllUsers = (uriParam: string) => {
   const requestOptions = {
@@ -15,7 +18,18 @@ export const getAllUsers = (uriParam: string) => {
   return HttpRequest.request(requestOptions);
 }
 
-export const postUser = (body: any) => {
+export const getOneUser = (id: string) => {
+  const requestOptions = {
+    url: `${protocol}://${hostname}:${port}/${getOne.replace(':id', id)}`,
+    method: 'GET',
+    headers: getHeader()
+  };
+
+  return HttpRequest.request(requestOptions);
+}
+
+export const postUser = (body: IUserPayload) => {
+
   const requestOptions = {
     url: `${protocol}://${hostname}:${port}/${create}`,
     method: 'POST',
@@ -26,7 +40,7 @@ export const postUser = (body: any) => {
   return HttpRequest.request(requestOptions);
 }
 
-export const putUser = (id: string, body: any) => {
+export const putUser = (body: IUserPayload, id: string) => {
   const requestOptions = {
     url: `${protocol}://${hostname}:${port}/${update.replace(':id', id)}`,
     method: 'PUT',

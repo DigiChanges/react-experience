@@ -15,9 +15,10 @@ import { resetQueryPagination } from "../../redux/general/actions";
 import IconEye from "../../atoms/Icons/Stroke/IconEye";
 import IconPencilAlt from "../../atoms/Icons/Stroke/IconPencilAlt";
 
-const UserList = ({ usersList, query, viewMore }) => {
+const UserList = ({ usersList, query, viewMore }) =>
+{
   const router = useRouter();
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
   const [booleanConfirmDelete, setBooleanConfirmDelete] = useState(false);
   const [showScroll, setShowScroll] = useState(false);
 
@@ -29,16 +30,18 @@ const UserList = ({ usersList, query, viewMore }) => {
     return router.push("/users/create");
   }
 
-  const onClickFilter = (search: string, filterBy: string, orderBy: string, sort: 'asc' | 'desc') => {
-    dispatch(resetUsers());
-    dispatch(resetQueryPagination());
+  const onClickFilter = (search: string, filterBy: string, orderBy: string, sort: 'asc' | 'desc') =>
+	{
+		dispatch(resetUsers());
+		dispatch(resetQueryPagination());
 
     const uriParam = FilterFactory.getUriParam({ search, filterBy, orderBy, sort });
 
     router.push(`/users/list?${uriParam}`, undefined, { shallow: false });
   }
 
-  const checkScrollTop = () => {
+  const checkScrollTop = () =>
+	{
     if (!showScroll && window.pageYOffset > 300) {
       setShowScroll(true)
     }
@@ -65,7 +68,6 @@ const UserList = ({ usersList, query, viewMore }) => {
       <div className="flex flex-col justify-between my-4">
         <FilterSort actionFilter={onClickFilter} filterQuery={query} />
       </div>
-
       <div className="text-gray-500 bg-gray-900 flex flex-row items-center flex-wrap w-full justify-start ">
         <div className="w-full flex flex-row flex-wrap mx-auto justify-center ">
         {usersList && usersList.map((user, i) => (

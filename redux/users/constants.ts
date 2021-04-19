@@ -2,11 +2,8 @@ export const GET_USERS = 'GET_USERS';
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const RESET_USERS = 'RESET_USERS';
 
-export const GET_USERS_FILTER = 'GET_USERS';
-export const GET_USERS_SUCCESS_FILTER = 'GET_USERS_SUCCESS';
-
-export const SELECTED_USER = 'SELECTED_USER';
-export const UNSELECTED_USER = 'UNSELECTED_USER';
+export const GET_USER = 'GET_USER';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 
 export const CREATE_USER = 'CREATE_USER';
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';

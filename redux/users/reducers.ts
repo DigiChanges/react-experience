@@ -1,14 +1,12 @@
 import {
-  GET_USERS_SUCCESS,
-  SELECTED_USER,
-  UNSELECTED_USER,
-  CREATE_USER_SUCCESS,
-  UPDATE_USER_SUCCESS,
-  REMOVE_USER_SUCCESS,
-	RESET_USERS
-} from './constants'
-import { UserActions } from './actions';
+	GET_USERS_SUCCESS,
+	CREATE_USER_SUCCESS,
+	UPDATE_USER_SUCCESS,
+	REMOVE_USER_SUCCESS,
+	RESET_USERS, GET_USER_SUCCESS
+} from './constants';
 import _ from "lodash";
+import {ReduxActions} from "../../interfaces/default";
 
 const INIT_STATE = {
   usersList: [],
@@ -45,17 +43,11 @@ const deleteUser = (user, users) => (
     : INIT_STATE.usersList
 )
 
-const getSelectedUser = (id, users) => (
-  users &&
-  users.length > 0 &&
-  users.find(user => user.id === id)
-)
-
 const getUsers = (newUsers, currentUsers) => {
 	return _.concat(currentUsers, newUsers);
 }
 
-const Users = (state: State = INIT_STATE, action: UserActions) => {
+const Users = (state: State = INIT_STATE, action: ReduxActions) => {
   switch (action.type) {
     case GET_USERS_SUCCESS:
       return { ...state, usersList: getUsers(action.payload, state.usersList) }
@@ -63,11 +55,8 @@ const Users = (state: State = INIT_STATE, action: UserActions) => {
 		case RESET_USERS:
       return { ...state, usersList: INIT_STATE.usersList }
 
-    case SELECTED_USER:
-      return { ...state, userSelected: getSelectedUser(action.payload, state.usersList) }
-
-    case UNSELECTED_USER:
-      return { ...state, userSelected: INIT_STATE.userSelected }
+    case GET_USER_SUCCESS:
+      return { ...state, userSelected: action.payload }
 
     case CREATE_USER_SUCCESS:
       return { ...state, usersList: addUser(action.payload, state.usersList) }

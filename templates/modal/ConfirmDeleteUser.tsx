@@ -2,11 +2,10 @@ import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import Button from "../../atoms/Button";
 import Modal from "../../molecules/Modal";
-import {removeUser, unselectedUser} from '../../redux/users/actions'
+import {removeUser} from '../../redux/users/actions'
 
 const ConfirmDelete = ({open, close}: any): any =>
 {
-
 	const dispatch = useDispatch()
 	const booleanXquit = true;
 
@@ -22,7 +21,7 @@ const ConfirmDelete = ({open, close}: any): any =>
 	const closeModal = () =>
 	{
 		close();
-		dispatch(unselectedUser())
+		// dispatch(unselectedUser())
 		setOpenModal(!openModal);
 	};
 
@@ -76,7 +75,9 @@ const ConfirmDelete = ({open, close}: any): any =>
 							<div className="mt-10 flex justify-around ">
 								<Button
 									className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-									onClick={closeModal} buttonType="button">
+									onClick={closeModal}
+									buttonType="button"
+								>
 									<span className="mr-2">Close</span>
 								</Button>
 

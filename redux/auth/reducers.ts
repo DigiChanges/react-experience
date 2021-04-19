@@ -8,7 +8,7 @@ import {
 	REGISTER_USER_FAILED,
 	SET_DATA_AFTER_RELOADING_SUCCESS
 } from './constants';
-import {AuthAction} from "./actions";
+import {ReduxActions} from "../../interfaces/default";
 
 const INIT_STATE = {
 	user: null,
@@ -26,7 +26,7 @@ type State = {
 	userPermissions: string[]
 }
 
-const Auth = (state: State = INIT_STATE, action: AuthAction) =>
+const Auth = (state: State = INIT_STATE, action: ReduxActions) =>
 {
 	switch (action.type)
 	{

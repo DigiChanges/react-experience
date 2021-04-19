@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import { FieldProps } from "formik";
+import {FieldProps} from "formik";
 
 interface Option {
   label: string;
@@ -10,6 +10,9 @@ interface Option {
 interface OwnProps {
   id: string;
   options: any;
+  className?: string;
+  placeholder?: string;
+  name?: string;
   primary25: any;
   primary: any;
   neutral0: any;
@@ -23,9 +26,10 @@ interface OwnProps {
   dangerLight: any;
   neutral70: any;
   borderWidth: any;
+  handleChange: any;
 }
 
-const MultiSelect: React.FC<OwnProps & FieldProps> = ({
+const SimpleSelect: React.FC<OwnProps & FieldProps> = ({
   options,
 	id,
 	field,
@@ -44,15 +48,15 @@ const MultiSelect: React.FC<OwnProps & FieldProps> = ({
   ...props
 }) => {
 
-  const onChange = (option: Option[]) =>
+  const onChange = (option: Option) =>
 	{
-    form.setFieldValue(field.name, option.map((item: Option) => item.value));
+		form.setFieldValue(field.name, option.value);
   };
 
   const getValue = () =>
 	{
-      return options ? options.filter(option => field.value.indexOf(option.value) >= 0) : [];
-  };
+		return options ? options.find(option => option.value === field.value) : '';
+  }
 
   return (
 			<Select
@@ -62,7 +66,6 @@ const MultiSelect: React.FC<OwnProps & FieldProps> = ({
 				value={getValue()}
 				onChange={onChange}
 				options={options}
-				isMulti={true}
 				theme={(theme) => ({
 					...theme,
 					borderWidth: 6,
@@ -84,8 +87,8 @@ const MultiSelect: React.FC<OwnProps & FieldProps> = ({
 						dangerLight: dangerLight,
 					},
       })}
-		/>
+			/>
   );
 };
 
-export default MultiSelect;
+export default SimpleSelect;
