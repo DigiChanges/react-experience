@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import UserUpdate from "../../../templates/users/UserUpdate";
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux';
 import {getUser, getRoles, getPermissions, updateUser} from "../../../redux/actions";
 import {IUserPayload} from "../../../interfaces/user";
 

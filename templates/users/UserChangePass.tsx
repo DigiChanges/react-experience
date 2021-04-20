@@ -1,27 +1,39 @@
-import { Fragment, useEffect } from "react";
+import React, {PropsWithChildren} from "react";
 import { Field, Form, Formik } from "formik";
 import ChangePasswordSchema from "../../SchemaValidations/ChangePasswordSchema";
 import Router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { changePassword } from "../../redux/users/actions";
 import Title from "../../atoms/Title";
-import Button from "../../atoms/Button";
 import ErrorForm from "../../atoms/ErrorForm";
 import Label from "../../atoms/Label";
+import ButtonClose from "../../molecules/ButtonClose";
+import MultiSelect from "../../atoms/MultiSelect";
+import {SelectTransform} from "../../transforms/default";
+import DGDatePicker from "../../atoms/DGDatePicker";
+import SimpleSelect from "../../atoms/SimpleSelect";
 
-const UserChangePassword = (): any => {
+interface UserChangePassTemplateProps extends PropsWithChildren<any> {
+  permissionsList: string[];
+  rolesList: any[];
+  updateAction: any;
+  props?: any;
+}
+
+const UserChangePassword: React.FC<UserChangePassTemplateProps> = (): any =>
+{
   const { userSelected } = useSelector((state) => state.Users);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    //unmount component
-    return () => {
-      // dispatch(unselectedUser());
-    };
-  }, []);
+  // useEffect(() => {
+  //   //unmount component
+  //   return () => {
+  //     // dispatch(unselectedUser());
+  //   };
+  // }, []);
 
   return (
-    <Fragment>
+    <>
       <section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
         <div className="w-full">
           <div className="text-4xl mb-2">
@@ -114,7 +126,7 @@ const UserChangePassword = (): any => {
           </div>
         </div>
       </section>
-    </Fragment>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, useEffect, useState} from "react";
+import React, { PropsWithChildren } from "react";
 import {Field, Formik, Form} from "formik";
 import MultiSelect from "../../atoms/MultiSelect";
 import Router from "next/router";
@@ -8,9 +8,10 @@ import ButtonConfirm from "../../molecules/ButtonConfirm";
 import ButtonClose from "../../molecules/ButtonClose";
 import ErrorForm from "../../atoms/ErrorForm";
 import { SelectTransform } from "../../transforms/default";
-import { country } from '../../entities/country';
 import DGDatePicker from "../../atoms/DGDatePicker";
 import SimpleSelect from "../../atoms/SimpleSelect";
+import UserSchema from "../../SchemaValidations/UserSchema";
+import {country, documentTypeOptions, states} from "../../entities";
 
 interface UserUpdateTemplateProps extends PropsWithChildren<any> {
   permissionsList: string[];
@@ -21,16 +22,6 @@ interface UserUpdateTemplateProps extends PropsWithChildren<any> {
 
 const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelected, rolesList, permissionsList}): any =>
 {
-	const documentTypeOptions = [
-		{ label: 'DNI', value: 'dni' },
-		{ label: 'CC', value: 'cc' }
-	];
-
-	const STATES = [
-		{label: 'Enabled', value: true},
-		{label: 'Disabled', value: false},
-	];
-
 	return (
 		<section className="text-gray-500 body-font bg-gray-900 w-full md:container mx-auto px-3">
       <div className="mb-2 ">
@@ -56,20 +47,18 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 							permissions: userSelected.permissions,
 							enable: userSelected.enable,
 						}}
+						validationSchema={UserSchema}
 						onSubmit={(values) =>
 						{
 							updateAction(values, userSelected.id);
 						}}
 					>
-					{({ errors, touched, values, setFieldValue }) => (
+					{({ errors, touched}) => (
 						<Form>
 							<div className="sm:px-0 md:px-16 lg:px-14 flex flex-wrap mb-6 text-sm">
 								<span className="w-full px-2 text-xs text-bold">PERSONAL INFORMATION</span>
 								<div className="w-full md:w-1/2 px-2 mb-5">
-									<Label
-										htmlFor="firstName"
-										className=" text-gray-400 block mb-1"
-									>
+									<Label htmlFor="firstName" className=" text-gray-400 block mb-1">
 										First name
 									</Label>
 									<Field
@@ -86,12 +75,9 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 									) : null}
 								</div>
 								<div className="w-full md:w-1/2 px-2 mb-5">
-									<Label
-										htmlFor="lastName"
-										className="text-gray-400 block mb-1"
-									>
+									<Label htmlFor="lastName" className="text-gray-400 block mb-1">
 										Last name
-											</Label>
+									</Label>
 									<Field
 										name="lastName"
 										type="text"
@@ -208,7 +194,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 										name="enable"
 										id="enable"
 										component={SimpleSelect}
-										options={STATES}
+										options={states}
 										primary25="#a0aec0"
 										primary="#667eea"
 										neutral0="rgba(20,25,31)"
