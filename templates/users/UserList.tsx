@@ -94,9 +94,9 @@ const UserList = ({ usersList, query, viewMore }) =>
         ))}
         </div>
         <div className="flex justify-center w-3/4 mt-10">
-          <Button buttonClick={viewMore} className="w-32 h-10 bg-main-gray-500 hover:bg-main-gray-400 rounded-xl text-white font-bold text-sm mx-auto">
+          <Button onClick={viewMore} className="w-32 h-10 bg-main-gray-500 hover:bg-main-gray-400 rounded-xl text-white font-bold text-sm mx-auto">
             View More
-            </Button>
+					</Button>
           <Button onClick={scrollTop} className={'h-10 w-10 transform rotate-90 text-main-gray-250 ' + (showScroll ? 'flex' : 'hidden')} >
             <IconArrowCircleLeft />
           </Button>
