@@ -1,5 +1,5 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { notification, notificationTypes } from "../../entities/notification";
+import { notification, notificationTypes } from "../../entities";
 import Router from "next/router";
 import {
 	getAllUsers,
@@ -15,7 +15,7 @@ import {
   GET_USER,
   CREATE_USER,
   UPDATE_USER,
-  CHANGE_PASSWORD,
+  CHANGE_PASSWORD_USER,
   REMOVE_USER,
 } from "./constants";
 import {
@@ -148,14 +148,12 @@ function* updateUser({ payload: { body, id } })
   }
 }
 
-function* changePassword({ payload: { id, password, passwordConfirmation } }) {
+function* changePassword({ payload: { body, id } }) {
   yield put(startGeneralLoading());
   try {
-    const res = yield call(changeUserPassword, id, {
-      newPassword: password,
-      newPasswordConfirmation: passwordConfirmation,
-    });
+    const res = yield call(changeUserPassword, body, id);
     const { data } = res;
+
     if (!data) {
       return yield put(showErrorNotification("Internal Server Error"));
     }
@@ -214,7 +212,7 @@ export function* watchUpdateUser(): any {
 
 export function* watchChangeUserPassword(): any {
   // @ts-ignore
-  yield takeEvery(CHANGE_PASSWORD, changePassword);
+  yield takeEvery(CHANGE_PASSWORD_USER, changePassword);
 }
 
 export function* watchRemoveUser(): any {

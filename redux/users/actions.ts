@@ -8,14 +8,14 @@ import {
 	CREATE_USER_SUCCESS,
 	UPDATE_USER,
 	UPDATE_USER_SUCCESS,
-	CHANGE_PASSWORD,
+	CHANGE_PASSWORD_USER,
 	REMOVE_USER,
 	REMOVE_USER_SUCCESS,
 	RESET_USERS
 } from './constants';
 
 import { ReduxActions } from "../../interfaces/default";
-import {IUserApi, IUserPayload} from "../../interfaces/user";
+import {IChangePasswordPayload, IUserApi, IUserPayload} from "../../interfaces/user";
 
 export const getUsers = (userFilterQueryParam: ParsedUrlQuery, nextQueryParamsPagination: string): ReduxActions => ({
   type: GET_USERS,
@@ -65,16 +65,10 @@ export const updateUserSuccess = (payload: IUserApi): ReduxActions => ({
   payload
 })
 
-export const changePassword = (
-  id: string,
-  password: string,
-  passwordConfirmation: string
-): ReduxActions => {
-  return {
-    type: CHANGE_PASSWORD,
-    payload: { id, password, passwordConfirmation }
-  }
-}
+export const changePasswordUser = (body: IChangePasswordPayload, id: string): ReduxActions => ({
+    type: CHANGE_PASSWORD_USER,
+    payload: { body, id }
+})
 
 export const removeUser = (id: string): ReduxActions => ({
   type: REMOVE_USER,

@@ -7,11 +7,12 @@ import ErrorForm from "../../atoms/ErrorForm";
 import Label from "../../atoms/Label";
 import ButtonConfirm from "../../molecules/ButtonConfirm";
 import ButtonClose from "../../molecules/ButtonClose";
-import {country} from "../../entities/country";
 import {SelectTransform} from "../../transforms/default";
 import UserSchema from "../../SchemaValidations/UserSchema";
 import {IRoleApi} from "../../interfaces/role";
 import DGDatePicker from "../../atoms/DGDatePicker";
+import {documentTypeOptions, country,states} from "../../entities";
+import Router from "next/router";
 
 interface UserCreateTemplateProps extends PropsWithChildren<any> {
   permissionsList: string[];
@@ -22,16 +23,6 @@ interface UserCreateTemplateProps extends PropsWithChildren<any> {
 
 const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesList, createAction}): any =>
 {
-	const documentTypeOptions = [
-		{ label: 'DNI', value: 'dni' },
-		{ label: 'CC', value: 'cc' }
-	];
-
-	const STATES = [
-		{label: 'Enabled', value: true},
-		{label: 'Disabled', value: false},
-	];
-
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-full md:container mx-auto px-3">
       <div className="mb-2 ">
@@ -207,7 +198,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
 										name="enable"
 										id="enable"
 										component={SimpleSelect}
-										options={STATES}
+										options={states}
 										primary25="#a0aec0"
 										primary="#667eea"
 										neutral0="rgba(20,25,31)"
@@ -407,7 +398,9 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
               </div>
               <div className="w-full mt-5 flex flex-row-reverse">
                 <ButtonConfirm>Save</ButtonConfirm>
-                <ButtonClose>Close</ButtonClose>
+								<ButtonClose buttonType="button" onClick={() => Router.push("/users")}>
+									Close
+								</ButtonClose>
               </div>
             </div>
           </Form>

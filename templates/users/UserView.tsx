@@ -268,10 +268,7 @@ const UserView = ({userSelected, rolesList, permissionsList}) =>
 									/>
 								</div>
 								<div className="w-full mt-5 flex flex-row-reverse">
-									<ButtonClose
-										buttonType="button"
-										onClick={() => Router.push("/users")}
-									>
+									<ButtonClose buttonType="button" onClick={() => Router.push("/users")}>
 										Close
 									</ButtonClose>
 								</div>

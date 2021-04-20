@@ -3,7 +3,7 @@
 import { config } from '../api/config'
 import { getHeader } from '../api/auth'
 import HttpRequest from "../helpers/HttpRequest";
-import {IUserPayload} from "../interfaces/user";
+import {IChangePasswordPayload, IUserPayload} from "../interfaces/user";
 
 const { protocol, hostname, port } = config.apiGateway.server
 const { getAll, getOne, create, update, editPassword, remove, assignRole } = config.apiGateway.routes.users
@@ -51,7 +51,7 @@ export const putUser = (body: IUserPayload, id: string) => {
   return HttpRequest.request(requestOptions);
 }
 
-export const changeUserPassword = (id: string, body: any) => {
+export const changeUserPassword = (body: IChangePasswordPayload, id: string) => {
   const requestOptions = {
     url: `${protocol}://${hostname}:${port}/${editPassword.replace(':id', id)}`,
     method: 'PUT',

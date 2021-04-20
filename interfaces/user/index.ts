@@ -1,5 +1,11 @@
 import { IRoleApi } from "../role";
 
+export interface IChangePasswordPayload
+{
+		newPassword: string;
+		newPasswordConfirmation: string;
+}
+
 export interface IUserPayload
 {
 		email: string;
@@ -12,6 +18,8 @@ export interface IUserPayload
 		phone: string;
 		country: string;
 		address: string;
+		password: string;
+		passwordConfirmation: string;
 		permissions: string[];
 		roles: string[];
 		enable: boolean;

@@ -334,10 +334,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 								</div>
 								<div className="w-full mt-5 flex flex-row-reverse">
 									<ButtonConfirm>Save</ButtonConfirm>
-									<ButtonClose
-										buttonType="button"
-										onClick={() => Router.push("/users")}
-									>
+									<ButtonClose buttonType="button" onClick={() => Router.push("/users")}>
 										Close
 									</ButtonClose>
 								</div>
