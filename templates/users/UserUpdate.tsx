@@ -1,233 +1,348 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import {Field, Formik, Form} from "formik";
-import Select from "../../atoms/MultiSelect";
+import MultiSelect from "../../atoms/MultiSelect";
 import Router from "next/router";
-import {useDispatch} from 'react-redux'
-import {updateUser} from '../../redux/users/actions';
 import Title from "../../atoms/Title"
-import Button from "../../atoms/Button";
 import Label from "../../atoms/Label";
+import ButtonConfirm from "../../molecules/ButtonConfirm";
+import ButtonClose from "../../molecules/ButtonClose";
+import ErrorForm from "../../atoms/ErrorForm";
+import { SelectTransform } from "../../transforms/default";
+import DGDatePicker from "../../atoms/DGDatePicker";
+import SimpleSelect from "../../atoms/SimpleSelect";
+import UserSchema from "../../SchemaValidations/UserSchema";
+import {country, documentTypeOptions, states} from "../../entities";
 
-const UpdateUser = ({userSelected, rolesList, permissions}): any =>
+interface UserUpdateTemplateProps extends PropsWithChildren<any> {
+  permissionsList: string[];
+  rolesList: any[];
+  updateAction: any;
+  props?: any;
+}
+
+const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelected, rolesList, permissionsList}): any =>
 {
-	const dispatch = useDispatch(); // Remove it
-
-	const STATES = [
-		{label: 'Enabled', value: 1},
-		{label: 'Disabled', value: 0},
-	];
-
-	const getUserInitialState = () => (userSelected.enable ? STATES[0] : STATES[1]);
-
-	const getUserInitialRoles = () =>
-	{
-		const roles = getRolesList();
-
-		return userSelected && userSelected.roles.map((userRole) =>
-		{
-			return roles.find((role) => userRole.name === role.label);
-		});
-	};
-
-	const getUserInitialPerms = () => (
-		userSelected.permissions && userSelected.permissions.length > 0
-			? userSelected.permissions.map((label, value) => ({label, value}))
-			: []
-	);
-	const getPermissionsList = () => (
-		permissions && permissions.length > 0
-			? permissions.map((label, value) => ({label, value}))
-			: []
-	);
-	const getRolesList = () => (
-		rolesList && rolesList.length > 0
-			? rolesList.map((label, value) => ({label: label.name, value, id: label.id}))
-			: []
-	);
-
-	const formatPerms = (perms) => (
-		perms && perms.length > 0
-			? perms.map(label => (
-				label.label
-			))
-			: []
-	);
-
-	const formatRoles = (role) => (
-		role && role.length > 0
-			? role.map(label => (
-				label.id
-			))
-			: []
-	);
-
 	return (
-		<section className="text-gray-500 body-font bg-gray-900 w-128 flex ">
-			<div className="w-full">
-				<div className="text-4xl mb-2">
-					<Title className="text-left" titleType="h1">Update User</Title>
-				</div>
-				<div className="bg-gray-800 p-6  border-teal border-t-12  mb-6 rounded-lg shadow-lg">
-					{userSelected ? (
-						<Formik
-							initialValues={{
-								firstName: userSelected.firstName,
-								lastName: userSelected.lastName,
-								email: userSelected.email,
-								roles: getUserInitialRoles(),
-								permissions: getUserInitialPerms(),
-								enable: getUserInitialState(),
-							}}
-							onSubmit={async (values) =>
-							{
-								//TODO enable
-								const {firstName, lastName, email, permissions, roles, enable} = values
-								const newPerms = formatPerms(permissions)
-								const newRoles = formatRoles(roles)
-								dispatch(
-									updateUser(
-										userSelected.id,
-										firstName,
-										lastName,
-										email,
-										newPerms,
-										newRoles,
-										!!enable.value
-									)
-								)
-							}}
-						>
-							{(): any => (
-								<Form>
-									<div
-										className="flex flex-col  bg-gray-800 rounded-lg border-teal border-t-12 shadow-lg">
-										<div className="mb-4">
-											<Label htmlFor="firstName" className="font-bold text-gray-400 block mb-2">
-												First Name
+		<section className="text-gray-500 body-font bg-gray-900 w-full md:container mx-auto px-3">
+      <div className="mb-2 ">
+        <Title className="text-3xl font-bold sm:px-0 md:px-18 lg:px-14" titleType="h1">
+          Update User
+          </Title>
+      </div>
+				{userSelected ? (
+					<Formik
+						enableReinitialize={true}
+						initialValues={{
+							firstName: userSelected.firstName,
+							lastName: userSelected.lastName,
+							email: userSelected.email,
+							birthday: userSelected.birthday,
+							documentType: userSelected.documentType,
+							documentNumber: userSelected.documentNumber,
+							gender: userSelected.gender,
+							phone: userSelected.phone,
+							country: userSelected.country,
+							address: userSelected.address,
+							roles: userSelected.roles.map(role => role.id),
+							permissions: userSelected.permissions,
+							enable: userSelected.enable,
+						}}
+						validationSchema={UserSchema}
+						onSubmit={(values) =>
+						{
+							updateAction(values, userSelected.id);
+						}}
+					>
+					{({ errors, touched}) => (
+						<Form>
+							<div className="sm:px-0 md:px-16 lg:px-14 flex flex-wrap mb-6 text-sm">
+								<span className="w-full px-2 text-xs text-bold">PERSONAL INFORMATION</span>
+								<div className="w-full md:w-1/2 px-2 mb-5">
+									<Label htmlFor="firstName" className=" text-gray-400 block mb-1">
+										First name
+									</Label>
+									<Field
+										name="firstName"
+										type="text"
+										id="firstName"
+										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
+										placeholder="Enter First Name"
+									/>
+									{errors.firstName && touched.firstName ? (
+										<ErrorForm className="text-red-500 p-2">
+											{errors.firstName}
+										</ErrorForm>
+									) : null}
+								</div>
+								<div className="w-full md:w-1/2 px-2 mb-5">
+									<Label htmlFor="lastName" className="text-gray-400 block mb-1">
+										Last name
+									</Label>
+									<Field
+										name="lastName"
+										type="text"
+										id="lastName"
+										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
+										placeholder="Enter Last Name"
+									/>
+									{errors.lastName && touched.lastName ? (
+										<ErrorForm className="text-red-500 p-2">
+											{errors.lastName}
+										</ErrorForm>
+									) : null}
+								</div>
+								<div className="w-full md:w-1/4 px-2 mb-5">
+									<Label
+										htmlFor="documentType"
+										className="text-gray-400 block mb-1"
+									>
+										ID number
 											</Label>
-											<Field
-												name="firstName"
-												type="text"
-												id="firstName"
-												className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-2 rounded shadow"
-												placeholder="FirstName"
-											/>
-										</div>
-										<div className="mb-4">
-											<Label htmlFor="lastName" className="font-bold text-gray-400 block mb-2">
-												Last Name
-											</Label>
-											<Field
-												name="lastName"
-												type="text"
-												id="lastName"
-												className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-2 rounded shadow"
-												placeholder="lastName"
-											/>
-										</div>
-										<div className="mb-1">
-											<Label htmlFor="email" className="font-bold text-gray-400 block mb-2">
-												Email
-											</Label>
-											<Field
-												name="email"
-												type="text"
-												id="email"
-												className="w-full bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-2 rounded shadow"
-												placeholder="email"
-											/>
-										</div>
+									<div className="flex w-full">
+										<Field
+											name="documentType"
+											id="documentType"
+											component={SimpleSelect}
+											options={documentTypeOptions}
+											className="flex-1 w-1/4 border-main-gray-500 text-white rounded-l-full focus:outline-none focus:border-indigo-500 text-base hover:border-grey h-10 shadow font-bold"
+											primary25="#a0aec0"
+											primary="#667eea"
+											neutral0="rgba(20,25,31)"
+											neutral20="rgba(17,21,30)"
+											neutral50="#a0aec0"
+											neutral80="#718096"
+											neutral10="#fff"
+											neutral30="#667eea"
+											primary50="#718096"
+											danger="#a0aec0"
+											dangerLight="#fff"
+										/>
+										<Field
+											name="documentNumber"
+											type="text"
+											id="documentNumber"
+											className="flex-1 w-3/4 bg-gray-800 border rounded-r-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
+											placeholder="Enter ID"
+										/>
+									</div>
+									{errors.documentNumber && touched.documentNumber ? (
+										<ErrorForm className="text-red-500 p-2">
+											{errors.documentNumber}
+										</ErrorForm>
+									) : null}
 
-										<div className="mb-4 ">
-											<Label htmlFor="enable" className="font-bold text-gray-400 block mb-2">
-												State
-											</Label>
-											<Field
-												name="enable"
-												id="enable"
-												component={Select}
-												items={STATES}
-												primary25="#4a5568"
-												primary="#667eea"
-												neutral0="#2d3748"
-												neutral20="#4a5568"
-												neutral50="#a0aec0"
-												neutral80="#fff"
-												neutral10="#4a5568"
-												neutral30="#667eea"
-												primary50="#718096"
-												danger="#a0aec0"
-												dangerLight="#1a202c"
-											/>
-										</div>
-										<div className="mb-4">
-											<Label htmlFor="roles" className="font-bold text-gray-400 block mb-2">
-												Roles
-											</Label>
-											<Field
-												name="roles"
-												id="roles"
-												isMulti
-												component={Select}
-												items={getRolesList()}
-												primary25="#4a5568"
-												primary="#667eea"
-												neutral0="#2d3748"
-												neutral20="#4a5568"
-												neutral50="#a0aec0"
-												neutral80="#fff"
-												neutral10="#4a5568"
-												neutral30="#667eea"
-												primary50="#718096"
-												danger="#a0aec0"
-												dangerLight="#1a202c"
-											/>
-										</div>
-										<div className="mb-4">
-											<Label htmlFor="permissions" className="font-bold text-gray-400 block mb-2">
-												Permissions
-											</Label>
-											<Field
-												name="permissions"
-												id="permissions"
-												component={Select}
-												items={getPermissionsList()}
-												isMulti
-												primary25="#4a5568"
-												primary="#667eea"
-												neutral0="#2d3748"
-												neutral20="#4a5568"
-												neutral50="#a0aec0"
-												neutral80="#fff"
-												neutral10="#4a5568"
-												neutral30="#667eea"
-												primary50="#718096"
-												danger="#a0aec0"
-												dangerLight="#1a202c"
-											/>
-										</div>
-									</div>
-									<div className="flex justify-evenly mt-8">
-										<Button
-											className="flex shadow-kx1 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg text-center"
-											buttonType="button"
-											onClick={() => Router.push("/users")}
+								</div>
+								<div className="w-full md:w-1/4 px-2 center align-center self-center justify-center items-center mb-5">
+									<Label
+										htmlFor="gender"
+										className="text-gray-400 block mb-1"
+									>
+										Gender
+									</Label>
+
+									<Field name="gender" type="radio" id="gender" value="female" className="border-1 rounded-full border-main-gray-500 bg-gray-800 p-3 focus:bg-white focus:border-white m-1" />
+										<label
+											htmlFor="gender"
+											className="text-gray-400 text-xs font-bold mr-1"
 										>
-											<span className="mr-2">Back</span>
-										</Button>
-										<Button
-											className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-											buttonType="submit"
-										>
-											Save
-										</Button>
-									</div>
-								</Form>
-							)}
-						</Formik>
-					) : <p>No user selected</p>}
-				</div>
-			</div>
+											F
+										</label>
+
+									<Field name="gender" type="radio" id="gender" value="male" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
+									<label
+										htmlFor="gender"
+										className="text-gray-400 text-xs font-bold mr-1"
+									>
+										M
+									</label>
+
+									<Field name="gender" type="radio" id="gender" value="other" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
+									<label
+										className="text-gray-400 text-xs font-bold mr-1"
+										htmlFor="gender"
+									>
+										Other
+									</label>
+
+									{errors.gender && touched.gender ? (
+										<ErrorForm className="text-red-500 p-2">
+											{errors.gender}
+										</ErrorForm>
+									) : null}
+								</div>
+								<div className="w-full md:w-1/4 px-2 mb-5">
+									<Label
+										htmlFor="birthdate"
+										className="text-gray-400 block mb-1"
+									>
+										Birthday
+									</Label>
+								<Field
+                  name="birthday"
+                  component={DGDatePicker}
+                  id="birthday"
+                  className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 h-10 py-3 shadow font-bold"
+									dateFormatUI="d/MM/yyyy"
+									dateFormatValue="D/MM/YYYY"
+                />
+								</div>
+								<div className="w-full md:w-1/4 px-2 mb-5">
+									<Label htmlFor="enable" className="font-bold text-gray-400 block mb-2">
+										Enable
+									</Label>
+									<Field
+										name="enable"
+										id="enable"
+										component={SimpleSelect}
+										options={states}
+										primary25="#a0aec0"
+										primary="#667eea"
+										neutral0="rgba(20,25,31)"
+										neutral20="rgba(17,21,30)"
+										neutral50="#a0aec0"
+										neutral80="#718096"
+										neutral10="#fff"
+										neutral30="#667eea"
+										primary50="#718096"
+										danger="#a0aec0"
+										dangerLight="#fff"
+									/>
+								</div>
+								<div className="w-full md:w-1/2 px-2 mb-5">
+									<Label
+										htmlFor="country"
+										className="text-gray-400 block mb-1"
+									>
+										Country
+									</Label>
+									<Field
+										name="country"
+										id="country"
+										options={country}
+										component={SimpleSelect}
+										className="bg-gray-800 border rounded-full border-gray-700 text-base  hover:border-grey shadow font-bold"
+										placeholder="Select country"
+										primary25="#a0aec0"
+										primary="#667eea"
+										neutral0="rgba(20,25,31)"
+										neutral20="rgba(17,21,30)"
+										neutral50="#a0aec0"
+										neutral80="#718096"
+										neutral10="#fff"
+										neutral30="#667eea"
+										primary50="#718096"
+										danger="#a0aec0"
+										dangerLight="#fff"
+										/>
+								</div>
+								<div className="w-full md:w-1/2 px-2 mb-5">
+									<Label
+										htmlFor="address"
+										className="text-gray-400 block mb-1"
+									>
+										Address
+									</Label>
+									<Field
+										name="address"
+										id="address"
+										type="text"
+										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
+										placeholder="Your address..."
+									/>
+								</div>
+								<span className="w-full mt-5 px-2">CONTACT INFORMATION </span>
+								<div className="w-full md:w-1/2 px-2 mb-5">
+									<Label htmlFor="email" className="text-gray-400 block mb-1">
+										Email
+									</Label>
+									<Field
+										name="email"
+										type="text"
+										id="email"
+										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
+										placeholder="Enter Email"
+									/>
+									{errors.email && touched.email ? (
+										<ErrorForm className="text-red-500 p-2">
+											{errors.email}
+										</ErrorForm>
+									) : null}
+								</div>
+								<div className="w-full md:w-1/2 px-2 mb-5">
+									<Label htmlFor="phone" className="text-gray-400 block mb-1">
+										Phone
+									</Label>
+									<Field
+										name="phone"
+										type="text"
+										id="phone"
+										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
+										placeholder="Enter number"
+									/>
+									{errors.phone && touched.phone ? (
+										<ErrorForm className="text-red-500 p-2">
+											{errors.phone}
+										</ErrorForm>
+									) : null}
+								</div>
+								<div className="w-full md:w-1/2 mb-5">
+									<Label htmlFor="permissions" className="font-bold text-gray-400 block mb-1">
+										Permissions
+									</Label>
+									<Field
+										name="permissions"
+										id="permissions"
+										component={MultiSelect}
+										options={SelectTransform.getOptionsSimpleArray(permissionsList)}
+										primary25="#4a5568"
+										primary="#667eea"
+										neutral0="#2d3748"
+										neutral20="#4a5568"
+										neutral50="#a0aec0"
+										neutral80="#fff"
+										neutral10="#4a5568"
+										neutral30="#667eea"
+										primary50="#718096"
+										danger="#a0aec0"
+										dangerLight="#1a202c"
+									/>
+								</div>
+								<div className="w-full md:w-1/2 mb-5">
+									<Label
+										htmlFor="roles"
+										className="font-bold text-gray-400 block mb-1"
+									>
+										Roles
+											</Label>
+									<Field
+										name="roles"
+										id="roles"
+										component={MultiSelect}
+										options={SelectTransform.getOptionsObjectArray(rolesList, 'name', 'id')}
+										primary25="#4a5568"
+										primary="#667eea"
+										neutral0="#2d3748"
+										neutral20="#4a5568"
+										neutral50="#a0aec0"
+										neutral80="#fff"
+										neutral10="#4a5568"
+										neutral30="#667eea"
+										primary50="#718096"
+										danger="#a0aec0"
+										dangerLight="#1a202c"
+									/>
+								</div>
+								<div className="w-full mt-5 flex flex-row-reverse">
+									<ButtonConfirm>Save</ButtonConfirm>
+									<ButtonClose buttonType="button" onClick={() => Router.push("/users")}>
+										Close
+									</ButtonClose>
+								</div>
+							</div>
+						</Form>
+					)}
+					</Formik>
+				) : <p>No user selected</p>} {/*TODO: Change for loading*/}
 		</section>
 	);
 };

@@ -37,6 +37,7 @@ export const config = {
       },
       users: {
         getAll: `${BACKEND_BASE_PATH}/users`,
+        getOne: `${BACKEND_BASE_PATH}/users/:id`,
         create: `${BACKEND_BASE_PATH}/users`,
         update: `${BACKEND_BASE_PATH}/users/:id`,
         remove: `${BACKEND_BASE_PATH}/users/:id`,
@@ -45,6 +46,7 @@ export const config = {
       },
       roles: {
         getAll: `${BACKEND_BASE_PATH}/roles`,
+        getOne: `${BACKEND_BASE_PATH}/roles/:id`,
         create: `${BACKEND_BASE_PATH}/roles`,
         update: `${BACKEND_BASE_PATH}/roles/:id`,
         remove: `${BACKEND_BASE_PATH}/roles/:id`

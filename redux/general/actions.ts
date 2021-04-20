@@ -6,14 +6,9 @@ import {
 	NEXT_QUERY_PAGINATION
 } from './constants'
 import _ from "lodash";
+import {ReduxActions} from "../../interfaces/default";
 
-export interface GeneralActions
-{
-	type: string
-	payload: any | null
-}
-
-export const startGeneralLoading = (): GeneralActions => ({
+export const startGeneralLoading = (): ReduxActions => ({
 	type: START_GENERAL_LOADING,
 	payload: null
 })
@@ -28,12 +23,12 @@ export const showGeneralNotification = (notification: any) => ({
 	payload: notification
 })
 
-export const resetQueryPagination = (): GeneralActions => ({
+export const resetQueryPagination = (): ReduxActions => ({
   type: RESET_QUERY_PAGINATION,
   payload: null
 })
 
-export const nextQueryPagination = (pagination: any): GeneralActions =>
+export const nextQueryPagination = (pagination: any): ReduxActions =>
 {
 	const uriParam = _.last(pagination.nextUrl.split("?"));
 

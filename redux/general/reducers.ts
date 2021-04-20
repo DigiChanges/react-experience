@@ -4,7 +4,7 @@ import {
 	SHOW_GENERAL_NOTIFICATION,
 	RESET_QUERY_PAGINATION, NEXT_QUERY_PAGINATION
 } from './constants';
-import {GeneralActions} from './actions';
+import {ReduxActions} from "../../interfaces/default";
 
 const INIT_STATE = {
 	isLoading: false,
@@ -18,7 +18,7 @@ type State = {
 	nextQueryParamsPagination: string
 }
 
-const General = (state: State = INIT_STATE, action: GeneralActions) =>
+const General = (state: State = INIT_STATE, action: ReduxActions) =>
 {
 	switch (action.type)
 	{

@@ -2,123 +2,80 @@ import {ParsedUrlQuery} from "querystring";
 import {
 	GET_USERS,
 	GET_USERS_SUCCESS,
-	SELECTED_USER,
-	UNSELECTED_USER,
+	GET_USER,
+	GET_USER_SUCCESS,
 	CREATE_USER,
 	CREATE_USER_SUCCESS,
 	UPDATE_USER,
 	UPDATE_USER_SUCCESS,
-	CHANGE_PASSWORD,
+	CHANGE_PASSWORD_USER,
 	REMOVE_USER,
 	REMOVE_USER_SUCCESS,
 	RESET_USERS
 } from './constants';
 
-export interface UserActions {
-  type: string
-  payload: any | null
-}
+import { ReduxActions } from "../../interfaces/default";
+import {IChangePasswordPayload, IUserApi, IUserPayload} from "../../interfaces/user";
 
-export const getUsers = (userFilterQueryParam: ParsedUrlQuery, nextQueryParamsPagination: string): UserActions => ({
+export const getUsers = (userFilterQueryParam: ParsedUrlQuery, nextQueryParamsPagination: string): ReduxActions => ({
   type: GET_USERS,
   payload: { userFilterQueryParam, nextQueryParamsPagination }
 })
 
-export const getUserSuccess = (users: any): UserActions => ({
+export const getUsersSuccess = (users: IUserApi[]): ReduxActions => ({
   type: GET_USERS_SUCCESS,
   payload: users
 })
 
-export const resetUsers = (): UserActions => ({
+export const getUser = (id: string): ReduxActions => ({
+  type: GET_USER,
+  payload: id
+})
+
+export const getUserSuccess = (users: IUserApi): ReduxActions => ({
+  type: GET_USER_SUCCESS,
+  payload: users
+})
+
+export const resetUsers = (): ReduxActions => ({
   type: RESET_USERS,
   payload: null
 })
 
-export const selectedUser = (id: string): UserActions => ({
-  type: SELECTED_USER,
-  payload: id
-})
-
-export const unselectedUser = (): UserActions => ({
-  type: UNSELECTED_USER,
-  payload: null
-})
-
-export const createUser = (
-  firstName: string,
-  lastName: string,
-  email: string,
-	birthday: string,
-	documentType: string,
-  documentNumber: string,
-  gender: string,
-  phone: string,
-	country: string,
-	address: string,
-  password: string,
-  passwordConfirmation: string,
-  permissions: string[],
-  roles: any[]
-): UserActions => ({
+export const createUser = (payload: IUserPayload): ReduxActions => ({
   type: CREATE_USER,
-  payload: {
-		firstName,
-		lastName,
-		email,
-		birthday,
-		documentType,
-		documentNumber,
-		gender,
-		phone,
-		country,
-		address,
-		password,
-		passwordConfirmation,
-		permissions,
-		roles
-  }
+  payload
 })
 
-export const createUserSuccess = (user: any): UserActions => ({
+export const createUserSuccess = (payload: IUserApi): ReduxActions => ({
   type: CREATE_USER_SUCCESS,
-  payload: user
+  payload
 })
 
-export const updateUser = (
-  id: string,
-  firstName: string,
-  lastName: string,
-  email: string,
-  permissions: [],
-  roles: [],
-  enable: boolean
-): UserActions => ({
-  type: UPDATE_USER,
-  payload: { id, firstName, lastName, email, permissions, roles, enable }
-})
-
-export const updateUserSuccess = (user: any): UserActions => ({
-  type: UPDATE_USER_SUCCESS,
-  payload: user
-})
-
-export const changePassword = (
-  id: string,
-  password: string,
-  passwordConfirmation: string
-): UserActions => {
-  return {
-    type: CHANGE_PASSWORD,
-    payload: { id, password, passwordConfirmation }
-  }
+export const updateUser = (body: IUserPayload, id: string): ReduxActions =>
+{
+	return ({
+		type: UPDATE_USER,
+		payload: { body, id }
+	});
 }
 
-export const removeUser = (id: string): UserActions => ({
+export const updateUserSuccess = (payload: IUserApi): ReduxActions => ({
+  type: UPDATE_USER_SUCCESS,
+  payload
+})
+
+export const changePasswordUser = (body: IChangePasswordPayload, id: string): ReduxActions => ({
+    type: CHANGE_PASSWORD_USER,
+    payload: { body, id }
+})
+
+export const removeUser = (id: string): ReduxActions => ({
   type: REMOVE_USER,
   payload: id
 })
 
-export const removeUserSuccess = (user: any): UserActions => ({
+export const removeUserSuccess = (user: any): ReduxActions => ({
   type: REMOVE_USER_SUCCESS,
   payload: user
 })

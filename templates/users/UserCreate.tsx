@@ -1,42 +1,28 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { PropsWithChildren } from "react";
+import React, {PropsWithChildren} from "react";
 import { Field, Form, Formik } from "formik";
-import SignUpSchema from "../../SchemaValidations/SignUpSchema";
-import Select from "../../atoms/MultiSelect";
+import MultiSelect from "../../atoms/MultiSelect";
+import SimpleSelect from "../../atoms/SimpleSelect";
 import Title from "../../atoms/Title";
 import ErrorForm from "../../atoms/ErrorForm";
 import Label from "../../atoms/Label";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import CountrySelector from "../../molecules/CountrySelector";
 import ButtonConfirm from "../../molecules/ButtonConfirm";
 import ButtonClose from "../../molecules/ButtonClose";
+import {SelectTransform} from "../../transforms/default";
+import UserSchema from "../../SchemaValidations/UserSchema";
+import {IRoleApi} from "../../interfaces/role";
+import DGDatePicker from "../../atoms/DGDatePicker";
+import {documentTypeOptions, country,states} from "../../entities";
+import Router from "next/router";
 
 interface UserCreateTemplateProps extends PropsWithChildren<any> {
   permissionsList: string[];
-  rolesList: any[];
+  rolesList: IRoleApi[];
   createAction: any;
   props?: any;
 }
 
-const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesList, createAction }): any => {
-  const identityOptions = [
-    { label: 'DNI', value: 'dni' },
-    { label: 'CC', value: 'cc' }
-  ];
-
-  //TODO child key issue
-  const getRolesList = () => {
-    return rolesList && rolesList.length > 0
-      ? rolesList.map((role) => ({ label: role.name, value: role.id }))
-      : [];
-  };
-  //TODO child key issue
-  const getPermissionsList = () =>
-    permissionsList && permissionsList.length > 0
-      ? permissionsList.map((label, value) => ({ label, value }))
-      : [];
-
+const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesList, createAction}): any =>
+{
   return (
     <section className="text-gray-500 body-font bg-gray-900 w-full md:container mx-auto px-3">
       <div className="mb-2 ">
@@ -55,21 +41,21 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesL
           documentNumber: "",
           gender: "",
           phone: "",
-          country: "",
-          address: "",
+					country: "",
+					address: "",
           password: "",
           passwordConfirmation: "",
           permissions: [],
           roles: [],
+					enable: ""
         }}
-        validationSchema={SignUpSchema}
+        validationSchema={UserSchema}
         onSubmit={async (values) => {
-          createAction(values);
+					createAction(values);
         }}
       >
-        {({ errors, touched, values, setFieldValue }) => (
+        {({ errors, touched}) => (
           <Form>
-
             <div className="sm:px-0 md:px-16 lg:px-14 flex flex-wrap mb-6 text-sm">
               <span className="w-full px-2 text-xs text-bold">PERSONAL INFORMATION</span>
               <div className="w-full md:w-1/2 px-2 mb-5">
@@ -123,8 +109,8 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesL
                   <Field
                     name="documentType"
                     id="documentType"
-                    component={Select}
-                    items={identityOptions}
+                    component={SimpleSelect}
+                    options={documentTypeOptions}
                     className="flex-1 w-1/4 border-main-gray-500 text-white rounded-l-full focus:outline-none focus:border-indigo-500 text-base hover:border-grey h-10 shadow font-bold"
                     primary25="#a0aec0"
                     primary="#667eea"
@@ -163,20 +149,19 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesL
 								</Label>
 
                 <Field name="gender" type="radio" id="gender" value="female" className="border-1 rounded-full border-main-gray-500 bg-gray-800 p-3 focus:bg-white focus:border-white m-1" />
-                <label className="text-gray-400 text-xs font-bold mr-1">
+                <label htmlFor="gender" className="text-gray-400 text-xs font-bold mr-1">
                   F
                 </label>
 
                 <Field name="gender" type="radio" id="gender" value="male" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
-                <label className="text-gray-400 text-xs font-bold mr-1">
+                <label htmlFor="gender" className="text-gray-400 text-xs font-bold mr-1">
                   M
                 </label>
 
                 <Field name="gender" type="radio" id="gender" value="other" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
-                <label className="text-gray-400 text-xs font-bold mr-1">
+                <label htmlFor="gender" className="text-gray-400 text-xs font-bold mr-1">
                   Other
                 </label>
-
                 {errors.gender && touched.gender ? (
                   <ErrorForm className="text-red-500 p-2">
                     {errors.gender}
@@ -189,67 +174,100 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesL
                   htmlFor="birthdate"
                   className="text-gray-400 block mb-1"
                 >
-                  Date picker
+                  Birthday
                 </Label>
-                <Field
+								<Field
                   name="birthday"
-                  component={DatePicker}
-                  id="date"
+                  component={DGDatePicker}
+                  id="birthday"
                   className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 h-10 py-3 shadow font-bold"
-                  selected={values.birthday}
-                  dateFormat="MMMM d, yyyy"
-                  onChange={date => setFieldValue('birthday', date)}
+									dateFormatUI="d/MM/yyyy"
+									dateFormatValue="D/MM/YYYY"
                 />
+								{errors.birthday && touched.birthday ? (
+                  <ErrorForm className="text-red-500 p-2">
+                    {errors.birthday}
+                  </ErrorForm>
+                ) : null}
               </div>
+							<div className="w-full md:w-1/4 px-2 mb-5">
+									<Label htmlFor="enable" className="font-bold text-gray-400 block mb-2">
+										Enable
+									</Label>
+									<Field
+										name="enable"
+										id="enable"
+										component={SimpleSelect}
+										options={states}
+										primary25="#a0aec0"
+										primary="#667eea"
+										neutral0="rgba(20,25,31)"
+										neutral20="rgba(17,21,30)"
+										neutral50="#a0aec0"
+										neutral80="#718096"
+										neutral10="#fff"
+										neutral30="#667eea"
+										primary50="#718096"
+										danger="#a0aec0"
+										dangerLight="#fff"
+									/>
+									{errors.enable && touched.enable ? (
+										<ErrorForm className="text-red-500 p-2">
+											{errors.enable}
+										</ErrorForm>
+                ) : null}
+							</div>
               <div className="w-full md:w-1/2 px-2 mb-5">
-                <Label
-                  htmlFor="country"
-                  className="text-gray-400 block mb-1"
-                >
+                <Label htmlFor="country" className="text-gray-400 block mb-1">
                   Country
 								</Label>
                 <Field
-                  name="country"
-                  id="country"
-                  component={CountrySelector}
-                  className="bg-gray-800 border rounded-full border-gray-700 text-base  hover:border-grey shadow font-bold"
-                  placeholder="Select country"
-                  primary25="#a0aec0"
-                  primary="#667eea"
-                  neutral0="rgba(20,25,31)"
-                  neutral20="rgba(17,21,30)"
-                  neutral50="#a0aec0"
-                  neutral80="#718096"
-                  neutral10="#fff"
-                  neutral30="#667eea"
-                  primary50="#718096"
-                  danger="#a0aec0"
-                  dangerLight="#fff"
-                />
+									name="country"
+									id="country"
+									options={country}
+									component={SimpleSelect}
+									className="bg-gray-800 border rounded-full border-gray-700 text-base  hover:border-grey shadow font-bold"
+									placeholder="Select country"
+									primary25="#a0aec0"
+									primary="#667eea"
+									neutral0="rgba(20,25,31)"
+									neutral20="rgba(17,21,30)"
+									neutral50="#a0aec0"
+									neutral80="#718096"
+									neutral10="#fff"
+									neutral30="#667eea"
+									primary50="#718096"
+									danger="#a0aec0"
+									dangerLight="#fff"
+								/>
+								{errors.country && touched.country ? (
+                  <ErrorForm className="text-red-500 p-2">
+                    {errors.country}
+                  </ErrorForm>
+                ) : null}
               </div>
               <div className="w-full md:w-1/2 px-2 mb-5">
-                <Label
-                  htmlFor="address"
-                  className="text-gray-400 block mb-1"
-                >
+                <Label htmlFor="address" className="text-gray-400 block mb-1">
                   Address
 								</Label>
                 <Field
-                  name="address"
-                  id="address"
-                  type="text"
-                  className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
-                  placeholder="Your address..."
-                />
+									name="address"
+									id="address"
+									type="text"
+									className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
+									placeholder="Your address..."
+								/>
+								{errors.address && touched.address ? (
+                  <ErrorForm className="text-red-500 p-2">
+                    {errors.address}
+                  </ErrorForm>
+                ) : null}
               </div>
-              <span className="w-full mt-5 px-2">CONTACT INFORMATION </span>
+              <span className="w-full mt-5 px-2"> CONTACT INFORMATION </span>
               <div className="w-full md:w-1/2 px-2 mb-5">
-                <Label
-                  htmlFor="email"
-                  className="text-gray-400 block mb-1"
-                >
+                <Label htmlFor="email" className="text-gray-400 block mb-1">
                   Email
-                    </Label>
+								</Label>
                 <Field
                   name="email"
                   type="text"
@@ -264,10 +282,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesL
                 ) : null}
               </div>
               <div className="w-full md:w-1/2 px-2 mb-5">
-                <Label
-                  htmlFor="phone"
-                  className="text-gray-400 block mb-1"
-                >
+                <Label htmlFor="phone" className="text-gray-400 block mb-1">
                   Phone
 								</Label>
                 <Field
@@ -284,12 +299,9 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesL
                 ) : null}
               </div>
               <div className="w-full px-2 mb-5">
-                <Label
-                  htmlFor="password"
-                  className="text-gray-400 block mb-1"
-                >
+                <Label htmlFor="password" className="text-gray-400 block mb-1">
                   Password
-                    </Label>
+								</Label>
                 <Field
                   name="password"
                   type="password"
@@ -304,13 +316,9 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesL
                 ) : null}
               </div>
               <div className="w-full px-2 mb-5">
-
-                <Label
-                  htmlFor="passwordConfirmation"
-                  className="text-gray-400 block mb-1"
-                >
+                <Label htmlFor="passwordConfirmation" className="text-gray-400 block mb-1">
                   Confirm Password
-                    </Label>
+								</Label>
                 <Field
                   name="passwordConfirmation"
                   type="password"
@@ -325,38 +333,15 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesL
                   </ErrorForm>
                 ) : null}
               </div>
-              {/* <div className="w-full md:w-1/2 px-2 mb-5">
-                <Label
-                  htmlFor="email"
-                  className="text-gray-400 block mb-1"
-                >
-                  Email
-                    </Label>
-                <Field
-                  name="email"
-                  type="text"
-                  id="email"
-                  className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
-                  placeholder="Enter Email"
-                />
-                {errors.email && touched.email ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.email}
-                  </ErrorForm>
-                ) : null}
-              </div> */}
-              <div className="w-full md:w-1/2 mb-5 px-2">
-                <Label
-                  htmlFor="permissions"
-                  className="text-gray-400 block mb-1"
-                >
+              <div className="w-full md:w-1/2 mb-5">
+                <Label htmlFor="permissions" className="text-gray-400 block mb-1">
                   Permissions
-                    </Label>
+								</Label>
                 <Field
                   name="permissions"
                   id="permissions"
-                  component={Select}
-                  items={getPermissionsList()}
+                  component={MultiSelect}
+                  options={SelectTransform.getOptionsSimpleArray(permissionsList)}
                   isMulti
                   className="bg-gray-800 border rounded-full border-gray-700 text-base hover:border-grey shadow font-bold"
                   placeholder="Select permissions"
@@ -372,6 +357,11 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesL
                   danger="#a0aec0"
                   dangerLight="#fff"
                 />
+								{errors.permissions && touched.permissions ? (
+                  <ErrorForm className="text-red-500 p-2">
+                    {errors.permissions}
+                  </ErrorForm>
+                ) : null}
               </div>
               <div className="w-full md:w-1/2 mb-5 px-2">
                 <Label
@@ -379,12 +369,12 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesL
                   className="text-gray-400 block mb-1"
                 >
                   Roles
-                    </Label>
+								</Label>
                 <Field
                   name="roles"
                   id="roles"
-                  component={Select}
-                  items={getRolesList()}
+                  component={MultiSelect}
+                  options={SelectTransform.getOptionsObjectArray(rolesList, 'name', 'id')}
                   isMulti
                   className="bg-gray-800 border rounded-full border-gray-700 text-base hover:border-grey shadow font-bold"
                   placeholder="Select roles"
@@ -400,14 +390,17 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({ permissionsList, rolesL
                   danger="#a0aec0"
                   dangerLight="#fff"
                 />
+								{errors.roles && touched.roles ? (
+                  <ErrorForm className="text-red-500 p-2">
+                    {errors.roles}
+                  </ErrorForm>
+                ) : null}
               </div>
-
-
-
-
               <div className="w-full mt-5 flex flex-row-reverse">
                 <ButtonConfirm>Save</ButtonConfirm>
-                <ButtonClose>Close</ButtonClose>
+								<ButtonClose buttonType="button" onClick={() => Router.push("/users")}>
+									Close
+								</ButtonClose>
               </div>
             </div>
           </Form>

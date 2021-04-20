@@ -11,4 +11,4 @@ const AssignRoleSchema = Yup.object().shape({
       .required("Required")
 })
 
-export default AssignRoleSchema
+export default AssignRoleSchema;

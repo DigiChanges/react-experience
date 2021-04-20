@@ -1,31 +1,34 @@
 import React, {useEffect} from "react";
 import UserUpdate from "../../../templates/users/UserUpdate";
-import {useDispatch, useSelector} from 'react-redux'
-import {unselectedUser} from '../../../redux/users/actions';
-import {getRoles} from '../../../redux/roles/actions';
-import { getPermissions } from "../../../redux/actions";
+import {useDispatch, useSelector} from 'react-redux';
+import {getUser, getRoles, getPermissions, updateUser} from "../../../redux/actions";
+import {IUserPayload} from "../../../interfaces/user";
 
-const IndexPage = (): any =>
+const IndexPage = ({query}): any =>
 {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
 	const {userSelected} = useSelector(state => state.Users);
 	const {rolesList} = useSelector(state => state.Roles);
 	const {permissionsList} = useSelector(store => store.Auth);
 
+	const updateAction = (payload: IUserPayload, id: string) =>
+	{
+		dispatch(updateUser(payload, id));
+	}
+
 	useEffect(() =>
 	{
+		dispatch(getUser(query.userId));
 		dispatch(getRoles());
-		dispatch(getPermissions())
-		//unmount component
-		return () =>
-		{
-			dispatch(unselectedUser());
-		}
-	}, [])
+		dispatch(getPermissions());
+	}, []);
+
 	return (
-		<UserUpdate userSelected={userSelected} rolesList={rolesList} permissions={permissionsList}/>
-	)
+		<UserUpdate updateAction={updateAction} userSelected={userSelected} rolesList={rolesList} permissionsList={permissionsList}/>
+	);
 };
+
+IndexPage.getInitialProps = ({query}) => ({query});
 
 export default IndexPage;

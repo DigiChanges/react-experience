@@ -59,8 +59,6 @@ const AuthProvider = ({children, query, ...props}) =>
 	return renderChildren();
 }
 
-AuthProvider.getInitialProps = async ({query}) => {
-	return {query};
-}
+AuthProvider.getInitialProps = async ({query}) => ({query});
 
 export default withCookies(AuthProvider);

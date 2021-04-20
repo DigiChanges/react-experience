@@ -1,9 +1,7 @@
 import { TOGGLE_SIDEBAR } from './constants'
+import {ReduxActions} from "../../interfaces/default";
 
-export interface MenuActions {
-  type: string,
-}
-
-export const setShowSidebar = (): MenuActions => ({
+export const setShowSidebar = (): ReduxActions => ({
   type: TOGGLE_SIDEBAR,
+	payload: null
 })

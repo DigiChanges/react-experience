@@ -6,7 +6,7 @@ import {
 	UPDATE_ROLE_SUCCESS,
 	REMOVE_ROLE_SUCCESS
 } from './constants';
-import {RolesActions} from './actions';
+import {ReduxActions} from "../../interfaces/default";
 
 const INIT_STATE = {
 	rolesList: null,
@@ -53,7 +53,7 @@ const getSelectedRole = (id, roles) => (
 	roles.find(role => role.id === id)
 )
 
-const Roles = (state: State = INIT_STATE, action: RolesActions) =>
+const Roles = (state: State = INIT_STATE, action: ReduxActions) =>
 {
 	switch (action.type)
 	{
