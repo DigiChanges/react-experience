@@ -7,9 +7,9 @@ const SideBarSubItem = ({ theKey, name, path, equalPath, icon, isToggled }) => {
     <>
       <Link href={path} key={theKey}>
         <a
-          className={` border-r-2 border-main-gray-600 hover:border-blue-500 hover:text-blue-500 flex flex-row items-center justify-start h-8 ${equalPath.equal
+          className={` border-r-2 border-gray-800 hover:border-blue-500 hover:text-blue-500 flex flex-row items-center justify-start h-8 ${equalPath.equal
             ? "text-blue-700 border-blue-700"
-            : "text-gray-500 border-main-gray-600"
+            : "text-gray-500 border-gray-800"
             }`}
         >
           {Icon ? (
