@@ -12,7 +12,7 @@ const SideBar = ({ className }) => {
 
   const [isExpanded, setExpanded] = useState(true);
 
-  let classNameUl = "flex flex-col items-center h-full md:items-start md:justify-center w-56 pl-4 ml-1 ";
+  let classNameUl = "flex flex-col items-center h-full md:items-start md:justify-center     pl-4 ml-1 ";
 
   classNameUl = isExpanded ? classNameUl : "flex flex-col items-center h-full md:items-center md:justify-center w-full";
 
@@ -49,7 +49,7 @@ const SideBar = ({ className }) => {
     });
 
   return (
-    <div className={className} >
+    <div className={`${className} ${isExpanded ? "md:relative md:w-56" : ""}`}>
       <div className={`flex flex-row md:flex-col h-full`}>
         {/* TODO: Change image logic*/}
         <div className={classNameUl}>

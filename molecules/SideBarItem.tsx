@@ -37,10 +37,10 @@ const SideBarItem = ({
         <Link href={path} key={theKey}>
           <a
             className={`flex flex-row items-center w-auto text-gray-500
-              hover:text-blue-500 hover:border-blue-500 border-r-2 border-main-gray-600
+              hover:text-blue-500 hover:border-blue-500 border-r-2 border-gray-800
               h-8 ${equalPath.equal
                 ? "text-blue-700 border-blue-700"
-                : "text-gray-500 border-main-gray-600"
+                : "text-gray-500 border-gray-800"
               } cursor-pointer`}
           >
             {Icon ? (
@@ -99,7 +99,7 @@ const SideBarItem = ({
           <button
             onClick={toggleMenu}
             className={`
-            w-full focus:outline-none hover:text-blue-500 hover:border-blue-500 border-r-2 border-main-gray-600 flex flex-row items-center h-8
+            w-full focus:outline-none hover:text-blue-500 hover:border-blue-500 border-r-2 border-gray-800 flex flex-row items-center h-8
             ${open ? "text-blue-500 hover:text-blue-500 hover:border-blue-500" : "text-main-gray-100"}
             ${equalPath.equal
                 ? "text-blue-700 border-blue-700"
@@ -127,7 +127,7 @@ const SideBarItem = ({
             ) : (
               ""
             )}
-            {multi && open && !isToggled ? (<div className="bg-main-gray-600 absolute ml-15 mt-8 pl-2">{getDropDownItems()}</div>) : null}
+            {multi && open && !isToggled ? (<div className="bg-gray-800 absolute ml-15 mt-8 pl-2">{getDropDownItems()}</div>) : null}
           </button>
 
           <div
