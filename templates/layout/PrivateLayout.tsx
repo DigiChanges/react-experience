@@ -5,13 +5,14 @@ import Footer from "../../organisms/Footer";
 import NavBar from "../../organisms/NavBar";
 import { useSelector, useDispatch } from "react-redux";
 import { setShowSidebar } from '../../redux/menu/actions';
+import ConfirmDelete from "../modal/ConfirmDelete";
 
-const PrivateLayout = ({ children }) => {
-
-
+const PrivateLayout: React.FC<any> = ({ children }) =>
+{
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.Auth);
   const { showSidebar } = useSelector(state => state.Menu);
+  const { modalData } = useSelector(state => state.General);
 
   const onClick = () => {
     dispatch(setShowSidebar())
@@ -42,6 +43,12 @@ const PrivateLayout = ({ children }) => {
         <Footer className="flex grid-in-footer border m-4 w-auto p-4 text-sm text-gray-200 rounded justify-center">
           2021 © DigiChanges
         </Footer>
+				<ConfirmDelete
+					open={modalData?.open}
+					idSelected={modalData?.idSelected}
+					text={modalData?.text}
+					action={modalData?.action}
+				/>
       </div>
     </>
   );

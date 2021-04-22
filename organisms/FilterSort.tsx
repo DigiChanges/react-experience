@@ -2,7 +2,6 @@ import { Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import Button from "../atoms/Button";
 import Label from "../atoms/Label";
-import IconFilter from "../atoms/Icons/Solid/IconFilter";
 import SearchInput from "../atoms/SearchInput";
 import IconButtonActive from "../molecules/IconButtonActive";
 import IconSortAscending from "../atoms/Icons/Stroke/IconSortAscending";

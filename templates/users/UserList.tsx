@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useRouter } from "next/router";
-import ConfirmDeleteUser from "../modal/ConfirmDeleteUser";
 import IconPlus from "../../atoms/Icons/Stroke/IconPlus";
 import TitleWithButton from "../../molecules/TitleWithButton";
 import FilterSort from "../../organisms/FilterSort";
@@ -10,20 +9,29 @@ import MediaObject from "../../molecules/MediaObject";
 import Title from "../../atoms/Title";
 import Button from "../../atoms/Button";
 import IconArrowCircleLeft from "../../atoms/Icons/Solid/IconArrowCircleLeft";
-import { resetUsers } from "../../redux/users/actions";
-import { resetQueryPagination } from "../../redux/general/actions";
+import { removeUser, resetUsers } from "../../redux/users/actions";
+import { openModal, resetQueryPagination } from "../../redux/general/actions";
 import IconEye from "../../atoms/Icons/Stroke/IconEye";
 import IconPencilAlt from "../../atoms/Icons/Stroke/IconPencilAlt";
+import UserRemove from "./UserRemove";
+import IconTrash from "../../atoms/Icons/Stroke/IconTrash";
 
 const UserList = ({ usersList, query, viewMore }) =>
 {
   const router = useRouter();
 	const dispatch = useDispatch();
-  const [booleanConfirmDelete, setBooleanConfirmDelete] = useState(false);
   const [showScroll, setShowScroll] = useState(false);
 
-  const openConfirmDelete = (): void => {
-    setBooleanConfirmDelete(!booleanConfirmDelete);
+  const openConfirmDelete = (id: string, lastName:  string, firstName: string): void =>
+	{
+		const modalData = {
+			idSelected: id,
+			open: true,
+			text: <UserRemove id={id} lastName={lastName} firstName={firstName}/>,
+			action: removeUser
+		}
+
+		dispatch(openModal(modalData));
   };
 
   const actionCreateButton = () => {
@@ -71,26 +79,55 @@ const UserList = ({ usersList, query, viewMore }) =>
       <div className="text-gray-500 bg-gray-900 flex flex-row items-center flex-wrap w-full justify-start ">
         <div className="w-full flex flex-row flex-wrap mx-auto justify-center ">
         {usersList && usersList.map((user, i) => (
-          <MediaObject key={i} className="flex items-center font-semibold text-sm text-main-gray-250 rounded-lg
-          p-6 m-2
-          w-full
-          md:max-w-lg
-          h-24
-          bg-main-gray-600
-          hover:bg-main-gray-500
-          cursor-pointer
+          <button
+						key={i}
+						onClick={() => router.push(`/users/view/${user.id}`)}
+					>
+							<MediaObject
+								className="flex items-center font-semibold text-sm text-main-gray-250 rounded-lg
+									p-6 m-2
+									w-full
+									md:max-w-lg
+									h-24
+									bg-main-gray-600
+									hover:bg-main-gray-500
+									cursor-pointer"
+							>
+							<div className="flex-col w-10 h-10 bg-white text-black justify-center content-center rounded-full">{' '}</div>
+							<div className="flex-col justify-center content-center ml-3">
+								<Title titleType="h6" className="h-6 font-bold">{user.firstName}{' '}{user.lastName}</Title>
+								{user.email}
+							</div>
+							<div className="flex flex-col ml-auto">
+								<div className="h-6 w-6 my-1">
+									<button
+										className="w-6 hover:text-gray-700 mr-1 focus:outline-none"
+										onClick={() => router.push(`/users/update/${user.id}`)}
+									>
+										<IconPencilAlt/>
+									</button>
+								</div>
+								<div className="h-6 w-6 my-1">
+									<button
+										className="w-6 hover:text-gray-700 mr-1 focus:outline-none"
+										onClick={() => router.push(`/users/changePassword/${user.id}`)}
+									>
+										<IconEye/>
+									</button>
+								</div>
+								<div className="h-6 w-6 my-1">
+									<button
+										className="w-6 hover:text-gray-700 mr-1 focus:outline-none"
+										onClick={() => openConfirmDelete(user.id, user.lastName, user.firstName)}
+										type='button'
+									>
+										<IconTrash/>
+								</button>
+								</div>
+							</div>
+						</MediaObject>
+          </button>
 
-            ">
-            <div className="flex-col w-10 h-10 bg-white text-black justify-center content-center rounded-full">{' '}</div>
-            <div className="flex-col justify-center content-center ml-3">
-              <Title titleType="h6" className="h-6 font-bold">{user.firstName}{' '}{user.lastName}</Title>
-              {user.email}
-            </div>
-            <div className="flex flex-col ml-auto">
-              <div className="h-6 w-6 my-1"><IconEye/></div>
-              <div className="h-6 w-6 my-1"><IconPencilAlt/></div>
-            </div>
-          </MediaObject>
         ))}
         </div>
         <div className="flex justify-center w-3/4 mt-10">
@@ -102,10 +139,6 @@ const UserList = ({ usersList, query, viewMore }) =>
           </Button>
         </div>
       </div>
-
-      {booleanConfirmDelete ? (
-        <ConfirmDeleteUser close={openConfirmDelete} />
-      ) : null}
     </section>
   );
 };

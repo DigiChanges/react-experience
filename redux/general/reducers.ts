@@ -2,20 +2,33 @@ import {
 	START_GENERAL_LOADING,
 	STOP_GENERAL_LOADING,
 	SHOW_GENERAL_NOTIFICATION,
-	RESET_QUERY_PAGINATION, NEXT_QUERY_PAGINATION
+	RESET_QUERY_PAGINATION,
+	NEXT_QUERY_PAGINATION,
+	OPEN_MODAL_DATA, CLOSE_MODAL_DATA
 } from './constants';
 import {ReduxActions} from "../../interfaces/default";
 
 const INIT_STATE = {
 	isLoading: false,
 	notification: null,
-	nextQueryParamsPagination: "pagination[limit]=2&pagination[offset]=0",
+	nextQueryParamsPagination: "pagination[limit]=3&pagination[offset]=0",
+	modalData: null,
 }
 
-type State = {
+export interface IModalData
+{
+	open: boolean;
+	idSelected: string;
+	text: JSX.Element;
+	action: any;
+}
+
+interface State
+{
 	isLoading: boolean,
 	notification: any | null,
-	nextQueryParamsPagination: string
+	nextQueryParamsPagination: string,
+	modalData: IModalData | null
 }
 
 const General = (state: State = INIT_STATE, action: ReduxActions) =>
@@ -23,23 +36,29 @@ const General = (state: State = INIT_STATE, action: ReduxActions) =>
 	switch (action.type)
 	{
 		case START_GENERAL_LOADING:
-			return {...state, notification: null, isLoading: true}
+			return { ...state, notification: null, isLoading: true }
 
 		case STOP_GENERAL_LOADING:
-			return {...state, isLoading: false}
+			return { ...state, isLoading: false }
 
 		case SHOW_GENERAL_NOTIFICATION:
-			return {...state, isLoading: false, notification: {...action.payload}}
+			return { ...state, isLoading: false, notification: {...action.payload} }
 
 		case RESET_QUERY_PAGINATION:
-			return {...state, nextQueryParamsPagination: INIT_STATE.nextQueryParamsPagination}
+			return { ...state, nextQueryParamsPagination: INIT_STATE.nextQueryParamsPagination }
 
 		case NEXT_QUERY_PAGINATION:
-			return {...state, nextQueryParamsPagination: action.payload}
+			return { ...state, nextQueryParamsPagination: action.payload }
+
+		case OPEN_MODAL_DATA:
+			return { ...state, modalData: action.payload.modalData }
+
+		case CLOSE_MODAL_DATA:
+			return { ...state, modalData: action.payload }
 
 		default:
-			return {...state}
+			return { ...state }
 	}
 }
 
-export default General
+export default General;

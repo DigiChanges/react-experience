@@ -6,7 +6,7 @@ import {
 	putRole,
 	deleteRole
 } from '../../services/rolesService';
-import {notificationTypes, notification} from '../../entities/notification';
+import {notificationTypes, notification} from '../../entities';
 import {
 	GET_ROLES,
 	CREATE_ROLE,

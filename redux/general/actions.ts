@@ -3,10 +3,11 @@ import {
 	STOP_GENERAL_LOADING,
 	SHOW_GENERAL_NOTIFICATION,
 	RESET_QUERY_PAGINATION,
-	NEXT_QUERY_PAGINATION
+	NEXT_QUERY_PAGINATION, OPEN_MODAL_DATA, CLOSE_MODAL_DATA
 } from './constants'
 import _ from "lodash";
 import {ReduxActions} from "../../interfaces/default";
+import {IModalData} from "./reducers";
 
 export const startGeneralLoading = (): ReduxActions => ({
 	type: START_GENERAL_LOADING,
@@ -37,3 +38,13 @@ export const nextQueryPagination = (pagination: any): ReduxActions =>
 		payload: uriParam
 	}
 }
+
+export const openModal = (modalData: IModalData): ReduxActions => ({
+  type: OPEN_MODAL_DATA,
+  payload: {modalData}
+})
+
+export const closeModal = (): ReduxActions => ({
+  type: CLOSE_MODAL_DATA,
+  payload: null
+})
