@@ -22,7 +22,7 @@ const PrivateLayout: React.FC<any> = ({ children }) =>
     dispatch(setShowSidebar())
   }
 
-  const getDashItems = () => 
+  const getDashItems = () =>
     dashRoutes.map((route, rKey) =>
       <HasPermission
         key={rKey}
@@ -37,7 +37,7 @@ const PrivateLayout: React.FC<any> = ({ children }) =>
           isLoading={isLoading}
           >
           {
-            route.levels?.map((level, lKey) => 
+            route.levels?.map((level, lKey) =>
               <HasPermission
                 key={lKey}
                 permission={level.permission}
@@ -61,7 +61,7 @@ const PrivateLayout: React.FC<any> = ({ children }) =>
         <header className="grid-in-header bg-gray-800 w-auto">
           <NavBar showSidebar={showSidebar} onClick={onClick} email={user?.email} />
         </header>
-        <div className="hidden md:block mt-6 ml-4 z-10">
+        <div className="hidden md:block mt-6 ml-4 z-10 w-max grid-in-sidebar">
           <SideBar className="absolute ml-1 bg-gray-800 rounded-lg-md shadow-md h-89 py-5">
             {getDashItems()}
           </SideBar>
@@ -71,7 +71,7 @@ const PrivateLayout: React.FC<any> = ({ children }) =>
           <SideBar className="hidden" />
 
         ) : (
-          <div className="absolute md:block mt-20 md:m-4 z-10">
+          <div className="absolute md:block mt-20 md:m-4 z-10 w-max">
             <SideBar className="ml-5 bg-gray-800 rounded-lg-md shadow-md h-89 py-5">
               {getDashItems()}
             </SideBar>

@@ -112,7 +112,7 @@ const SideBarItem : React.FC<SideBarItemProps> = ({
           <div
             className={`
             ${open ? `text-main-gray-100` : `hidden w-full`}
-            ${open && isToggled ? `w-max flex flex-col ` : `ml-10`}
+            ${open && isToggled ? `w-full flex flex-col ` : `ml-10`}
             `}
           >
             {multi && isToggled ? getDropDownItems() : ""}

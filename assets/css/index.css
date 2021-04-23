@@ -149,8 +149,20 @@
   .hover-trigger:hover .hover-target {
       display: block;
   }
+  .w-min {
+  width: min-content;
+  }
+  .w-max {
+  width: max-content;
+  }
   /* @apply */
   /* icon-pill set: idealized for use on MediaObject component, but you know, you can use it everywhere. */
+  .dg-media-object {
+    @apply flex items-center font-semibold text-sm text-main-gray-250 rounded-lg py-2 px-4 bg-main-gray-600 hover:bg-main-gray-500;
+  }
+  .dg-grid-3x3 {
+    @apply grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3;
+  }
   .dg-icon-pill {
     @apply md:max-w-md w-full md:w-1/2 p-2 bg-main-gray-600 h-18 rounded-lg mx-1 my-1 flex items-center font-semibold text-sm text-main-gray-250;
   }
