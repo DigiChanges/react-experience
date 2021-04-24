@@ -6,6 +6,9 @@ import NavBar from "../../organisms/NavBar";
 import { useSelector, useDispatch } from "react-redux";
 import { setShowSidebar } from '../../redux/menu/actions';
 import ConfirmDelete from "../modal/ConfirmDelete";
+import SideBarItem from "../../molecules/SideBarItem";
+import { dashRoutes } from "../../config/dashRoutes";
+import SideBarSubItem from "../../atoms/SideBarSubItem";
 
 const PrivateLayout: React.FC<any> = ({ children }) =>
 {
@@ -18,13 +21,38 @@ const PrivateLayout: React.FC<any> = ({ children }) =>
     dispatch(setShowSidebar())
   }
 
+  const getDashItems = () => 
+    dashRoutes.map((route, rKey) => 
+      <SideBarItem
+        key={rKey}
+        name={route.name}
+        path={route.path}
+        icon={route.icon}
+        permission={route.permission}
+      >
+        {
+          route.levels?.map((level, lKey) => 
+            <SideBarSubItem
+              key={lKey}
+              name={level.name}
+              path={level.path}
+              icon={level.icon}
+              permission={level.permission}
+            />
+          )
+        }
+      </SideBarItem>
+    )
+
   return (
       <div className="grid grid-areas-md-private-layout h-full text-gray-700 body-font bg-gray-900">
         <header className="grid-in-header bg-gray-800 w-auto">
           <NavBar showSidebar={showSidebar} onClick={onClick} email={user?.email} />
         </header>
         <div className="hidden md:block mt-6 ml-4 z-10">
-          <SideBar className="absolute ml-1 bg-gray-800 rounded-lg-md shadow-md h-89 py-5" />
+          <SideBar className="absolute ml-1 bg-gray-800 rounded-lg-md shadow-md h-89 py-5">
+            {getDashItems()}
+          </SideBar>
         </div>
         {showSidebar ? (
 
@@ -32,7 +60,9 @@ const PrivateLayout: React.FC<any> = ({ children }) =>
 
         ) : (
           <div className="absolute md:block mt-20 md:m-4 z-10">
-            <SideBar className="ml-5 bg-gray-800 rounded-lg-md shadow-md h-89 py-5" />
+            <SideBar className="ml-5 bg-gray-800 rounded-lg-md shadow-md h-89 py-5">
+              {getDashItems()}
+            </SideBar>
           </div>
         )}
         <main className="grid-in-main min-h-screen w-full">

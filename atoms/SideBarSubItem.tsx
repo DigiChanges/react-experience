@@ -1,14 +1,22 @@
 import React from "react";
 import Link from "next/link";
+import HasPermission from "./HasPermission";
 
-const SideBarSubItem = ({ theKey, name, path, icon, isToggled }) =>
-{
+interface SideBarSubItemProps {
+  name : string,
+  path : string,
+  icon? : any,
+  permission : string,
+  isToggled? : boolean
+}
+
+const SideBarSubItem : React.FC<SideBarSubItemProps> = ({ name, path, icon, permission, isToggled }) => {
   const Icon: any = icon;
   const equal = true;
 
   return (
-    <>
-      <Link href={path} key={theKey}>
+    <HasPermission permission={permission}>
+      <Link href={path}>
         <a
           className={` border-r-2 border-gray-800 hover:border-blue-500 hover:text-blue-500 flex flex-row items-center justify-start h-8 ${equal
             ? "text-blue-700 border-blue-700"
@@ -28,7 +36,7 @@ const SideBarSubItem = ({ theKey, name, path, icon, isToggled }) =>
           </span>
         </a>
       </Link>
-    </>
+    </HasPermission>
   );
 };
 

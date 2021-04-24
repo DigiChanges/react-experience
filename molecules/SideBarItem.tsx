@@ -1,39 +1,43 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import SideBarSubItem from "../atoms/SideBarSubItem";
-import { ADMIN } from "../config/permissions";
 import IconChevronDown from "../atoms/Icons/Stroke/IconChevronDown";
 import IconChevronRight from "../atoms/Icons/Stroke/IconChevronRight";
+import HasPermission from "../atoms/HasPermission";
+import { useSelector } from "react-redux";
 
-const SideBarItem = ({
-  theKey,
+interface SideBarItemProps extends React.PropsWithChildren<any> {
+  name : string,
+  path : string,
+  icon? : any,
+  permission : string,
+  isToggled? : boolean
+}
+
+const SideBarItem : React.FC<SideBarItemProps> = ({
+  children,
   name,
   path,
   icon,
-  levels,
-  user,
-  userPermissions,
-  isLoading,
+  permission,
   isToggled,
 }) => {
   const [open, setOpen] = useState(false);
+
+  const levels = React.Children.toArray(children)
   const multi = levels && levels.length > 0;
   const Icon: any = icon;
   const isLogoutClass = path === "/logout" ? "mt-auto pb-8" : " ";
 
-
-  const hasPermission = (permission, user) =>
-    (userPermissions && user?.roles && userPermissions.includes(permission)) ||
-    user?.roles.find((role) => role.slug === ADMIN);
+  const { isLoading } = useSelector((store) => store.General);
 
   const toggleMenu = () => {
     levels && levels.length > 0 ? setOpen(!open) : false;
   };
 
-  const getLabelOrItem = (path, theKey, name, equalPath) => {
+  const getLabelOrItem = (path, name, equalPath) => {
     if (path) {
       return (
-        <Link href={path} key={theKey}>
+        <Link href={path}>
           <a
             className={`flex flex-row items-center w-auto text-gray-500
               hover:text-blue-500 hover:border-blue-500 border-r-2 border-gray-800
@@ -67,75 +71,61 @@ const SideBarItem = ({
 
   const getDropDownItems = () =>
     levels
-      ? levels.map((prop, k) => {
+      ? React.Children.map(children, (child) => {
         isLoading && open ? setOpen(!open) : "";
-        const SubIcon = prop?.icon ? prop.icon : false;
         return (
-          hasPermission(prop.permission, user) && (
-            <SideBarSubItem
-              key={k}
-              theKey={k}
-              name={prop.name}
-              path={prop.path}
-              // equalPath={
-              //   equalPath.currentPath == prop.path
-              //     ? { subEqual: true, subCurrentPath: equalPath.currentPath }
-              //     : false
-              // }
-              icon={SubIcon}
-              isToggled={isToggled}
-            />
-          )
-        );
+          React.cloneElement(child, {isToggled})
+        )
       })
       : "";
 
   return (
+    <HasPermission permission={permission}>
+      <div className={`${isToggled ? "" : "pl-4 mx-1"}  w-full ${isLogoutClass}`}>
+        {multi ? (
+          <>
+            <button
+              onClick={toggleMenu}
+              className={`
+              w-full focus:outline-none hover:text-blue-500 hover:border-blue-500 border-r-2 border-gray-800 flex flex-row items-center h-8
+              ${open ? "text-blue-500 hover:text-blue-500 hover:border-blue-500" : "text-main-gray-100"}`}
+            >
+              {Icon ? (
+                <span className={`${!isToggled ? "ml-3" : ""} inline-flex items-center h-8 w-6 text-lg`}>
+                  <Icon />
+                </span>
+              ) : (
+                <span className=" inline-flex items-center justify-center h-8 w-6 text-lg" />
+              )}
+              {isToggled
+                ? (<span className="text-sm font-bold md:block pr-2 pl-4">
+                  {name}
+                </span>)
+                : null}
 
-    <div className={`${isToggled ? "" : "pl-4 mx-1"}  w-full ${isLogoutClass}`} key={theKey}>
-      {multi ? (
-        <>
-          <button
-            onClick={toggleMenu}
-            className={`
-            w-full focus:outline-none hover:text-blue-500 hover:border-blue-500 border-r-2 border-gray-800 flex flex-row items-center h-8
-            ${open ? "text-blue-500 hover:text-blue-500 hover:border-blue-500" : "text-main-gray-100"}`}
-          >
-            {Icon ? (
-              <span className={`${!isToggled ? "ml-3" : ""} inline-flex items-center h-8 w-6 text-lg`}>
-                <Icon />
-              </span>
-            ) : (
-              <span className=" inline-flex items-center justify-center h-8 w-6 text-lg" />
-            )}
-            {isToggled
-              ? (<span className="text-sm font-bold md:block pr-2 pl-4">
-                {name}
-              </span>)
-              : null}
+              {open && multi ? (
+                // si esta compactado esto no se ve
+                <span className={`${isToggled ? "" : "hidden"} inline-flex ml-auto mr-3 pl-1 w-6`}> <IconChevronDown /> </span>
+              ) : !open && multi ? (
+                <span className={`${isToggled ? "" : "hidden"} inline-flex ml-auto mr-3 pl-1 w-6`}> <IconChevronRight /></span>
+              ) : (
+                ""
+              )}
+              {multi && open && !isToggled ? (<div className="bg-gray-800 absolute ml-15 mt-8 pl-2">{getDropDownItems()}</div>) : null}
+            </button>
 
-            {open && multi ? (
-              // si esta compactado esto no se ve
-              <span className={`${isToggled ? "" : "hidden"} inline-flex ml-auto mr-3 pl-1 w-6`}> <IconChevronDown /> </span>
-            ) : !open && multi ? (
-              <span className={`${isToggled ? "" : "hidden"} inline-flex ml-auto mr-3 pl-1 w-6`}> <IconChevronRight /></span>
-            ) : (
-              ""
-            )}
-            {multi && open && !isToggled ? (<div className="bg-gray-800 absolute ml-15 mt-8 pl-2">{getDropDownItems()}</div>) : null}
-          </button>
-
-          <div
-            className={`
-            ${open ? `text-main-gray-100` : `hidden w-full`}
-            ${open && isToggled ? `w-max flex flex-col ` : `ml-10`}
-            `}
-          >
-            {multi && isToggled ? getDropDownItems() : ""}
-          </div>
-        </>
-      ) : (getLabelOrItem(path, theKey, name, false))}
-    </div>
+            <div
+              className={`
+              ${open ? `text-main-gray-100` : `hidden w-full`}
+              ${open && isToggled ? `w-max flex flex-col ` : `ml-10`}
+              `}
+            >
+              {multi && isToggled ? getDropDownItems() : ""}
+            </div>
+          </>
+        ) : (getLabelOrItem(path, name, false /* equalPath */))}
+      </div>
+    </HasPermission>
   );
 };
 
