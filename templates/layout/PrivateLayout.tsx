@@ -9,39 +9,51 @@ import ConfirmDelete from "../modal/ConfirmDelete";
 import SideBarItem from "../../molecules/SideBarItem";
 import { dashRoutes } from "../../config/dashRoutes";
 import SideBarSubItem from "../../atoms/SideBarSubItem";
+import HasPermission from "../../atoms/HasPermission";
 
 const PrivateLayout: React.FC<any> = ({ children }) =>
 {
   const dispatch = useDispatch()
-  const { user } = useSelector((state : any) => state.Auth);
+  const { user, userPermissions } = useSelector((state : any) => state.Auth);
   const { showSidebar } = useSelector((state : any) => state.Menu);
-  const { modalData } = useSelector((state : any) => state.General);
+  const { modalData, isLoading } = useSelector((state : any) => state.General);
 
   const onClick = () => {
     dispatch(setShowSidebar())
   }
 
   const getDashItems = () => 
-    dashRoutes.map((route, rKey) => 
-      <SideBarItem
+    dashRoutes.map((route, rKey) =>
+      <HasPermission
         key={rKey}
-        name={route.name}
-        path={route.path}
-        icon={route.icon}
         permission={route.permission}
+        user={user}
+        userPermissions={userPermissions}
       >
-        {
-          route.levels?.map((level, lKey) => 
-            <SideBarSubItem
-              key={lKey}
-              name={level.name}
-              path={level.path}
-              icon={level.icon}
-              permission={level.permission}
-            />
-          )
-        }
-      </SideBarItem>
+        <SideBarItem
+          name={route.name}
+          path={route.path}
+          icon={route.icon}
+          isLoading={isLoading}
+          >
+          {
+            route.levels?.map((level, lKey) => 
+              <HasPermission
+                key={lKey}
+                permission={level.permission}
+                user={user}
+                userPermissions={userPermissions}
+              >
+                <SideBarSubItem
+                  name={level.name}
+                  path={level.path}
+                  icon={level.icon}
+                />
+              </HasPermission>
+            )
+          }
+        </SideBarItem>
+      </HasPermission>
     )
 
   return (

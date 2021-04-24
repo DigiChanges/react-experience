@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import IconChevronDown from "../atoms/Icons/Stroke/IconChevronDown";
 import IconChevronRight from "../atoms/Icons/Stroke/IconChevronRight";
-import HasPermission from "../atoms/HasPermission";
-import { useSelector } from "react-redux";
 
 interface SideBarItemProps extends React.PropsWithChildren<any> {
   name : string,
   path : string,
   icon? : any,
-  permission : string,
-  isToggled? : boolean
+  isToggled? : boolean,
+  isLoading?: boolean
 }
 
 const SideBarItem : React.FC<SideBarItemProps> = ({
@@ -18,8 +16,8 @@ const SideBarItem : React.FC<SideBarItemProps> = ({
   name,
   path,
   icon,
-  permission,
   isToggled,
+  isLoading
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -27,8 +25,6 @@ const SideBarItem : React.FC<SideBarItemProps> = ({
   const multi = levels && levels.length > 0;
   const Icon: any = icon;
   const isLogoutClass = path === "/logout" ? "mt-auto pb-8" : " ";
-
-  const { isLoading } = useSelector((store : any) => store.General);
 
   const toggleMenu = () => {
     levels && levels.length > 0 ? setOpen(!open) : false;
@@ -80,52 +76,50 @@ const SideBarItem : React.FC<SideBarItemProps> = ({
       : "";
 
   return (
-    <HasPermission permission={permission}>
-      <div className={`${isToggled ? "" : "pl-4 mx-1"}  w-full ${isLogoutClass}`}>
-        {multi ? (
-          <>
-            <button
-              onClick={toggleMenu}
-              className={`
-              w-full focus:outline-none hover:text-blue-500 hover:border-blue-500 border-r-2 border-gray-800 flex flex-row items-center h-8
-              ${open ? "text-blue-500 hover:text-blue-500 hover:border-blue-500" : "text-main-gray-100"}`}
-            >
-              {Icon ? (
-                <span className={`${!isToggled ? "ml-3" : ""} inline-flex items-center h-8 w-6 text-lg`}>
-                  <Icon />
-                </span>
-              ) : (
-                <span className=" inline-flex items-center justify-center h-8 w-6 text-lg" />
-              )}
-              {isToggled
-                ? (<span className="text-sm font-bold md:block pr-2 pl-4">
-                  {name}
-                </span>)
-                : null}
+    <div className={`${isToggled ? "" : "pl-4 mx-1"}  w-full ${isLogoutClass}`}>
+      {multi ? (
+        <>
+          <button
+            onClick={toggleMenu}
+            className={`
+            w-full focus:outline-none hover:text-blue-500 hover:border-blue-500 border-r-2 border-gray-800 flex flex-row items-center h-8
+            ${open ? "text-blue-500 hover:text-blue-500 hover:border-blue-500" : "text-main-gray-100"}`}
+          >
+            {Icon ? (
+              <span className={`${!isToggled ? "ml-3" : ""} inline-flex items-center h-8 w-6 text-lg`}>
+                <Icon />
+              </span>
+            ) : (
+              <span className=" inline-flex items-center justify-center h-8 w-6 text-lg" />
+            )}
+            {isToggled
+              ? (<span className="text-sm font-bold md:block pr-2 pl-4">
+                {name}
+              </span>)
+              : null}
 
-              {open && multi ? (
-                // si esta compactado esto no se ve
-                <span className={`${isToggled ? "" : "hidden"} inline-flex ml-auto mr-3 pl-1 w-6`}> <IconChevronDown /> </span>
-              ) : !open && multi ? (
-                <span className={`${isToggled ? "" : "hidden"} inline-flex ml-auto mr-3 pl-1 w-6`}> <IconChevronRight /></span>
-              ) : (
-                ""
-              )}
-              {multi && open && !isToggled ? (<div className="bg-gray-800 absolute ml-15 mt-8 pl-2">{getDropDownItems()}</div>) : null}
-            </button>
+            {open && multi ? (
+              // si esta compactado esto no se ve
+              <span className={`${isToggled ? "" : "hidden"} inline-flex ml-auto mr-3 pl-1 w-6`}> <IconChevronDown /> </span>
+            ) : !open && multi ? (
+              <span className={`${isToggled ? "" : "hidden"} inline-flex ml-auto mr-3 pl-1 w-6`}> <IconChevronRight /></span>
+            ) : (
+              ""
+            )}
+            {multi && open && !isToggled ? (<div className="bg-gray-800 absolute ml-15 mt-8 pl-2">{getDropDownItems()}</div>) : null}
+          </button>
 
-            <div
-              className={`
-              ${open ? `text-main-gray-100` : `hidden w-full`}
-              ${open && isToggled ? `w-max flex flex-col ` : `ml-10`}
-              `}
-            >
-              {multi && isToggled ? getDropDownItems() : ""}
-            </div>
-          </>
-        ) : (getLabelOrItem(path, name, false /* equalPath */))}
-      </div>
-    </HasPermission>
+          <div
+            className={`
+            ${open ? `text-main-gray-100` : `hidden w-full`}
+            ${open && isToggled ? `w-max flex flex-col ` : `ml-10`}
+            `}
+          >
+            {multi && isToggled ? getDropDownItems() : ""}
+          </div>
+        </>
+      ) : (getLabelOrItem(path, name, false /* equalPath */))}
+    </div>
   );
 };
 

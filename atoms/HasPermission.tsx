@@ -1,23 +1,23 @@
 import React, { PropsWithChildren } from "react";
-import { useSelector } from "react-redux";
 import { ADMIN } from "../config/permissions";
 
 interface HasPermissionProps extends PropsWithChildren<any> {
-  permission: string
+  permission: string,
+  user: any,
+  userPermissions: string[]
 }
 
-const HasPermission : React.FC<HasPermissionProps> = ({children, permission}) => {
-  const { userPermissions, user } = useSelector((store : any) => store.Auth) || {};
-
+const HasPermission : React.FC<HasPermissionProps> = ({children, permission, user, userPermissions, ...childrenProps}) => {
   const shouldRender = () =>
   (userPermissions && user?.roles && userPermissions.includes(permission)) ||
   user?.roles.find((role) => role.slug === ADMIN);
 
   return (
-    shouldRender()
+    shouldRender() &&
+    React.isValidElement(children)
     ?
     <>
-      {children}
+      {React.cloneElement(children, {...childrenProps})}
     </>
     :
     null
