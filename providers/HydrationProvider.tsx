@@ -6,7 +6,7 @@ import {getSession} from "../helpers/AuthSession";
 const HydrationProvider: React.FC<PropsWithChildren<any>> = ({children}) =>
 {
 	const dispatch = useDispatch();
-	const auth  = useSelector(store => store.Auth);
+	const auth  = useSelector((store : any) => store.Auth);
 
 	useEffect(() =>
 	{

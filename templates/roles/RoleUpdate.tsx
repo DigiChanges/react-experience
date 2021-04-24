@@ -11,8 +11,8 @@ import Label from "../../atoms/Label";
 const RoleUpdate = (): any =>
 {
 	const dispatch = useDispatch()
-	const {roleSelected} = useSelector(state => state.Roles)
-	const {permissions} = useSelector(store => store.Auth)
+	const {roleSelected} = useSelector((state : any) => state.Roles)
+	const {permissions} = useSelector((store : any) => store.Auth)
 
 	useEffect(() =>
 	{

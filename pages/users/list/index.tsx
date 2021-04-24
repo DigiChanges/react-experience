@@ -6,8 +6,8 @@ import { resetQueryPagination } from "../../../redux/general/actions";
 
 const UsersListPage = ({ query }): any => {
   const dispatch = useDispatch();
-  const { usersList } = useSelector(state => state.Users);
-  const { nextQueryParamsPagination } = useSelector(state => state.General);
+  const { usersList } = useSelector((state : any) => state.Users);
+  const { nextQueryParamsPagination } = useSelector((state : any) => state.General);
 
   useEffect(() => {
     dispatch(getUsers(query, nextQueryParamsPagination));

@@ -9,7 +9,7 @@ const ConfirmDelete = ({open, close}: any): any =>
 	const dispatch = useDispatch()
 	const booleanXquit = true;
 
-	const {roleSelected} = useSelector(state => state.Roles)
+	const {roleSelected} = useSelector((state : any) => state.Roles)
 
 	useEffect(() =>
 	{

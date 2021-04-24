@@ -1,39 +1,39 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import SideBarSubItem from "../atoms/SideBarSubItem";
-import { ADMIN } from "../config/permissions";
 import IconChevronDown from "../atoms/Icons/Stroke/IconChevronDown";
 import IconChevronRight from "../atoms/Icons/Stroke/IconChevronRight";
 
-const SideBarItem = ({
-  theKey,
+interface SideBarItemProps extends React.PropsWithChildren<any> {
+  name : string,
+  path : string,
+  icon? : any,
+  isToggled? : boolean,
+  isLoading?: boolean
+}
+
+const SideBarItem : React.FC<SideBarItemProps> = ({
+  children,
   name,
   path,
   icon,
-  levels,
-  user,
-  userPermissions,
-  isLoading,
   isToggled,
+  isLoading
 }) => {
   const [open, setOpen] = useState(false);
+
+  const levels = React.Children.toArray(children)
   const multi = levels && levels.length > 0;
   const Icon: any = icon;
   const isLogoutClass = path === "/logout" ? "mt-auto pb-8" : " ";
-
-
-  const hasPermission = (permission, user) =>
-    (userPermissions && user?.roles && userPermissions.includes(permission)) ||
-    user?.roles.find((role) => role.slug === ADMIN);
 
   const toggleMenu = () => {
     levels && levels.length > 0 ? setOpen(!open) : false;
   };
 
-  const getLabelOrItem = (path, theKey, name, equalPath) => {
+  const getLabelOrItem = (path, name, equalPath) => {
     if (path) {
       return (
-        <Link href={path} key={theKey}>
+        <Link href={path}>
           <a
             className={`flex flex-row items-center w-auto text-gray-500
               hover:text-blue-500 hover:border-blue-500 border-r-2 border-gray-800
@@ -67,32 +67,16 @@ const SideBarItem = ({
 
   const getDropDownItems = () =>
     levels
-      ? levels.map((prop, k) => {
+      ? React.Children.map(children, (child : React.ReactElement) => {
         isLoading && open ? setOpen(!open) : "";
-        const SubIcon = prop?.icon ? prop.icon : false;
         return (
-          hasPermission(prop.permission, user) && (
-            <SideBarSubItem
-              key={k}
-              theKey={k}
-              name={prop.name}
-              path={prop.path}
-              // equalPath={
-              //   equalPath.currentPath == prop.path
-              //     ? { subEqual: true, subCurrentPath: equalPath.currentPath }
-              //     : false
-              // }
-              icon={SubIcon}
-              isToggled={isToggled}
-            />
-          )
-        );
+          React.cloneElement(child, {isToggled})
+        )
       })
       : "";
 
   return (
-
-    <div className={`${isToggled ? "" : "pl-4 mx-1"}  w-full ${isLogoutClass}`} key={theKey}>
+    <div className={`${isToggled ? "" : "pl-4 mx-1"}  w-full ${isLogoutClass}`}>
       {multi ? (
         <>
           <button
@@ -134,7 +118,7 @@ const SideBarItem = ({
             {multi && isToggled ? getDropDownItems() : ""}
           </div>
         </>
-      ) : (getLabelOrItem(path, theKey, name, false))}
+      ) : (getLabelOrItem(path, name, false /* equalPath */))}
     </div>
   );
 };

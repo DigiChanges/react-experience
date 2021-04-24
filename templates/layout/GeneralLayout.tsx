@@ -6,7 +6,7 @@ import GeneralToast from '../../atoms/GeneralToast'
 
 const GeneralLayout: React.FC<PropsWithChildren<any>> = (props: any): any =>
 {
-  const { isLoading, notification } = useSelector(state => state.General)
+  const { isLoading, notification } = useSelector((state : any) => state.General)
 
   return (
     <Fragment>

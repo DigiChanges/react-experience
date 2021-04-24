@@ -8,7 +8,7 @@ import Button from "../../atoms/Button";
 
 const RoleView = () => {
   const dispatch = useDispatch();
-  const { roleSelected } = useSelector((state) => state.Roles);
+  const { roleSelected } = useSelector((state : any) => state.Roles);
   let unselectRole = true;
 
   const navigateToUpdateRole = () => {

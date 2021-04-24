@@ -9,8 +9,8 @@ import {IUserPayload} from "../../../interfaces/user";
 const IndexPage: React.FC<void> = () =>
 {
   const dispatch = useDispatch();
-  const { permissionsList } = useSelector((store) => store.Auth);
-  const { rolesList } = useSelector((store) => store.Roles);
+  const { permissionsList } = useSelector((store : any) => store.Auth);
+  const { rolesList } = useSelector((store : any) => store.Roles);
 
   const createAction = (payload: IUserPayload) =>
 	{

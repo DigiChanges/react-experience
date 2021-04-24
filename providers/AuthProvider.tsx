@@ -9,7 +9,12 @@ const AuthProvider = ({children}) =>
 {
 	const cookies = getSession();
 	const [publicRoute, setPublicRoute] = useState(null);
-	const isAuth = cookies?.user && cookies?.user.enable && cookies?.user.id;
+	const [isAuth, setIsAuth] = useState(false)
+
+	useEffect(() =>
+	{
+		setIsAuth(cookies?.user && cookies?.user.enable && cookies?.user.id)
+	}, [cookies])
 
 	useEffect(() =>
 	{
@@ -22,8 +27,8 @@ const AuthProvider = ({children}) =>
 		{
 			return <PublicLayout>{children}</PublicLayout>;
 		}
-
-		return isAuth && Router.pathname !== '/login'
+		
+		return isAuth && typeof window !== 'undefined' && Router.pathname !== '/login'
 			? <PrivateLayout>{children}</PrivateLayout>
 			: <PublicLayout>{children}</PublicLayout>
 	}
