@@ -13,9 +13,9 @@ import SideBarSubItem from "../../atoms/SideBarSubItem";
 const PrivateLayout: React.FC<any> = ({ children }) =>
 {
   const dispatch = useDispatch()
-  const { user } = useSelector(state => state.Auth);
-  const { showSidebar } = useSelector(state => state.Menu);
-  const { modalData } = useSelector(state => state.General);
+  const { user } = useSelector((state : any) => state.Auth);
+  const { showSidebar } = useSelector((state : any) => state.Menu);
+  const { modalData } = useSelector((state : any) => state.General);
 
   const onClick = () => {
     dispatch(setShowSidebar())

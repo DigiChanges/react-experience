@@ -7,7 +7,7 @@ interface HasPermissionProps extends PropsWithChildren<any> {
 }
 
 const HasPermission : React.FC<HasPermissionProps> = ({children, permission}) => {
-  const { userPermissions, user } = useSelector((store) => store.Auth) || {};
+  const { userPermissions, user } = useSelector((store : any) => store.Auth) || {};
 
   const shouldRender = () =>
   (userPermissions && user?.roles && userPermissions.includes(permission)) ||

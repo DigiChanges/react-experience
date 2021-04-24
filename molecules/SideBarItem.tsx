@@ -28,7 +28,7 @@ const SideBarItem : React.FC<SideBarItemProps> = ({
   const Icon: any = icon;
   const isLogoutClass = path === "/logout" ? "mt-auto pb-8" : " ";
 
-  const { isLoading } = useSelector((store) => store.General);
+  const { isLoading } = useSelector((store : any) => store.General);
 
   const toggleMenu = () => {
     levels && levels.length > 0 ? setOpen(!open) : false;

@@ -9,9 +9,9 @@ const IndexPage = ({query}): any =>
 {
 	const dispatch = useDispatch();
 
-	const {userSelected} = useSelector(state => state.Users);
-	const {rolesList} = useSelector(state => state.Roles);
-	const {permissionsList} = useSelector(store => store.Auth);
+	const {userSelected} = useSelector((state : any) => state.Users);
+	const {rolesList} = useSelector((state : any) => state.Roles);
+	const {permissionsList} = useSelector((store : any) => store.Auth);
 
 	useEffect(() =>
 	{
