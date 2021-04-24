@@ -3,7 +3,6 @@ import Logout from '../../templates/logout/index'
 
 const LogoutPage = (): any =>
 {
-
 	return (
 		<Logout/>
 	)

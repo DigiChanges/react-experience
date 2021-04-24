@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useRouter} from 'next/router'
 import {removeSession} from '../../helpers/AuthSession'
 
@@ -6,8 +6,11 @@ const Logout = () =>
 {
 	const router = useRouter()
 
-	removeSession()
-	router.replace('/login')
+	useEffect(() =>
+	{
+		removeSession()
+		router.replace('/login')
+	}, []);
 
 	return (
 		<div>Logging Out</div>
