@@ -7,7 +7,8 @@ interface SideBarSubItemProps {
   path : string,
   icon? : any,
   permission : string,
-  isToggled? : boolean
+  isToggled? : boolean,
+  equalPath?: any
 }
 
 const SideBarSubItem : React.FC<SideBarSubItemProps> = ({ name, path, icon, permission, isToggled }) => {

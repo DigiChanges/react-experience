@@ -71,7 +71,7 @@ const SideBarItem : React.FC<SideBarItemProps> = ({
 
   const getDropDownItems = () =>
     levels
-      ? React.Children.map(children, (child) => {
+      ? React.Children.map(children, (child : React.ReactElement) => {
         isLoading && open ? setOpen(!open) : "";
         return (
           React.cloneElement(child, {isToggled})

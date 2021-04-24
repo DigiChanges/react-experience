@@ -13,7 +13,7 @@ const SideBar : React.FC<SideBarProps> = ({ children, className }) => {
   classNameUl = isExpanded ? classNameUl : "flex flex-col items-center h-full md:items-center md:justify-center w-full";
 
   const getChildren = () =>
-    React.Children.map(children, (child) => 
+    React.Children.map(children, (child : React.ReactElement) => 
       React.cloneElement(child, {isToggled: isExpanded})
     )
 
