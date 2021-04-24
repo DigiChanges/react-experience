@@ -3,10 +3,10 @@ import { Field, Form, Formik } from "formik";
 import ChangePasswordSchema from "../../SchemaValidations/ChangePasswordSchema";
 import Router from "next/router";
 import Title from "../../atoms/Title";
-import ErrorForm from "../../atoms/ErrorForm";
 import Label from "../../atoms/Label";
 import ButtonClose from "../../molecules/ButtonClose";
 import ButtonConfirm from "../../molecules/ButtonConfirm";
+import ErrorFormikForm from "../../molecules/ErrorFormikForm";
 
 const UserChangePassword: React.FC<PropsWithChildren<any>> = ({changePasswordAction}): any =>
 {
@@ -39,17 +39,13 @@ const UserChangePassword: React.FC<PropsWithChildren<any>> = ({changePasswordAct
 								Password
 									</Label>
 							<Field
-								name="password"
+								name="newPassword"
 								type="password"
-								id="password"
+								id="newPassword"
 								className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
 								placeholder="Enter Password"
 							/>
-							{errors.newPassword && touched.newPassword ? (
-								<ErrorForm className="text-red-500 p-2">
-									{errors.newPassword}
-								</ErrorForm>
-							) : null}
+							<ErrorFormikForm field="newPassword" errors={errors} touched={touched}/>
 						</div>
 						<div className="w-full px-2 mb-5">
 							<Label
@@ -59,18 +55,13 @@ const UserChangePassword: React.FC<PropsWithChildren<any>> = ({changePasswordAct
 								Confirm Password
 									</Label>
 							<Field
-								name="passwordConfirmation"
+								name="newPasswordConfirmation"
 								type="password"
-								id="passwordConfirmation"
+								id="newPasswordConfirmation"
 								className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
 								placeholder="Repeat Password"
 							/>
-							{errors.newPasswordConfirmation &&
-								touched.newPasswordConfirmation ? (
-								<ErrorForm className="text-red-500 p-2">
-									{errors.newPasswordConfirmation}
-								</ErrorForm>
-							) : null}
+							<ErrorFormikForm field="newPasswordConfirmation" errors={errors} touched={touched}/>
 						</div>
 						<div className="w-full mt-5 flex flex-row-reverse">
 							<ButtonConfirm>Save</ButtonConfirm>

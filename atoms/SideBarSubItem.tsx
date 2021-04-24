@@ -1,13 +1,16 @@
 import React from "react";
 import Link from "next/link";
 
-const SideBarSubItem = ({ theKey, name, path, equalPath, icon, isToggled }) => {
+const SideBarSubItem = ({ theKey, name, path, icon, isToggled }) =>
+{
   const Icon: any = icon;
+  const equal = true;
+
   return (
     <>
       <Link href={path} key={theKey}>
         <a
-          className={` border-r-2 border-gray-800 hover:border-blue-500 hover:text-blue-500 flex flex-row items-center justify-start h-8 ${equalPath.equal
+          className={` border-r-2 border-gray-800 hover:border-blue-500 hover:text-blue-500 flex flex-row items-center justify-start h-8 ${equal
             ? "text-blue-700 border-blue-700"
             : "text-gray-500 border-gray-800"
             }`}
@@ -19,8 +22,6 @@ const SideBarSubItem = ({ theKey, name, path, equalPath, icon, isToggled }) => {
           ) : (
             <span className="inline-flex w-6 items-center justify-center h-6 text-lg " />
           )}
-
-
 
           <span className={`${!isToggled ? "px-4" : "pl-10"} text-sm font-bold justify-start md:justify-center pl-2 `}>
             {name}

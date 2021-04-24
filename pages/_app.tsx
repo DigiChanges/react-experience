@@ -6,8 +6,9 @@ import { Provider } from "react-redux";
 import { configureStore } from "../redux/store";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AuthProvider from "../auth/AuthProvider";
+import AuthProvider from "../providers/AuthProvider";
 import GeneralLayout from "../templates/layout/GeneralLayout";
+import HydrationProvider from "../providers/HydrationProvider";
 
 createTheme("DGDarkTheme", {
   text: {
@@ -41,7 +42,8 @@ createTheme("DGDarkTheme", {
 
 toast.configure();
 
-const MyApp = ({ Component, pageProps }: any): any => {
+const MyApp = ({ Component, pageProps }: any): any =>
+{
   return (
     <>
       <Head>
@@ -57,9 +59,11 @@ const MyApp = ({ Component, pageProps }: any): any => {
       </Head>
       <Provider store={configureStore}>
         <GeneralLayout>
-          <AuthProvider>
-            <Component {...pageProps}/>
-          </AuthProvider>
+					<HydrationProvider>
+						<AuthProvider>
+							<Component {...pageProps}/>
+						</AuthProvider>
+					</HydrationProvider>
         </GeneralLayout>
       </Provider>
     </>

@@ -1,16 +1,17 @@
 import {config} from '../api/config'
 import {getHeader} from '../api/auth'
 import HttpRequest from "../helpers/HttpRequest";
+import {IChangeForgotPasswordPayload, ILoginPayload} from "../interfaces/auth";
 
 const {protocol, hostname, port} = config.apiGateway.server
-const {login, permissionsGetAll, forgotPassword} = config.apiGateway.routes.auth
+const {login, permissionsGetAll, forgotPassword, changeForgotPassword} = config.apiGateway.routes.auth
 
-export const signin = (email, password) =>
+export const signin = (body: ILoginPayload) =>
 {
 	const requestOptions = {
 		url: `${protocol}://${hostname}:${port}/${login}`,
 		method: 'POST',
-		body: {email, password},
+		body,
 		headers: {'Content-Type': 'application/json'}
 	};
 
@@ -34,6 +35,18 @@ export const getForgotPassword = (email) =>
 		url: `${protocol}://${hostname}:${port}/${forgotPassword}`,
 		method: 'POST',
 		body: {email},
+		headers: {'Content-Type': 'application/json'}
+	};
+
+	return HttpRequest.request(requestOptions);
+}
+
+export const setChangeForgotPassword = (body: IChangeForgotPasswordPayload) =>
+{
+	const requestOptions = {
+		url: `${protocol}://${hostname}:${port}/${changeForgotPassword}`,
+		method: 'POST',
+		body,
 		headers: {'Content-Type': 'application/json'}
 	};
 

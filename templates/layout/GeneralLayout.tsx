@@ -1,10 +1,11 @@
-import React, { Fragment } from "react";
+import React, {Fragment, PropsWithChildren} from "react";
 import GeneralLoader from "../../atoms/GeneralLoader";
 import { useSelector } from 'react-redux';
 import GeneralToast from '../../atoms/GeneralToast'
 
 
-const GeneralLayout = (props: any): any => {
+const GeneralLayout: React.FC<PropsWithChildren<any>> = (props: any): any =>
+{
   const { isLoading, notification } = useSelector(state => state.General)
 
   return (

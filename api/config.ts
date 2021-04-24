@@ -33,7 +33,8 @@ export const config = {
         login: `${BACKEND_BASE_PATH}/auth/login`,
         permissionsGetAll: `${BACKEND_BASE_PATH}/auth/permissions`,
         keepAlive: `${BACKEND_BASE_PATH}/auth/keepAlive`,
-        forgotPassword: `${BACKEND_BASE_PATH}/auth/forgotPassword`
+        forgotPassword: `${BACKEND_BASE_PATH}/auth/forgotPassword`,
+        changeForgotPassword: `${BACKEND_BASE_PATH}/auth/changeForgotPassword`
       },
       users: {
         getAll: `${BACKEND_BASE_PATH}/users`,

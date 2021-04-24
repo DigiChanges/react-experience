@@ -9,7 +9,6 @@ const SideBarItem = ({
   theKey,
   name,
   path,
-  equalPath,
   icon,
   levels,
   user,
@@ -78,11 +77,11 @@ const SideBarItem = ({
               theKey={k}
               name={prop.name}
               path={prop.path}
-              equalPath={
-                equalPath.currentPath == prop.path
-                  ? { subEqual: true, subCurrentPath: equalPath.currentPath }
-                  : false
-              }
+              // equalPath={
+              //   equalPath.currentPath == prop.path
+              //     ? { subEqual: true, subCurrentPath: equalPath.currentPath }
+              //     : false
+              // }
               icon={SubIcon}
               isToggled={isToggled}
             />
@@ -100,11 +99,7 @@ const SideBarItem = ({
             onClick={toggleMenu}
             className={`
             w-full focus:outline-none hover:text-blue-500 hover:border-blue-500 border-r-2 border-gray-800 flex flex-row items-center h-8
-            ${open ? "text-blue-500 hover:text-blue-500 hover:border-blue-500" : "text-main-gray-100"}
-            ${equalPath.equal
-                ? "text-blue-700 border-blue-700"
-                : ""
-              }`}
+            ${open ? "text-blue-500 hover:text-blue-500 hover:border-blue-500" : "text-main-gray-100"}`}
           >
             {Icon ? (
               <span className={`${!isToggled ? "ml-3" : ""} inline-flex items-center h-8 w-6 text-lg`}>
@@ -139,7 +134,7 @@ const SideBarItem = ({
             {multi && isToggled ? getDropDownItems() : ""}
           </div>
         </>
-      ) : (getLabelOrItem(path, theKey, name, equalPath))}
+      ) : (getLabelOrItem(path, theKey, name, false))}
     </div>
   );
 };

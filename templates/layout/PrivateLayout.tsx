@@ -19,7 +19,6 @@ const PrivateLayout: React.FC<any> = ({ children }) =>
   }
 
   return (
-    <>
       <div className="grid grid-areas-md-private-layout h-full text-gray-700 body-font bg-gray-900">
         <header className="grid-in-header bg-gray-800 w-auto">
           <NavBar showSidebar={showSidebar} onClick={onClick} email={user?.email} />
@@ -50,7 +49,6 @@ const PrivateLayout: React.FC<any> = ({ children }) =>
 					action={modalData?.action}
 				/>
       </div>
-    </>
   );
 };
 

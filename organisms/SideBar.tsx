@@ -8,7 +8,6 @@ import IconArrowCircleLeft from "../atoms/Icons/Solid/IconArrowCircleLeft";
 const SideBar = ({ className }) => {
   const { userPermissions, user } = useSelector((store) => store.Auth);
   const { isLoading } = useSelector((store) => store.General);
-  const { currentPathname } = useSelector((store) => store.Paths);
 
   const [isExpanded, setExpanded] = useState(true);
 
@@ -32,11 +31,11 @@ const SideBar = ({ className }) => {
             theKey={key}
             name={prop.name}
             path={prop.path}
-            equalPath={
-              currentPathname == prop.path
-                ? { equal: true, currentPath: currentPathname }
-                : { equal: false, currentPath: currentPathname }
-            }
+            // equalPath={
+            //   currentPathname == prop.path
+            //     ? { equal: true, currentPath: currentPathname }
+            //     : { equal: false, currentPath: currentPathname }
+            // }
             userPermissions={userPermissions}
             user={user}
             icon={prop.icon ? prop.icon : false}

@@ -6,12 +6,12 @@ import Title from "../../atoms/Title"
 import Label from "../../atoms/Label";
 import ButtonConfirm from "../../molecules/ButtonConfirm";
 import ButtonClose from "../../molecules/ButtonClose";
-import ErrorForm from "../../atoms/ErrorForm";
 import { SelectTransform } from "../../transforms/default";
 import DGDatePicker from "../../atoms/DGDatePicker";
 import SimpleSelect from "../../atoms/SimpleSelect";
 import UserSchema from "../../SchemaValidations/UserSchema";
 import {country, documentTypeOptions, states} from "../../entities";
+import ErrorFormikForm from "../../molecules/ErrorFormikForm";
 
 interface UserUpdateTemplateProps extends PropsWithChildren<any> {
   permissionsList: string[];
@@ -68,11 +68,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
 										placeholder="Enter First Name"
 									/>
-									{errors.firstName && touched.firstName ? (
-										<ErrorForm className="text-red-500 p-2">
-											{errors.firstName}
-										</ErrorForm>
-									) : null}
+									<ErrorFormikForm field="firstName" errors={errors} touched={touched}/>
 								</div>
 								<div className="w-full md:w-1/2 px-2 mb-5">
 									<Label htmlFor="lastName" className="text-gray-400 block mb-1">
@@ -85,11 +81,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
 										placeholder="Enter Last Name"
 									/>
-									{errors.lastName && touched.lastName ? (
-										<ErrorForm className="text-red-500 p-2">
-											{errors.lastName}
-										</ErrorForm>
-									) : null}
+									<ErrorFormikForm field="lastName" errors={errors} touched={touched}/>
 								</div>
 								<div className="w-full md:w-1/4 px-2 mb-5">
 									<Label
@@ -125,11 +117,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 											placeholder="Enter ID"
 										/>
 									</div>
-									{errors.documentNumber && touched.documentNumber ? (
-										<ErrorForm className="text-red-500 p-2">
-											{errors.documentNumber}
-										</ErrorForm>
-									) : null}
+									<ErrorFormikForm field="documentNumber" errors={errors} touched={touched}/>
 
 								</div>
 								<div className="w-full md:w-1/4 px-2 center align-center self-center justify-center items-center mb-5">
@@ -164,17 +152,10 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 										Other
 									</label>
 
-									{errors.gender && touched.gender ? (
-										<ErrorForm className="text-red-500 p-2">
-											{errors.gender}
-										</ErrorForm>
-									) : null}
+									<ErrorFormikForm field="gender" errors={errors} touched={touched}/>
 								</div>
 								<div className="w-full md:w-1/4 px-2 mb-5">
-									<Label
-										htmlFor="birthdate"
-										className="text-gray-400 block mb-1"
-									>
+									<Label htmlFor="birthdate" className="text-gray-400 block mb-1">
 										Birthday
 									</Label>
 								<Field
@@ -185,6 +166,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 									dateFormatUI="d/MM/yyyy"
 									dateFormatValue="D/MM/YYYY"
                 />
+								<ErrorFormikForm field="birthday" errors={errors} touched={touched}/>
 								</div>
 								<div className="w-full md:w-1/4 px-2 mb-5">
 									<Label htmlFor="enable" className="font-bold text-gray-400 block mb-2">
@@ -207,12 +189,10 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 										danger="#a0aec0"
 										dangerLight="#fff"
 									/>
+									<ErrorFormikForm field="enable" errors={errors} touched={touched}/>
 								</div>
 								<div className="w-full md:w-1/2 px-2 mb-5">
-									<Label
-										htmlFor="country"
-										className="text-gray-400 block mb-1"
-									>
+									<Label htmlFor="country" className="text-gray-400 block mb-1">
 										Country
 									</Label>
 									<Field
@@ -234,12 +214,10 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 										danger="#a0aec0"
 										dangerLight="#fff"
 										/>
+										<ErrorFormikForm field="country" errors={errors} touched={touched}/>
 								</div>
 								<div className="w-full md:w-1/2 px-2 mb-5">
-									<Label
-										htmlFor="address"
-										className="text-gray-400 block mb-1"
-									>
+									<Label htmlFor="address" className="text-gray-400 block mb-1">
 										Address
 									</Label>
 									<Field
@@ -249,6 +227,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
 										placeholder="Your address..."
 									/>
+									<ErrorFormikForm field="address" errors={errors} touched={touched}/>
 								</div>
 								<span className="w-full mt-5 px-2">CONTACT INFORMATION </span>
 								<div className="w-full md:w-1/2 px-2 mb-5">
@@ -262,11 +241,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
 										placeholder="Enter Email"
 									/>
-									{errors.email && touched.email ? (
-										<ErrorForm className="text-red-500 p-2">
-											{errors.email}
-										</ErrorForm>
-									) : null}
+									<ErrorFormikForm field="email" errors={errors} touched={touched}/>
 								</div>
 								<div className="w-full md:w-1/2 px-2 mb-5">
 									<Label htmlFor="phone" className="text-gray-400 block mb-1">
@@ -279,11 +254,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
 										placeholder="Enter number"
 									/>
-									{errors.phone && touched.phone ? (
-										<ErrorForm className="text-red-500 p-2">
-											{errors.phone}
-										</ErrorForm>
-									) : null}
+									<ErrorFormikForm field="phone" errors={errors} touched={touched}/>
 								</div>
 								<div className="w-full md:w-1/2 mb-5">
 									<Label htmlFor="permissions" className="font-bold text-gray-400 block mb-1">
@@ -306,14 +277,12 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 										danger="#a0aec0"
 										dangerLight="#1a202c"
 									/>
+									<ErrorFormikForm field="permissions" errors={errors} touched={touched}/>
 								</div>
 								<div className="w-full md:w-1/2 mb-5">
-									<Label
-										htmlFor="roles"
-										className="font-bold text-gray-400 block mb-1"
-									>
+									<Label htmlFor="roles" className="font-bold text-gray-400 block mb-1">
 										Roles
-											</Label>
+									</Label>
 									<Field
 										name="roles"
 										id="roles"
@@ -332,6 +301,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 										dangerLight="#1a202c"
 									/>
 								</div>
+								<ErrorFormikForm field="roles" errors={errors} touched={touched}/>
 								<div className="w-full mt-5 flex flex-row-reverse">
 									<ButtonConfirm>Save</ButtonConfirm>
 									<ButtonClose buttonType="button" onClick={() => Router.push("/users")}>

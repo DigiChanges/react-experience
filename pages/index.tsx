@@ -1,28 +1,37 @@
 import {useEffect} from 'react';
-import {useRouter} from "next/router";
-import {useSelector} from 'react-redux'
+import {getSession} from "../helpers/AuthSession";
+import Router from "next/router";
+import {defaultRoute} from "../config/dashRoutes";
 
 const HomePage = (): any =>
 {
-	const router = useRouter()
-	const {startPathname} = useSelector(state => state.Paths)
+	const cookies = getSession();
+	const isAuth = cookies?.user && cookies?.user.enable && cookies?.user.id;
 
 	useEffect(() =>
 	{
-		if (startPathname &&
-			startPathname !== '/' &&
-			startPathname !== '/login')
+		if (isAuth)
 		{
-			router.replace(startPathname)
+			getDefaultRoute();
 		}
 		else
 		{
-			router.replace('/dashboard')
+			getLoginRoute();
 		}
 	})
 
+	const getDefaultRoute = () =>
+	{
+		Router.push(defaultRoute);
+	}
+
+	const getLoginRoute = () =>
+	{
+		Router.push('/login');
+	}
+
 	return (
-		'Redirecting...'
+		<span>...Redirecting</span>
 	)
 }
 

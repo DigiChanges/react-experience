@@ -5,7 +5,8 @@ import Image from "../../atoms/Image";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 import LoginForm from "./LoginForm";
 
-const Login = () => {
+const Login = () =>
+{
   const [showRecoverPassword, setShowRecoverPassword] = useState(false);
 
   const togglePasswordRecovery = () => {

@@ -13,6 +13,7 @@ import {IRoleApi} from "../../interfaces/role";
 import DGDatePicker from "../../atoms/DGDatePicker";
 import {documentTypeOptions, country,states} from "../../entities";
 import Router from "next/router";
+import ErrorFormikForm from "../../molecules/ErrorFormikForm";
 
 interface UserCreateTemplateProps extends PropsWithChildren<any> {
   permissionsList: string[];
@@ -59,10 +60,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
             <div className="sm:px-0 md:px-16 lg:px-14 flex flex-wrap mb-6 text-sm">
               <span className="w-full px-2 text-xs text-bold">PERSONAL INFORMATION</span>
               <div className="w-full md:w-1/2 px-2 mb-5">
-                <Label
-                  htmlFor="firstName"
-                  className=" text-gray-400 block mb-1"
-                >
+                <Label htmlFor="firstName" className=" text-gray-400 block mb-1">
                   First name
 								</Label>
                 <Field
@@ -72,19 +70,12 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
                   placeholder="Enter First Name"
                 />
-                {errors.firstName && touched.firstName ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.firstName}
-                  </ErrorForm>
-                ) : null}
+							<ErrorFormikForm field="firstName" errors={errors} touched={touched}/>
               </div>
               <div className="w-full md:w-1/2 px-2 mb-5">
-                <Label
-                  htmlFor="lastName"
-                  className="text-gray-400 block mb-1"
-                >
+                <Label htmlFor="lastName" className="text-gray-400 block mb-1">
                   Last name
-                    </Label>
+								</Label>
                 <Field
                   name="lastName"
                   type="text"
@@ -92,11 +83,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
                   placeholder="Enter Last Name"
                 />
-                {errors.lastName && touched.lastName ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.lastName}
-                  </ErrorForm>
-                ) : null}
+							<ErrorFormikForm field="lastName" errors={errors} touched={touched}/>
               </div>
               <div className="w-full md:w-1/4 px-2 mb-5">
                 <Label
@@ -132,19 +119,12 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                     placeholder="Enter ID"
                   />
                 </div>
-                {errors.documentNumber && touched.documentNumber ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.documentNumber}
-                  </ErrorForm>
-                ) : null}
+								<ErrorFormikForm field="documentNumber" errors={errors} touched={touched}/>
 
               </div>
 
               <div className="w-full md:w-1/4 px-2 center align-center self-center justify-center items-center mb-5">
-                <Label
-                  htmlFor="gender"
-                  className="text-gray-400 block mb-1"
-                >
+                <Label htmlFor="gender" className="text-gray-400 block mb-1">
                   Gender
 								</Label>
 
@@ -162,18 +142,11 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                 <label htmlFor="gender" className="text-gray-400 text-xs font-bold mr-1">
                   Other
                 </label>
-                {errors.gender && touched.gender ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.gender}
-                  </ErrorForm>
-                ) : null}
+								<ErrorFormikForm field="gender" errors={errors} touched={touched}/>
               </div>
 
               <div className="w-full md:w-1/4 px-2 mb-5">
-                <Label
-                  htmlFor="birthdate"
-                  className="text-gray-400 block mb-1"
-                >
+                <Label htmlFor="birthdate" className="text-gray-400 block mb-1">
                   Birthday
                 </Label>
 								<Field
@@ -184,11 +157,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
 									dateFormatUI="d/MM/yyyy"
 									dateFormatValue="D/MM/YYYY"
                 />
-								{errors.birthday && touched.birthday ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.birthday}
-                  </ErrorForm>
-                ) : null}
+								<ErrorFormikForm field="birthday" errors={errors} touched={touched}/>
               </div>
 							<div className="w-full md:w-1/4 px-2 mb-5">
 									<Label htmlFor="enable" className="font-bold text-gray-400 block mb-2">
@@ -211,11 +180,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
 										danger="#a0aec0"
 										dangerLight="#fff"
 									/>
-									{errors.enable && touched.enable ? (
-										<ErrorForm className="text-red-500 p-2">
-											{errors.enable}
-										</ErrorForm>
-                ) : null}
+									<ErrorFormikForm field="enable" errors={errors} touched={touched}/>
 							</div>
               <div className="w-full md:w-1/2 px-2 mb-5">
                 <Label htmlFor="country" className="text-gray-400 block mb-1">
@@ -240,11 +205,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
 									danger="#a0aec0"
 									dangerLight="#fff"
 								/>
-								{errors.country && touched.country ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.country}
-                  </ErrorForm>
-                ) : null}
+								<ErrorFormikForm field="country" errors={errors} touched={touched}/>
               </div>
               <div className="w-full md:w-1/2 px-2 mb-5">
                 <Label htmlFor="address" className="text-gray-400 block mb-1">
@@ -257,11 +218,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
 									className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
 									placeholder="Your address..."
 								/>
-								{errors.address && touched.address ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.address}
-                  </ErrorForm>
-                ) : null}
+							<ErrorFormikForm field="address" errors={errors} touched={touched}/>
               </div>
               <span className="w-full mt-5 px-2"> CONTACT INFORMATION </span>
               <div className="w-full md:w-1/2 px-2 mb-5">
@@ -275,11 +232,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
                   placeholder="Enter Email"
                 />
-                {errors.email && touched.email ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.email}
-                  </ErrorForm>
-                ) : null}
+								<ErrorFormikForm field="email" errors={errors} touched={touched}/>
               </div>
               <div className="w-full md:w-1/2 px-2 mb-5">
                 <Label htmlFor="phone" className="text-gray-400 block mb-1">
@@ -292,11 +245,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
                   placeholder="Enter number"
                 />
-                {errors.phone && touched.phone ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.phone}
-                  </ErrorForm>
-                ) : null}
+							<ErrorFormikForm field="phone" errors={errors} touched={touched}/>
               </div>
               <div className="w-full px-2 mb-5">
                 <Label htmlFor="password" className="text-gray-400 block mb-1">
@@ -309,11 +258,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
                   placeholder="Enter Password"
                 />
-                {errors.password && touched.password ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.password}
-                  </ErrorForm>
-                ) : null}
+								<ErrorFormikForm field="password" errors={errors} touched={touched}/>
               </div>
               <div className="w-full px-2 mb-5">
                 <Label htmlFor="passwordConfirmation" className="text-gray-400 block mb-1">
@@ -326,12 +271,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
                   placeholder="Repeat Password"
                 />
-                {errors.passwordConfirmation &&
-                  touched.passwordConfirmation ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.passwordConfirmation}
-                  </ErrorForm>
-                ) : null}
+							<ErrorFormikForm field="passwordConfirmation" errors={errors} touched={touched}/>
               </div>
               <div className="w-full md:w-1/2 mb-5">
                 <Label htmlFor="permissions" className="text-gray-400 block mb-1">
@@ -357,17 +297,10 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   danger="#a0aec0"
                   dangerLight="#fff"
                 />
-								{errors.permissions && touched.permissions ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.permissions}
-                  </ErrorForm>
-                ) : null}
+								<ErrorFormikForm field="permissions" errors={errors} touched={touched}/>
               </div>
               <div className="w-full md:w-1/2 mb-5 px-2">
-                <Label
-                  htmlFor="roles"
-                  className="text-gray-400 block mb-1"
-                >
+                <Label htmlFor="roles" className="text-gray-400 block mb-1">
                   Roles
 								</Label>
                 <Field
@@ -390,11 +323,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   danger="#a0aec0"
                   dangerLight="#fff"
                 />
-								{errors.roles && touched.roles ? (
-                  <ErrorForm className="text-red-500 p-2">
-                    {errors.roles}
-                  </ErrorForm>
-                ) : null}
+								<ErrorFormikForm field="roles" errors={errors} touched={touched}/>
               </div>
               <div className="w-full mt-5 flex flex-row-reverse">
                 <ButtonConfirm>Save</ButtonConfirm>

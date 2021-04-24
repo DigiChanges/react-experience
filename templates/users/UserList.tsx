@@ -58,10 +58,16 @@ const UserList = ({ usersList, query, viewMore }) =>
     }
   };
 
-  window.addEventListener('scroll', checkScrollTop)
+  if (typeof window !== "undefined")
+  {
+		window.addEventListener('scroll', checkScrollTop)
+	}
 
-  const scrollTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const scrollTop = () =>
+	{
+		if (typeof window !== "undefined") {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}
   };
 
   return (
