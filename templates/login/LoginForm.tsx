@@ -44,7 +44,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ ...props }): any =>
                 name="email"
                 type="text"
                 id="email"
-                className="w-full focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey rounded shadow font-extrabold"
+                className="dg-form-field-full font-extrabold"
                 placeholder="Your Email"
               />
 							<ErrorFormikForm field="email" errors={errors} touched={touched}/>

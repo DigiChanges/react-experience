@@ -58,6 +58,19 @@ const SimpleSelect: React.FC<OwnProps & FieldProps> = ({
 		return options ? options.find(option => option.value === field.value) : '';
   }
 
+  const customStyles = {
+  control: () => ({
+    width: 'auto',
+      minWidth: 75,
+  }),
+  singleValue: (provided, state) => {
+    const opacity = state.isDisabled ? 0.5 : 1;
+    const transition = 'opacity 300ms';
+
+    return { ...provided, opacity, transition };
+  }
+}
+
   return (
 			<Select
 				{...props}
@@ -66,9 +79,12 @@ const SimpleSelect: React.FC<OwnProps & FieldProps> = ({
 				value={getValue()}
 				onChange={onChange}
 				options={options}
+                classNamePrefix="r"
+                className="select font-bold dg-border-main hover:border-indigo-500"
+                styles={customStyles}
 				theme={(theme) => ({
 					...theme,
-					borderWidth: 6,
+					borderWidth: 16,
 					multiValue: {
 						borderRadius: 30,
 					},
@@ -89,6 +105,6 @@ const SimpleSelect: React.FC<OwnProps & FieldProps> = ({
       })}
 			/>
   );
-};
+}
 
 export default SimpleSelect;

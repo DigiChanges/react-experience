@@ -10,6 +10,7 @@ interface Option {
 interface OwnProps {
   id: string;
   options: any;
+  styles: any;
   primary25: any;
   primary: any;
   neutral0: any;
@@ -24,7 +25,6 @@ interface OwnProps {
   neutral70: any;
   borderWidth: any;
 }
-
 const MultiSelect: React.FC<OwnProps & FieldProps> = ({
   options,
 	id,
@@ -54,6 +54,18 @@ const MultiSelect: React.FC<OwnProps & FieldProps> = ({
       return options ? options.filter(option => field.value.indexOf(option.value) >= 0) : [];
   };
 
+const customStyles = {
+  control: () => ({
+    width: 'auto',
+      minWidth: 75,
+  }),
+  singleValue: (provided, state) => {
+    const opacity = state.isDisabled ? 0.5 : 1;
+    const transition = 'opacity 300ms';
+
+    return { ...provided, opacity, transition };
+  }
+}
   return (
 			<Select
 				{...props}
@@ -63,6 +75,9 @@ const MultiSelect: React.FC<OwnProps & FieldProps> = ({
 				onChange={onChange}
 				options={options}
 				isMulti={true}
+                className="select font-bold"
+                classNamePrefix="r"
+                styles={customStyles}
 				theme={(theme) => ({
 					...theme,
 					borderWidth: 6,

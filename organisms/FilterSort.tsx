@@ -59,16 +59,17 @@ const FilterSort = ({ actionFilter, filterButtonName = 'Filter', filterQuery = n
         actionFilter(search, filterBy, orderBy, getSort(sortFields.isSort));
       }}>
       {({ errors, touched }) => (
-        <Form className="flex flex-col justify-between w-full text-main-gray-300 px-8">
+        <Form className="flex flex-col justify-between w-full text-main-gray-300">
           <Field
             name="search"
             type="search"
             id="search"
             placeholder={"Search users... "}
             component={SearchInput}
-            className={`h-9 font-semibold ${errors.search && touched.search ? 'border-red-500' : ''}`}
+            className={`dg-form-field-full ${errors.search && touched.search ? 'border-red-500' : ''}`}
           />
-          <div className="DROPDOWN COMING SOON flex flex-wrap justify-between my-6">
+          {/* todo add DROPDOWN to filter/sort opts */}
+          <div className="flex flex-wrap justify-between my-6">
             <div className="flex-col w-full md:w-5/12">
                   <Label htmlFor="roles" className="font-bold text-gray-400 block md:inline-block mr-2 w-16">
                     Filter By
@@ -78,7 +79,7 @@ const FilterSort = ({ actionFilter, filterButtonName = 'Filter', filterQuery = n
                     type="text"
                     id="filterBy"
                     placeholder={"Filter by... "}
-                    className={`h-9 font-semibold w-full md:w-auto ${errors.filterBy && touched.filterBy ? 'border-red-500' : ''}`}
+                    className={`dg-form-field-quarter md:min-w-max  ${errors.filterBy && touched.filterBy ? 'border-red-500' : ''}`}
                   />
               </div>
             <div className="flex-col w-full md:w-5/12">
@@ -90,7 +91,7 @@ const FilterSort = ({ actionFilter, filterButtonName = 'Filter', filterQuery = n
                     type="text"
                     id="orderBy"
                     placeholder={"Sort by... "}
-                    className={`h-9 font-semibold w-full md:w-auto ${errors.orderBy && touched.orderBy ? 'border-red-500' : ''}`}
+                    className={`dg-form-field-quarter md:min-w-max ${errors.orderBy && touched.orderBy ? 'border-red-500' : ''}`}
                   />
             </div>
 
@@ -98,9 +99,9 @@ const FilterSort = ({ actionFilter, filterButtonName = 'Filter', filterQuery = n
             <div className="flex-col self-end md:self-center w-6 h-6 my-3 md:my-2 lg:my-0">
                     <IconButtonActive classNameOnActive="text-white" onClick={onClickIsSortAsc} isActive={sortFields.isSort} iconEnable={IconSortAscending} iconDisable={IconSortDescending} />
             </div>
-            <div className="flex-col self-center w-full md:w-auto my-3 lg:my-0 mx-auto">
+            <div className="flex-col self-center my-3 lg:my-0 mx-auto">
               <Button
-                className="shadow-kx1 button-primary w-full md:w-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
+                className="dg-main-button"
                 buttonType="submit"
               >
                 {filterButtonName}

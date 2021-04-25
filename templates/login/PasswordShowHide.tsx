@@ -18,7 +18,7 @@ const PasswordShowHide = ({ field }) =>
         <input
           type={isShowingPassword ? "text" : "password"}
           {...field}
-          className="w-full focus:outline-none focus:border-indigo-500 text-base px-4 py-2 hover:border-grey rounded shadow font-extrabold"
+          className="dg-form-field-full font-extrabold"
           placeholder="Your Password"
         />
         <span className="absolute inset-y-0 right-0 flex items-center pl-2">

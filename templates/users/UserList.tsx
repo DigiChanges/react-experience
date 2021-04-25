@@ -5,17 +5,16 @@ import IconPlus from "../../atoms/Icons/Stroke/IconPlus";
 import TitleWithButton from "../../molecules/TitleWithButton";
 import FilterSort from "../../organisms/FilterSort";
 import FilterFactory from "../../helpers/FilterFactory";
-import Link from "next/link";
 import MediaObject from "../../molecules/MediaObject";
 import Title from "../../atoms/Title";
 import Button from "../../atoms/Button";
 import IconArrowCircleLeft from "../../atoms/Icons/Solid/IconArrowCircleLeft";
 import { removeUser, resetUsers } from "../../redux/users/actions";
 import { openModal, resetQueryPagination } from "../../redux/general/actions";
-import IconEye from "../../atoms/Icons/Stroke/IconEye";
 import IconPencilAlt from "../../atoms/Icons/Stroke/IconPencilAlt";
 import UserRemove from "./UserRemove";
 import IconTrash from "../../atoms/Icons/Stroke/IconTrash";
+import IconViewMediaObject from "../../atoms/Icons/Stroke/IconViewMediaObject";
 
 const UserList = ({ usersList, query, viewMore }) =>
 {
@@ -108,7 +107,7 @@ const UserList = ({ usersList, query, viewMore }) =>
 										className="w-6 hover:text-gray-700 mr-1 focus:outline-none"
 										onClick={() => router.push(`/users/changePassword/${user.id}`)}
 									>
-										<IconEye/>
+										<IconViewMediaObject/>
 									</button>
 								</div>
 								<div className="h-6 w-6 my-1">
@@ -128,8 +127,8 @@ const UserList = ({ usersList, query, viewMore }) =>
 
 
 
-        <div className="flex justify-center w-3/4 mt-10">
-          <Button onClick={viewMore} className="w-32 h-10 bg-main-gray-500 hover:bg-main-gray-400 rounded-xl text-white font-bold text-sm mx-auto">
+        <div className="dg-full-center-flex mt-8">
+          <Button onClick={viewMore} className="dg-secondary-button">
             View More
 					</Button>
           <Button onClick={scrollTop} className={'h-10 w-10 transform rotate-90 text-main-gray-250 ' + (showScroll ? 'flex' : 'hidden')} >

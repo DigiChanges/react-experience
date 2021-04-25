@@ -57,12 +57,14 @@ const PrivateLayout: React.FC<any> = ({ children }) =>
     )
 
   return (
-      <div className="grid grid-areas-md-private-layout h-full text-gray-700 body-font bg-gray-900">
-        <header className="grid-in-header bg-gray-800 w-auto">
+    <>
+      <div className="grid grid-areas-mobile-layout md:grid-areas-tablet-layout lg:grid-areas-desktop-layout grid-cols-desktop-layout
+      h-full dg-main-bg">
+        <header className="grid-in-header dg-element-bg">
           <NavBar showSidebar={showSidebar} onClick={onClick} email={user?.email} />
         </header>
         <div className="hidden md:block mt-6 ml-4 z-10 w-max grid-in-sidebar">
-          <SideBar className="absolute ml-1 bg-gray-800 rounded-lg-md shadow-md h-89 py-5">
+          <SideBar className="dg-rounded ml-1 h-89 py-5">
             {getDashItems()}
           </SideBar>
         </div>
@@ -71,14 +73,15 @@ const PrivateLayout: React.FC<any> = ({ children }) =>
           <SideBar className="hidden" />
 
         ) : (
-          <div className="absolute md:block mt-20 md:m-4 z-10 w-max">
-            <SideBar className="ml-5 bg-gray-800 rounded-lg-md shadow-md h-89 py-5">
+          <div className="absolute md:block mt-20 md:m-4 z-10 ">
+            <SideBar className="ml-5 dg-rounded h-89 py-5 w-48" />
+						<SideBar className="ml-5 dg-rounded h-89 py-5 w-48">
               {getDashItems()}
             </SideBar>
           </div>
         )}
         <main className="grid-in-main min-h-screen w-full">
-          <Breadcrumb className="pt-5 text-gray-500 lg:text-base ml-4 sm:ml-4" />
+          <Breadcrumb className="pt-5 text-gray-500 lg:text-base ml-2 md:ml-4" />
           {children}
         </main>
         <Footer className="flex grid-in-footer border m-4 w-auto p-4 text-sm text-gray-200 rounded justify-center">
