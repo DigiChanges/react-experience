@@ -29,48 +29,7 @@
   .w-max {
     width: max-content;
   }
-  /*react-select styling*/
 
-  .select {
-    @apply: relative box-border dg-border-main focus:outline-none focus:border-indigo-500 text-base hover:border-indigo-400;
-  }
-  /*.r__control {*/
-  /*  @apply items-center dg-subelement-bg dg-border-main flex flex-wrap justify-between relative box-border transition-all duration-200;*/
-  /*}*/
-  /*.r__value-container,*/
-  /*.r__value-container--is-multi {*/
-  /*  @apply items-center flex flex-wrap px-1 py-2 relative overflow-hidden box-border;*/
-  /*}*/
-  /*.r__placeholder {*/
-  /*  @apply mx-1 absolute transform top-50 translate-y-1/2 box-border;*/
-  /*}*/
-  /*.r__input {*/
-  /*  @apply inline-block;*/
-  /*}*/
-  /*.r__indicators {*/
-  /*  @apply items-center flex flex-shrink-0 box-border;*/
-  /*}*/
-  /*.r__indicator-separator {*/
-  /*  @apply self-stretch my-1 w-px box-border dg-main-bg;*/
-  /*}*/
-  /*.r__indicator {*/
-  /*  @apply text-black;*/
-  /*}*/
-  /*.r__indicator,*/
-  /*.r_dropdown-indicator {*/
-  /*  @apply bg-transparent hover:text-white flex p-1 transition-colors duration-150 box-border;*/
-  /*}*/
-  /*.r__control-is-focused,*/
-  /*.r__control-menu-is-open {*/
-  /*  @apply border-indigo-500;*/
-  /*}*/
-  /*.r__menu {*/
-  /*  @apply dg-element-bg text-white z-30;*/
-  /*}*/
-  /*.r__option {*/
-  /*  @apply hover:bg-gray-650;*/
-  /*}*/
-  /* @apply */
   .dg-media-object {
     @apply flex items-center font-semibold text-sm text-main-gray-250 rounded-lg py-2 px-4 dg-subelement-bg hover:bg-main-gray-500;
   }

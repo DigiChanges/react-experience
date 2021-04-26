@@ -57,7 +57,6 @@ const PrivateLayout: React.FC<any> = ({ children }) =>
     )
 
   return (
-    <>
       <div className="grid grid-areas-mobile-layout md:grid-areas-tablet-layout lg:grid-areas-desktop-layout grid-cols-desktop-layout
       h-full dg-main-bg">
         <header className="grid-in-header dg-element-bg">

@@ -3,7 +3,6 @@ import { Field, Form, Formik } from "formik";
 import MultiSelect from "../../atoms/MultiSelect";
 import SimpleSelect from "../../atoms/SimpleSelect";
 import Title from "../../atoms/Title";
-import ErrorForm from "../../atoms/ErrorForm";
 import Label from "../../atoms/Label";
 import ButtonConfirm from "../../molecules/ButtonConfirm";
 import ButtonClose from "../../molecules/ButtonClose";
@@ -14,6 +13,7 @@ import DGDatePicker from "../../atoms/DGDatePicker";
 import {documentTypeOptions, country,states} from "../../entities";
 import Router from "next/router";
 import ErrorFormikForm from "../../molecules/ErrorFormikForm";
+import SelectStyle from "../../assets/customStyles/SelectStyle";
 
 interface UserCreateTemplateProps extends PropsWithChildren<any> {
   permissionsList: string[];
@@ -25,7 +25,6 @@ interface UserCreateTemplateProps extends PropsWithChildren<any> {
 const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesList, createAction}): any =>
 {
   return (
-      // <section className="text-gray-500 body-font bg-gray-900 w-full md:container mx-auto px-6">
     <section className="px-4">
       <div className="mb-2 ">
         <Title className="text-3xl font-bold" titleType="h1">
@@ -87,19 +86,16 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
 							<ErrorFormikForm field="lastName" errors={errors} touched={touched}/>
               </div>
               <div className="dg-form-quarter-field-wrapper">
-                <Label
-                  htmlFor="documentType"
-                  className="dg-form-label"
-                >
+                <Label htmlFor="documentType" className="dg-form-label">
                   ID number
-                    </Label>
+								</Label>
                 <div className="flex w-full">
                   <Field
                     name="documentType"
                     id="documentType"
                     component={SimpleSelect}
                     options={documentTypeOptions}
-                    className="dg-form-field-full"
+										selectStyle={SelectStyle}
                   />
                   <Field
                     name="documentNumber"
@@ -145,6 +141,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="dg-form-field-full"
 									dateFormatUI="d/MM/yyyy"
 									dateFormatValue="D/MM/YYYY"
+									placeholder="Choose your birthday..."
                 />
 								<ErrorFormikForm field="birthday" errors={errors} touched={touched}/>
               </div>
@@ -156,6 +153,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
 										name="enable"
 										id="enable"
 										component={SimpleSelect}
+										selectStyle={SelectStyle}
 										options={states}
 									/>
 									<ErrorFormikForm field="enable" errors={errors} touched={touched}/>
@@ -169,7 +167,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
 									id="country"
 									options={country}
 									component={SimpleSelect}
-									className="dg-form-field-full"
+									selectStyle={SelectStyle}
 								/>
 								<ErrorFormikForm field="country" errors={errors} touched={touched}/>
               </div>
@@ -249,19 +247,8 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   component={MultiSelect}
                   options={SelectTransform.getOptionsSimpleArray(permissionsList)}
                   isMulti
-                  className="bg-gray-800 border rounded-full border-gray-700 text-base hover:border-grey shadow font-bold"
                   placeholder="Select permissions"
-                  primary25="#a0aec0"
-                  primary="#667eea"
-                  neutral0="rgba(20,25,31)"
-                  neutral20="rgba(17,21,30)"
-                  neutral50="#a0aec0"
-                  neutral80="#718096"
-                  neutral10="#fff"
-                  neutral30="#667eea"
-                  primary50="#718096"
-                  danger="#a0aec0"
-                  dangerLight="#fff"
+									selectStyle={SelectStyle}
                 />
 								<ErrorFormikForm field="permissions" errors={errors} touched={touched}/>
               </div>
@@ -275,19 +262,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   component={MultiSelect}
                   options={SelectTransform.getOptionsObjectArray(rolesList, 'name', 'id')}
                   isMulti
-                  className="bg-gray-800 border rounded-full border-gray-700 text-base hover:border-grey shadow font-bold"
-                  placeholder="Select roles"
-                  primary25="#a0aec0"
-                  primary="#667eea"
-                  neutral0="rgba(20,25,31)"
-                  neutral20="rgba(17,21,30)"
-                  neutral50="#a0aec0"
-                  neutral80="#718096"
-                  neutral10="#fff"
-                  neutral30="#667eea"
-                  primary50="#718096"
-                  danger="#a0aec0"
-                  dangerLight="#fff"
+									selectStyle={SelectStyle}
                 />
 								<ErrorFormikForm field="roles" errors={errors} touched={touched}/>
               </div>

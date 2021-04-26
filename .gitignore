@@ -159,4 +159,6 @@ sketch
 
 package-lock.json
 
+assets/css/main.css
+
 # End of https://www.toptal.com/developers/gitignore/api/react,phpstorm
