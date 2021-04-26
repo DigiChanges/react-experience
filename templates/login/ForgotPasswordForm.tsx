@@ -43,7 +43,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ ...props }) => 
                 name="email"
                 type="text"
                 id="email"
-                className="dg-form-field-full"
+                className="dg-form-field-full  pl-5"
                 placeholder="Your Email"
               />
 							<ErrorFormikForm field="email" errors={errors} touched={touched}/>

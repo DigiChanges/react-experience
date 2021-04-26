@@ -25,17 +25,17 @@ module.exports = {
       'desktop-layout': [
         "header header header header",
         "sidebar main main main",
-        "footer footer footer foot",
+        "footer footer footer footer",
       ],
       'tablet-layout': [
         "header header header header",
         "sidebar . main main",
-        "footer footer footer foot",
+        "footer footer footer footer",
       ],
       'mobile-layout': [
         "header header header header",
         "main main main main",
-        "footer footer footer foot",
+        "footer footer footer footer",
       ]
     },
     screens: {
@@ -50,6 +50,7 @@ module.exports = {
       current: "currentColor",
 
       black: "#000",
+      "transparent-black": "#00000098",
       white: "#fff",
 
       primary: {

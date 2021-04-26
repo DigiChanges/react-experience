@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 import ChangeForgotPassword from "../../templates/changeForgotPassword";
 import {changeForgotPassword} from "../../redux/auth/actions";
 import {IChangeForgotPasswordPayload} from "../../interfaces/auth";
+import Image from "../../atoms/Image";
 
 const IndexPage = ({query}) =>
 {
@@ -14,14 +15,15 @@ const IndexPage = ({query}) =>
 	}
 
 	return (
-		<section className="text-gray-500 body-font bg-gray-900 h-screen">
-      <div className="mx-auto h-full flex justify-center items-center">
-        <div className="w-1/2 md:w-1/3 min-w-xxs max-w-lg ">
-          <div className="bg-gray-650 rounded-lg border-teal p-8 border-t-12  mb-6 shadow-lg h-72">
-						<ChangeForgotPassword action={changePassword}/>
-          </div>
-        </div>
-      </div>
+		<section className="dg-main-bg h-screen">
+			<div className="dg-full-center-flex">
+				<div className="dg-rounded-small-box">
+				  <div className="flex w-full justify-center mb-6 h-8">
+					  <a href="/"><Image image={"/logonav.png"} className="h-8"/></a>
+				  </div>
+					<ChangeForgotPassword action={changePassword}/>
+				</div>
+			</div>
     </section>
 	)
 }

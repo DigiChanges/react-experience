@@ -18,12 +18,12 @@ const PasswordShowHide = ({ field }) =>
         <input
           type={isShowingPassword ? "text" : "password"}
           {...field}
-          className="dg-form-field-full font-extrabold"
+          className="dg-form-field-full font-extrabold pl-5"
           placeholder="Your Password"
         />
         <span className="absolute inset-y-0 right-0 flex items-center pl-2">
           <Button
-						className="text-right w-8 h-8 mt-2 mb-1 mx-3 text-purple-lighter"
+						className="w-8 h-8 mt-2 mb-1 mx-3 p-1 text-main-gray-100"
             onClick={showPasswordClick}>
             {
 							isShowingPassword

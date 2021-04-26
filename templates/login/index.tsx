@@ -17,7 +17,7 @@ const Login = () =>
     <section className="dg-main-bg h-screen">
       <div className="dg-full-center-flex">
           <div className="dg-rounded-small-box">
-            <div className="flex w-full justify-center mb-6 h-8"><Image image={"/logonav.png"} /></div>
+            <div className="flex w-full justify-center mb-6 h-8 -mt-4"><a href="/"><Image image={"/logonav.png"} className="h-8"/></a></div>
             {
               showRecoverPassword
                 ? (<ForgotPasswordForm onClick={togglePasswordRecovery} />)
