@@ -5,7 +5,7 @@ import {selectedRole} from '../../../redux/roles/actions';
 import IconEye from "../../../atoms/Icons/Stroke/IconEye";
 import IconPencilAlt from "../../../atoms/Icons/Stroke/IconPencilAlt";
 import IconTrash from "../../../atoms/Icons/Stroke/IconTrash";
-import ConfirmDelete from "../../modal/ConfirmDeleteUser"
+import ConfirmDelete from "../../modal/ConfirmDeleteRole"
 
 
 const RoleActionsCell = (role: any): any =>

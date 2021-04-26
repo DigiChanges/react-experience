@@ -32,18 +32,6 @@ const SimpleSelect: React.FC<OwnProps & FieldProps> = ({
 		return options ? options.find(option => option.value === field.value) : '';
   }
 
-//   const customStyles = {
-//   control: () => ({
-//     width: 'auto',
-//       minWidth: 75,
-//   }),
-//   singleValue: (provided, state) => {
-//     const opacity = state.isDisabled ? 0.5 : 1;
-//     const transition = 'opacity 300ms';
-//
-//     return { ...provided, opacity, transition };
-//   }
-// }
   return (
 			<Select
 				{...props}

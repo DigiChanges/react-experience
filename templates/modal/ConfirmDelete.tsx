@@ -30,7 +30,6 @@ const ConfirmDelete: React.FC<IModalData> = ({open, idSelected,	text, action}): 
 					<div className="dg-rounded-small-box flex flex-col justify-between">
 							<div className="w-full flex justify-end">
 								<Button
-									// className="flex shadow-kx1 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
 									className="dg-link w-6"
 									buttonType="button"
 									onClick={onHandleCloseModal}

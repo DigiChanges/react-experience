@@ -1,4 +1,3 @@
-// import UserStateCell from "./UserStateCell"
 import RoleActionsCell from "./RoleActionsCell"
 
 const ListRolesTemplateColumns =
@@ -13,12 +12,6 @@ const ListRolesTemplateColumns =
 			selector: "slug",
 			sortable: true,
 		},
-		// {
-		//   name: "State",
-		//   selector: "",
-		//   sortable: true,
-		//   cell: UserStateCell,
-		// },
 		{
 			name: "Actions",
 			selector: "",
