@@ -21,6 +21,21 @@ module.exports = {
         'header header header header',
         'sidebar main main main',
         'footer footer footer footer',
+      ],
+      'desktop-layout': [
+        "header header header header",
+        "sidebar main main main",
+        "footer footer footer foot",
+      ],
+      'tablet-layout': [
+        "header header header header",
+        "sidebar . main main",
+        "footer footer footer foot",
+      ],
+      'mobile-layout': [
+        "header header header header",
+        "main main main main",
+        "footer footer footer foot",
       ]
     },
     screens: {
@@ -388,6 +403,7 @@ module.exports = {
       0: "0",
       auto: "auto",
       100: "100%",
+      50: "50%",
     },
     letterSpacing: {
       tighter: "-0.05em",
@@ -502,6 +518,7 @@ module.exports = {
       "1/2": "50%",
       "3/4": "75%",
       full: "100%",
+      "max": "max-content",
       screen: "100vh",
     },
     objectPosition: {
@@ -588,6 +605,8 @@ module.exports = {
       "9/12": "75%",
       "10/12": "83.333333%",
       "11/12": "91.666667%",
+      "min": "min-content",
+      "max": "max-content",
       full: "100%",
       screen: "100vw",
     }),
@@ -616,6 +635,7 @@ module.exports = {
       11: "repeat(11, minmax(0, 1fr))",
       12: "repeat(12, minmax(0, 1fr))",
       13: "15% auto",
+      "desktop-layout": "min-content",
     },
     gridColumn: {
       auto: "auto",
@@ -861,6 +881,7 @@ module.exports = {
     fontVariantNumeric: ["responsive"],
     fontStyle: ["responsive"],
     fontWeight: ["responsive", "hover", "focus"],
+    gridTemplateAreas: ['responsive'],
     height: ["responsive"],
     inset: ["responsive"],
     justifyContent: ["responsive"],

@@ -10,8 +10,8 @@ const NavBar = ({ email, onClick, showSidebar }): any => {
 
   return (
     <nav className=" shadow-md text-white " >
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div className="relative flex items-center justify-between h-16">
+      <div className="mx-auto px-2 sm:px-6 lg:px-8">
+        <div className="relative dg-full-center-flex h-16">
           <div className="flex-1 flex items-start justify-start sm:items-stretch sm:justify-start">
 
             <div className="flex-shrink-0 flex items-center  cursor-pointer">
@@ -20,7 +20,7 @@ const NavBar = ({ email, onClick, showSidebar }): any => {
             <a href="/"> <div className="block ml-4 mt-1 text-main-gray-300 font-extrabold">DIGICHANGES</div></a>
           </div>
           <div className="absolute flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white h-8 w-8 hidden md:block lg:block">
+            <button className="p-1 rounded-full text-gray-400 hover:text-white h-8 w-8 hidden md:block lg:block">
               <span className="sr-only">View notifications</span>
               <span>
                 <span className="ml-1 animate-ping absolute inline-flex h-2 w-2 rounded-full bg-blue-600 opacity-75 "/>

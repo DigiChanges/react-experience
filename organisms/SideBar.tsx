@@ -8,9 +8,9 @@ interface SideBarProps extends PropsWithChildren<any> {
 const SideBar : React.FC<SideBarProps> = ({ children, className }) => {
   const [isExpanded, setExpanded] = useState(true);
 
-  let classNameUl = "flex flex-col items-center h-full md:items-start md:justify-center     pl-4 ml-1 ";
+  let classNameUl = "flex flex-col items-center h-full md:items-start md:justify-center  w-full md:w-auto  pl-4 ml-1 ";
 
-  classNameUl = isExpanded ? classNameUl : "flex flex-col items-center h-full md:items-center md:justify-center w-full";
+  classNameUl = isExpanded ? classNameUl : "flex flex-col items-center h-full md:items-center md:justify-center w-max";
 
   const getChildren = () =>
     React.Children.map(children, (child : React.ReactElement) => 

@@ -35,7 +35,7 @@ const SideBarItem : React.FC<SideBarItemProps> = ({
       return (
         <Link href={path}>
           <a
-            className={`flex flex-row items-center w-auto text-gray-500
+            className={`flex flex-row items-center w-full text-gray-500
               hover:text-blue-500 hover:border-blue-500 border-r-2 border-gray-800
               h-8 ${equalPath.equal
                 ? "text-blue-700 border-blue-700"
@@ -112,7 +112,7 @@ const SideBarItem : React.FC<SideBarItemProps> = ({
           <div
             className={`
             ${open ? `text-main-gray-100` : `hidden w-full`}
-            ${open && isToggled ? `w-max flex flex-col ` : `ml-10`}
+            ${open && isToggled ? `w-full flex flex-col ` : `ml-10`}
             `}
           >
             {multi && isToggled ? getDropDownItems() : ""}

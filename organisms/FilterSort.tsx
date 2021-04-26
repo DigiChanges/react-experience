@@ -59,44 +59,55 @@ const FilterSort = ({ actionFilter, filterButtonName = 'Filter', filterQuery = n
         actionFilter(search, filterBy, orderBy, getSort(sortFields.isSort));
       }}>
       {({ errors, touched }) => (
-        <Form className="flex flex-col lg:flex-row justify-between space-x-5 w-full text-main-gray-300 cursor-pointer">
+        <Form className="flex flex-col justify-between w-full text-main-gray-300">
           <Field
             name="search"
             type="search"
             id="search"
             placeholder={"Search users... "}
             component={SearchInput}
-            className={`h-9 font-semibold ${errors.search && touched.search ? 'border-red-500' : ''}`}
+            className={`dg-form-field-full ${errors.search && touched.search ? 'border-red-500' : ''}`}
           />
-          <Label htmlFor="roles" className="font-bold text-gray-400 block pt-4 mb-2">
-            Filter By
-					</Label>
-          <Field
-            name="filterBy"
-            type="text"
-            id="filterBy"
-            placeholder={"Filter by... "}
-            className={errors.filterBy && touched.filterBy ? 'border-red-500' : ''}
-          />
-          <Label htmlFor="roles" className="font-bold text-gray-400 block pt-4 mb-2">
-            Sort By
-					</Label>
-          <Field
-            name="orderBy"
-            type="text"
-            id="orderBy"
-            placeholder={"Sort by... "}
-            className={errors.orderBy && touched.orderBy ? 'border-red-500' : ''}
-          />
-          <span className="w-6 pt-5">
-            <IconButtonActive classNameOnActive="text-white" onClick={onClickIsSortAsc} isActive={sortFields.isSort} iconEnable={IconSortAscending} iconDisable={IconSortDescending} />
-          </span>
-          <Button
-            className="shadow-kx1 my-5 button-primary text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg text-center"
-            buttonType="submit"
-          >
-            {filterButtonName}
-          </Button>
+          {/* todo add DROPDOWN to filter/sort opts */}
+          <div className="flex flex-wrap justify-between my-6">
+            <div className="flex-col w-full md:w-5/12">
+                  <Label htmlFor="roles" className="font-bold text-gray-400 block md:inline-block mr-2 w-16">
+                    Filter By
+                            </Label>
+                  <Field
+                    name="filterBy"
+                    type="text"
+                    id="filterBy"
+                    placeholder={"Filter by... "}
+                    className={`dg-form-field-quarter md:min-w-max  ${errors.filterBy && touched.filterBy ? 'border-red-500' : ''}`}
+                  />
+              </div>
+            <div className="flex-col w-full md:w-5/12">
+                  <Label htmlFor="roles" className="font-bold text-gray-400 block md:inline-block mr-2 w-16">
+                    Sort By
+                            </Label>
+                  <Field
+                    name="orderBy"
+                    type="text"
+                    id="orderBy"
+                    placeholder={"Sort by... "}
+                    className={`dg-form-field-quarter md:min-w-max ${errors.orderBy && touched.orderBy ? 'border-red-500' : ''}`}
+                  />
+            </div>
+
+
+            <div className="flex-col self-end md:self-center w-6 h-6 my-3 md:my-2 lg:my-0">
+                    <IconButtonActive classNameOnActive="text-white" onClick={onClickIsSortAsc} isActive={sortFields.isSort} iconEnable={IconSortAscending} iconDisable={IconSortDescending} />
+            </div>
+            <div className="flex-col self-center my-3 lg:my-0 mx-auto">
+              <Button
+                className="dg-main-button"
+                buttonType="submit"
+              >
+                {filterButtonName}
+              </Button>
+            </div>
+          </div>
         </Form>
       )}
     </Formik>

@@ -5,10 +5,10 @@ const ButtonIcon = ({ icon, labelName, buttonType = null, ...props }) => {
   const Icon = icon;
 
   return (
-    <div className="mt-4 text-white">
+    <div className="mt-3 ">
       <Button
         buttonType={buttonType}
-        className="flex bg-primary-main hover:bg-primary-hover rounded-full mx-auto border-0 p-3 md:pt-4 md:px-8 focus:outline-none text-lg"
+        className="dg-main-button-w-icon"
         {...props}
       >
         <span className="hidden md:block font-bold pb-1">{labelName}</span>

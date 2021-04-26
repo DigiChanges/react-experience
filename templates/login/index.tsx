@@ -14,10 +14,9 @@ const Login = () =>
   }
 
   return (
-    <section className="text-gray-500 body-font bg-gray-900 h-screen">
-      <div className="mx-auto h-full flex justify-center items-center">
-        <div className="w-1/2 md:w-1/3 min-w-xxs max-w-lg ">
-          <div className="bg-gray-650 rounded-lg border-teal p-8 border-t-12  mb-6 shadow-lg h-72">
+    <section className="dg-main-bg h-screen">
+      <div className="dg-full-center-flex">
+          <div className="dg-rounded-small-box">
             <div className="flex w-full justify-center mb-6 h-8"><Image image={"/logonav.png"} /></div>
             {
               showRecoverPassword
@@ -25,7 +24,6 @@ const Login = () =>
                 : (<LoginForm onClick={togglePasswordRecovery} />)
             }
           </div>
-        </div>
       </div>
     </section>
   )
