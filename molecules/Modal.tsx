@@ -7,13 +7,10 @@ const Modal = (props: any): any =>
 	return (
 		<>
 			{open && <div
-                className="fixed top-0 left-0 h-screen w-full flex items-center justify-center z-20"
-                style={{background: "rgba(0,0,0,0.8)"}}
+                className="fixed h-screen w-screen items-center z-20 bg-transparent-black"
             >
-              <div className="container mx-auto h-full flex justify-center items-center">
 			{children}
-              </div>
-            </div>}
+			</div>}
 		</>
 	);
 };

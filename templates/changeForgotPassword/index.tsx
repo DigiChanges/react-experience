@@ -6,6 +6,7 @@ import Label from "../../atoms/Label";
 import ErrorFormikForm from "../../molecules/ErrorFormikForm";
 import ChangePasswordSchema from "../../SchemaValidations/ChangePasswordSchema";
 import PasswordShowHide from "../login/PasswordShowHide";
+import Image from "../../atoms/Image";
 
 const ChangeForgotPassword = ({action}): any => {
   return (
@@ -24,7 +25,7 @@ const ChangeForgotPassword = ({action}): any => {
         {({ errors, touched }) => (
           <Form className="flex flex-col h-4/5">
             <Title titleType="h1" className="mb-2 text-left text-xs font-extrabold text-main-gray-250 w-full">
-              Change Password
+              CHANGE PASSWORD
 						</Title>
             <div className="mb-1">
               <Label htmlFor='password' className="text-main-gray-200 block mb-2">
@@ -40,7 +41,7 @@ const ChangeForgotPassword = ({action}): any => {
 							<ErrorFormikForm field="password" errors={errors} touched={touched}/>
             </div>
 
-            <div className="mb-1">
+            <div className="my-4">
               <Label htmlFor='passwordConfirmation' className="text-main-gray-200 block mb-2">
                 Password
 							</Label>

@@ -87,4 +87,7 @@
   .dg-form-field-quarter {
     @apply w-3/4 dg-subelement-bg text-white dg-border-main focus:outline-none focus:border-indigo-500 text-base hover:border-indigo-400 h-10 font-bold;
   }
+  .dg-link {
+    @apply text-main-gray-300 hover:text-white;
+  }
 }

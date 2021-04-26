@@ -12,7 +12,7 @@ const ChangePassword = ({ close }: any): any => {
   return (
     <Fragment>
       <div
-        className="fixed top-0 left-0 h-screen w-full flex items-center justify-center"
+        className=" top-0 left-0 h-screen w-full flex items-center justify-center"
         style={{ background: "rgba(0,0,0,0.5)" }}
       >
         <div className="container mx-auto h-full flex justify-center items-center">

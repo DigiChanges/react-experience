@@ -71,7 +71,7 @@ const UserList = ({ usersList, query, viewMore }) =>
   };
 
   return (
-    <section className="mx-4 -mt-4 ">
+    <section className="mx-8">
       <TitleWithButton
         className="dg-section-title"
         title="Users"

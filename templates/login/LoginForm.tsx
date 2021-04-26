@@ -44,15 +44,23 @@ const LoginForm: React.FC<LoginFormProps> = ({ ...props }): any =>
                 name="email"
                 type="text"
                 id="email"
-                className="dg-form-field-full font-extrabold"
+                className="dg-form-field-full font-extrabold pl-5"
                 placeholder="Your Email"
               />
 							<ErrorFormikForm field="email" errors={errors} touched={touched}/>
             </div>
-            <div className="mb-1">
-              <Label htmlFor='password' className="text-main-gray-200 block mb-2">
+            <div>
+                <div className="flex items-center justify-between">
+              <Label htmlFor='password' className="text-main-gray-200 block my-3">
                 Password
 							</Label>
+              <Button
+                onClick={props.onClick}
+                className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-dark "
+              >
+                Forgot Password?
+							</Button>
+            </div>
               <Field
                 name="password"
                 type="password"
@@ -63,15 +71,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ ...props }): any =>
 							<ErrorFormikForm field="password" errors={errors} touched={touched}/>
             </div>
 
-            <div className="flex items-center justify-between">
-              <Button
-                onClick={props.onClick}
-                className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-dark "
-              >
-                Forgot Password?
-							</Button>
-            </div>
-            <div className="mt-4 flex justify-center">
+
+            <div className="mt-12 flex justify-center">
               <Button
                 buttonType="submit"
                 className="mx-auto text-white bg-primary-main border-0 py-2 focus:outline-none hover:bg-primary-hover rounded-full text-sm font-bold w-32 text-center"

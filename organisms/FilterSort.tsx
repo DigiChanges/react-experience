@@ -59,7 +59,7 @@ const FilterSort = ({ actionFilter, filterButtonName = 'Filter', filterQuery = n
         actionFilter(search, filterBy, orderBy, getSort(sortFields.isSort));
       }}>
       {({ errors, touched }) => (
-        <Form className="flex flex-col justify-between w-full text-main-gray-300">
+        <Form className="flex flex-col justify-between w-full text-main-gray-300 my-2">
           <Field
             name="search"
             type="search"

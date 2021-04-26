@@ -5,11 +5,12 @@ const PublicLayout: React.FC<any> = ({ children }) =>
 {
   return (
     <>
-      <div className="grid grid-areas-md-private-layout h-full text-gray-700 body-font bg-gray-900">
+      <div className="grid grid-areas-mobile-layout md:grid-areas-tablet-layout lg:grid-areas-desktop-layout grid-cols-desktop-layout
+      h-full dg-main-bg">
         <main className="grid-in-main min-h-screen w-full">
           {children}
         </main>
-        <Footer className="flex grid-in-footer border m-4 w-auto p-4 text-sm text-gray-200 rounded justify-center">
+        <Footer className="text-center flex grid-in-footer border m-4 w-auto p-4 text-sm text-gray-200 rounded justify-center">
           2021 © DigiChanges
         </Footer>
       </div>

@@ -3,13 +3,12 @@ import React from "react";
 const UserRemove = ({ id, lastName, firstName }) =>
 {
   return (
-			<p className="font-hairline text-5xl text-gray-400 mb-4 text-center">
-				Are you sure delete user:
-				<br/>
+			<div className="font-hairline  text-gray-400 mb-4 text-center">
+				<div className="w-full text-3xl">Are you sure delete user:</div>
 				<span className='text-2xl'>
-					{`${id} - ${lastName} ${firstName}`}
+					{`${lastName} ${firstName}`}
 				</span>
-			</p>
+			</div>
   );
 };
 
