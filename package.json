@@ -44,7 +44,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "multiselect-react-dropdown": "^1.6.11",
-    "next": "^10.0.7",
+    "next": "^10.2.0",
     "nextjs-breadcrumbs": "^0.9.9",
     "postcss": "^8.2.8",
     "postcss-cli": "^8.3.1",
