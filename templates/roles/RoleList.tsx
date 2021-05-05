@@ -9,43 +9,43 @@ import MediaObject from "../../molecules/MediaObject";
 import Title from "../../atoms/Title";
 import Button from "../../atoms/Button";
 import IconArrowCircleLeft from "../../atoms/Icons/Solid/IconArrowCircleLeft";
-import { removeUser, resetUsers } from "../../redux/users/actions";
 import { openModal, resetQueryPagination } from "../../redux/general/actions";
 import IconPencilAlt from "../../atoms/Icons/Stroke/IconPencilAlt";
-import UserRemove from "./UserRemove";
+import RoleRemove from "./RoleRemove";
 import IconTrash from "../../atoms/Icons/Stroke/IconTrash";
 import IconViewMediaObject from "../../atoms/Icons/Stroke/IconViewMediaObject";
+import {removeRole, resetRoles} from "../../redux/roles/actions";
 
-const UserList = ({ usersList, query, viewMore }) =>
+const RoleList = ({ rolesList, query, viewMore }) =>
 {
   const router = useRouter();
 	const dispatch = useDispatch();
   const [showScroll, setShowScroll] = useState(false);
 
-  const openConfirmDelete = (id: string, lastName:  string, firstName: string): void =>
+  const openConfirmDelete = (id: string, name:  string): void =>
 	{
 		const modalData = {
 			idSelected: id,
 			open: true,
-			text: <UserRemove id={id} lastName={lastName} firstName={firstName}/>,
-			action: removeUser
+			text: <RoleRemove name={name}/>,
+			action: removeRole
 		}
 
 		dispatch(openModal(modalData));
   };
 
   const actionCreateButton = () => {
-    return router.push("/users/create");
+    return router.push("/roles/create");
   }
 
   const onClickFilter = (search: string, filterBy: string, orderBy: string, sort: 'asc' | 'desc') =>
 	{
-		dispatch(resetUsers());
+		dispatch(resetRoles());
 		dispatch(resetQueryPagination());
 
     const uriParam = FilterFactory.getUriParam({ search, filterBy, orderBy, sort });
 
-    router.push(`/users/list?${uriParam}`, undefined, { shallow: false });
+    router.push(`/roles/list?${uriParam}`, undefined, { shallow: false });
   }
 
   const checkScrollTop = () =>
@@ -74,25 +74,25 @@ const UserList = ({ usersList, query, viewMore }) =>
     <section className="mx-8">
       <TitleWithButton
         className="dg-section-title"
-        title="Users"
-        labelButtonName="Create User"
+        title="Roles"
+        labelButtonName="Create Role"
         icon={IconPlus}
         buttonAction={actionCreateButton}
       />
 			<FilterSort actionFilter={onClickFilter} filterQuery={query} placeholder="Search roles..."/>
 			<div className="dg-grid-3x3">
-			{usersList && usersList.map((user, i) => (
+			{rolesList && rolesList.map((role, i) => (
 				<MediaObject className="dg-media-object" key={i}>
 					<div className="flex-col w-10 h-10 bg-white text-black justify-center content-center rounded-full">{' '}</div>
 					<div className="flex-col justify-center content-center ml-3">
-						<Title titleType="h6" className="hover:transform hover:scale-125"><a href={`/users/view/${user.id}`}>{user.firstName}{' '}{user.lastName}</a></Title>
-						{user.email}
+						<Title titleType="h6" className="hover:transform hover:scale-125"><a href={`/roles/view/${role.id}`}>{role.name}</a></Title>
+						{role.name}
 					</div>
 					<div className="flex flex-col ml-auto">
 					<div className="h-6 w-6 my-1">
 						<button
 							className="w-6 hover:text-gray-700 mr-1 focus:outline-none"
-							onClick={() => router.push(`/users/update/${user.id}`)}
+							onClick={() => router.push(`/roles/update/${role.id}`)}
 						>
 							<IconPencilAlt/>
 						</button>
@@ -100,7 +100,7 @@ const UserList = ({ usersList, query, viewMore }) =>
 					<div className="h-6 w-6 my-1">
 						<button
 							className="w-6 hover:text-gray-700 mr-1 focus:outline-none"
-							onClick={() => router.push(`/users/changePassword/${user.id}`)}
+							onClick={() => router.push(`/roles/changePassword/${role.id}`)}
 						>
 							<IconViewMediaObject/>
 						</button>
@@ -108,7 +108,7 @@ const UserList = ({ usersList, query, viewMore }) =>
 					<div className="h-6 w-6 my-1">
 						<button
 							className="w-6 hover:text-gray-700 mr-1 focus:outline-none"
-							onClick={() => openConfirmDelete(user.id, user.lastName, user.firstName)}
+							onClick={() => openConfirmDelete(role.id, role.name)}
 							type='button'
 						>
 							<IconTrash/>
@@ -131,18 +131,4 @@ const UserList = ({ usersList, query, viewMore }) =>
   );
 };
 
-export default UserList;
-// export default withRedux(initializeStore)(UsersList);
-
-// export function getServerSideProps() {
-//   const reduxStore = initializeStore();
-//   const { dispatch } = reduxStore
-//
-//   dispatch({
-//     type: 'TICK',
-//     light: false,
-//     lastUpdate: Date.now(),
-//   })
-//
-//   return { props: { initialReduxState: reduxStore.getState() } }
-// }
+export default RoleList;

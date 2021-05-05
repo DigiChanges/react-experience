@@ -1,30 +1,36 @@
 import {
 	GET_ROLES_SUCCESS,
-	SELECTED_ROLE,
-	UNSELECTED_ROLE,
 	CREATE_ROLE_SUCCESS,
 	UPDATE_ROLE_SUCCESS,
-	REMOVE_ROLE_SUCCESS
+	REMOVE_ROLE_SUCCESS, RESET_ROLES
 } from './constants';
 import {ReduxActions} from "../../interfaces/default";
+import _ from "lodash";
 
 const INIT_STATE = {
-	rolesList: null,
+	rolesList: [],
 	roleSelected: null,
 }
 
-type State = {
-	rolesList: [] | null
+export type State = {
+	rolesList: any[]
 }
 
 const addRole = (newRole, roles) =>
 {
-	if (!roles)
+    const role = roles.find((role) => role.id === newRole.id);
+
+    if (!roles)
 	{
-		roles = []
+		roles = [];
 	}
-	roles.push(newRole)
-	return roles
+
+    if (!role)
+    {
+        roles.push(newRole);
+    }
+
+	return roles;
 }
 
 const updateRole = (role, roles) =>
@@ -53,18 +59,24 @@ const getSelectedRole = (id, roles) => (
 	roles.find(role => role.id === id)
 )
 
+const getRoles = (newRoles, currentRoles, pagination) =>
+{
+    if (!pagination) {
+      return newRoles;
+    }
+
+	return _.concat(currentRoles, newRoles);
+}
+
 const Roles = (state: State = INIT_STATE, action: ReduxActions) =>
 {
 	switch (action.type)
 	{
 		case GET_ROLES_SUCCESS:
-			return {...state, rolesList: action.payload}
+			return {...state, rolesList: getRoles(action.payload.roles, state.rolesList, action.payload.pagination)}
 
-		case SELECTED_ROLE:
-			return {...state, roleSelected: getSelectedRole(action.payload, state.rolesList)}
-
-		case UNSELECTED_ROLE:
-			return {...state, roleSelected: INIT_STATE.roleSelected}
+		case RESET_ROLES:
+            return { ...state, rolesList: INIT_STATE.rolesList }
 
 		case CREATE_ROLE_SUCCESS:
 			return {...state, rolesList: addRole(action.payload, state.rolesList)}

@@ -5,10 +5,12 @@ import HttpRequest from "../helpers/HttpRequest";
 const {protocol, hostname, port} = config.apiGateway.server
 const {getAll, create, update, remove} = config.apiGateway.routes.roles
 
-export const getAllRoles = () =>
+export const getAllRoles = (uriParam?: string) =>
 {
+    const params = uriParam ?? '';
+
 	const requestOptions = {
-		url: `${protocol}://${hostname}:${port}/${getAll}`,
+    url: `${protocol}://${hostname}:${port}/${getAll}?${params}`,
 		method: 'GET',
 		headers: getHeader()
 	}

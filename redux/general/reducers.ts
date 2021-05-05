@@ -23,7 +23,7 @@ export interface IModalData
 	action: any;
 }
 
-interface State
+export interface State
 {
 	isLoading: boolean,
 	notification: any | null,

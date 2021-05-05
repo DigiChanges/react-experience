@@ -7,7 +7,7 @@ const UsersIndexPage = (): any =>
 
 	useEffect(() =>
 	{
-			router.replace('/users/list')
+        router.replace('/users/list')
 	})
 
 	return (

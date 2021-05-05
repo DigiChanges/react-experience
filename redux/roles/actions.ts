@@ -8,18 +8,24 @@ import {
 	UPDATE_ROLE,
 	UPDATE_ROLE_SUCCESS,
 	REMOVE_ROLE,
-	REMOVE_ROLE_SUCCESS
+	REMOVE_ROLE_SUCCESS, RESET_ROLES
 } from './constants';
 import {ReduxActions} from "../../interfaces/default";
+import {ParsedUrlQuery} from "querystring";
 
-export const getRoles = (): ReduxActions => ({
+export const getRoles = (userFilterQueryParam?: ParsedUrlQuery, nextQueryParamsPagination?: string): ReduxActions => ({
 	type: GET_ROLES,
-	payload: null
+  payload: { userFilterQueryParam, nextQueryParamsPagination }
 })
 
-export const getRolesSuccess = (roles: []): ReduxActions => ({
+export const getRolesSuccess = (roles: [], pagination): ReduxActions => ({
 	type: GET_ROLES_SUCCESS,
-	payload: roles
+	payload: { roles, pagination }
+})
+
+export const resetRoles = (): ReduxActions => ({
+  type: RESET_ROLES,
+  payload: null
 })
 
 export const selectedRole = (id: string): ReduxActions => ({

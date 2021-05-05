@@ -13,7 +13,7 @@ const RolesTable = () =>
 
 	useEffect(() =>
 	{
-		dispatch(getRoles())
+		// dispatch(getRoles())
 	}, []);
 
 	const getRoleRow = (id, name, slug) => ({

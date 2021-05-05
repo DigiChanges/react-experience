@@ -15,7 +15,7 @@ const INIT_STATE = {
 	userPermissions: []
 };
 
-type State = {
+export interface State {
 	user: any | null,
 	permissionsList: string[],
 	userPermissions: string[]

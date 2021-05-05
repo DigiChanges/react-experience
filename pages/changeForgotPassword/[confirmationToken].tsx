@@ -1,14 +1,12 @@
 import React from "react";
-import {useDispatch} from "react-redux";
+import {connect} from "react-redux";
 import ChangeForgotPassword from "../../templates/changeForgotPassword";
 import {changeForgotPassword} from "../../redux/auth/actions";
 import {IChangeForgotPasswordPayload} from "../../interfaces/auth";
 import Image from "../../atoms/Image";
 
-const IndexPage = ({query}) =>
+const IndexPage = ({dispatch, query}) =>
 {
-	const dispatch = useDispatch();
-
 	const changePassword = (values: IChangeForgotPasswordPayload) =>
 	{
 			dispatch(changeForgotPassword({...values, confirmationToken: query.confirmationToken}));
@@ -28,6 +26,6 @@ const IndexPage = ({query}) =>
 	)
 }
 
-IndexPage.getInitialProps = ({query}) => ({query});
+IndexPage.getInitialProps = ({dispatch, query}) => ({dispatch, query});
 
-export default IndexPage;
+export default connect((state) => state)(IndexPage);

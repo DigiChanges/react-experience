@@ -17,7 +17,7 @@ const RoleCreate = (): any =>
 
 	useEffect(() =>
 	{
-		dispatch(getRoles());
+		// dispatch(getRoles());
 	}, []);
 
 	//TODO child key issue

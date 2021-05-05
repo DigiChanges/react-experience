@@ -5,7 +5,7 @@ const INIT_STATE = {
   showSidebar: true,
 }
 
-type State = {
+export type State = {
   showSidebar: boolean,
 }
 

@@ -6,7 +6,6 @@ import {
 	putRole,
 	deleteRole
 } from '../../services/rolesService';
-import {notificationTypes, notification} from '../../entities';
 import {
 	GET_ROLES,
 	CREATE_ROLE,
@@ -16,7 +15,7 @@ import {
 import {
 	startGeneralLoading,
 	stopGeneralLoading,
-	showGeneralNotification
+	nextQueryPagination
 } from '../general/actions';
 import {
 	getRolesSuccess,
@@ -24,41 +23,38 @@ import {
 	updateRoleSuccess,
 	removeRoleSuccess
 } from './actions';
+import FilterFactory from "../../helpers/FilterFactory";
+import {showErrorNotification, showSuccessNotification} from "../general/saga";
 
-function* getRolesList()
+function* getRolesList({payload})
 {
 	yield put(startGeneralLoading())
-	try
-	{
-		const res = yield call(getAllRoles)
-		const {data} = res
 
-		if (!data)
-		{
-			return yield put(
-				showGeneralNotification(
-					notification(
-						notificationTypes.ERROR,
-						'Internal Server Error'
-					)
-				)
-			)
-		}
-		yield put(getRolesSuccess(data))
-	} catch (e)
+    try
 	{
-		yield put(
-			showGeneralNotification(
-				notification(
-					notificationTypes.ERROR,
-					e.message
-				)
-			)
-		)
-	} finally
-	{
-		yield put(stopGeneralLoading())
-	}
+	    const {userFilterQueryParam, nextQueryParamsPagination} = payload;
+	    let query;
+
+	    if (userFilterQueryParam || nextQueryParamsPagination)
+	    {
+            query = FilterFactory.getPath(payload.userFilterQueryParam, payload.nextQueryParamsPagination);
+        }
+
+		const res = yield call(getAllRoles, query)
+		const {data, pagination} = res
+
+		if (!data) {
+            return yield put(showErrorNotification("Internal Server Error"));
+        }
+
+        yield put(getRolesSuccess(data, pagination))
+        yield put(nextQueryPagination(pagination));
+
+	  } catch (e) {
+    yield put(showErrorNotification(e.message));
+  } finally {
+    yield put(stopGeneralLoading());
+  }
 }
 
 /**
@@ -81,9 +77,10 @@ function* createNewRole(
 		//create user
 		const res = yield call(postRole, newRole)
 		const {data} = res
+
 		if (!data)
 		{
-			return yield put(showErrorNotification('Internal Server Error'))
+      return yield put(showErrorNotification("Internal Server Error"));
 		}
 
 		/**
@@ -121,7 +118,7 @@ function* updateRole({
 		const {data} = res
 		if (!data)
 		{
-			return yield put(showErrorNotification('Internal Server Error'))
+      return yield put(showErrorNotification("Internal Server Error"));
 		}
 		yield put(showSuccessNotification('Role Updated!'))
 		yield put(updateRoleSuccess(data))
@@ -158,24 +155,6 @@ function* removeRole({payload: id})
 		yield put(stopGeneralLoading())
 	}
 }
-
-const showSuccessNotification = (msg: string) => (
-	showGeneralNotification(
-		notification(
-			notificationTypes.SUCCESS,
-			msg
-		)
-	)
-)
-
-const showErrorNotification = (msg: string) => (
-	showGeneralNotification(
-		notification(
-			notificationTypes.ERROR,
-			msg
-		)
-	)
-)
 
 export function* watchGetRoles(): any
 {

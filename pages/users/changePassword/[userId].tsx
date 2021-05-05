@@ -1,13 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import UserChangePassword from "../../../templates/users/UserChangePass";
 import {changePasswordUser} from "../../../redux/users/actions";
 import {IChangePasswordPayload} from "../../../interfaces/user";
+import withAuth from '../../../providers/withAuth';
 
-const IndexPage = ({query}): any =>
+const IndexPage = ({dispatch, query}): any =>
 {
-	const dispatch = useDispatch();
-
 	const changePasswordAction = (payload: IChangePasswordPayload) =>
 	{
 		dispatch(changePasswordUser(payload, query.userId));
@@ -18,6 +17,6 @@ const IndexPage = ({query}): any =>
 	)
 }
 
-IndexPage.getInitialProps = ({query}) => ({query});
+IndexPage.getInitialProps = ({dispatch, query}) => ({dispatch, query});
 
-export default IndexPage;
+export default connect((state) => state)(withAuth(IndexPage));
