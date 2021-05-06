@@ -1,14 +1,11 @@
 import {
 	GET_ROLES,
 	GET_ROLES_SUCCESS,
-	SELECTED_ROLE,
-	UNSELECTED_ROLE,
 	CREATE_ROLE,
-	CREATE_ROLE_SUCCESS,
 	UPDATE_ROLE,
-	UPDATE_ROLE_SUCCESS,
 	REMOVE_ROLE,
-	REMOVE_ROLE_SUCCESS, RESET_ROLES
+	REMOVE_ROLE_SUCCESS,
+    RESET_ROLES
 } from './constants';
 import {ReduxActions} from "../../interfaces/default";
 import {ParsedUrlQuery} from "querystring";
@@ -28,16 +25,6 @@ export const resetRoles = (): ReduxActions => ({
   payload: null
 })
 
-export const selectedRole = (id: string): ReduxActions => ({
-	type: SELECTED_ROLE,
-	payload: id
-})
-
-export const unselectedRole = (): ReduxActions => ({
-	type: UNSELECTED_ROLE,
-	payload: null
-})
-
 export const createRole = (
 	name: string,
 	slug: string,
@@ -45,11 +32,6 @@ export const createRole = (
 ): ReduxActions => ({
 	type: CREATE_ROLE,
 	payload: {name, slug, permissions}
-})
-
-export const createRoleSuccess = (roles: any): ReduxActions => ({
-	type: CREATE_ROLE_SUCCESS,
-	payload: roles
 })
 
 export const updateRole = (
@@ -61,11 +43,6 @@ export const updateRole = (
 ): ReduxActions => ({
 	type: UPDATE_ROLE,
 	payload: {id, name, slug, permissions, enable}
-})
-
-export const updateRoleSuccess = (roles: any): ReduxActions => ({
-	type: UPDATE_ROLE_SUCCESS,
-	payload: roles
 })
 
 export const removeRole = (id: string): ReduxActions => ({

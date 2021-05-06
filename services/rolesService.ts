@@ -1,6 +1,7 @@
 import {config} from '../api/config'
 import {getHeader} from '../api/auth'
 import HttpRequest from "../helpers/HttpRequest";
+import { IRolePayload } from '../interfaces/role';
 
 const {protocol, hostname, port} = config.apiGateway.server
 const {getAll, create, update, remove} = config.apiGateway.routes.roles
@@ -17,7 +18,7 @@ export const getAllRoles = (uriParam?: string) =>
 
 	return HttpRequest.request(requestOptions);
 }
-export const postRole = (body: any) =>
+export const postRole = (body: IRolePayload) =>
 {
 	const requestOptions = {
 		url: `${protocol}://${hostname}:${port}/${create}`,
@@ -29,7 +30,7 @@ export const postRole = (body: any) =>
 	return HttpRequest.request(requestOptions);
 }
 
-export const putRole = (id: string, body: any) =>
+export const putRole = (id: string, body: IRolePayload) =>
 {
 	const requestOptions = {
 		url: `${protocol}://${hostname}:${port}/${update.replace(':id', id)}`,

@@ -16,17 +16,6 @@ export type State = {
   userSelected: any | null
 }
 
-const updateUser = (user, users) => {
-  if (users && users.length > 0) {
-    const userIndex = users.findIndex(u => u.id === user.id)
-    if (userIndex > -1) {
-      users[userIndex] = user
-    }
-    return users
-  }
-  return INIT_STATE.usersList
-}
-
 const deleteUser = (user, users) => (
   users && users.length > 0
     ? users.filter(u => u.id !== user.id)
