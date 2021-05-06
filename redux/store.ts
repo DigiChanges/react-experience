@@ -1,27 +1,9 @@
-import { applyMiddleware, createStore, Store } from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import {createWrapper, Context} from 'next-redux-wrapper';
-import rootReducers, {appState} from "./reducers";
+import {createWrapper} from 'next-redux-wrapper';
+import rootReducers from "./reducers";
 import rootSagas from "./sagas";
-
-// export const makeStore = (context: Context) => {
-//     // 1: Create the middleware
-//     const sagaMiddleware = createSagaMiddleware();
-//
-//     // 2: Add an extra parameter for applying middleware:
-//     const store = createStore(rootReducers, applyMiddleware(sagaMiddleware));
-//
-//     // 3: Run your sagas on server
-//     (store as appState).sagaTask = sagaMiddleware.run(rootSagas);
-//
-//     // 4: now return the store:
-//     return store;
-// };
-//
-// // @ts-ignore
-// export const wrapper = createWrapper<Store<appState>>(makeStore, {debug: true});
-//
-// export default wrapper;
+import {config} from '../api/config';
 
 const bindMiddleware = (middleware) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -31,7 +13,7 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware)
 }
 
-export const makeStore = (context) => {
+export const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware()
 
   // @ts-ignore
@@ -43,6 +25,6 @@ export const makeStore = (context) => {
   return store
 }
 
-export const wrapper = createWrapper(makeStore, { debug: true })
+export const wrapper = createWrapper(makeStore, { debug: config.debug })
 
 export default wrapper;

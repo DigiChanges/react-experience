@@ -5,9 +5,7 @@ import {
 	GET_USER,
 	GET_USER_SUCCESS,
 	CREATE_USER,
-	CREATE_USER_SUCCESS,
 	UPDATE_USER,
-	UPDATE_USER_SUCCESS,
 	CHANGE_PASSWORD_USER,
 	REMOVE_USER,
 	REMOVE_USER_SUCCESS,
@@ -47,11 +45,6 @@ export const createUser = (payload: IUserPayload): ReduxActions => ({
   payload
 })
 
-export const createUserSuccess = (payload: IUserApi): ReduxActions => ({
-  type: CREATE_USER_SUCCESS,
-  payload
-})
-
 export const updateUser = (body: IUserPayload, id: string): ReduxActions =>
 {
 	return ({
@@ -59,11 +52,6 @@ export const updateUser = (body: IUserPayload, id: string): ReduxActions =>
 		payload: { body, id }
 	});
 }
-
-export const updateUserSuccess = (payload: IUserApi): ReduxActions => ({
-  type: UPDATE_USER_SUCCESS,
-  payload
-})
 
 export const changePasswordUser = (body: IChangePasswordPayload, id: string): ReduxActions => ({
     type: CHANGE_PASSWORD_USER,

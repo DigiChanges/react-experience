@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import UserCreate from "../../../templates/users/UserCreate";
 import {getRoles} from "../../../redux/roles/actions";
 import {getPermissions} from "../../../redux/auth/actions";

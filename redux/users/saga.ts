@@ -24,8 +24,6 @@ import {
 } from "../general/actions";
 import {
 	getUsersSuccess,
-	createUserSuccess,
-	updateUserSuccess,
 	removeUserSuccess, getUserSuccess,
 } from "./actions";
 import FilterFactory from "../../helpers/FilterFactory";
@@ -106,7 +104,6 @@ function* createNewUser({ payload })
       }
     }
     yield put(showSuccessNotification("User Created!"));
-    yield put(createUserSuccess(data));
 
     Router.push("/users");
 
@@ -140,7 +137,6 @@ function* updateUser({ payload: { body, id } })
     }
 
     yield put(showSuccessNotification("User Updated!"));
-    yield put(updateUserSuccess(data));
     Router.push("/users");
   } catch (e) {
     yield put(showErrorNotification(e.message));

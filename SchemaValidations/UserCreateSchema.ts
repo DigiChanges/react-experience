@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const UserSchema = Yup.object().shape({
+const UserCreateSchema = Yup.object().shape({
   firstName: Yup.string()
       .required("Required")
       .min(2, "Too Short!")
@@ -43,4 +43,4 @@ const UserSchema = Yup.object().shape({
       .required("Required"),
 });
 
-export default UserSchema;
+export default UserCreateSchema;

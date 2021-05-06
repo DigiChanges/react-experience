@@ -10,7 +10,6 @@ createTheme("DGDarkTheme", {
     primary: "#E1E8E8",
     secondary: "#D2D9D9",
   },
-
   background: {
     default: "#2d3748",
   },

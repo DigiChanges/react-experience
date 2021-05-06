@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserRemove = ({ id, lastName, firstName }) =>
+const UserRemove = ({ lastName, firstName }) =>
 {
   return (
 			<div className="font-hairline  text-gray-400 mb-4 text-center">

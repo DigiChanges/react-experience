@@ -1,5 +1,5 @@
 import React, {PropsWithChildren} from "react";
-import { Field, Form, Formik } from "formik";
+import {Field, Form, Formik} from "formik";
 import MultiSelect from "../../atoms/MultiSelect";
 import SimpleSelect from "../../atoms/SimpleSelect";
 import Title from "../../atoms/Title";
@@ -7,7 +7,7 @@ import Label from "../../atoms/Label";
 import ButtonConfirm from "../../molecules/ButtonConfirm";
 import ButtonClose from "../../molecules/ButtonClose";
 import {SelectTransform} from "../../transforms/default";
-import UserSchema from "../../SchemaValidations/UserSchema";
+import UserCreateSchema from "../../SchemaValidations/UserCreateSchema";
 import {IRoleApi} from "../../interfaces/role";
 import DGDatePicker from "../../atoms/DGDatePicker";
 import {documentTypeOptions, country,states} from "../../entities";
@@ -50,7 +50,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
           roles: [],
           enable: ""
         }}
-        validationSchema={UserSchema}
+        validationSchema={UserCreateSchema}
         onSubmit={async (values) => {
             createAction(values);
         }}

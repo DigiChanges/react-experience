@@ -7,10 +7,10 @@ const {getAll, create, update, remove} = config.apiGateway.routes.roles
 
 export const getAllRoles = (uriParam?: string) =>
 {
-    const params = uriParam ?? '';
+    const params = uriParam ? `?${uriParam}`: '';
 
 	const requestOptions = {
-    url: `${protocol}://${hostname}:${port}/${getAll}?${params}`,
+    url: `${protocol}://${hostname}:${port}/${getAll}${params}`,
 		method: 'GET',
 		headers: getHeader()
 	}

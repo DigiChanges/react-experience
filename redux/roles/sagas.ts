@@ -28,7 +28,7 @@ import {showErrorNotification, showSuccessNotification} from "../general/saga";
 
 function* getRolesList({payload})
 {
-	yield put(startGeneralLoading())
+	yield put(startGeneralLoading());
 
     try
 	{
@@ -40,15 +40,19 @@ function* getRolesList({payload})
             query = FilterFactory.getPath(payload.userFilterQueryParam, payload.nextQueryParamsPagination);
         }
 
-		const res = yield call(getAllRoles, query)
-		const {data, pagination} = res
+		const res = yield call(getAllRoles, query);
+		const {data, pagination} = res;
 
 		if (!data) {
             return yield put(showErrorNotification("Internal Server Error"));
         }
 
-        yield put(getRolesSuccess(data, pagination))
-        yield put(nextQueryPagination(pagination));
+        yield put(getRolesSuccess(data, pagination));
+
+        if (pagination)
+        {
+          yield put(nextQueryPagination(pagination));
+        }
 
 	  } catch (e) {
     yield put(showErrorNotification(e.message));

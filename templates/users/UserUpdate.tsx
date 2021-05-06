@@ -9,9 +9,9 @@ import ButtonClose from "../../molecules/ButtonClose";
 import { SelectTransform } from "../../transforms/default";
 import DGDatePicker from "../../atoms/DGDatePicker";
 import SimpleSelect from "../../atoms/SimpleSelect";
-import UserSchema from "../../SchemaValidations/UserSchema";
 import {country, documentTypeOptions, states} from "../../entities";
 import ErrorFormikForm from "../../molecules/ErrorFormikForm";
+import UserUpdateSchema from '../../SchemaValidations/UserUpdateSchema';
 
 interface UserUpdateTemplateProps extends PropsWithChildren<any> {
   permissionsList: string[];
@@ -23,7 +23,7 @@ interface UserUpdateTemplateProps extends PropsWithChildren<any> {
 const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelected, rolesList, permissionsList}): any =>
 {
 	return (
-		<section className="text-gray-500 body-font bg-gray-900 w-full md:container mx-auto px-3">
+      <section className="text-gray-500 body-font bg-gray-900 w-full md:container mx-auto px-3">
       <div className="mb-2 ">
         <Title className="text-3xl font-bold sm:px-0 md:px-18 lg:px-14" titleType="h1">
           Update User
@@ -47,7 +47,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 							permissions: userSelected.permissions,
 							enable: userSelected.enable,
 						}}
-						validationSchema={UserSchema}
+						validationSchema={UserUpdateSchema}
 						onSubmit={(values) =>
 						{
 							updateAction(values, userSelected.id);
@@ -302,11 +302,11 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelect
 									/>
 								</div>
 								<ErrorFormikForm field="roles" errors={errors} touched={touched}/>
-								<div className="w-full mt-5 flex flex-row-reverse">
-									<ButtonConfirm>Save</ButtonConfirm>
+								<div className="w-full mt-5 flex flex-row">
 									<ButtonClose buttonType="button" onClick={() => Router.push("/users")}>
 										Close
 									</ButtonClose>
+									<ButtonConfirm>Save</ButtonConfirm>
 								</div>
 							</div>
 						</Form>

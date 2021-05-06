@@ -27,7 +27,7 @@ const UserList = ({ usersList, query, viewMore }) =>
 		const modalData = {
 			idSelected: id,
 			open: true,
-			text: <UserRemove id={id} lastName={lastName} firstName={firstName}/>,
+			text: <UserRemove lastName={lastName} firstName={firstName}/>,
 			action: removeUser
 		}
 
@@ -132,17 +132,3 @@ const UserList = ({ usersList, query, viewMore }) =>
 };
 
 export default UserList;
-// export default withRedux(initializeStore)(UsersList);
-
-// export function getServerSideProps() {
-//   const reduxStore = initializeStore();
-//   const { dispatch } = reduxStore
-//
-//   dispatch({
-//     type: 'TICK',
-//     light: false,
-//     lastUpdate: Date.now(),
-//   })
-//
-//   return { props: { initialReduxState: reduxStore.getState() } }
-// }
