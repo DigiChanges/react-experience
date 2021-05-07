@@ -10,13 +10,13 @@ import withAuth from '../../../providers/withAuth';
 const IndexPage = ({dispatch, Auth, Roles}) =>
 {
   const createAction = (payload: IUserPayload) =>
-	{
-		dispatch(createUser(payload));
-	}
+  {
+      dispatch(createUser(payload));
+  }
 
-	useEffect(() => {
-      dispatch(getRoles());
-      dispatch(getPermissions());
+  useEffect(() => {
+    dispatch(getRoles());
+    dispatch(getPermissions());
   }, []);
 
   return <UserCreate permissionsList={Auth.permissionsList} rolesList={Roles.rolesList} createAction={createAction}/>;

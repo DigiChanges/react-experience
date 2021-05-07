@@ -19,7 +19,7 @@ import IconViewMediaObject from "../../atoms/Icons/Stroke/IconViewMediaObject";
 const UserList = ({ usersList, query, viewMore }) =>
 {
   const router = useRouter();
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [showScroll, setShowScroll] = useState(false);
 
   const openConfirmDelete = (id: string, lastName:  string, firstName: string): void =>

@@ -1,10 +1,12 @@
 import {
-	GET_ROLES_SUCCESS,
-	REMOVE_ROLE_SUCCESS,
-    RESET_ROLES
+  GET_ROLE_SUCCESS,
+  GET_ROLES_SUCCESS,
+  REMOVE_ROLE_SUCCESS, RESET_ROLE_SELECTED,
+  RESET_ROLES
 } from './constants';
-import {ReduxActions} from "../../interfaces/default";
+import {ReduxAction} from "../../interfaces/default";
 import _ from "lodash";
+import { IRoleApi } from '../../interfaces/role';
 
 const INIT_STATE = {
 	rolesList: [],
@@ -12,7 +14,8 @@ const INIT_STATE = {
 }
 
 export type State = {
-	rolesList: any[]
+	rolesList: any[],
+    roleSelected: IRoleApi
 }
 
 const deleteRole = (role, roles) => (
@@ -30,15 +33,21 @@ const getRoles = (newRoles, currentRoles, pagination) =>
 	return _.concat(currentRoles, newRoles);
 }
 
-const Roles = (state: State = INIT_STATE, action: ReduxActions) =>
+const Roles = (state: State = INIT_STATE, action: ReduxAction) =>
 {
 	switch (action.type)
 	{
 		case GET_ROLES_SUCCESS:
 			return {...state, rolesList: getRoles(action.payload.roles, state.rolesList, action.payload.pagination)}
 
+        case GET_ROLE_SUCCESS:
+          return { ...state, roleSelected: action.payload }
+
 		case RESET_ROLES:
             return { ...state, rolesList: INIT_STATE.rolesList }
+
+        case RESET_ROLE_SELECTED:
+            return { ...state, roleSelected: action.payload }
 
 		case REMOVE_ROLE_SUCCESS:
 			return {...state, rolesList: deleteRole(action.payload, state.rolesList)}

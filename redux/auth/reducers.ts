@@ -7,7 +7,7 @@ import {
 	CHANGE_FORGOT_PASSWORD,
 	CHANGE_FORGOT_PASSWORD_SUCCESS
 } from './constants';
-import {ReduxActions} from "../../interfaces/default";
+import {ReduxAction} from "../../interfaces/default";
 
 const INIT_STATE = {
 	user: null,
@@ -21,7 +21,7 @@ export interface State {
 	userPermissions: string[]
 }
 
-const Auth = (state: State = INIT_STATE, action: ReduxActions) =>
+const Auth = (state: State = INIT_STATE, action: ReduxAction) =>
 {
 	switch (action.type)
 	{

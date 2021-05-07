@@ -7,7 +7,7 @@ const RolesIndexPage = (): any =>
 
 	useEffect(() =>
 	{
-			router.replace('/roles/list')
+        router.replace('/roles/list')
 	})
 
 	return (

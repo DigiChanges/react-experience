@@ -1,10 +1,10 @@
 import {
-	GET_USERS_SUCCESS,
-	REMOVE_USER_SUCCESS,
-	RESET_USERS, GET_USER_SUCCESS
+  GET_USERS_SUCCESS,
+  REMOVE_USER_SUCCESS,
+  RESET_USERS, GET_USER_SUCCESS, RESET_USER_SELECTED
 } from './constants';
 import _ from "lodash";
-import {ReduxActions} from "../../interfaces/default";
+import {ReduxAction} from "../../interfaces/default";
 
 const INIT_STATE = {
   usersList: [],
@@ -26,7 +26,7 @@ const getUsers = (newUsers, currentUsers) => {
 	return _.concat(currentUsers, newUsers);
 }
 
-const Users = (state: State = INIT_STATE, action: ReduxActions) => {
+const Users = (state: State = INIT_STATE, action: ReduxAction) => {
   switch (action.type)
   {
     case GET_USERS_SUCCESS:
@@ -34,6 +34,9 @@ const Users = (state: State = INIT_STATE, action: ReduxActions) => {
 
     case RESET_USERS:
       return { ...state, usersList: INIT_STATE.usersList }
+
+    case RESET_USER_SELECTED:
+      return { ...state, roleSelected: action.payload }
 
     case GET_USER_SUCCESS:
       return { ...state, userSelected: action.payload }

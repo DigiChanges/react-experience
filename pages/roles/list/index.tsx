@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { getRoles, resetRoles } from "../../../redux/roles/actions";
 import { resetQueryPagination } from "../../../redux/general/actions";
 import RoleList from "../../../templates/roles/RoleList";
+import withAuth from '../../../providers/withAuth';
 
-const RolesListPage = ({ query }): any => {
-  const dispatch = useDispatch();
-  const { rolesList } = useSelector((state : any) => state.Roles);
-  const { nextQueryParamsPagination } = useSelector((state : any) => state.General);
-
+const IndexPage = ({dispatch, Roles, General, query}): any =>
+{
   useEffect(() => {
-		console.log('render', query)
-    dispatch(getRoles(query, nextQueryParamsPagination));
+    dispatch(getRoles(query, General.nextQueryParamsPagination));
 
     return () => {
       dispatch(resetRoles());
@@ -20,17 +17,16 @@ const RolesListPage = ({ query }): any => {
   }, [query]);
 
   const viewMore = (): void => {
-    dispatch(getRoles(query, nextQueryParamsPagination));
+    dispatch(getRoles(query, General.nextQueryParamsPagination));
   }
 
   return (
     <>
-			<div>RENDER</div>
-      {/*<RoleList viewMore={viewMore} rolesList={rolesList} query={query} />*/}
+      <RoleList viewMore={viewMore} rolesList={Roles.rolesList} query={query} />
     </>
   );
 }
 
-RolesListPage.getInitialProps = ({ query }) => ({ query })
+IndexPage.getInitialProps = ({dispatch, Roles, General, query}) => ({dispatch, Roles, General, query});
 
-export default RolesListPage;
+export default connect((state) => state)(withAuth(IndexPage));

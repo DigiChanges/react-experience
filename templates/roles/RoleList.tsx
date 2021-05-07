@@ -13,7 +13,6 @@ import { openModal, resetQueryPagination } from "../../redux/general/actions";
 import IconPencilAlt from "../../atoms/Icons/Stroke/IconPencilAlt";
 import RoleRemove from "./RoleRemove";
 import IconTrash from "../../atoms/Icons/Stroke/IconTrash";
-import IconViewMediaObject from "../../atoms/Icons/Stroke/IconViewMediaObject";
 import {removeRole, resetRoles} from "../../redux/roles/actions";
 
 const RoleList = ({ rolesList, query, viewMore }) =>
@@ -94,15 +93,7 @@ const RoleList = ({ rolesList, query, viewMore }) =>
 							className="w-6 hover:text-gray-700 mr-1 focus:outline-none"
 							onClick={() => router.push(`/roles/update/${role.id}`)}
 						>
-							<IconPencilAlt/>
-						</button>
-					</div>
-					<div className="h-6 w-6 my-1">
-						<button
-							className="w-6 hover:text-gray-700 mr-1 focus:outline-none"
-							onClick={() => router.push(`/roles/changePassword/${role.id}`)}
-						>
-							<IconViewMediaObject/>
+                        <IconPencilAlt/>
 						</button>
 					</div>
 					<div className="h-6 w-6 my-1">
@@ -111,7 +102,7 @@ const RoleList = ({ rolesList, query, viewMore }) =>
 							onClick={() => openConfirmDelete(role.id, role.name)}
 							type='button'
 						>
-							<IconTrash/>
+                        <IconTrash/>
 					</button>
 					</div>
 				</div>

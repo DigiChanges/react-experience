@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
-import UserUpdate from "../../../templates/users/UserUpdate";
 import {connect} from 'react-redux';
-import {getUser, getRoles, getPermissions, updateUser} from "../../../redux/actions";
+import UserUpdate from "../../../templates/users/UserUpdate";
+import { getUser, getRoles, getPermissions, updateUser, resetUserSelected } from '../../../redux/actions';
 import {IUserPayload} from "../../../interfaces/user";
 import withAuth from '../../../providers/withAuth';
 
@@ -17,6 +17,10 @@ const IndexPage = ({dispatch, Users, Roles, Auth, query}): any =>
 		dispatch(getUser(query.userId));
 		dispatch(getRoles());
 		dispatch(getPermissions());
+
+        return () => {
+          dispatch(resetUserSelected());
+      }
 	}, []);
 
 	return (

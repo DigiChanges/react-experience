@@ -1,7 +1,11 @@
 export const GET_ROLES = 'GET_ROLES';
 export const GET_ROLES_SUCCESS = 'GET_ROLES_SUCCESS';
 
+export const GET_ROLE = 'GET_ROLE';
+export const GET_ROLE_SUCCESS = 'GET_ROLE_SUCCESS';
+
 export const RESET_ROLES = 'RESET_ROLES';
+export const RESET_ROLE_SELECTED = 'RESET_ROLE_SELECTED';
 
 export const CREATE_ROLE = 'CREATE_ROLE';
 

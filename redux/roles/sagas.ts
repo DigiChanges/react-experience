@@ -1,9 +1,15 @@
-import Router from 'next/router'
+import Router from 'next/router';
 import {all, call, fork, put, takeEvery} from 'redux-saga/effects';
-import {getAllRoles, postRole, putRole, deleteRole} from '../../services/rolesService';
-import {GET_ROLES, CREATE_ROLE,	UPDATE_ROLE, REMOVE_ROLE} from './constants';
+import { getAllRoles, postRole, putRole, deleteRole, getOneRole } from '../../services/rolesService';
+import {
+  GET_ROLES,
+  GET_ROLE,
+  CREATE_ROLE,
+  UPDATE_ROLE,
+  REMOVE_ROLE
+} from './constants';
 import {startGeneralLoading, stopGeneralLoading, nextQueryPagination} from '../general/actions';
-import {getRolesSuccess, removeRoleSuccess} from './actions';
+import { getRolesSuccess, getRoleSuccess, removeRoleSuccess } from './actions';
 import FilterFactory from "../../helpers/FilterFactory";
 import {showErrorNotification, showSuccessNotification} from "../general/saga";
 
@@ -36,6 +42,26 @@ function* getRolesList({payload})
         }
 
 	  } catch (e) {
+    yield put(showErrorNotification(e.message));
+  } finally {
+    yield put(stopGeneralLoading());
+  }
+}
+
+function* getRole({ payload })
+{
+  yield put(startGeneralLoading());
+
+  try {
+    const res = yield call(getOneRole, payload);
+    const { data } = res;
+
+    if (!data) {
+      return yield put(showErrorNotification("Internal Server Error"));
+    }
+
+    yield put(getRoleSuccess(data));
+  } catch (e) {
     yield put(showErrorNotification(e.message));
   } finally {
     yield put(stopGeneralLoading());
@@ -122,6 +148,12 @@ export function* watchGetRoles(): any
 	yield takeEvery(GET_ROLES, getRolesList);
 }
 
+export function* watchGetRole(): any
+{
+	// @ts-ignore
+	yield takeEvery(GET_ROLE, getRole);
+}
+
 export function* watchCreateRole(): any
 {
 	// @ts-ignore
@@ -144,6 +176,7 @@ function* rolesSagas(): any
 {
 	yield all([
 		fork(watchGetRoles),
+        fork(watchGetRole),
 		fork(watchCreateRole),
 		fork(watchUpdateRole),
 		fork(watchRemoveRole)

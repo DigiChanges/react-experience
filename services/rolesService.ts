@@ -4,7 +4,7 @@ import HttpRequest from "../helpers/HttpRequest";
 import { IRolePayload } from '../interfaces/role';
 
 const {protocol, hostname, port} = config.apiGateway.server
-const {getAll, create, update, remove} = config.apiGateway.routes.roles
+const {getAll, create, update, remove, getOne} = config.apiGateway.routes.roles
 
 export const getAllRoles = (uriParam?: string) =>
 {
@@ -18,6 +18,17 @@ export const getAllRoles = (uriParam?: string) =>
 
 	return HttpRequest.request(requestOptions);
 }
+
+export const getOneRole = (id: string) => {
+  const requestOptions = {
+    url: `${protocol}://${hostname}:${port}/${getOne.replace(':id', id)}`,
+    method: 'GET',
+    headers: getHeader()
+  };
+
+  return HttpRequest.request(requestOptions);
+}
+
 export const postRole = (body: IRolePayload) =>
 {
 	const requestOptions = {

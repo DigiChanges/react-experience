@@ -6,7 +6,7 @@ import {
 	NEXT_QUERY_PAGINATION,
 	OPEN_MODAL_DATA, CLOSE_MODAL_DATA
 } from './constants';
-import {ReduxActions} from "../../interfaces/default";
+import {ReduxAction} from "../../interfaces/default";
 
 const INIT_STATE = {
 	isLoading: false,
@@ -31,7 +31,7 @@ export interface State
 	modalData: IModalData | null
 }
 
-const General = (state: State = INIT_STATE, action: ReduxActions) =>
+const General = (state: State = INIT_STATE, action: ReduxAction) =>
 {
 	switch (action.type)
 	{

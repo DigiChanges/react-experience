@@ -16,7 +16,7 @@ const UserView = ({userSelected, rolesList, permissionsList}) =>
 		<section className="text-gray-500 body-font bg-gray-900 w-full md:container mx-auto px-3">
       <div className="mb-2 ">
         <Title className="text-3xl font-bold sm:px-0 md:px-18 lg:px-14" titleType="h1">
-          Update User
+          View User
 				</Title>
       </div>
 				{userSelected ? (

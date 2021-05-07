@@ -1,56 +1,64 @@
 import {
-	GET_ROLES,
-	GET_ROLES_SUCCESS,
-	CREATE_ROLE,
-	UPDATE_ROLE,
-	REMOVE_ROLE,
-	REMOVE_ROLE_SUCCESS,
-    RESET_ROLES
+  GET_ROLES,
+  GET_ROLES_SUCCESS,
+  CREATE_ROLE,
+  UPDATE_ROLE,
+  REMOVE_ROLE,
+  REMOVE_ROLE_SUCCESS,
+  RESET_ROLES,
+  RESET_ROLE_SELECTED,
+  GET_ROLE, GET_ROLE_SUCCESS
 } from './constants';
-import {ReduxActions} from "../../interfaces/default";
+import {ReduxAction} from "../../interfaces/default";
 import {ParsedUrlQuery} from "querystring";
+import { IRoleApi, IRolePayload } from '../../interfaces/role';
 
-export const getRoles = (userFilterQueryParam?: ParsedUrlQuery, nextQueryParamsPagination?: string): ReduxActions => ({
+export const getRoles = (userFilterQueryParam?: ParsedUrlQuery, nextQueryParamsPagination?: string): ReduxAction => ({
 	type: GET_ROLES,
   payload: { userFilterQueryParam, nextQueryParamsPagination }
 })
 
-export const getRolesSuccess = (roles: [], pagination): ReduxActions => ({
+export const getRolesSuccess = (roles: IRoleApi[], pagination): ReduxAction => ({
 	type: GET_ROLES_SUCCESS,
 	payload: { roles, pagination }
 })
 
-export const resetRoles = (): ReduxActions => ({
+export const getRole = (id: string): ReduxAction => ({
+  type: GET_ROLE,
+  payload: id
+})
+
+export const getRoleSuccess = (users: IRoleApi): ReduxAction => ({
+  type: GET_ROLE_SUCCESS,
+  payload: users
+})
+
+export const resetRoles = (): ReduxAction => ({
   type: RESET_ROLES,
   payload: null
 })
 
-export const createRole = (
-	name: string,
-	slug: string,
-	permissions: [],
-): ReduxActions => ({
+export const resetRoleSelected = (): ReduxAction => ({
+  type: RESET_ROLE_SELECTED,
+  payload: null
+})
+
+export const createRole = (payload: IRolePayload): ReduxAction   => ({
 	type: CREATE_ROLE,
-	payload: {name, slug, permissions}
+	payload
 })
 
-export const updateRole = (
-	id: string,
-	name: string,
-	slug: string,
-	permissions: [],
-	enable: boolean
-): ReduxActions => ({
+export const updateRole = (body: IRolePayload, id: string): ReduxAction => ({
 	type: UPDATE_ROLE,
-	payload: {id, name, slug, permissions, enable}
+	payload: { body, id }
 })
 
-export const removeRole = (id: string): ReduxActions => ({
+export const removeRole = (id: string): ReduxAction => ({
 	type: REMOVE_ROLE,
 	payload: id
 })
 
-export const removeRoleSuccess = (roles: any): ReduxActions => ({
+export const removeRoleSuccess = (roles: any): ReduxAction => ({
 	type: REMOVE_ROLE_SUCCESS,
 	payload: roles
 })
