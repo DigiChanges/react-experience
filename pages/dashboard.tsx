@@ -3,7 +3,7 @@ import Content from '../templates/content';
 
 const DashboardPage = (): any =>
 {
-	return (
+    return (
 		<>
 			<Content/>
 		</>);

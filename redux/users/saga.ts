@@ -1,5 +1,4 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { notification, notificationTypes } from "../../entities";
 import Router from "next/router";
 import {
 	getAllUsers,
@@ -21,16 +20,14 @@ import {
 import {
 	startGeneralLoading,
 	stopGeneralLoading,
-	showGeneralNotification,
 	nextQueryPagination,
 } from "../general/actions";
 import {
 	getUsersSuccess,
-	createUserSuccess,
-	updateUserSuccess,
 	removeUserSuccess, getUserSuccess,
 } from "./actions";
 import FilterFactory from "../../helpers/FilterFactory";
+import {showErrorNotification, showSuccessNotification} from "../general/saga";
 
 function* getUsersList({ payload })
 {
@@ -107,8 +104,9 @@ function* createNewUser({ payload })
       }
     }
     yield put(showSuccessNotification("User Created!"));
-    yield put(createUserSuccess(data));
+
     Router.push("/users");
+
   } catch (e) {
     yield put(showErrorNotification(e.message));
   } finally {
@@ -139,7 +137,6 @@ function* updateUser({ payload: { body, id } })
     }
 
     yield put(showSuccessNotification("User Updated!"));
-    yield put(updateUserSuccess(data));
     Router.push("/users");
   } catch (e) {
     yield put(showErrorNotification(e.message));
@@ -183,12 +180,6 @@ function* removeUser({ payload: id }) {
     yield put(stopGeneralLoading());
   }
 }
-
-const showSuccessNotification = (msg: string) =>
-  showGeneralNotification(notification(notificationTypes.SUCCESS, msg));
-
-const showErrorNotification = (msg: string) =>
-  showGeneralNotification(notification(notificationTypes.ERROR, msg));
 
 export function* watchGetUsersList(): any {
   // @ts-ignore

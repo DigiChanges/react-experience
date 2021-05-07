@@ -1,5 +1,5 @@
 import React, {PropsWithChildren} from "react";
-import { Field, Form, Formik } from "formik";
+import {Field, Form, Formik} from "formik";
 import MultiSelect from "../../atoms/MultiSelect";
 import SimpleSelect from "../../atoms/SimpleSelect";
 import Title from "../../atoms/Title";
@@ -7,7 +7,7 @@ import Label from "../../atoms/Label";
 import ButtonConfirm from "../../molecules/ButtonConfirm";
 import ButtonClose from "../../molecules/ButtonClose";
 import {SelectTransform} from "../../transforms/default";
-import UserSchema from "../../SchemaValidations/UserSchema";
+import UserCreateSchema from "../../SchemaValidations/UserCreateSchema";
 import {IRoleApi} from "../../interfaces/role";
 import DGDatePicker from "../../atoms/DGDatePicker";
 import {documentTypeOptions, country,states} from "../../entities";
@@ -42,17 +42,17 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
           documentNumber: "",
           gender: "",
           phone: "",
-					country: "",
-					address: "",
+          country: "",
+          address: "",
           password: "",
           passwordConfirmation: "",
           permissions: [],
           roles: [],
-					enable: ""
+          enable: ""
         }}
-        validationSchema={UserSchema}
+        validationSchema={UserCreateSchema}
         onSubmit={async (values) => {
-					createAction(values);
+            createAction(values);
         }}
       >
         {({ errors, touched}) => (
@@ -62,7 +62,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
               <div className="dg-form-full-field-wrapper">
                 <Label htmlFor="firstName" className="dg-form-label">
                   First name
-								</Label>
+                </Label>
                 <Field
                   name="firstName"
                   type="text"
@@ -70,12 +70,12 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="dg-form-field-full"
                   placeholder="Enter First Name"
                 />
-							<ErrorFormikForm field="firstName" errors={errors} touched={touched}/>
+                <ErrorFormikForm field="firstName" errors={errors} touched={touched}/>
               </div>
               <div className="dg-form-full-field-wrapper">
                 <Label htmlFor="lastName" className="dg-form-label">
                   Last name
-								</Label>
+                </Label>
                 <Field
                   name="lastName"
                   type="text"
@@ -83,19 +83,19 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="dg-form-field-full"
                   placeholder="Enter Last Name"
                 />
-							<ErrorFormikForm field="lastName" errors={errors} touched={touched}/>
+                <ErrorFormikForm field="lastName" errors={errors} touched={touched}/>
               </div>
               <div className="dg-form-quarter-field-wrapper">
                 <Label htmlFor="documentType" className="dg-form-label">
                   ID number
-								</Label>
+                </Label>
                 <div className="flex w-full">
                   <Field
                     name="documentType"
                     id="documentType"
                     component={SimpleSelect}
                     options={documentTypeOptions}
-										selectStyle={SelectStyle}
+                    selectStyle={SelectStyle}
                   />
                   <Field
                     name="documentNumber"
@@ -105,13 +105,13 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                     placeholder="Enter ID"
                   />
                 </div>
-								<ErrorFormikForm field="documentNumber" errors={errors} touched={touched}/>
+                <ErrorFormikForm field="documentNumber" errors={errors} touched={touched}/>
               </div>
 
               <div className="dg-form-quarter-field-wrapper text-center">
                 <Label htmlFor="gender" className="dg-form-label text-left">
                   Gender
-								</Label>
+                </Label>
 
                 <Field name="gender" type="radio" id="gender" value="female" className="border-1 rounded-full border-main-gray-500 bg-gray-800 p-3 focus:bg-white focus:border-white m-1" />
                     <label htmlFor="gender" className="text-gray-400 text-xs font-bold mr-1">
@@ -134,61 +134,61 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                 <Label htmlFor="birthdate" className="dg-form-label">
                   Birthday
                 </Label>
-								<Field
+                <Field
                   name="birthday"
                   component={DGDatePicker}
                   id="birthday"
                   className="dg-form-field-full"
-									dateFormatUI="d/MM/yyyy"
-									dateFormatValue="D/MM/YYYY"
-									placeholder="Choose your birthday..."
+                  dateFormatUI="d/MM/yyyy"
+                  dateFormatValue="D/MM/YYYY"
+                  placeholder="Choose your birthday..."
                 />
-								<ErrorFormikForm field="birthday" errors={errors} touched={touched}/>
+                <ErrorFormikForm field="birthday" errors={errors} touched={touched}/>
               </div>
-							<div className="dg-form-quarter-field-wrapper">
-									<Label htmlFor="enable" className="dg-form-label">
-										Enable
-									</Label>
-									<Field
-										name="enable"
-										id="enable"
-										component={SimpleSelect}
-										selectStyle={SelectStyle}
-										options={states}
-									/>
-									<ErrorFormikForm field="enable" errors={errors} touched={touched}/>
-							</div>
+              <div className="dg-form-quarter-field-wrapper">
+                      <Label htmlFor="enable" className="dg-form-label">
+                          Enable
+                      </Label>
+                      <Field
+                          name="enable"
+                          id="enable"
+                          component={SimpleSelect}
+                          selectStyle={SelectStyle}
+                          options={states}
+                      />
+                      <ErrorFormikForm field="enable" errors={errors} touched={touched}/>
+              </div>
               <div className="dg-form-full-field-wrapper">
                 <Label htmlFor="country" className="dg-form-label">
                   Country
-								</Label>
+                </Label>
                 <Field
-									name="country"
-									id="country"
-									options={country}
-									component={SimpleSelect}
-									selectStyle={SelectStyle}
-								/>
-								<ErrorFormikForm field="country" errors={errors} touched={touched}/>
+                  name="country"
+                  id="country"
+                  options={country}
+                  component={SimpleSelect}
+                  selectStyle={SelectStyle}
+                />
+                <ErrorFormikForm field="country" errors={errors} touched={touched}/>
               </div>
               <div className="dg-form-full-field-wrapper">
                 <Label htmlFor="address" className="dg-form-label">
                   Address
-								</Label>
+                </Label>
                 <Field
-									name="address"
-									id="address"
-									type="text"
-									className="dg-form-field-full"
-									placeholder="Your address..."
-								/>
-							<ErrorFormikForm field="address" errors={errors} touched={touched}/>
+                  name="address"
+                  id="address"
+                  type="text"
+                  className="dg-form-field-full"
+                  placeholder="Your address..."
+                />
+                <ErrorFormikForm field="address" errors={errors} touched={touched}/>
               </div>
               <span className="w-full mt-5"> CONTACT INFORMATION </span>
               <div className="dg-form-full-field-wrapper">
                 <Label htmlFor="email" className="dg-form-label">
                   Email
-								</Label>
+                </Label>
                 <Field
                   name="email"
                   type="text"
@@ -196,12 +196,12 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="dg-form-field-full"
                   placeholder="Enter Email"
                 />
-								<ErrorFormikForm field="email" errors={errors} touched={touched}/>
+                <ErrorFormikForm field="email" errors={errors} touched={touched}/>
               </div>
               <div className="dg-form-full-field-wrapper">
                 <Label htmlFor="phone" className="dg-form-label">
                   Phone
-								</Label>
+                </Label>
                 <Field
                   name="phone"
                   type="text"
@@ -209,12 +209,12 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="dg-form-field-full"
                   placeholder="Enter number"
                 />
-								<ErrorFormikForm field="phone" errors={errors} touched={touched}/>
+                <ErrorFormikForm field="phone" errors={errors} touched={touched}/>
               </div>
               <div className="w-full mb-5 pr-2">
                 <Label htmlFor="password" className="dg-form-label">
                   Password
-								</Label>
+                </Label>
                 <Field
                   name="password"
                   type="password"
@@ -222,12 +222,12 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="dg-form-field-full"
                   placeholder="Enter Password"
                 />
-								<ErrorFormikForm field="password" errors={errors} touched={touched}/>
+                <ErrorFormikForm field="password" errors={errors} touched={touched}/>
               </div>
               <div className="w-full mb-5 pr-2">
                 <Label htmlFor="passwordConfirmation" className="dg-form-label">
                   Confirm Password
-								</Label>
+                </Label>
                 <Field
                   name="passwordConfirmation"
                   type="password"
@@ -235,12 +235,12 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   className="dg-form-field-full"
                   placeholder="Repeat Password"
                 />
-								<ErrorFormikForm field="passwordConfirmation" errors={errors} touched={touched}/>
+                <ErrorFormikForm field="passwordConfirmation" errors={errors} touched={touched}/>
               </div>
               <div className="dg-form-full-field-wrapper">
                 <Label htmlFor="permissions" className="dg-form-label">
                   Permissions
-								</Label>
+                </Label>
                 <Field
                   name="permissions"
                   id="permissions"
@@ -248,28 +248,28 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   options={SelectTransform.getOptionsSimpleArray(permissionsList)}
                   isMulti
                   placeholder="Select permissions"
-									selectStyle={SelectStyle}
+                  selectStyle={SelectStyle}
                 />
-								<ErrorFormikForm field="permissions" errors={errors} touched={touched}/>
+                <ErrorFormikForm field="permissions" errors={errors} touched={touched}/>
               </div>
               <div className="dg-form-full-field-wrapper">
                 <Label htmlFor="roles" className="dg-form-label">
                   Roles
-								</Label>
+                </Label>
                 <Field
                   name="roles"
                   id="roles"
                   component={MultiSelect}
                   options={SelectTransform.getOptionsObjectArray(rolesList, 'name', 'id')}
                   isMulti
-									selectStyle={SelectStyle}
+                  selectStyle={SelectStyle}
                 />
-								<ErrorFormikForm field="roles" errors={errors} touched={touched}/>
+                <ErrorFormikForm field="roles" errors={errors} touched={touched}/>
               </div>
               <div className="w-full mt-5 flex justify-end">
-								<ButtonClose buttonType="button" onClick={() => Router.push("/users")}>
-									Close
-								</ButtonClose>
+                <ButtonClose buttonType="button" onClick={() => Router.push("/users")}>
+                    Close
+                </ButtonClose>
                 <ButtonConfirm>Save</ButtonConfirm>
               </div>
             </div>

@@ -1,17 +1,12 @@
 import React, {useEffect} from "react";
+import {connect} from 'react-redux';
 import UserUpdate from "../../../templates/users/UserUpdate";
-import {useDispatch, useSelector} from 'react-redux';
-import {getUser, getRoles, getPermissions, updateUser} from "../../../redux/actions";
+import { getUser, getRoles, getPermissions, updateUser, resetUserSelected } from '../../../redux/actions';
 import {IUserPayload} from "../../../interfaces/user";
+import withAuth from '../../../providers/withAuth';
 
-const IndexPage = ({query}): any =>
+const IndexPage = ({dispatch, Users, Roles, Auth, query}): any =>
 {
-	const dispatch = useDispatch();
-
-	const {userSelected} = useSelector((state : any) => state.Users);
-	const {rolesList} = useSelector((state : any) => state.Roles);
-	const {permissionsList} = useSelector((store : any) => store.Auth);
-
 	const updateAction = (payload: IUserPayload, id: string) =>
 	{
 		dispatch(updateUser(payload, id));
@@ -22,13 +17,17 @@ const IndexPage = ({query}): any =>
 		dispatch(getUser(query.userId));
 		dispatch(getRoles());
 		dispatch(getPermissions());
+
+        return () => {
+          dispatch(resetUserSelected());
+      }
 	}, []);
 
 	return (
-		<UserUpdate updateAction={updateAction} userSelected={userSelected} rolesList={rolesList} permissionsList={permissionsList}/>
+		<UserUpdate updateAction={updateAction} userSelected={Users.userSelected} rolesList={Roles.rolesList} permissionsList={Auth.permissionsList}/>
 	);
 };
 
-IndexPage.getInitialProps = ({query}) => ({query});
+IndexPage.getInitialProps = ({dispatch, Users, Roles, Auth, query}) => ({dispatch, Users, Roles, Auth, query});
 
-export default IndexPage;
+export default connect((state) => state)(withAuth(IndexPage));

@@ -9,7 +9,7 @@ import IconSortDescending from "../atoms/Icons/Stroke/IconSortDescending";
 import FilterSortSchema from "../SchemaValidations/FilterSortSchema";
 import _ from "lodash";
 
-const FilterSort = ({ actionFilter, filterButtonName = 'Filter', filterQuery = null }): any => {
+const FilterSort = ({ actionFilter, filterButtonName = 'Filter', filterQuery = null, placeholder }): any => {
   const [filterFields, setFilterField] = useState({ search: "", filterBy: "" });
   const [sortFields, setSortField] = useState({ orderBy: "", sort: "asc", isSort: true });
 
@@ -64,40 +64,45 @@ const FilterSort = ({ actionFilter, filterButtonName = 'Filter', filterQuery = n
             name="search"
             type="search"
             id="search"
-            placeholder={"Search users... "}
+            placeholder={placeholder}
             component={SearchInput}
             className={`dg-form-field-full ${errors.search && touched.search ? 'border-red-500' : ''}`}
           />
           {/* todo add DROPDOWN to filter/sort opts */}
           <div className="flex flex-wrap justify-between my-6">
             <div className="flex-col w-full md:w-5/12">
-                  <Label htmlFor="roles" className="font-bold text-gray-400 block md:inline-block mr-2 w-16">
-                    Filter By
-                            </Label>
-                  <Field
-                    name="filterBy"
-                    type="text"
-                    id="filterBy"
-                    placeholder={"Filter by... "}
-                    className={`dg-form-field-quarter md:min-w-max  ${errors.filterBy && touched.filterBy ? 'border-red-500' : ''}`}
-                  />
-              </div>
+              <Label htmlFor="roles" className="font-bold text-gray-400 block md:inline-block mr-2 w-16">
+                Filter By
+              </Label>
+              <Field
+                name="filterBy"
+                type="text"
+                id="filterBy"
+                placeholder={"Filter by... "}
+                className={`dg-form-field-quarter md:min-w-max  ${errors.filterBy && touched.filterBy ? 'border-red-500' : ''}`}
+              />
+            </div>
             <div className="flex-col w-full md:w-5/12">
-                  <Label htmlFor="roles" className="font-bold text-gray-400 block md:inline-block mr-2 w-16">
-                    Sort By
-                            </Label>
-                  <Field
-                    name="orderBy"
-                    type="text"
-                    id="orderBy"
-                    placeholder={"Sort by... "}
-                    className={`dg-form-field-quarter md:min-w-max ${errors.orderBy && touched.orderBy ? 'border-red-500' : ''}`}
-                  />
+              <Label htmlFor="roles" className="font-bold text-gray-400 block md:inline-block mr-2 w-16">
+                Sort By
+              </Label>
+              <Field
+                name="orderBy"
+                type="text"
+                id="orderBy"
+                placeholder={"Sort by... "}
+                className={`dg-form-field-quarter md:min-w-max ${errors.orderBy && touched.orderBy ? 'border-red-500' : ''}`}
+              />
             </div>
 
-
             <div className="flex-col self-end md:self-center w-6 h-6 my-3 md:my-2 lg:my-0">
-                    <IconButtonActive classNameOnActive="text-white" onClick={onClickIsSortAsc} isActive={sortFields.isSort} iconEnable={IconSortAscending} iconDisable={IconSortDescending} />
+              <IconButtonActive
+                classNameOnActive="text-white"
+                onClick={onClickIsSortAsc}
+                isActive={sortFields.isSort}
+                iconEnable={IconSortAscending}
+                iconDisable={IconSortDescending}
+              />
             </div>
             <div className="flex-col self-center my-3 lg:my-0 mx-auto">
               <Button

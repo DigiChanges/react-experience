@@ -17,7 +17,7 @@ interface LoginFormProps extends PropsWithChildren<any> {
 
 const LoginForm: React.FC<LoginFormProps> = ({ ...props }): any =>
 {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -59,7 +59,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ ...props }): any =>
                 className="no-underline inline-block align-baseline font-bold text-sm text-blue hover:text-blue-dark "
               >
                 Forgot Password?
-							</Button>
+            </Button>
             </div>
               <Field
                 name="password"
@@ -68,7 +68,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ ...props }): any =>
                 autoComplete="off"
                 component={PasswordShowHide}
               />
-							<ErrorFormikForm field="password" errors={errors} touched={touched}/>
+            <ErrorFormikForm field="password" errors={errors} touched={touched}/>
             </div>
 
 
@@ -78,7 +78,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ ...props }): any =>
                 className="mx-auto text-white bg-primary-main border-0 py-2 focus:outline-none hover:bg-primary-hover rounded-full text-sm font-bold w-32 text-center"
               >
                 Login
-						</Button>
+            </Button>
             </div>
           </Form>
         )}

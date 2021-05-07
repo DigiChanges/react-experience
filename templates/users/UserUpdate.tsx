@@ -1,320 +1,294 @@
-import React, { PropsWithChildren } from "react";
-import {Field, Formik, Form} from "formik";
-import MultiSelect from "../../atoms/MultiSelect";
-import Router from "next/router";
-import Title from "../../atoms/Title"
-import Label from "../../atoms/Label";
-import ButtonConfirm from "../../molecules/ButtonConfirm";
-import ButtonClose from "../../molecules/ButtonClose";
-import { SelectTransform } from "../../transforms/default";
-import DGDatePicker from "../../atoms/DGDatePicker";
-import SimpleSelect from "../../atoms/SimpleSelect";
-import UserSchema from "../../SchemaValidations/UserSchema";
-import {country, documentTypeOptions, states} from "../../entities";
-import ErrorFormikForm from "../../molecules/ErrorFormikForm";
+import React, { PropsWithChildren } from 'react';
+import { Field, Form, Formik } from 'formik';
+import MultiSelect from '../../atoms/MultiSelect';
+import Router from 'next/router';
+import Title from '../../atoms/Title'
+import Label from '../../atoms/Label';
+import ButtonConfirm from '../../molecules/ButtonConfirm';
+import ButtonClose from '../../molecules/ButtonClose';
+import { SelectTransform } from '../../transforms/default';
+import DGDatePicker from '../../atoms/DGDatePicker';
+import SimpleSelect from '../../atoms/SimpleSelect';
+import { country, documentTypeOptions, states } from '../../entities';
+import ErrorFormikForm from '../../molecules/ErrorFormikForm';
+import UserUpdateSchema from '../../SchemaValidations/UserUpdateSchema';
+import SelectStyle from '../../assets/customStyles/SelectStyle';
+import { IUserApi } from '../../interfaces/user';
 
-interface UserUpdateTemplateProps extends PropsWithChildren<any> {
+interface UserUpdateTemplateProps extends PropsWithChildren<any>
+{
   permissionsList: string[];
   rolesList: any[];
+  userSelected: IUserApi;
   updateAction: any;
   props?: any;
 }
 
-const UpdateUser: React.FC<UserUpdateTemplateProps> = ({updateAction, userSelected, rolesList, permissionsList}): any =>
+const UpdateUser: React.FC<UserUpdateTemplateProps> = ({
+                                                         updateAction,
+                                                         userSelected,
+                                                         rolesList,
+                                                         permissionsList
+                                                       }): any =>
 {
-	return (
-		<section className="text-gray-500 body-font bg-gray-900 w-full md:container mx-auto px-3">
+  return (
+    <section className="px-4">
       <div className="mb-2 ">
-        <Title className="text-3xl font-bold sm:px-0 md:px-18 lg:px-14" titleType="h1">
+        <Title className="text-3xl font-bold" titleType="h1">
           Update User
-          </Title>
+        </Title>
       </div>
-				{userSelected ? (
-					<Formik
-						enableReinitialize={true}
-						initialValues={{
-							firstName: userSelected.firstName,
-							lastName: userSelected.lastName,
-							email: userSelected.email,
-							birthday: userSelected.birthday,
-							documentType: userSelected.documentType,
-							documentNumber: userSelected.documentNumber,
-							gender: userSelected.gender,
-							phone: userSelected.phone,
-							country: userSelected.country,
-							address: userSelected.address,
-							roles: userSelected.roles.map(role => role.id),
-							permissions: userSelected.permissions,
-							enable: userSelected.enable,
-						}}
-						validationSchema={UserSchema}
-						onSubmit={(values) =>
-						{
-							updateAction(values, userSelected.id);
-						}}
-					>
-					{({ errors, touched}) => (
-						<Form>
-							<div className="sm:px-0 md:px-16 lg:px-14 flex flex-wrap mb-6 text-sm">
-								<span className="w-full px-2 text-xs text-bold">PERSONAL INFORMATION</span>
-								<div className="w-full md:w-1/2 px-2 mb-5">
-									<Label htmlFor="firstName" className=" text-gray-400 block mb-1">
-										First name
-									</Label>
-									<Field
-										name="firstName"
-										type="text"
-										id="firstName"
-										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
-										placeholder="Enter First Name"
-									/>
-									<ErrorFormikForm field="firstName" errors={errors} touched={touched}/>
-								</div>
-								<div className="w-full md:w-1/2 px-2 mb-5">
-									<Label htmlFor="lastName" className="text-gray-400 block mb-1">
-										Last name
-									</Label>
-									<Field
-										name="lastName"
-										type="text"
-										id="lastName"
-										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
-										placeholder="Enter Last Name"
-									/>
-									<ErrorFormikForm field="lastName" errors={errors} touched={touched}/>
-								</div>
-								<div className="w-full md:w-1/4 px-2 mb-5">
-									<Label
-										htmlFor="documentType"
-										className="text-gray-400 block mb-1"
-									>
-										ID number
-											</Label>
-									<div className="flex w-full">
-										<Field
-											name="documentType"
-											id="documentType"
-											component={SimpleSelect}
-											options={documentTypeOptions}
-											className="flex-1 w-1/4 border-main-gray-500 text-white rounded-l-full focus:outline-none focus:border-indigo-500 text-base hover:border-grey h-10 shadow font-bold"
-											primary25="#a0aec0"
-											primary="#667eea"
-											neutral0="rgba(20,25,31)"
-											neutral20="rgba(17,21,30)"
-											neutral50="#a0aec0"
-											neutral80="#718096"
-											neutral10="#fff"
-											neutral30="#667eea"
-											primary50="#718096"
-											danger="#a0aec0"
-											dangerLight="#fff"
-										/>
-										<Field
-											name="documentNumber"
-											type="text"
-											id="documentNumber"
-											className="flex-1 w-3/4 bg-gray-800 border rounded-r-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
-											placeholder="Enter ID"
-										/>
-									</div>
-									<ErrorFormikForm field="documentNumber" errors={errors} touched={touched}/>
+      {userSelected ? (
+        <Formik
+          enableReinitialize={true}
+          initialValues={{
+            firstName: userSelected.firstName,
+            lastName: userSelected.lastName,
+            email: userSelected.email,
+            birthday: userSelected.birthday,
+            documentType: userSelected.documentType,
+            documentNumber: userSelected.documentNumber,
+            gender: userSelected.gender,
+            phone: userSelected.phone,
+            country: userSelected.country,
+            address: userSelected.address,
+            roles: userSelected.roles.map(role => role.id),
+            permissions: userSelected.permissions,
+            enable: userSelected.enable,
+          }}
+          validationSchema={UserUpdateSchema}
+          onSubmit={(values) =>
+          {
+            updateAction(values, userSelected.id);
+          }}
+        >
+          {({ errors, touched }) => (
+            <Form>
+              <div className="flex flex-wrap text-sm">
+                <span className="w-full text-xs text-bold">PERSONAL INFORMATION</span>
+                <div className="dg-form-full-field-wrapper">
+                  <Label htmlFor="firstName" className="dg-form-label">
+                    First name
+                  </Label>
+                  <Field
+                    name="firstName"
+                    type="text"
+                    id="firstName"
+                    className="dg-form-field-full"
+                    placeholder="Enter First Name"
+                  />
+                  <ErrorFormikForm field="firstName" errors={errors} touched={touched}/>
+                </div>
+                <div className="dg-form-full-field-wrapper">
+                  <Label htmlFor="lastName" className="dg-form-label">
+                    Last name
+                  </Label>
+                  <Field
+                    name="lastName"
+                    type="text"
+                    id="lastName"
+                    className="dg-form-field-full"
+                    placeholder="Enter Last Name"
+                  />
+                  <ErrorFormikForm field="lastName" errors={errors} touched={touched}/>
+                </div>
+                <div className="dg-form-quarter-field-wrapper">
+                  <Label htmlFor="documentType" className="dg-form-label">
+                    ID number
+                  </Label>
+                  <div className="flex w-full">
+                    <Field
+                      name="documentType"
+                      id="documentType"
+                      component={SimpleSelect}
+                      options={documentTypeOptions}
+                      selectStyle={SelectStyle}
+                    />
+                    <Field
+                      name="documentNumber"
+                      type="text"
+                      id="documentNumber"
+                      className="flex-1 dg-form-field-quarter rounded-l-none"
+                      placeholder="Enter ID"
+                    />
+                  </div>
+                  <ErrorFormikForm field="documentNumber" errors={errors} touched={touched}/>
+                </div>
 
-								</div>
-								<div className="w-full md:w-1/4 px-2 center align-center self-center justify-center items-center mb-5">
-									<Label
-										htmlFor="gender"
-										className="text-gray-400 block mb-1"
-									>
-										Gender
-									</Label>
+                <div className="dg-form-quarter-field-wrapper text-center">
+                  <Label htmlFor="gender" className="dg-form-label text-left">
+                    Gender
+                  </Label>
 
-									<Field name="gender" type="radio" id="gender" value="female" className="border-1 rounded-full border-main-gray-500 bg-gray-800 p-3 focus:bg-white focus:border-white m-1" />
-										<label
-											htmlFor="gender"
-											className="text-gray-400 text-xs font-bold mr-1"
-										>
-											F
-										</label>
+                  <Field name="gender" type="radio" id="gender" value="female"
+                         className="border-1 rounded-full border-main-gray-500 bg-gray-800 p-3 focus:bg-white focus:border-white m-1"/>
+                  <label htmlFor="gender" className="text-gray-400 text-xs font-bold mr-1">
+                    F
+                  </label>
 
-									<Field name="gender" type="radio" id="gender" value="male" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
-									<label
-										htmlFor="gender"
-										className="text-gray-400 text-xs font-bold mr-1"
-									>
-										M
-									</label>
+                  <Field name="gender" type="radio" id="gender" value="male"
+                         className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1"/>
+                  <label htmlFor="gender" className="text-gray-400 text-xs font-bold mr-1">
+                    M
+                  </label>
 
-									<Field name="gender" type="radio" id="gender" value="other" className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1" />
-									<label
-										className="text-gray-400 text-xs font-bold mr-1"
-										htmlFor="gender"
-									>
-										Other
-									</label>
+                  <Field name="gender" type="radio" id="gender" value="other"
+                         className="border-1 border-main-gray-500 bg-gray-800 p-3 focus:bg-indigo-300 focus:border-white m-1"/>
+                  <label htmlFor="gender" className="text-gray-400 text-xs font-bold mr-1">
+                    Other
+                  </label>
+                  <ErrorFormikForm field="gender" errors={errors} touched={touched}/>
+                </div>
 
-									<ErrorFormikForm field="gender" errors={errors} touched={touched}/>
-								</div>
-								<div className="w-full md:w-1/4 px-2 mb-5">
-									<Label htmlFor="birthdate" className="text-gray-400 block mb-1">
-										Birthday
-									</Label>
-								<Field
-                  name="birthday"
-                  component={DGDatePicker}
-                  id="birthday"
-                  className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 h-10 py-3 shadow font-bold"
-									dateFormatUI="d/MM/yyyy"
-									dateFormatValue="D/MM/YYYY"
-                />
-								<ErrorFormikForm field="birthday" errors={errors} touched={touched}/>
-								</div>
-								<div className="w-full md:w-1/4 px-2 mb-5">
-									<Label htmlFor="enable" className="font-bold text-gray-400 block mb-2">
-										Enable
-									</Label>
-									<Field
-										name="enable"
-										id="enable"
-										component={SimpleSelect}
-										options={states}
-										primary25="#a0aec0"
-										primary="#667eea"
-										neutral0="rgba(20,25,31)"
-										neutral20="rgba(17,21,30)"
-										neutral50="#a0aec0"
-										neutral80="#718096"
-										neutral10="#fff"
-										neutral30="#667eea"
-										primary50="#718096"
-										danger="#a0aec0"
-										dangerLight="#fff"
-									/>
-									<ErrorFormikForm field="enable" errors={errors} touched={touched}/>
-								</div>
-								<div className="w-full md:w-1/2 px-2 mb-5">
-									<Label htmlFor="country" className="text-gray-400 block mb-1">
-										Country
-									</Label>
-									<Field
-										name="country"
-										id="country"
-										options={country}
-										component={SimpleSelect}
-										className="bg-gray-800 border rounded-full border-gray-700 text-base  hover:border-grey shadow font-bold"
-										placeholder="Select country"
-										primary25="#a0aec0"
-										primary="#667eea"
-										neutral0="rgba(20,25,31)"
-										neutral20="rgba(17,21,30)"
-										neutral50="#a0aec0"
-										neutral80="#718096"
-										neutral10="#fff"
-										neutral30="#667eea"
-										primary50="#718096"
-										danger="#a0aec0"
-										dangerLight="#fff"
-										/>
-										<ErrorFormikForm field="country" errors={errors} touched={touched}/>
-								</div>
-								<div className="w-full md:w-1/2 px-2 mb-5">
-									<Label htmlFor="address" className="text-gray-400 block mb-1">
-										Address
-									</Label>
-									<Field
-										name="address"
-										id="address"
-										type="text"
-										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base hover:border-grey px-2 py-3 h-10 shadow font-bold"
-										placeholder="Your address..."
-									/>
-									<ErrorFormikForm field="address" errors={errors} touched={touched}/>
-								</div>
-								<span className="w-full mt-5 px-2">CONTACT INFORMATION </span>
-								<div className="w-full md:w-1/2 px-2 mb-5">
-									<Label htmlFor="email" className="text-gray-400 block mb-1">
-										Email
-									</Label>
-									<Field
-										name="email"
-										type="text"
-										id="email"
-										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
-										placeholder="Enter Email"
-									/>
-									<ErrorFormikForm field="email" errors={errors} touched={touched}/>
-								</div>
-								<div className="w-full md:w-1/2 px-2 mb-5">
-									<Label htmlFor="phone" className="text-gray-400 block mb-1">
-										Phone
-									</Label>
-									<Field
-										name="phone"
-										type="text"
-										id="phone"
-										className="w-full bg-gray-800 border rounded-full border-gray-700 text-white focus:outline-none focus:border-indigo-500 text-base  hover:border-grey px-2 py-3 h-10 shadow font-bold"
-										placeholder="Enter number"
-									/>
-									<ErrorFormikForm field="phone" errors={errors} touched={touched}/>
-								</div>
-								<div className="w-full md:w-1/2 mb-5">
-									<Label htmlFor="permissions" className="font-bold text-gray-400 block mb-1">
-										Permissions
-									</Label>
-									<Field
-										name="permissions"
-										id="permissions"
-										component={MultiSelect}
-										options={SelectTransform.getOptionsSimpleArray(permissionsList)}
-										primary25="#4a5568"
-										primary="#667eea"
-										neutral0="#2d3748"
-										neutral20="#4a5568"
-										neutral50="#a0aec0"
-										neutral80="#fff"
-										neutral10="#4a5568"
-										neutral30="#667eea"
-										primary50="#718096"
-										danger="#a0aec0"
-										dangerLight="#1a202c"
-									/>
-									<ErrorFormikForm field="permissions" errors={errors} touched={touched}/>
-								</div>
-								<div className="w-full md:w-1/2 mb-5">
-									<Label htmlFor="roles" className="font-bold text-gray-400 block mb-1">
-										Roles
-									</Label>
-									<Field
-										name="roles"
-										id="roles"
-										component={MultiSelect}
-										options={SelectTransform.getOptionsObjectArray(rolesList, 'name', 'id')}
-										primary25="#4a5568"
-										primary="#667eea"
-										neutral0="#2d3748"
-										neutral20="#4a5568"
-										neutral50="#a0aec0"
-										neutral80="#fff"
-										neutral10="#4a5568"
-										neutral30="#667eea"
-										primary50="#718096"
-										danger="#a0aec0"
-										dangerLight="#1a202c"
-									/>
-								</div>
-								<ErrorFormikForm field="roles" errors={errors} touched={touched}/>
-								<div className="w-full mt-5 flex flex-row-reverse">
-									<ButtonConfirm>Save</ButtonConfirm>
-									<ButtonClose buttonType="button" onClick={() => Router.push("/users")}>
-										Close
-									</ButtonClose>
-								</div>
-							</div>
-						</Form>
-					)}
-					</Formik>
-				) : <p>No user selected</p>} {/*TODO: Change for loading*/}
-		</section>
-	);
+                <div className="dg-form-quarter-field-wrapper">
+                  <Label htmlFor="birthdate" className="dg-form-label">
+                    Birthday
+                  </Label>
+                  <Field
+                    name="birthday"
+                    component={DGDatePicker}
+                    id="birthday"
+                    className="dg-form-field-full"
+                    dateFormatUI="d/MM/yyyy"
+                    dateFormatValue="D/MM/YYYY"
+                    placeholder="Choose your birthday..."
+                  />
+                  <ErrorFormikForm field="birthday" errors={errors} touched={touched}/>
+                </div>
+                <div className="dg-form-quarter-field-wrapper">
+                  <Label htmlFor="enable" className="dg-form-label">
+                    Enable
+                  </Label>
+                  <Field
+                    name="enable"
+                    id="enable"
+                    component={SimpleSelect}
+                    selectStyle={SelectStyle}
+                    options={states}
+                  />
+                  <ErrorFormikForm field="enable" errors={errors} touched={touched}/>
+                </div>
+                <div className="dg-form-full-field-wrapper">
+                  <Label htmlFor="country" className="dg-form-label">
+                    Country
+                  </Label>
+                  <Field
+                    name="country"
+                    id="country"
+                    options={country}
+                    component={SimpleSelect}
+                    selectStyle={SelectStyle}
+                  />
+                  <ErrorFormikForm field="country" errors={errors} touched={touched}/>
+                </div>
+                <div className="dg-form-full-field-wrapper">
+                  <Label htmlFor="address" className="dg-form-label">
+                    Address
+                  </Label>
+                  <Field
+                    name="address"
+                    id="address"
+                    type="text"
+                    className="dg-form-field-full"
+                    placeholder="Your address..."
+                  />
+                  <ErrorFormikForm field="address" errors={errors} touched={touched}/>
+                </div>
+                <span className="w-full mt-5"> CONTACT INFORMATION </span>
+                <div className="dg-form-full-field-wrapper">
+                  <Label htmlFor="email" className="dg-form-label">
+                    Email
+                  </Label>
+                  <Field
+                    name="email"
+                    type="text"
+                    id="email"
+                    className="dg-form-field-full"
+                    placeholder="Enter Email"
+                  />
+                  <ErrorFormikForm field="email" errors={errors} touched={touched}/>
+                </div>
+                <div className="dg-form-full-field-wrapper">
+                  <Label htmlFor="phone" className="dg-form-label">
+                    Phone
+                  </Label>
+                  <Field
+                    name="phone"
+                    type="text"
+                    id="phone"
+                    className="dg-form-field-full"
+                    placeholder="Enter number"
+                  />
+                  <ErrorFormikForm field="phone" errors={errors} touched={touched}/>
+                </div>
+                <div className="w-full mb-5 pr-2">
+                  <Label htmlFor="password" className="dg-form-label">
+                    Password
+                  </Label>
+                  <Field
+                    name="password"
+                    type="password"
+                    id="password"
+                    className="dg-form-field-full"
+                    placeholder="Enter Password"
+                  />
+                  <ErrorFormikForm field="password" errors={errors} touched={touched}/>
+                </div>
+                <div className="w-full mb-5 pr-2">
+                  <Label htmlFor="passwordConfirmation" className="dg-form-label">
+                    Confirm Password
+                  </Label>
+                  <Field
+                    name="passwordConfirmation"
+                    type="password"
+                    id="passwordConfirmation"
+                    className="dg-form-field-full"
+                    placeholder="Repeat Password"
+                  />
+                  <ErrorFormikForm field="passwordConfirmation" errors={errors} touched={touched}/>
+                </div>
+                <div className="dg-form-full-field-wrapper">
+                  <Label htmlFor="permissions" className="dg-form-label">
+                    Permissions
+                  </Label>
+                  <Field
+                    name="permissions"
+                    id="permissions"
+                    component={MultiSelect}
+                    options={SelectTransform.getOptionsSimpleArray(permissionsList)}
+                    isMulti
+                    placeholder="Select permissions"
+                    selectStyle={SelectStyle}
+                  />
+                  <ErrorFormikForm field="permissions" errors={errors} touched={touched}/>
+                </div>
+                <div className="dg-form-full-field-wrapper">
+                  <Label htmlFor="roles" className="dg-form-label">
+                    Roles
+                  </Label>
+                  <Field
+                    name="roles"
+                    id="roles"
+                    component={MultiSelect}
+                    options={SelectTransform.getOptionsObjectArray(rolesList, 'name', 'id')}
+                    isMulti
+                    selectStyle={SelectStyle}
+                  />
+                  <ErrorFormikForm field="roles" errors={errors} touched={touched}/>
+                </div>
+                <div className="w-full mt-5 flex justify-end">
+                  <ButtonClose buttonType="button" onClick={() => Router.push('/users')}>
+                    Close
+                  </ButtonClose>
+                  <ButtonConfirm>Save</ButtonConfirm>
+                </div>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      ) : <p>No user selected</p>} {/*TODO: Change for loading*/}
+    </section>
+  );
 };
 
 export default UpdateUser;

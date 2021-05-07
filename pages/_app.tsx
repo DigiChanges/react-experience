@@ -2,20 +2,14 @@ import React from "react";
 import Head from "next/head";
 import { createTheme } from "react-data-table-component";
 import "../assets/css/index.css";
-import { Provider } from "react-redux";
-import { configureStore } from "../redux/store";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AuthProvider from "../providers/AuthProvider";
-import GeneralLayout from "../templates/layout/GeneralLayout";
-import HydrationProvider from "../providers/HydrationProvider";
+import { toast } from "react-toastify";
 
 createTheme("DGDarkTheme", {
   text: {
     primary: "#E1E8E8",
     secondary: "#D2D9D9",
   },
-
   background: {
     default: "#2d3748",
   },
@@ -42,32 +36,54 @@ createTheme("DGDarkTheme", {
 
 toast.configure();
 
-const MyApp = ({ Component, pageProps }: any): any =>
-{
-  return (
-    <>
-      <Head>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
-        <title>React Experience</title>
-      </Head>
-      <Provider store={configureStore}>
-        <GeneralLayout>
-					<HydrationProvider>
-						<AuthProvider>
-							<Component {...pageProps}/>
-						</AuthProvider>
-					</HydrationProvider>
-        </GeneralLayout>
-      </Provider>
-    </>
-  );
-};
+import App, {AppInitialProps, AppContext} from 'next/app';
+import {END} from 'redux-saga';
+import wrapper from '../redux/store';
+import { appState } from '../redux/reducers';
+import GeneralLayout from '../templates/layout/GeneralLayout';
 
-export default MyApp;
+class WrappedApp extends App<AppInitialProps>
+{
+    public static getInitialProps = async ({Component, ctx}: AppContext) =>
+    {
+        // 1. Wait for all page actions to dispatch
+        const pageProps = {
+            ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+        };
+
+        // 2. Stop the saga if on server
+        if (ctx.req) {
+            ctx.store.dispatch(END);
+            await (ctx.store as appState).sagaTask.toPromise();
+        }
+
+        // 3. Return props
+        return {
+            pageProps,
+        };
+    };
+
+    public render() {
+        const {Component, pageProps} = this.props;
+        return(
+          <>
+            <Head>
+              <meta
+                name="viewport"
+                content="minimum-scale=1, initial-scale=1, width=device-width"
+              />
+              <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+              />
+              <title>React Experience</title>
+            </Head>
+            <GeneralLayout>
+              <Component {...pageProps} />
+            </GeneralLayout>
+        </>
+        )
+    }
+}
+
+export default wrapper.withRedux(WrappedApp);

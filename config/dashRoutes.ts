@@ -69,8 +69,4 @@ export const dashRoutes = [
 	}
 ];
 
-export const publicRoutes = [
-		'/changeForgotPassword/[confirmationToken]'
-];
-
-export const defaultRoute = '/dashboard';
+export const defaultRoute = '/users/list';

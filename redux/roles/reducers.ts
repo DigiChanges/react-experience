@@ -1,44 +1,21 @@
 import {
-	GET_ROLES_SUCCESS,
-	SELECTED_ROLE,
-	UNSELECTED_ROLE,
-	CREATE_ROLE_SUCCESS,
-	UPDATE_ROLE_SUCCESS,
-	REMOVE_ROLE_SUCCESS
+  GET_ROLE_SUCCESS,
+  GET_ROLES_SUCCESS,
+  REMOVE_ROLE_SUCCESS, RESET_ROLE_SELECTED,
+  RESET_ROLES
 } from './constants';
-import {ReduxActions} from "../../interfaces/default";
+import {ReduxAction} from "../../interfaces/default";
+import _ from "lodash";
+import { IRoleApi } from '../../interfaces/role';
 
 const INIT_STATE = {
-	rolesList: null,
+	rolesList: [],
 	roleSelected: null,
 }
 
-type State = {
-	rolesList: [] | null
-}
-
-const addRole = (newRole, roles) =>
-{
-	if (!roles)
-	{
-		roles = []
-	}
-	roles.push(newRole)
-	return roles
-}
-
-const updateRole = (role, roles) =>
-{
-	if (roles && roles.length > 0)
-	{
-		const roleIndex = roles.findIndex(r => r.id === role.id)
-		if (roleIndex > -1)
-		{
-			roles[roleIndex] = role
-		}
-		return roles
-	}
-	return INIT_STATE.rolesList
+export type State = {
+	rolesList: any[],
+    roleSelected: IRoleApi
 }
 
 const deleteRole = (role, roles) => (
@@ -47,30 +24,30 @@ const deleteRole = (role, roles) => (
 		: INIT_STATE.rolesList
 )
 
-const getSelectedRole = (id, roles) => (
-	roles &&
-	roles.length > 0 &&
-	roles.find(role => role.id === id)
-)
+const getRoles = (newRoles, currentRoles, pagination) =>
+{
+    if (!pagination) {
+      return newRoles;
+    }
 
-const Roles = (state: State = INIT_STATE, action: ReduxActions) =>
+	return _.concat(currentRoles, newRoles);
+}
+
+const Roles = (state: State = INIT_STATE, action: ReduxAction) =>
 {
 	switch (action.type)
 	{
 		case GET_ROLES_SUCCESS:
-			return {...state, rolesList: action.payload}
+			return {...state, rolesList: getRoles(action.payload.roles, state.rolesList, action.payload.pagination)}
 
-		case SELECTED_ROLE:
-			return {...state, roleSelected: getSelectedRole(action.payload, state.rolesList)}
+        case GET_ROLE_SUCCESS:
+          return { ...state, roleSelected: action.payload }
 
-		case UNSELECTED_ROLE:
-			return {...state, roleSelected: INIT_STATE.roleSelected}
+		case RESET_ROLES:
+            return { ...state, rolesList: INIT_STATE.rolesList }
 
-		case CREATE_ROLE_SUCCESS:
-			return {...state, rolesList: addRole(action.payload, state.rolesList)}
-
-		case UPDATE_ROLE_SUCCESS:
-			return {...state, rolesList: updateRole(action.payload, state.rolesList)}
+        case RESET_ROLE_SELECTED:
+            return { ...state, roleSelected: action.payload }
 
 		case REMOVE_ROLE_SUCCESS:
 			return {...state, rolesList: deleteRole(action.payload, state.rolesList)}

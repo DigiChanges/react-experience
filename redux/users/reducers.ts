@@ -1,40 +1,19 @@
 import {
-	GET_USERS_SUCCESS,
-	CREATE_USER_SUCCESS,
-	UPDATE_USER_SUCCESS,
-	REMOVE_USER_SUCCESS,
-	RESET_USERS, GET_USER_SUCCESS
+  GET_USERS_SUCCESS,
+  REMOVE_USER_SUCCESS,
+  RESET_USERS, GET_USER_SUCCESS, RESET_USER_SELECTED
 } from './constants';
 import _ from "lodash";
-import {ReduxActions} from "../../interfaces/default";
+import {ReduxAction} from "../../interfaces/default";
 
 const INIT_STATE = {
   usersList: [],
   userSelected: null
 }
 
-type State = {
+export type State = {
   usersList: any[],
   userSelected: any | null
-}
-
-const addUser = (newUser, users) => {
-  if (!users) {
-    users = []
-  }
-  users.push(newUser)
-  return users
-}
-
-const updateUser = (user, users) => {
-  if (users && users.length > 0) {
-    const userIndex = users.findIndex(u => u.id === user.id)
-    if (userIndex > -1) {
-      users[userIndex] = user
-    }
-    return users
-  }
-  return INIT_STATE.usersList
 }
 
 const deleteUser = (user, users) => (
@@ -47,22 +26,20 @@ const getUsers = (newUsers, currentUsers) => {
 	return _.concat(currentUsers, newUsers);
 }
 
-const Users = (state: State = INIT_STATE, action: ReduxActions) => {
-  switch (action.type) {
+const Users = (state: State = INIT_STATE, action: ReduxAction) => {
+  switch (action.type)
+  {
     case GET_USERS_SUCCESS:
       return { ...state, usersList: getUsers(action.payload, state.usersList) }
 
-		case RESET_USERS:
+    case RESET_USERS:
       return { ...state, usersList: INIT_STATE.usersList }
+
+    case RESET_USER_SELECTED:
+      return { ...state, roleSelected: action.payload }
 
     case GET_USER_SUCCESS:
       return { ...state, userSelected: action.payload }
-
-    case CREATE_USER_SUCCESS:
-      return { ...state, usersList: addUser(action.payload, state.usersList) }
-
-    case UPDATE_USER_SUCCESS:
-      return { ...state, usersList: updateUser(action.payload, state.usersList) }
 
     case REMOVE_USER_SUCCESS:
       return { ...state, usersList: deleteUser(action.payload, state.usersList) }

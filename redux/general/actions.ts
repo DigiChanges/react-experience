@@ -6,10 +6,10 @@ import {
 	NEXT_QUERY_PAGINATION, OPEN_MODAL_DATA, CLOSE_MODAL_DATA
 } from './constants'
 import _ from "lodash";
-import {ReduxActions} from "../../interfaces/default";
+import {ReduxAction} from "../../interfaces/default";
 import {IModalData} from "./reducers";
 
-export const startGeneralLoading = (): ReduxActions => ({
+export const startGeneralLoading = (): ReduxAction => ({
 	type: START_GENERAL_LOADING,
 	payload: null
 })
@@ -24,12 +24,12 @@ export const showGeneralNotification = (notification: any) => ({
 	payload: notification
 })
 
-export const resetQueryPagination = (): ReduxActions => ({
+export const resetQueryPagination = (): ReduxAction => ({
   type: RESET_QUERY_PAGINATION,
   payload: null
 })
 
-export const nextQueryPagination = (pagination: any): ReduxActions =>
+export const nextQueryPagination = (pagination: any): ReduxAction =>
 {
 	const uriParam = _.last(pagination.nextUrl.split("?"));
 
@@ -39,12 +39,12 @@ export const nextQueryPagination = (pagination: any): ReduxActions =>
 	}
 }
 
-export const openModal = (modalData: IModalData): ReduxActions => ({
+export const openModal = (modalData: IModalData): ReduxAction => ({
   type: OPEN_MODAL_DATA,
   payload: {modalData}
 })
 
-export const closeModal = (): ReduxActions => ({
+export const closeModal = (): ReduxAction => ({
   type: CLOSE_MODAL_DATA,
   payload: null
 })

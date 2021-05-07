@@ -1,5 +1,5 @@
 
-export interface ReduxActions
+export interface ReduxAction
 {
   type: string;
   payload: any | null;
