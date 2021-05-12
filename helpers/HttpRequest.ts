@@ -61,7 +61,7 @@ class HttpRequest
 				if (isValid)
 				{
 					const pathKeepAlive = config.apiGateway.routes.auth.keepAlive;
-					const url = `${config.apiGateway.server.protocol}:${config.apiGateway.server.hostname}:${config.apiGateway.server.port}`;
+					const url = `${config.apiGateway.server.protocol}://${config.apiGateway.server.hostname}:${config.apiGateway.server.port}`;
 
 					const options: { [key: string]: any } = {
 						url: `${url}/${pathKeepAlive}`,

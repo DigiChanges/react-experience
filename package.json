@@ -13,7 +13,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "dev:debug": "NODE_OPTIONS='--inspect' next dev",
     "start": "next start",
     "build": "next build"
