@@ -8,7 +8,7 @@ import {
 } from './constants';
 import {ReduxAction} from "../../interfaces/default";
 
-const INIT_STATE = {
+export const INIT_STATE = {
 	isLoading: false,
 	notification: null,
 	nextQueryParamsPagination: "pagination[limit]=3&pagination[offset]=0",
