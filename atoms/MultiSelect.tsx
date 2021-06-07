@@ -23,12 +23,12 @@ const MultiSelect: React.FC<OwnProps & FieldProps> = ({
 
   const onChange = (option: Option[]) =>
 	{
-    form.setFieldValue(field.name, option.map((item: Option) => item.value));
+    form.setFieldValue(field.name, option ? option.map((item: Option) => item.value) : []);
   };
 
   const getValue = () =>
 	{
-      return options ? options.filter(option => field.value.indexOf(option.value) >= 0) : [];
+      return options ? options.filter(option => field.value?.indexOf(option.value) >= 0) : [];
   };
 
   return (
