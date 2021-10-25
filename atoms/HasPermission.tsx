@@ -10,7 +10,7 @@ interface HasPermissionProps extends PropsWithChildren<any> {
 const HasPermission : React.FC<HasPermissionProps> = ({children, permission, user, userPermissions, ...childrenProps}) => {
   const shouldRender = () =>
   (userPermissions && user?.roles && userPermissions.includes(permission)) ||
-  user?.roles.find((role) => role.slug === ADMIN);
+  user?.roles?.find((role) => role.slug === ADMIN);
 
   return (
     shouldRender() &&

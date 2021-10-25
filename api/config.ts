@@ -33,9 +33,9 @@ export const config = {
       auth: {
         login: `${BACKEND_BASE_PATH}/auth/login`,
         permissionsGetAll: `${BACKEND_BASE_PATH}/auth/permissions`,
-        keepAlive: `${BACKEND_BASE_PATH}/auth/keepAlive`,
-        forgotPassword: `${BACKEND_BASE_PATH}/auth/forgotPassword`,
-        changeForgotPassword: `${BACKEND_BASE_PATH}/auth/changeForgotPassword`
+        keepAlive: `${BACKEND_BASE_PATH}/auth/keep-alive`,
+        forgotPassword: `${BACKEND_BASE_PATH}/auth/forgot-password`,
+        changeForgotPassword: `${BACKEND_BASE_PATH}/auth/change-forgot-password`
       },
       users: {
         getAll: `${BACKEND_BASE_PATH}/users`,
@@ -43,8 +43,8 @@ export const config = {
         create: `${BACKEND_BASE_PATH}/users`,
         update: `${BACKEND_BASE_PATH}/users/:id`,
         remove: `${BACKEND_BASE_PATH}/users/:id`,
-        editPassword: `${BACKEND_BASE_PATH}/users/changeUserPassword/:id`,
-        assignRole: `${BACKEND_BASE_PATH}/users/assignRole/:id`
+        editPassword: `${BACKEND_BASE_PATH}/users/change-user-password/:id`,
+        assignRole: `${BACKEND_BASE_PATH}/users/assign-role/:id`
       },
       roles: {
         getAll: `${BACKEND_BASE_PATH}/roles`,

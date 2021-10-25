@@ -24,6 +24,14 @@ interface UserUpdateTemplateProps extends PropsWithChildren<any>
   props?: any;
 }
 
+const flatPermissionsList = (permissionsList) => {
+  const newPermissionsList = [];
+  permissionsList && permissionsList.forEach(permission => {
+      newPermissionsList.push(...permission.permissions);
+  });
+  return newPermissionsList;
+}
+
 const UpdateUser: React.FC<UserUpdateTemplateProps> = ({
                                                          updateAction,
                                                          userSelected,
@@ -255,7 +263,7 @@ const UpdateUser: React.FC<UserUpdateTemplateProps> = ({
                     name="permissions"
                     id="permissions"
                     component={MultiSelect}
-                    options={SelectTransform.getOptionsSimpleArray(permissionsList)}
+                    options={SelectTransform.getOptionsSimpleArray(flatPermissionsList(permissionsList))}
                     isMulti
                     placeholder="Select permissions"
                     selectStyle={SelectStyle}

@@ -16,10 +16,18 @@ import ErrorFormikForm from "../../molecules/ErrorFormikForm";
 import SelectStyle from "../../assets/customStyles/SelectStyle";
 
 interface UserCreateTemplateProps extends PropsWithChildren<any> {
-  permissionsList: string[];
+  permissionsList: Record<string, string | []>[];
   rolesList: IRoleApi[];
   createAction: any;
   props?: any;
+}
+
+const flatPermissionsList = (permissionsList) => {
+  const newPermissionsList = [];
+  permissionsList && permissionsList.forEach(permission => {
+      newPermissionsList.push(...permission.permissions);
+  });
+  return newPermissionsList;
 }
 
 const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesList, createAction}): any =>
@@ -245,7 +253,7 @@ const UserCreate: React.FC<UserCreateTemplateProps> = ({permissionsList, rolesLi
                   name="permissions"
                   id="permissions"
                   component={MultiSelect}
-                  options={SelectTransform.getOptionsSimpleArray(permissionsList)}
+                  options={SelectTransform.getOptionsSimpleArray(flatPermissionsList(permissionsList))}
                   isMulti
                   placeholder="Select permissions"
                   selectStyle={SelectStyle}
