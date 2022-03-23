@@ -25,6 +25,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ ...props }): any =>
         initialValues={{
           email: "",
           password: "",
+          tenant: "public"
         }}
         validationSchema={SignUpSchema}
         onSubmit={async (values) => {

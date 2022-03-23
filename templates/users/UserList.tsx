@@ -43,9 +43,11 @@ const UserList = ({ usersList, query, viewMore }) =>
 		dispatch(resetUsers());
 		dispatch(resetQueryPagination());
 
-    const uriParam = FilterFactory.getUriParam({ search, filterBy, orderBy, sort });
+		const searchParam = { search, filterBy, orderBy, sort };
 
-    router.push(`/users/list?${uriParam}`, undefined, { shallow: false });
+		const uriParam = FilterFactory.getUriParam(searchParam);
+
+		router.push(`/users/list?${uriParam}`, undefined, { shallow: false });
   }
 
   const checkScrollTop = () =>
@@ -79,7 +81,7 @@ const UserList = ({ usersList, query, viewMore }) =>
         icon={IconPlus}
         buttonAction={actionCreateButton}
       />
-			<FilterSort actionFilter={onClickFilter} filterQuery={query} placeholder="Search roles..."/>
+			<FilterSort actionFilter={onClickFilter} filterQuery={query} placeholder="Search users..."/>
 			<div className="dg-grid-3x3">
 			{usersList && usersList.map((user, i) => (
 				<MediaObject className="dg-media-object" key={i}>

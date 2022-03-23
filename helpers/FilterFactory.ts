@@ -22,10 +22,14 @@ class FilterFactory
 	static getPath(userFilterQueryParam: ParsedUrlQuery, nextQueryParamsPagination: string): string
 	{
 		const filterSort = userFilterQueryParam ? queryString.stringify(userFilterQueryParam) : '';
+		
+		const result = filterSort &&
+			nextQueryParamsPagination && 
+			!nextQueryParamsPagination.includes(filterSort)
+			? `${nextQueryParamsPagination}&${filterSort}`
+			: nextQueryParamsPagination;
 
-		return filterSort && nextQueryParamsPagination && !nextQueryParamsPagination.includes(filterSort)
-														? `${nextQueryParamsPagination}&${filterSort}`
-														: nextQueryParamsPagination;
+		return result;
 	}
 }
 
